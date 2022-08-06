@@ -12,6 +12,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
+    "@heroicons/react": "^1.0.6",
     "@mapbox/rehype-prism": "^0.8.0",
     "@netlify/plugin-nextjs": "4.14",
     "@tailwindcss/typography": "^0.5.0",
