@@ -12,7 +12,7 @@ export default function Index({}) {
   const globalData = {
     name: "Torii",
     description: "Offline first portal",
-    footerText: "(C) Kore Nordmann",
+    footerText: "Kore Nordmann 2022 - " + (new Date()).getFullYear(),
   };
 
   const [modules, setModules] = useLocalStorage('modules', []);
