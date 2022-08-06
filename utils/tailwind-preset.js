@@ -18,7 +18,6 @@ const themesConfig = plugin(function ({ addComponents }) {
   const cssVars = {};
 
   Object.keys(COLOR_THEMES[THEME].colors).forEach((key) => {
-    console.log(key)
     if (typeof COLOR_THEMES[THEME].colors[key] === 'object') {
       cssVars[`--color-${key}`] = `${COLOR_THEMES[THEME].colors[key][500]}`;
       Object.keys(COLOR_THEMES[THEME].colors[key]).forEach((index) => {
@@ -31,8 +30,6 @@ const themesConfig = plugin(function ({ addComponents }) {
 
   cssVars['--font-primary'] = FONT_THEMES[FONT_PRIMARY];
   cssVars['--font-secondary'] = FONT_THEMES[FONT_SECONDARY];
-
-console.log(cssVars);
 
   const themeCompiled = {
     '.theme-compiled': cssVars,
