@@ -18,11 +18,21 @@ const themesConfig = plugin(function ({ addComponents }) {
   const cssVars = {};
 
   Object.keys(COLOR_THEMES[THEME].colors).forEach((key) => {
-    cssVars[`--color-${key}`] = `${COLOR_THEMES[THEME].colors[key]}`;
+    console.log(key)
+    if (typeof COLOR_THEMES[THEME].colors[key] === 'object') {
+      cssVars[`--color-${key}`] = `${COLOR_THEMES[THEME].colors[key][500]}`;
+      Object.keys(COLOR_THEMES[THEME].colors[key]).forEach((index) => {
+        cssVars[`--color-${key}-${index}`] = `${COLOR_THEMES[THEME].colors[key][index]}`;
+      });
+    } else {
+      cssVars[`--color-${key}`] = `${COLOR_THEMES[THEME].colors[key]}`;
+    }
   });
 
   cssVars['--font-primary'] = FONT_THEMES[FONT_PRIMARY];
   cssVars['--font-secondary'] = FONT_THEMES[FONT_SECONDARY];
+
+console.log(cssVars);
 
   const themeCompiled = {
     '.theme-compiled': cssVars,
@@ -39,7 +49,18 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        primary: 'var(--color-primary)',
+        primary: {
+          50: 'var(--color-primary-50)',
+          100: 'var(--color-primary-100)',
+          200: 'var(--color-primary-200)',
+          300: 'var(--color-primary-300)',
+          400: 'var(--color-primary-400)',
+          500: 'var(--color-primary-500)',
+          600: 'var(--color-primary-600)',
+          700: 'var(--color-primary-700)',
+          800: 'var(--color-primary-800)',
+          900: 'var(--color-primary-900)',
+        },
         'gradient-1': 'var(--color-gradient-1)',
         'gradient-2': 'var(--color-gradient-2)',
         'gradient-3': 'var(--color-gradient-3)',
