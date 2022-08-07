@@ -15,42 +15,29 @@ export default function Index({}) {
     footerText: "Kore Nordmann 2022 - " + (new Date()).getFullYear(),
   };
 
+  const [settings, setSettings] = useLocalStorage('settings', { columns: 3 });
   const [modules, setModules] = useLocalStorage('modules', []);
-  console.log(modules)
+  console.log(settings, modules)
 
   return (
     <Layout>
       <SEO title={globalData.name} description={globalData.blogTitle} />
       <Header name={globalData.name} />
       <main className="w-full">
-        <h1 className="text-3xl lg:text-5xl text-center mb-12">{globalData.blogTitle}</h1>
-        <ul className="w-full">
-          {modules && modules.map((module) => (
-            <li
-              key={module.filePath}
-              className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0"
-            >
-              <Link
-                as={`/modules/${module.filePath.replace(/\.mdx?$/, '')}`}
-                href={`/modules/[slug]`}
-              >
-                <a className="py-6 lg:py-10 px-6 lg:px-16 block focus:outline-none focus:ring-4">
-                  {module.data.date && (
-                    <p className="uppercase mb-3 font-bold opacity-60">
-                      {module.data.date}
-                    </p>
-                  )}
-                  <h2 className="text-2xl md:text-3xl">{module.data.title}</h2>
-                  {module.data.description && (
-                    <p className="mt-3 text-lg opacity-60">
-                      {module.data.description}
-                    </p>
-                  )}
-                  <ArrowIcon className="mt-4" />
-                </a>
-              </Link>
+        {/* Hack to make sure the grid-cols-[1234] classes are in the compiled CSS */}
+        <div className="hidden grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4" />
+        <ul className={`mb-6 pt-6 grid grid-cols-${settings.columns} gap-6 w-full`}>
+          {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
+            return <li className={""} key={column}>
+              <ul>
+                {(modules[column] ?? []).map((module, index) => {
+                  return <li key={index} className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0 p-4">
+                    {module.type}
+                  </li>;
+                })}
+              </ul>
             </li>
-          ))}
+          })}
         </ul>
       </main>
       <Footer copyrightText={globalData.footerText} />
