@@ -51,7 +51,7 @@ export default function Layout({ children }) {
 
   return (
     <div className="relative overflow-hidden min-h-screen">
-      <div className="flex flex-col items-center w-full mx-auto lg:px-6">
+      <div className="flex flex-col items-center w-full mx-auto lg:px-6 px-1">
         {children}
       </div>
     </div>
