@@ -15,7 +15,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Settings() {
+export default function Settings({ modules, setModules, settings, setSettings }) {
   const [group, setGroup] = useState('Settings');
 
   return (
@@ -51,8 +51,8 @@ export default function Settings() {
       </aside>
 
       <div className="divide-y divide-gray-200 dark:divide-gray-600 lg:col-span-9">
-        {group === 'Settings' && <SettingsSettings />}
-        {group === 'Modules' && <SettingsModules />}
+        {group === 'Settings' && <SettingsSettings settings={settings} setSettings={setSettings} />}
+        {group === 'Modules' && <SettingsModules settings={settings} modules={modules} setModules={setModules} />}
       </div>
     </div>
   )

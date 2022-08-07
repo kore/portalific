@@ -1,15 +1,13 @@
 import { Fragment, useState } from 'react'
 import useLocalStorage from '../../utils/useLocalStorage';
-import { Disclosure, Menu, Switch, Transition } from '@headlessui/react'
+import { Switch } from '@headlessui/react'
 import { QRCodeSVG } from 'qrcode.react';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Settings() {
-  const [settings, setSettings] = useLocalStorage('settings', {});
-
+export default function Settings({ settings, setSettings }) {
   const setSetting = (setting, value) => {
     if (setting === 'synchronize' && value) {
       settings.identifier = settings.identifier || (Math.random() + 1).toString(36).substring(2);

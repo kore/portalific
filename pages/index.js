@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Link from 'next/link';
 
 import useLocalStorage from '../utils/useLocalStorage';
@@ -23,12 +24,17 @@ export default function Index({}) {
 
   const [settings, setSettings] = useLocalStorage('settings', { columns: 3 });
   const [modules, setModules] = useLocalStorage('modules', [[], [], []]);
-  console.log(settings, modules)
 
   return (
     <Layout>
       <SEO title={globalData.name} description={globalData.blogTitle} />
-      <Header name={globalData.name} />
+      <Header
+        name={globalData.name}
+        modules={modules}
+        setModules={setModules}
+        settings={settings}
+        setSettings={setSettings}
+      />
       <main className="w-full">
         {/* Hack to make sure the grid-cols-[1234] classes are in the compiled CSS */}
         <div className="hidden grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4" />

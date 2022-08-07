@@ -4,7 +4,7 @@ import Modal from './Modal';
 import Settings from './Settings';
 import { CogIcon } from '@heroicons/react/outline'
 
-export default function Header({ name }) {
+export default function Header({ name, modules, setModules, settings, setSettings }) {
   const [showSettings, setShowSettings] = useState(false)
 
   return (
@@ -21,7 +21,7 @@ export default function Header({ name }) {
         <CogIcon className="h-6 w-6" aria-hidden="true" />
       </button>
       <Modal open={showSettings} setOpen={setShowSettings}>
-        <Settings />
+        <Settings modules={modules} setModules={setModules} settings={settings} setSettings={setSettings} />
       </Modal>
     </header>
   );
