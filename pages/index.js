@@ -7,6 +7,12 @@ import Header from '../components/Header';
 import Layout, { GradientBackground } from '../components/Layout';
 import ArrowIcon from '../components/ArrowIcon';
 import SEO from '../components/SEO';
+import dynamic from 'next/dynamic';
+
+const availableModules = {
+  clock: dynamic(() => import('../modules/Clock'), { suspense: false }),
+  countdown: dynamic(() => import('../modules/Countdown'), { suspense: false }),
+};
 
 export default function Index({}) {
   const globalData = {
@@ -16,7 +22,7 @@ export default function Index({}) {
   };
 
   const [settings, setSettings] = useLocalStorage('settings', { columns: 3 });
-  const [modules, setModules] = useLocalStorage('modules', []);
+  const [modules, setModules] = useLocalStorage('modules', [[], [], []]);
   console.log(settings, modules)
 
   return (
@@ -25,18 +31,21 @@ export default function Index({}) {
       <Header name={globalData.name} />
       <main className="w-full">
         {/* Hack to make sure the grid-cols-[1234] classes are in the compiled CSS */}
-        <div className="hidden grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4" />
-        <ul className={`mb-6 pt-6 grid grid-cols-${settings.columns} gap-6 w-full`}>
+        <div className="hidden grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4" />
+
+        <ul className={`mb-6 pt-6 grid grid-cols-1 lg:grid-cols-${settings.columns ?? 3} gap-6 w-full`}>
           {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
             return <li className={""} key={column}>
               <ul>
                 {(modules[column] ?? []).map((module, index) => {
+                  const ModuleComponent = availableModules[module.type] ?? availableModules['notfound'];
+
                   return <li key={index} className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0 p-4">
-                    {module.type}
+                    <ModuleComponent configuration={module} />
                   </li>;
                 })}
               </ul>
-            </li>
+            </li>;
           })}
         </ul>
       </main>
