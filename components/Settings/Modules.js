@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 
 const availableModules = {
   clock: dynamic(() => import('../../modules/Clock/Configuration'), { suspense: false }),
+  countdown: dynamic(() => import('../../modules/Countdown/Configuration'), { suspense: false }),
 };
 
 function classNames(...classes) {
@@ -124,6 +125,7 @@ export default function Modules({ settings, modules, setModules }) {
                           configuration={module}
                           setConfiguration={(key, value) => {
                             module[key] = value;
+                            console.log(key, value, module);
                             setModules([...modules]);
                           }}
                         />
@@ -134,7 +136,7 @@ export default function Modules({ settings, modules, setModules }) {
                       className="flex-shrink-0 rounded-full p-1 ml-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:outline-none focus:bg-primary-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-900 focus:ring-white"
                       onClick={() => setShowSettings(module.id) }
                     >
-                      <span className="sr-only">View notifications</span>
+                      <span className="sr-only">Remove module</span>
                       <TrashIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
