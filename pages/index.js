@@ -23,8 +23,14 @@ export default function Index({}) {
     footerText: "Kore Nordmann 2022 - " + new Date().getFullYear(),
   };
 
-  const [settings, setSettings] = useLocalStorage("settings", { columns: 3 });
-  const [modules, setModules] = useLocalStorage("modules", [[], [], []]);
+  const [settings, setSettings] = useLocalStorage("settings", { columns: 1 });
+  const [modules, setModules] = useLocalStorage("modules", []);
+
+  console.log("Initial state", settings, modules);
+
+  useEffect(() => {
+    
+  }, [typeof localStorage]);
 
   // Dynamic class names: grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4
   const gridClassName = "lg:grid-cols-" + (settings.columns ?? 3);
