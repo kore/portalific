@@ -28,9 +28,10 @@ export default function Countdown({ configuration }) {
           <div className="text-center" key={countdown.name}>
             <h3 className="uppercase">{countdown.name}</h3>
             <div className="flex flex-row gap-2 justify-center">
-              {[...String(daysRemaining)].map((number) => {
+              {[...String(daysRemaining)].map((number, index) => {
                 return (
                   <div
+                    key={index}
                     className="relative bg-gray-100 dark:bg-gray-900 shadow-md rounded-lg loat-left"
                     style={{ width: "40px", height: "55px" }}
                   >

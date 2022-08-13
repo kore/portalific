@@ -48,14 +48,14 @@ export default function Index({}) {
             return (
               <li className={""} key={column}>
                 <ul>
-                  {(modules[column] ?? []).map((module, index) => {
+                  {(modules[column] ?? []).map((module) => {
                     const ModuleComponent =
                       availableModules[module.type] ??
                       availableModules["notfound"];
 
                     return (
                       <li
-                        key={index}
+                        key={module.id}
                         className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0 p-4"
                       >
                         <ModuleComponent configuration={module} />

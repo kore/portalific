@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "export": "next build && next export",
+    "format": "yarn prettier --write .",
     "lint": "next lint"
   },
   "dependencies": {
