@@ -23,9 +23,6 @@ export default function Modules({ settings, modules, setModules, moveModule }) {
   const [column, setColumn] = useState("1");
   const [settingsShown, setShowSettings] = useState(null);
 
-  // @TODO:
-  // * Allow to move modules by drag and drop
-
   // Dynamic class names: grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4
   const gridClassName = "grid-cols-" + (settings.columns ?? 3);
 

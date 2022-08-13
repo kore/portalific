@@ -9,6 +9,7 @@ export default function Feed({ configuration }) {
   // * Store read feed items
   // * Clear read store from time to time
   // * Also handle properties from RSS feeds and other feed styles
+  // * Resolve Firefox CORS issue
 
   useEffect(() => {
     (configuration.feeds ?? []).map(async (feed) => {
