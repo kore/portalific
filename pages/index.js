@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import ArrowIcon from "../components/ArrowIcon";
 import Column from "../components/Column";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -90,9 +89,7 @@ export default function Index({}) {
         setSettings={setSettings}
       />
       <main className="w-full">
-        <ul
-          className={`${gridClassName} mb-6 grid w-full grid-cols-1 gap-6 pt-6`}
-        >
+        <ul className={`${gridClassName} mb-6 grid w-full grid-cols-1 gap-6`}>
           {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
             return (
               <Column
@@ -115,7 +112,13 @@ export default function Index({}) {
                         index={index}
                         moveModule={moveModule}
                       >
-                        <ModuleComponent configuration={module} />
+                        <ModuleComponent
+                          configuration={module}
+                          updateModuleConfiguration={(configuration) => {
+                            modules[column][index] = configuration;
+                            setModules([...modules]);
+                          }}
+                        />
                       </Module>
                     );
                   })}

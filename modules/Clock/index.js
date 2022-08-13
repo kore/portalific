@@ -60,6 +60,7 @@ export default function Clock({ configuration }) {
             />
           )}
 
+          {/* Move this into a loop? */}
           <span
             className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
             style={{ width: "2%", height: "2%", top: "3%", left: "49%" }}
