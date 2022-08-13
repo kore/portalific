@@ -118,7 +118,12 @@ export default function Modules({ settings, modules, setModules, moveModule }) {
       <ul className={`${gridClassName} mt-6 grid w-full gap-6 pt-6`}>
         {[...Array(+settings.columns).keys()].map((column) => {
           return (
-            <Column key={column} column={column} moveModule={moveModule}>
+            <Column
+              key={column}
+              column={column}
+              length={(modules[column] ?? []).length}
+              moveModule={moveModule}
+            >
               <ul>
                 {(modules[column] ?? []).map((module, index) => {
                   const ModuleSettings = availableModules[module.type] ?? null;

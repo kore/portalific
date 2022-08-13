@@ -52,6 +52,9 @@ export default function Index({}) {
     modules[sourceColumn].splice(sourceIndex, 1);
 
     // Put item into target column
+    if (!Array.isArray(modules[targetColumn])) {
+      modules[targetColumn] = [];
+    }
     modules[targetColumn].splice(targetIndex, 0, removedModule);
 
     setModulesState([...modules]);
@@ -88,8 +91,9 @@ export default function Index({}) {
           {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
             return (
               <Column
-                key={column + 1}
+                key={column}
                 column={column}
+                length={(modules[column] ?? []).length}
                 moveModule={moveModule}
               >
                 <ul>
