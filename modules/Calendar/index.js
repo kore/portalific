@@ -149,7 +149,7 @@ export default function Calendar({ configuration, updateModuleConfiguration }) {
                     Nothing on today’s schedule
                   </p>
                 ) : (
-                  <ul className="grow">
+                  <ul className="grow divide-y">
                     {byDay.get(day.toLocaleDateString()).map((appointment) => {
                       return (
                         <li
