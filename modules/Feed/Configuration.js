@@ -5,10 +5,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function FeedConfiguration({
-  configuration,
-  setConfiguration,
-}) {
+export default function FeedConfiguration({ configuration, setConfiguration }) {
   const [color, setColor] = useState("");
   const [name, setName] = useState("");
   const [feed, setFeed] = useState("");
@@ -23,7 +20,8 @@ export default function FeedConfiguration({
               Feed
             </h2>
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
-              Configure a set of Atom and RSS feed sources to collect news items from
+              Configure a set of Atom and RSS feed sources to collect news items
+              from
             </p>
           </div>
           <ul
@@ -32,11 +30,13 @@ export default function FeedConfiguration({
           >
             {(configuration.feeds ?? []).map((feed) => {
               return (
-                <li
-                  className="grid grid-cols-12 gap-4 pt-4"
-                  key={feed.name}
-                >
-                  <div className="col-span-4 border-l-4 pl-2" style={{ borderColor: feed.color }}>{feed.name}</div>
+                <li className="grid grid-cols-12 gap-4 pt-4" key={feed.name}>
+                  <div
+                    className="col-span-4 border-l-4 pl-2"
+                    style={{ borderColor: feed.color }}
+                  >
+                    {feed.name}
+                  </div>
                   <div className="col-span-7">{feed.feed}</div>
                   <div className="col-span-1">
                     <button
@@ -113,8 +113,9 @@ export default function FeedConfiguration({
                   type="button"
                   className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
                   onClick={() => {
-                    let feeds = (configuration.feeds ?? [])
-                      .concat([{ name, feed, color }]);
+                    let feeds = (configuration.feeds ?? []).concat([
+                      { name, feed, color },
+                    ]);
 
                     setConfiguration("feeds", feeds);
                     setColor("");

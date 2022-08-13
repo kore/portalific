@@ -6,8 +6,8 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Layout, { GradientBackground } from "../components/Layout";
 import SEO from "../components/SEO";
-import useLocalStorage from "../utils/useLocalStorage";
 import NotFound from "../modules/NotFound";
+import useLocalStorage from "../utils/useLocalStorage";
 
 const availableModules = {
   clock: dynamic(() => import("../modules/Clock")),
