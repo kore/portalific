@@ -35,7 +35,10 @@ export default function Feed({ configuration }) {
     <ul>
       {feedItems.map((feedItem) => {
         return (
-          <li key={feedItem.id} className="hover:bg-white/30 dark:hover:bg-black/30">
+          <li
+            key={feedItem.id}
+            className="hover:bg-white/30 dark:hover:bg-black/30"
+          >
             <a
               className="block border-l-4 pl-2 text-sm"
               style={{ borderColor: feedItem.color }}

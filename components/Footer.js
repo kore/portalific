@@ -6,10 +6,14 @@ const ThemeSwitcher = () => {
   const [auto, setAuto] = useState(false);
 
   useEffect(() => {
-    setAuto((typeof localStorage === 'undefined') ? false : localStorage.getItem('theme') === 'auto');
+    setAuto(
+      typeof localStorage === "undefined"
+        ? false
+        : localStorage.getItem("theme") === "auto"
+    );
 
     const interval = setInterval(() => {
-      if (localStorage.getItem('theme') !== 'auto') {
+      if (localStorage.getItem("theme") !== "auto") {
         return;
       }
 
@@ -40,7 +44,10 @@ const ThemeSwitcher = () => {
         }}
         className="flex h-8 w-12 items-center justify-center rounded-3xl p-1 text-center transition dark:bg-primary-500"
       >
-        <MoonIcon className="h-6 w-6 text-gray-300 dark:text-white" aria-hidden="true" />
+        <MoonIcon
+          className="h-6 w-6 text-gray-300 dark:text-white"
+          aria-hidden="true"
+        />
       </button>
 
       <button
@@ -51,9 +58,12 @@ const ThemeSwitcher = () => {
           localStorage.setItem("theme", "light");
           setAuto(false);
         }}
-        className="flex ml-2 h-8 w-12 items-center justify-center rounded-3xl bg-primary-500 p-1 text-center transition dark:bg-transparent"
+        className="ml-2 flex h-8 w-12 items-center justify-center rounded-3xl bg-primary-500 p-1 text-center transition dark:bg-transparent"
       >
-        <SunIcon className="h-6 w-6 text-gray-100 dark:text-gray-400" aria-hidden="true" />
+        <SunIcon
+          className="h-6 w-6 text-gray-100 dark:text-gray-400"
+          aria-hidden="true"
+        />
       </button>
 
       <button
@@ -63,9 +73,15 @@ const ThemeSwitcher = () => {
           localStorage.setItem("theme", "auto");
           setAuto(true);
         }}
-        className={"flex ml-2 h-8 w-12 items-center justify-center rounded-3xl p-1 text-center transition " + (auto ? "bg-primary-700" : "bg-gray-100 dark:bg-gray-800")}
+        className={
+          "flex ml-2 h-8 w-12 items-center justify-center rounded-3xl p-1 text-center transition " +
+          (auto ? "bg-primary-700" : "bg-gray-100 dark:bg-gray-800")
+        }
       >
-        <ClockIcon className={"h-6 w-6 " + (auto ? "text-white" : "text-gray-700")} aria-hidden="true" />
+        <ClockIcon
+          className={"h-6 w-6 " + (auto ? "text-white" : "text-gray-700")}
+          aria-hidden="true"
+        />
       </button>
     </div>
   );
