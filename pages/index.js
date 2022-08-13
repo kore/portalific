@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import ArrowIcon from "../components/ArrowIcon";
 import Column from "../components/Column";
 import Footer from "../components/Footer";
@@ -10,7 +12,6 @@ import Module from "../components/Module";
 import SEO from "../components/SEO";
 import NotFound from "../modules/NotFound";
 import Welcome from "../modules/Welcome";
-import useLocalStorage from "../utils/useLocalStorage";
 
 const availableModules = {
   clock: dynamic(() => import("../modules/Clock")),
@@ -46,6 +47,22 @@ export default function Index({}) {
     localStorage.setItem("modules", JSON.stringify(modules));
   };
 
+  const moveModule = (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
+    console.log(
+      "Move module from", sourceColumn, sourceIndex,
+      "to", targetColumn, targetIndex
+    );
+    const removedModule = modules[sourceColumn][sourceIndex];
+
+    // Remove item from source column
+    modules[sourceColumn].splice(sourceIndex, 1);
+
+    // Put item into target column
+    modules[targetColumn].splice(targetIndex, 0, removedModule);
+
+    setModulesState([...modules]);
+  };
+
   useEffect(() => {
     if (hasLocalStorage && !loaded) {
       setSettingsState(
@@ -61,48 +78,56 @@ export default function Index({}) {
 
   return (
     <Layout>
-      <SEO title={globalData.name} description={globalData.blogTitle} />
-      <Header
-        name={globalData.name}
-        modules={modules}
-        setModules={setModules}
-        settings={settings}
-        setSettings={setSettings}
-      />
-      <main className="w-full">
-        <ul
-          className={`${gridClassName} mb-6 grid w-full grid-cols-1 gap-6 pt-6`}
-        >
-          {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
-            return (
-              <Column key={column + 1}>
-                <ul>
-                  {(modules[column] ?? []).map((module) => {
-                    const ModuleComponent =
-                      availableModules[module.type] ??
-                      availableModules["notfound"];
+      <DndProvider backend={HTML5Backend}>
+        <SEO title={globalData.name} description={globalData.blogTitle} />
+        <Header
+          name={globalData.name}
+          modules={modules}
+          setModules={setModules}
+          settings={settings}
+          setSettings={setSettings}
+        />
+        <main className="w-full">
+          <ul
+            className={`${gridClassName} mb-6 grid w-full grid-cols-1 gap-6 pt-6`}
+          >
+            {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
+              return (
+                <Column key={column + 1}>
+                  <ul>
+                    {(modules[column] ?? []).map((module, index) => {
+                      const ModuleComponent =
+                        availableModules[module.type] ??
+                        availableModules["notfound"];
 
-                    return (
-                      <Module key={module.id ?? "foo"}>
-                        <ModuleComponent configuration={module} />
-                      </Module>
-                    );
-                  })}
-                </ul>
-              </Column>
-            );
-          })}
-        </ul>
-      </main>
-      <Footer copyrightText={globalData.footerText} />
-      <GradientBackground
-        variant="large"
-        className="fixed top-20 opacity-40 dark:opacity-60"
-      />
-      <GradientBackground
-        variant="small"
-        className="absolute bottom-0 opacity-20 dark:opacity-10"
-      />
+                      return (
+                        <Module
+                          key={module.id}
+                          id={module.id}
+                          column={column}
+                          index={index}
+                          moveModule={moveModule}
+                        >
+                          <ModuleComponent configuration={module} />
+                        </Module>
+                      );
+                    })}
+                  </ul>
+                </Column>
+              );
+            })}
+          </ul>
+        </main>
+        <Footer copyrightText={globalData.footerText} />
+        <GradientBackground
+          variant="large"
+          className="fixed top-20 opacity-40 dark:opacity-60"
+        />
+        <GradientBackground
+          variant="small"
+          className="absolute bottom-0 opacity-20 dark:opacity-10"
+        />
+      </DndProvider>
     </Layout>
   );
 }
