@@ -5,7 +5,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function CalendarConfiguration({ configuration, setConfiguration }) {
+export default function CalendarConfiguration({
+  configuration,
+  setConfiguration,
+}) {
   const [color, setColor] = useState("");
   const [name, setName] = useState("");
   const [calendar, setCalendar] = useState("");
@@ -30,7 +33,10 @@ export default function CalendarConfiguration({ configuration, setConfiguration 
           >
             {(configuration.calendars ?? []).map((calendar) => {
               return (
-                <li className="grid grid-cols-12 gap-4 pt-4" key={calendar.name}>
+                <li
+                  className="grid grid-cols-12 gap-4 pt-4"
+                  key={calendar.name}
+                >
                   <div
                     className="col-span-4 border-l-4 pl-2"
                     style={{ borderColor: calendar.color }}
