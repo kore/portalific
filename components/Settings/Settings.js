@@ -18,6 +18,10 @@ export default function Settings({ settings, setSettings }) {
     setSettings({ ...settings });
   };
 
+  // @TODO:
+  // * Remap modules, if the number of columns is reduced
+  // * Implement backend synchronization of localStorage
+
   return (
     <Fragment>
       {/* Main section */}
