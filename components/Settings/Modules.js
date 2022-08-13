@@ -12,6 +12,7 @@ const availableModules = {
   clock: dynamic(() => import("../../modules/Clock/Configuration")),
   countdown: dynamic(() => import("../../modules/Countdown/Configuration")),
   feed: dynamic(() => import("../../modules/Feed/Configuration")),
+  calendar: dynamic(() => import("../../modules/Calendar/Configuration")),
 };
 
 function classNames(...classes) {
