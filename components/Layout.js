@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import { useEffect } from "react";
+import classNames from "classnames";
 import styles from "./Layout.module.css";
 
 export function GradientBackground({ variant, className }) {
@@ -50,8 +50,8 @@ export default function Layout({ children }) {
   }, []);
 
   return (
-    <div className="relative overflow-hidden min-h-screen">
-      <div className="flex flex-col items-center w-full mx-auto lg:px-6 px-1">
+    <div className="relative min-h-screen overflow-hidden">
+      <div className="mx-auto flex w-full flex-col items-center px-1 lg:px-6">
         {children}
       </div>
     </div>

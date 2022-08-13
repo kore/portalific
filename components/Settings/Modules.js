@@ -1,10 +1,10 @@
 import { Fragment, useState } from "react";
-import useLocalStorage from "../../utils/useLocalStorage";
-import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
-import { QRCodeSVG } from "qrcode.react";
-import { CogIcon, TrashIcon } from "@heroicons/react/outline";
-import Modal from "../Modal";
 import dynamic from "next/dynamic";
+import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
+import { CogIcon, TrashIcon } from "@heroicons/react/outline";
+import { QRCodeSVG } from "qrcode.react";
+import useLocalStorage from "../../utils/useLocalStorage";
+import Modal from "../Modal";
 
 const availableModules = {
   clock: dynamic(() => import("../../modules/Clock/Configuration"), {
@@ -28,7 +28,7 @@ export default function Modules({ settings, modules, setModules }) {
     <Fragment>
       <div className="py-6 px-4 sm:p-6 lg:pb-8">
         <div>
-          <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
+          <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
             Configure Modules
           </h2>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
@@ -37,7 +37,7 @@ export default function Modules({ settings, modules, setModules }) {
         </div>
 
         <div className="mt-6 grid grid-cols-12 gap-6">
-          <div className="md:col-span-8 col-span-12">
+          <div className="col-span-12 md:col-span-8">
             <label
               htmlFor="columns"
               className="block text-sm font-medium text-gray-700 dark:text-gray-200"
@@ -50,7 +50,7 @@ export default function Modules({ settings, modules, setModules }) {
               id="columns"
               value={module}
               onChange={(event) => setModule(event.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-800 dark:text-white"
+              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
             >
               <option value="none">Select Module Type</option>
               <option value="calendar">Calendar</option>
@@ -60,7 +60,7 @@ export default function Modules({ settings, modules, setModules }) {
             </select>
           </div>
 
-          <div className="md:col-span-2 col-span-6">
+          <div className="col-span-6 md:col-span-2">
             <label
               htmlFor="columns"
               className="block text-sm font-medium text-gray-700 dark:text-gray-200"
@@ -73,7 +73,7 @@ export default function Modules({ settings, modules, setModules }) {
               id="columns"
               value={column}
               onChange={(event) => setColumn(+event.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-800 dark:text-white"
+              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
             >
               <option value="0">1</option>
               <option value="1">2</option>
@@ -82,7 +82,7 @@ export default function Modules({ settings, modules, setModules }) {
             </select>
           </div>
 
-          <div className="md:col-span-2 col-span-6">
+          <div className="col-span-6 md:col-span-2">
             <button
               type="text"
               name="columns"
@@ -102,7 +102,7 @@ export default function Modules({ settings, modules, setModules }) {
                 });
                 setModules([...modules]);
               }}
-              className="mt-6 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-800 dark:text-white"
+              className="mt-6 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
             >
               Add
             </button>
@@ -114,7 +114,7 @@ export default function Modules({ settings, modules, setModules }) {
       <div className="hidden grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4" />
 
       <ul
-        className={`mt-6 pt-6 grid grid-cols-${settings.columns} gap-6 w-full`}
+        className={`grid-cols- mt-6 grid pt-6${settings.columns} w-full gap-6`}
       >
         {[...Array(+settings.columns).keys()].map((column) => {
           return (
@@ -124,16 +124,19 @@ export default function Modules({ settings, modules, setModules }) {
                   const ModuleSettings = availableModules[module.type] ?? null;
 
                   return (
-                    <li key={module.id} className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0 p-4">
+                    <li
+                      key={module.id}
+                      className="border border-b-0 border-gray-800 border-opacity-10 bg-white bg-opacity-10 p-4 backdrop-blur-lg transition last:border-b hover:border-b hover:bg-opacity-20 hovered-sibling:border-t-0 dark:border-white dark:border-opacity-10 dark:bg-black dark:bg-opacity-30 dark:hover:bg-opacity-50 md:first:rounded-t-lg md:last:rounded-b-lg"
+                    >
                       <h3>
                         Module: <strong>{module.type}</strong>
                       </h3>
-                      <div className="flex justify-end p-2 w-full">
+                      <div className="flex w-full justify-end p-2">
                         {ModuleSettings && (
                           <Fragment>
                             <button
                               type="button"
-                              className="flex-shrink-0 rounded-full p-1 ml-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:outline-none focus:bg-primary-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-900 focus:ring-white"
+                              className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
                               onClick={() => setShowSettings(module.id)}
                             >
                               <span className="sr-only">
@@ -158,7 +161,7 @@ export default function Modules({ settings, modules, setModules }) {
                         )}
                         <button
                           type="button"
-                          className="flex-shrink-0 rounded-full p-1 ml-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:outline-none focus:bg-primary-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-900 focus:ring-white"
+                          className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
                           onClick={() => setShowSettings(module.id)}
                         >
                           <span className="sr-only">Remove module</span>

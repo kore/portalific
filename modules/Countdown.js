@@ -27,16 +27,16 @@ export default function Countdown({ configuration }) {
         return (
           <div className="text-center" key={countdown.name}>
             <h3 className="uppercase">{countdown.name}</h3>
-            <div className="flex flex-row gap-2 justify-center">
+            <div className="flex flex-row justify-center gap-2">
               {[...String(daysRemaining)].map((number, index) => {
                 return (
                   <div
                     key={index}
-                    className="relative bg-gray-100 dark:bg-gray-900 shadow-md rounded-lg loat-left"
+                    className="loat-left relative rounded-lg bg-gray-100 shadow-md dark:bg-gray-900"
                     style={{ width: "40px", height: "55px" }}
                   >
                     <span
-                      className="absolute top-0 left-0 right-0 rounded-t-lg bg-gray-200 dark:bg-gray-800 border-b border-white dark:border-black"
+                      className="absolute inset-x-0 top-0 rounded-t-lg border-b border-white bg-gray-200 dark:border-black dark:bg-gray-800"
                       style={{
                         font: "bold 3em/55px sans-serif",
                         height: "50%",
@@ -47,7 +47,7 @@ export default function Countdown({ configuration }) {
                       {number}
                     </span>
                     <span
-                      className="rounded-b-lg primary-500"
+                      className="primary-500 rounded-b-lg"
                       style={{ font: "bold 3em/55px sans-serif" }}
                     >
                       {number}

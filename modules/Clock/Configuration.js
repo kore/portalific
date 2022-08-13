@@ -12,10 +12,10 @@ export default function ClockConfiguration({
   return (
     <Fragment>
       {/* Main section */}
-      <div className="pt-6 divide-y divide-gray-200 dark:divide-gray-600">
+      <div className="divide-y divide-gray-200 pt-6 dark:divide-gray-600">
         <div className="px-4 sm:px-6">
           <div>
-            <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
+            <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
               Clock
             </h2>
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
@@ -29,7 +29,7 @@ export default function ClockConfiguration({
           >
             <Switch.Group
               as="li"
-              className="py-4 flex items-center justify-between"
+              className="flex items-center justify-between py-4"
             >
               <div className="flex flex-col">
                 <Switch.Label
@@ -61,7 +61,7 @@ export default function ClockConfiguration({
             </Switch.Group>
             <Switch.Group
               as="li"
-              className="py-4 flex items-center justify-between"
+              className="flex items-center justify-between py-4"
             >
               <div className="flex flex-col">
                 <Switch.Label

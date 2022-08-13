@@ -1,5 +1,5 @@
-const plugin = require("tailwindcss/plugin");
 const pluginTypography = require("@tailwindcss/typography");
+const plugin = require("tailwindcss/plugin");
 const { COLOR_THEMES, FONT_THEMES } = require("../themes");
 
 const THEME = process.env.BLOG_THEME || "default";

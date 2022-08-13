@@ -1,10 +1,9 @@
 import { Fragment, useState } from "react";
-import useLocalStorage from "../utils/useLocalStorage";
 import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
 import { CogIcon, ViewGridAddIcon } from "@heroicons/react/outline";
-
-import SettingsSettings from "./Settings/Settings";
+import useLocalStorage from "../utils/useLocalStorage";
 import SettingsModules from "./Settings/Modules";
+import SettingsSettings from "./Settings/Settings";
 
 const groups = [
   { name: "Settings", href: "#", icon: CogIcon },

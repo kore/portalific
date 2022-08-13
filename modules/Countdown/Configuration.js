@@ -15,10 +15,10 @@ export default function CountdownConfiguration({
   return (
     <Fragment>
       {/* Main section */}
-      <div className="pt-6 divide-y divide-gray-200 dark:divide-gray-600">
+      <div className="divide-y divide-gray-200 pt-6 dark:divide-gray-600">
         <div className="px-4 sm:px-6">
           <div>
-            <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
+            <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
               Countdown
             </h2>
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
@@ -32,7 +32,7 @@ export default function CountdownConfiguration({
             {(configuration.countdowns ?? []).map((countdown) => {
               return (
                 <li
-                  className="grid grid-cols-12 pt-4 gap-4"
+                  className="grid grid-cols-12 gap-4 pt-4"
                   key={countdown.name}
                 >
                   <div className="col-span-7">{countdown.name}</div>
@@ -40,7 +40,7 @@ export default function CountdownConfiguration({
                   <div className="col-span-1">
                     <button
                       type="button"
-                      className="flex-shrink-0 rounded-full p-1 ml-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:outline-none focus:bg-primary-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-900 focus:ring-white"
+                      className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
                       onClick={() => {
                         setConfiguration(
                           "countdowns",
@@ -57,7 +57,7 @@ export default function CountdownConfiguration({
                 </li>
               );
             })}
-            <li className="grid grid-cols-12 pt-4 gap-4">
+            <li className="grid grid-cols-12 gap-4 pt-4">
               <div className="col-span-7">
                 <label
                   htmlFor="name"
@@ -71,7 +71,7 @@ export default function CountdownConfiguration({
                   id="name"
                   value={name ?? ""}
                   onChange={(event) => setName(event.target.value)}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-800 dark:text-white"
+                  className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
                 />
               </div>
               <div className="col-span-4">
@@ -87,13 +87,13 @@ export default function CountdownConfiguration({
                   id="date"
                   value={date ?? ""}
                   onChange={(event) => setDate(event.target.value)}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-800 dark:text-white"
+                  className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
                 />
               </div>
               <div className="col-span-1 pt-7">
                 <button
                   type="button"
-                  className="flex-shrink-0 rounded-full p-1 ml-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:outline-none focus:bg-primary-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-900 focus:ring-white"
+                  className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
                   onClick={() => {
                     let countdowns = (configuration.countdowns ?? [])
                       .concat([{ name, date }])

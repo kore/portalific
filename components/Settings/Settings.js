@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
-import useLocalStorage from "../../utils/useLocalStorage";
 import { Switch } from "@headlessui/react";
 import { QRCodeSVG } from "qrcode.react";
+import useLocalStorage from "../../utils/useLocalStorage";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -23,7 +23,7 @@ export default function Settings({ settings, setSettings }) {
       {/* Main section */}
       <div className="py-6 px-4 sm:p-6 lg:pb-8">
         <div>
-          <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
+          <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
             Profile
           </h2>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
@@ -45,7 +45,7 @@ export default function Settings({ settings, setSettings }) {
               id="name"
               value={settings.name ?? ""}
               onChange={(event) => setSetting("name", event.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-800 dark:text-white"
+              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
             />
           </div>
 
@@ -62,7 +62,7 @@ export default function Settings({ settings, setSettings }) {
               id="columns"
               value={settings.columns ?? ""}
               onChange={(event) => setSetting("columns", event.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-800 dark:text-white"
+              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
             >
               <option value="1">1</option>
               <option value="2">2</option>
@@ -74,10 +74,10 @@ export default function Settings({ settings, setSettings }) {
       </div>
 
       {/* Sync section */}
-      <div className="pt-6 divide-y divide-gray-200 dark:divide-gray-600">
+      <div className="divide-y divide-gray-200 pt-6 dark:divide-gray-600">
         <div className="px-4 sm:px-6">
           <div>
-            <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
+            <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
               Synchronization
             </h2>
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
@@ -91,7 +91,7 @@ export default function Settings({ settings, setSettings }) {
           >
             <Switch.Group
               as="li"
-              className="py-4 flex items-center justify-between"
+              className="flex items-center justify-between py-4"
             >
               <div className="flex flex-col">
                 <Switch.Label
@@ -145,7 +145,7 @@ export default function Settings({ settings, setSettings }) {
                 id="identifier"
                 value={settings.identifier ?? ""}
                 disabled
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-800 dark:text-white"
+                className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
               />
               <label
                 htmlFor="password"
@@ -160,7 +160,7 @@ export default function Settings({ settings, setSettings }) {
                 disabled={!settings.synchronize}
                 value={settings.password ?? ""}
                 onChange={(event) => setSetting("password", event.target.value)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-800 dark:text-white"
+                className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
               />
             </div>
             {settings.synchronize && (
@@ -168,7 +168,7 @@ export default function Settings({ settings, setSettings }) {
                 <QRCodeSVG
                   width="128"
                   height="128"
-                  className="inline border-white border-4 rounded-md"
+                  className="inline rounded-md border-4 border-white"
                   value={`https://torii2.netlify.app/setup?identifier=${settings.identifier}&password=${settings.password}`}
                 />
               </div>
@@ -178,10 +178,10 @@ export default function Settings({ settings, setSettings }) {
       </div>
 
       {/* Danger zone */}
-      <div className="pt-6 divide-y divide-gray-200 dark:divide-gray-600">
+      <div className="divide-y divide-gray-200 pt-6 dark:divide-gray-600">
         <div className="px-4 sm:px-6">
           <div>
-            <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
+            <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
               Danger Zone
             </h2>
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
@@ -191,7 +191,7 @@ export default function Settings({ settings, setSettings }) {
           <div className="text-right">
             <button
               type="button"
-              className="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:red-500 sm:text-sm"
+              className="focus:red-500 inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm"
               onClick={() => {
                 if (confirm("Really remove all data?")) {
                   localStorage.removeItem("theme");

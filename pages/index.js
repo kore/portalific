@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-
-import useLocalStorage from "../utils/useLocalStorage";
-
+import ArrowIcon from "../components/ArrowIcon";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Layout, { GradientBackground } from "../components/Layout";
-import ArrowIcon from "../components/ArrowIcon";
 import SEO from "../components/SEO";
-import dynamic from "next/dynamic";
+import useLocalStorage from "../utils/useLocalStorage";
 
 const availableModules = {
   clock: dynamic(() => import("../modules/Clock"), { suspense: false }),
@@ -40,9 +38,9 @@ export default function Index({}) {
         <div className="hidden grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4" />
 
         <ul
-          className={`mb-6 pt-6 grid grid-cols-1 lg:grid-cols-${
+          className={`lg:grid-cols- mb-6 grid grid-cols-1 pt-6${
             settings.columns ?? 3
-          } gap-6 w-full`}
+          } w-full gap-6`}
         >
           {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
             return (
@@ -56,7 +54,7 @@ export default function Index({}) {
                     return (
                       <li
                         key={module.id}
-                        className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0 p-4"
+                        className="border border-b-0 border-gray-800 border-opacity-10 bg-white bg-opacity-10 p-4 backdrop-blur-lg transition last:border-b hover:border-b hover:bg-opacity-20 hovered-sibling:border-t-0 dark:border-white dark:border-opacity-10 dark:bg-black dark:bg-opacity-30 dark:hover:bg-opacity-50 md:first:rounded-t-lg md:last:rounded-b-lg"
                       >
                         <ModuleComponent configuration={module} />
                       </li>
