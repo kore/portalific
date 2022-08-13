@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import Layout, { GradientBackground } from "../components/Layout";
 import SEO from "../components/SEO";
 import NotFound from "../modules/NotFound";
+import Welcome from "../modules/Welcome";
 import useLocalStorage from "../utils/useLocalStorage";
 
 const availableModules = {
@@ -14,6 +15,7 @@ const availableModules = {
   countdown: dynamic(() => import("../modules/Countdown")),
   feed: dynamic(() => import("../modules/Feed")),
   notfound: NotFound,
+  welcome: Welcome,
 };
 
 export default function Index({}) {
@@ -24,13 +26,9 @@ export default function Index({}) {
   };
 
   const [settings, setSettings] = useLocalStorage("settings", { columns: 1 });
-  const [modules, setModules] = useLocalStorage("modules", []);
+  const [modules, setModules] = useLocalStorage("modules", [[{ type: 'welcome', id: 'welcome' }]]);
 
   console.log("Initial state", settings, modules);
-
-  useEffect(() => {
-    
-  }, [typeof localStorage]);
 
   // Dynamic class names: grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4
   const gridClassName = "lg:grid-cols-" + (settings.columns ?? 3);
