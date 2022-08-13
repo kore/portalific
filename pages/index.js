@@ -7,10 +7,12 @@ import Header from "../components/Header";
 import Layout, { GradientBackground } from "../components/Layout";
 import SEO from "../components/SEO";
 import useLocalStorage from "../utils/useLocalStorage";
+import NotFound from "../modules/NotFound";
 
 const availableModules = {
   clock: dynamic(() => import("../modules/Clock")),
   countdown: dynamic(() => import("../modules/Countdown")),
+  notfound: NotFound,
 };
 
 export default function Index({}) {
