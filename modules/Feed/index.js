@@ -1,9 +1,13 @@
 import { Fragment, useState, useEffect } from "react";
 import { CheckIcon } from "@heroicons/react/outline";
-import Parser from "rss-parser";
 import axios from "axios";
+import Parser from "rss-parser";
 
-export default function Feed({ configuration, updateModuleConfiguration, pushError }) {
+export default function Feed({
+  configuration,
+  updateModuleConfiguration,
+  pushError,
+}) {
   const [feedItems, setFeedItems] = useState([]);
 
   // @TODO:
@@ -13,54 +17,54 @@ export default function Feed({ configuration, updateModuleConfiguration, pushErr
     Promise.allSettled(
       (configuration.feeds ?? []).map(async (feed) =>
         axios.get(
-          "https://k023.de/allowProxy.php?url=" +
-            encodeURIComponent(feed.feed),
+          "https://k023.de/allowProxy.php?url=" + encodeURIComponent(feed.feed),
           { color: feed.color, name: feed.name, feedUrl: feed.feed }
         )
       )
     ).then((feedPromises) => {
-      const successfulResponses = feedPromises.map((response) => {
-        if (response.status === 'rejected') {
-          pushError(
-            response.reason.message,
-            `Feed: ${response.reason.config.name}, URL: ${response.reason.config.feedUrl}`
-          );
+      const successfulResponses = feedPromises
+        .map((response) => {
+          if (response.status === "rejected") {
+            pushError(
+              response.reason.message,
+              `Feed: ${response.reason.config.name}, URL: ${response.reason.config.feedUrl}`
+            );
 
-          return null;
-        }
+            return null;
+          }
 
-        return response.value;
-      }).filter((item) => !!item);
-
-      Promise.all(successfulResponses.map(async (response) => {
-        const parser = new Parser();
-        return parser.parseString(response.data);
-      })).then(
-        axios.spread((...rssFeeds) => {
-          const allItems = rssFeeds.map((rssFeed) => {
-            return rssFeed.items.map((item) => {
-              // @TODO: How to get access to color and name here?!?
-              return { ...item, color: rssFeed.color, source: rssFeed.name };
-            });
-          });
-
-          const items = [].concat.apply([], allItems);
-          items.sort((a, b) => (a.isoDate < b.isoDate ? 1 : -1));
-          setFeedItems([
-            ...new Map(
-              items.map((item) => [
-                item.id,
-                item
-              ])
-            ).values(),
-          ]);
+          return response.value;
         })
-      ).catch((error) => {
-        pushError(
-          error.message,
-          `Feed: ${error.config.name}, URL: ${error.config.feedUrl}`
-        );
-      });
+        .filter((item) => !!item);
+
+      Promise.all(
+        successfulResponses.map(async (response) => {
+          const parser = new Parser();
+          return parser.parseString(response.data);
+        })
+      )
+        .then(
+          axios.spread((...rssFeeds) => {
+            const allItems = rssFeeds.map((rssFeed) => {
+              return rssFeed.items.map((item) => {
+                // @TODO: How to get access to color and name here?!?
+                return { ...item, color: rssFeed.color, source: rssFeed.name };
+              });
+            });
+
+            const items = [].concat.apply([], allItems);
+            items.sort((a, b) => (a.isoDate < b.isoDate ? 1 : -1));
+            setFeedItems([
+              ...new Map(items.map((item) => [item.id, item])).values(),
+            ]);
+          })
+        )
+        .catch((error) => {
+          pushError(
+            error.message,
+            `Feed: ${error.config.name}, URL: ${error.config.feedUrl}`
+          );
+        });
     });
   };
 

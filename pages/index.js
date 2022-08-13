@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Column from "../components/Column";
+import ErrorBoundary from "../components/ErrorBoundary";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import ErrorBoundary from "../components/ErrorBoundary";
 import Layout, { GradientBackground } from "../components/Layout";
 import Module from "../components/Module";
 import SEO from "../components/SEO";
@@ -49,7 +49,7 @@ export default function Index({}) {
 
   const pushError = (error, errorInfo = null) => {
     setErrors([...errors, { error: error, info: errorInfo }]);
-  }
+  };
 
   const moveModule = (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
     const removedModule = modules[sourceColumn][sourceIndex];
@@ -128,7 +128,7 @@ export default function Index({}) {
                               modules[column][index] = configuration;
                               setModules([...modules]);
                             }}
-														pushError={pushError}
+                            pushError={pushError}
                           />
                         </ErrorBoundary>
                       </Module>

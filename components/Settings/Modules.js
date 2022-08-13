@@ -5,9 +5,9 @@ import { CogIcon, TrashIcon } from "@heroicons/react/outline";
 import { QRCodeSVG } from "qrcode.react";
 import useLocalStorage from "../../utils/useLocalStorage";
 import Column from "../Column";
+import ErrorBoundary from "../ErrorBoundary";
 import Modal from "../Modal";
 import Module from "../Module";
-import ErrorBoundary from "../ErrorBoundary";
 
 const availableModules = {
   clock: dynamic(() => import("../../modules/Clock/Configuration")),
@@ -150,7 +150,10 @@ export default function Modules({ settings, modules, setModules, moveModule }) {
                                 <span className="sr-only">
                                   View notifications
                                 </span>
-                                <CogIcon className="h-6 w-6" aria-hidden="true" />
+                                <CogIcon
+                                  className="h-6 w-6"
+                                  aria-hidden="true"
+                                />
                               </button>
                               <Modal
                                 open={settingsShown === module.id}
