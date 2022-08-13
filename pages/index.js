@@ -20,6 +20,10 @@ const availableModules = {
 };
 
 export default function Index({}) {
+  // @TODO:
+  // * Add error boundaries
+  // * Add error reporting and alerting
+
   const globalData = {
     name: "Torii",
     description: "Offline first portal",
