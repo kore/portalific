@@ -16,96 +16,105 @@ const groupBy = (list, keyGetter) => {
   return map;
 };
 
-export default function Calendar({ configuration, updateModuleConfiguration }) {
+export default function Calendar({ configuration, updateModuleConfiguration, pushError }) {
   const [calendarItems, setCalendarItems] = useState([]);
 
   // Use https://stackoverflow.com/questions/72540660/react-how-to-combine-data-from-multiple-api-and-render-it to fetch data from all feeds
   const updateCalendars = () => {
-    Promise.all(
+    Promise.allSettled(
       (configuration.calendars ?? []).map(async (calendar) =>
         axios.get(
           "https://k023.de/allowProxy.php?url=" +
             encodeURIComponent(calendar.calendar),
-          { color: calendar.color, name: calendar.name }
+          { color: calendar.color, name: calendar.name, calendarUrl: calendar.calendar }
         )
       )
-    ).then(
-      axios.spread((...iCalendarDataSets) => {
-        const allAppointments = iCalendarDataSets.map((iCalendarData) => {
-          const jcalData = ICAL.parse(iCalendarData.data);
-          const vCalendar = new ICAL.Component(jcalData);
-          const calendarStart = new Date();
-          const calendarEnd = new Date();
-          calendarEnd.setDate(calendarStart.getDate() + 7);
+    ).then((calendarResponses) => {
+      const successfulResponses = calendarResponses.map((response) => {
+        if (response.status === 'rejected') {
+          pushError(
+            response.reason.message,
+            `Calendar: ${response.reason.config.name}, URL: ${response.reason.config.calendarUrl}`
+          );
 
-          const appointments = [];
-          vCalendar.getAllSubcomponents("vevent").map((vEvent) => {
-            const id = vEvent.getFirstPropertyValue("uid");
-            const recuring = vEvent.getFirstPropertyValue("rrule");
-            const start = new Date(vEvent.getFirstPropertyValue("dtstart"));
-            const end = new Date(vEvent.getFirstPropertyValue("dtend"));
-            const summary = vEvent.getFirstPropertyValue("summary");
+          return null;
+        }
 
-            if (recuring) {
-              const iterator = recuring.iterator(
-                vEvent.getFirstPropertyValue("dtstart")
+        return response.value;
+      }).filter((item) => !!item);
+
+      const allAppointments = successfulResponses.map((iCalendarData) => {
+        const jcalData = ICAL.parse(iCalendarData.data);
+        const vCalendar = new ICAL.Component(jcalData);
+        const calendarStart = new Date();
+        const calendarEnd = new Date();
+        calendarEnd.setDate(calendarStart.getDate() + 7);
+
+        const appointments = [];
+        vCalendar.getAllSubcomponents("vevent").map((vEvent) => {
+          const id = vEvent.getFirstPropertyValue("uid");
+          const recuring = vEvent.getFirstPropertyValue("rrule");
+          const start = new Date(vEvent.getFirstPropertyValue("dtstart"));
+          const end = new Date(vEvent.getFirstPropertyValue("dtend"));
+          const summary = vEvent.getFirstPropertyValue("summary");
+
+          if (recuring) {
+            const iterator = recuring.iterator(
+              vEvent.getFirstPropertyValue("dtstart")
+            );
+
+            let date, endDate;
+            do {
+              date = iterator.next();
+              if (!date) {
+                break;
+              }
+
+              date = date.toJSDate();
+              endDate = new Date().setTime(
+                date.getTime() + (end.getTime() - start.getTime())
               );
 
-              let date, endDate;
-              do {
-                date = iterator.next();
-                if (!date) {
-                  break;
-                }
-
-                date = date.toJSDate();
-                endDate = new Date().setTime(
-                  date.getTime() + (end.getTime() - start.getTime())
-                );
-
-                if (endDate > calendarStart && date < calendarEnd) {
-                  appointments.push({
-                    id,
-                    summary,
-                    start: date,
-                    end,
-                    color: iCalendarData.config.color,
-                    calendar: iCalendarData.config.name,
-                  });
-                }
-              } while (date < calendarEnd);
-              return;
-            } else {
-              if (end < calendarStart || start > calendarEnd) {
-                return;
+              if (endDate > calendarStart && date < calendarEnd) {
+                appointments.push({
+                  id,
+                  summary,
+                  start: date,
+                  end,
+                  color: iCalendarData.config.color,
+                  calendar: iCalendarData.config.name,
+                });
               }
+            } while (date < calendarEnd);
+            return;
+          } else {
+            if (end < calendarStart || start > calendarEnd) {
+              return;
             }
+          }
 
-            appointments.push({
-              id,
-              summary,
-              start,
-              end,
-              color: iCalendarData.config.color,
-              calendar: iCalendarData.config.name,
-            });
+          appointments.push({
+            id,
+            summary,
+            start,
+            end,
+            color: iCalendarData.config.color,
+            calendar: iCalendarData.config.name,
           });
-
-          return appointments;
         });
 
-        const appointments = [].concat.apply([], allAppointments);
-        appointments.sort((a, b) => a.start - b.start);
-        setCalendarItems(appointments);
-      })
-    );
-
-    /*
-      ).then((result) => {
-        return result.text();
-      }).then((iCalendarData) => {
+        return appointments;
       });
-    */
+
+      const appointments = [].concat.apply([], allAppointments);
+      appointments.sort((a, b) => a.start - b.start);
+      setCalendarItems(appointments);
+    }).catch((error) => {
+      pushError(
+        error.message,
+        `Calendar: ${error.config.name}, URL: ${error.config.calendarUrl}`
+      );
+    });
   };
 
   useEffect(() => {
