@@ -124,8 +124,8 @@ export default function Calendar({ configuration, updateModuleConfiguration }) {
   var byDay = groupBy(calendarItems, (item) => item.start.toLocaleDateString());
   return (
     <Fragment>
-      <ul className="divide-y divide-gray-200 text-sm leading-6 text-gray-500">
-        {[...Array(8).keys()]
+      <ul className="divide-y divide-gray-200 text-sm leading-6 text-gray-500 dark:divide-gray-800 dark:text-gray-300">
+        {[...Array(7).keys()]
           .map((index) => {
             const date = new Date();
             date.setDate(date.getDate() + index);
@@ -140,7 +140,6 @@ export default function Calendar({ configuration, updateModuleConfiguration }) {
                 >
                   {day.toLocaleDateString(undefined, {
                     weekday: "short",
-                    year: "numeric",
                     month: "short",
                     day: "numeric",
                   })}
@@ -158,7 +157,7 @@ export default function Calendar({ configuration, updateModuleConfiguration }) {
                           className="flex border-l-4 pl-2 text-sm hover:bg-white/30 dark:hover:bg-black/30"
                           style={{ borderColor: appointment.color }}
                         >
-                          <p className="mt-2 grow font-semibold text-gray-900 sm:mt-0">
+                          <p className="mt-2 grow font-semibold text-gray-900 dark:text-gray-100 sm:mt-0">
                             {appointment.summary}
                           </p>
                           <p className="flex-none sm:ml-6">
