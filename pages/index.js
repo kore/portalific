@@ -21,9 +21,6 @@ const availableModules = {
 };
 
 export default function Index({}) {
-  // @TODO:
-  // * Add error reporting and alerting
-
   const globalData = {
     name: "Torii",
     description: "Offline first portal",
@@ -97,6 +94,8 @@ export default function Index({}) {
         moveModule={moveModule}
         settings={settings}
         setSettings={setSettings}
+        errors={errors}
+        clearErrors={() => setErrors([])}
       />
       <main className="w-full">
         <ul className={`${gridClassName} mb-6 grid w-full grid-cols-1 gap-6`}>
@@ -129,6 +128,7 @@ export default function Index({}) {
                               modules[column][index] = configuration;
                               setModules([...modules]);
                             }}
+														pushError={pushError}
                           />
                         </ErrorBoundary>
                       </Module>

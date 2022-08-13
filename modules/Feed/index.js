@@ -1,31 +1,66 @@
 import { Fragment, useState, useEffect } from "react";
 import { CheckIcon } from "@heroicons/react/outline";
 import Parser from "rss-parser";
+import axios from "axios";
 
-export default function Feed({ configuration, updateModuleConfiguration }) {
+export default function Feed({ configuration, updateModuleConfiguration, pushError }) {
   const [feedItems, setFeedItems] = useState([]);
 
   // @TODO:
   // * Also handle properties from RSS feeds and other feed styles
 
   const updateFeeds = () => {
-    (configuration.feeds ?? []).map(async (feed) => {
-      const parser = new Parser();
-      let content = await parser.parseURL(
-        "https://k023.de/allowProxy.php?url=" + encodeURIComponent(feed.feed)
-      );
+    Promise.allSettled(
+      (configuration.feeds ?? []).map(async (feed) =>
+        axios.get(
+          "https://k023.de/allowProxy.php?url=" +
+            encodeURIComponent(feed.feed),
+          { color: feed.color, name: feed.name, feedUrl: feed.feed }
+        )
+      )
+    ).then((feedPromises) => {
+      const successfulResponses = feedPromises.map((response) => {
+        if (response.status === 'rejected') {
+          pushError(
+            response.reason.message,
+            `Feed: ${response.reason.config.name}, URL: ${response.reason.config.feedUrl}`
+          );
 
-      let newFeedItems = feedItems
-        .concat(content.items)
-        .sort((a, b) => (a.isoDate < b.isoDate ? 1 : -1));
-      setFeedItems([
-        ...new Map(
-          newFeedItems.map((item) => [
-            item.id,
-            { ...item, color: feed.color, source: feed.name },
-          ])
-        ).values(),
-      ]);
+          return null;
+        }
+
+        return response.value;
+      }).filter((item) => !!item);
+
+      Promise.all(successfulResponses.map(async (response) => {
+        const parser = new Parser();
+        return parser.parseString(response.data);
+      })).then(
+        axios.spread((...rssFeeds) => {
+          const allItems = rssFeeds.map((rssFeed) => {
+            return rssFeed.items.map((item) => {
+              // @TODO: How to get access to color and name here?!?
+              return { ...item, color: rssFeed.color, source: rssFeed.name };
+            });
+          });
+
+          const items = [].concat.apply([], allItems);
+          items.sort((a, b) => (a.isoDate < b.isoDate ? 1 : -1));
+          setFeedItems([
+            ...new Map(
+              items.map((item) => [
+                item.id,
+                item
+              ])
+            ).values(),
+          ]);
+        })
+      ).catch((error) => {
+        pushError(
+          error.message,
+          `Feed: ${error.config.name}, URL: ${error.config.feedUrl}`
+        );
+      });
     });
   };
 
