@@ -17,7 +17,7 @@ export default function Clock({ configuration }) {
     <div className="grid grid-flow-col gap-6">
       {configuration.showAnalogue && (
         <div
-          className="grid-span-1 center m-x-auto relative aspect-square max-w-xs rounded-full bg-white bg-opacity-60 opacity-100 shadow-xl dark:bg-black dark:bg-opacity-40"
+          className="relative mx-auto aspect-square max-w-xs rounded-full bg-white/60 text-center opacity-100 shadow-xl dark:bg-black/40"
           style={{ minWidth: "128px" }}
         >
           <div
@@ -121,7 +121,7 @@ export default function Clock({ configuration }) {
           />
         </div>
       )}
-      <div className="align-center flex flex-col justify-center">
+      <div className="flex flex-col justify-center text-center">
         <span className="text-center text-xl">
           <h2 className="font-extrabold">
             {time.getHours()}:{String(time.getMinutes()).padStart(2, "0")}

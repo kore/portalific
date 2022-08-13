@@ -32,7 +32,7 @@ export default function Countdown({ configuration }) {
                 return (
                   <div
                     key={index}
-                    className="loat-left relative rounded-lg bg-gray-100 shadow-md dark:bg-gray-900"
+                    className="relative rounded-lg bg-gray-100 shadow-md dark:bg-gray-900"
                     style={{ width: "40px", height: "55px" }}
                   >
                     <span
@@ -47,7 +47,7 @@ export default function Countdown({ configuration }) {
                       {number}
                     </span>
                     <span
-                      className="primary-500 rounded-b-lg"
+                      className="rounded-b-lg"
                       style={{ font: "bold 3em/55px sans-serif" }}
                     >
                       {number}

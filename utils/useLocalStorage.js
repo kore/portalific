@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export default (storageKey, fallbackState) => {
+const useLocalStorage = (storageKey, fallbackState) => {
   const [value, setValue] = React.useState(
     (typeof localStorage !== "undefined" &&
       JSON.parse(localStorage.getItem(storageKey))) ??
@@ -13,3 +13,5 @@ export default (storageKey, fallbackState) => {
 
   return [value, setValue];
 };
+
+export default useLocalStorage;

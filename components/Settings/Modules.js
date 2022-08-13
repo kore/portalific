@@ -24,6 +24,9 @@ export default function Modules({ settings, modules, setModules }) {
   const [column, setColumn] = useState("1");
   const [settingsShown, setShowSettings] = useState(null);
 
+  // Dynamic class names: grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4
+  const gridClassName = "grid-cols-" + (settings.columns ?? 3);
+
   return (
     <Fragment>
       <div className="py-6 px-4 sm:p-6 lg:pb-8">
@@ -110,12 +113,7 @@ export default function Modules({ settings, modules, setModules }) {
         </div>
       </div>
 
-      {/* Hack to make sure the grid-cols-[1234] classes are in the compiled CSS */}
-      <div className="hidden grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4" />
-
-      <ul
-        className={`grid-cols- mt-6 grid pt-6${settings.columns} w-full gap-6`}
-      >
+      <ul className={`${gridClassName} mt-6 grid w-full gap-6 pt-6`}>
         {[...Array(+settings.columns).keys()].map((column) => {
           return (
             <li className={""} key={column}>
@@ -126,7 +124,7 @@ export default function Modules({ settings, modules, setModules }) {
                   return (
                     <li
                       key={module.id}
-                      className="border border-b-0 border-gray-800 border-opacity-10 bg-white bg-opacity-10 p-4 backdrop-blur-lg transition last:border-b hover:border-b hover:bg-opacity-20 hovered-sibling:border-t-0 dark:border-white dark:border-opacity-10 dark:bg-black dark:bg-opacity-30 dark:hover:bg-opacity-50 md:first:rounded-t-lg md:last:rounded-b-lg"
+                      className="border border-b-0 border-gray-800/10 bg-white/10 p-4 backdrop-blur-lg transition last:border-b hover:border-b hover:bg-white/20 hovered-sibling:border-t-0 dark:border-white/10 dark:bg-black/30 dark:hover:bg-black/50 md:first:rounded-t-lg md:last:rounded-b-lg"
                     >
                       <h3>
                         Module: <strong>{module.type}</strong>

@@ -191,7 +191,7 @@ export default function Settings({ settings, setSettings }) {
           <div className="text-right">
             <button
               type="button"
-              className="focus:red-500 inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm"
+              className="inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm"
               onClick={() => {
                 if (confirm("Really remove all data?")) {
                   localStorage.removeItem("theme");
