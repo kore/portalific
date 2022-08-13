@@ -12,6 +12,7 @@ import NotFound from "../modules/NotFound";
 const availableModules = {
   clock: dynamic(() => import("../modules/Clock")),
   countdown: dynamic(() => import("../modules/Countdown")),
+  feed: dynamic(() => import("../modules/Feed")),
   notfound: NotFound,
 };
 
