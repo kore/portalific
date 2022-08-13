@@ -25,10 +25,32 @@ export default function Index({}) {
     footerText: "Kore Nordmann 2022 - " + new Date().getFullYear(),
   };
 
-  const [settings, setSettings] = useLocalStorage("settings", { columns: 1 });
-  const [modules, setModules] = useLocalStorage("modules", [
+  const [loaded, setLoaded] = useState(false);
+  const [settings, setSettingsState] = useState({ columns: 1 });
+  const [modules, setModulesState] = useState([
     [{ type: "welcome", id: "welcome" }],
   ]);
+  const hasLocalStorage = typeof localStorage !== "undefined";
+
+  const setSettings = (settings) => {
+    setSettingsState(settings);
+    // Defer?
+    localStorage.setItem("settings", settings);
+  };
+
+  const setModules = (modules) => {
+    setModulesState(modules);
+    // Defer?
+    localStorage.setItem("modules", modules);
+  };
+
+  useEffect(() => {
+    if (hasLocalStorage && !loaded) {
+      setSettingsState(JSON.parse(localStorage.getItem("settings")));
+      setModulesState(JSON.parse(localStorage.getItem("modules")));
+      setLoaded(true);
+    }
+  }, [hasLocalStorage]);
 
   // Dynamic class names: grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4
   const gridClassName = "lg:grid-cols-" + (settings.columns ?? 3);

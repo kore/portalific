@@ -4,6 +4,7 @@ import { SunIcon, MoonIcon, ClockIcon } from "@heroicons/react/outline";
 const ThemeSwitcher = () => {
   const [time, setTime] = useState(new Date().getTime());
   const [auto, setAuto] = useState(false);
+  const hasLocalStorage = typeof localStorage !== "undefined";
 
   useEffect(() => {
     setAuto(
@@ -30,7 +31,7 @@ const ThemeSwitcher = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [typeof localStorage, auto]);
+  }, [hasLocalStorage, auto]);
 
   return (
     <div className="ml-4 flex justify-center rounded-3xl bg-white p-1 dark:bg-gray-900">
