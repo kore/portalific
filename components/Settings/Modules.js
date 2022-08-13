@@ -18,7 +18,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Modules({ settings, modules, setModules }) {
+export default function Modules({ settings, modules, setModules, moveModule }) {
   const [module, setModule] = useState("none");
   const [column, setColumn] = useState("1");
   const [settingsShown, setShowSettings] = useState(null);
@@ -118,13 +118,19 @@ export default function Modules({ settings, modules, setModules }) {
       <ul className={`${gridClassName} mt-6 grid w-full gap-6 pt-6`}>
         {[...Array(+settings.columns).keys()].map((column) => {
           return (
-            <Column key={column}>
+            <Column key={column} column={column} moveModule={moveModule}>
               <ul>
-                {(modules[column] ?? []).map((module) => {
+                {(modules[column] ?? []).map((module, index) => {
                   const ModuleSettings = availableModules[module.type] ?? null;
 
                   return (
-                    <Module key={module.id}>
+                    <Module
+                      key={module.id}
+                      id={module.id}
+                      column={column}
+                      index={index}
+                      moveModule={moveModule}
+                    >
                       <h3>
                         Module: <strong>{module.type}</strong>
                       </h3>

@@ -8,6 +8,7 @@ export default function Header({
   name,
   modules,
   setModules,
+  moveModule,
   settings,
   setSettings,
 }) {
@@ -30,6 +31,7 @@ export default function Header({
         <Settings
           modules={modules}
           setModules={setModules}
+          moveModule={moveModule}
           settings={settings}
           setSettings={setSettings}
         />

@@ -17,6 +17,7 @@ function classNames(...classes) {
 export default function Settings({
   modules,
   setModules,
+  moveModule,
   settings,
   setSettings,
 }) {
@@ -65,6 +66,7 @@ export default function Settings({
             settings={settings}
             modules={modules}
             setModules={setModules}
+            moveModule={moveModule}
           />
         )}
       </div>

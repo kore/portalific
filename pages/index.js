@@ -48,10 +48,6 @@ export default function Index({}) {
   };
 
   const moveModule = (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
-    console.log(
-      "Move module from", sourceColumn, sourceIndex,
-      "to", targetColumn, targetIndex
-    );
     const removedModule = modules[sourceColumn][sourceIndex];
 
     // Remove item from source column
@@ -84,6 +80,7 @@ export default function Index({}) {
           name={globalData.name}
           modules={modules}
           setModules={setModules}
+          moveModule={moveModule}
           settings={settings}
           setSettings={setSettings}
         />
@@ -93,7 +90,11 @@ export default function Index({}) {
           >
             {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
               return (
-                <Column key={column + 1}>
+                <Column
+                  key={column + 1}
+                  column={column}
+                  moveModule={moveModule}
+                >
                   <ul>
                     {(modules[column] ?? []).map((module, index) => {
                       const ModuleComponent =
