@@ -4,6 +4,7 @@ import Link from "next/link";
 import Column from "../components/Column";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import ErrorBoundary from "../components/ErrorBoundary";
 import Layout, { GradientBackground } from "../components/Layout";
 import Module from "../components/Module";
 import SEO from "../components/SEO";
@@ -21,7 +22,6 @@ const availableModules = {
 
 export default function Index({}) {
   // @TODO:
-  // * Add error boundaries
   // * Add error reporting and alerting
 
   const globalData = {
@@ -31,6 +31,7 @@ export default function Index({}) {
   };
 
   const [loaded, setLoaded] = useState(false);
+  const [errors, setErrors] = useState([]);
   const [settings, setSettingsState] = useState({ columns: 1 });
   const [modules, setModulesState] = useState([
     [{ type: "welcome", id: "welcome" }],
@@ -48,6 +49,10 @@ export default function Index({}) {
     // Defer?
     localStorage.setItem("modules", JSON.stringify(modules));
   };
+
+  const pushError = (error, errorInfo = null) => {
+    setErrors([...errors, { error: error, info: errorInfo }]);
+  }
 
   const moveModule = (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
     const removedModule = modules[sourceColumn][sourceIndex];
@@ -117,13 +122,15 @@ export default function Index({}) {
                         index={index}
                         moveModule={moveModule}
                       >
-                        <ModuleComponent
-                          configuration={module}
-                          updateModuleConfiguration={(configuration) => {
-                            modules[column][index] = configuration;
-                            setModules([...modules]);
-                          }}
-                        />
+                        <ErrorBoundary pushError={pushError}>
+                          <ModuleComponent
+                            configuration={module}
+                            updateModuleConfiguration={(configuration) => {
+                              modules[column][index] = configuration;
+                              setModules([...modules]);
+                            }}
+                          />
+                        </ErrorBoundary>
                       </Module>
                     );
                   })}

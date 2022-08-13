@@ -7,6 +7,7 @@ import useLocalStorage from "../../utils/useLocalStorage";
 import Column from "../Column";
 import Modal from "../Modal";
 import Module from "../Module";
+import ErrorBoundary from "../ErrorBoundary";
 
 const availableModules = {
   clock: dynamic(() => import("../../modules/Clock/Configuration")),
@@ -134,53 +135,55 @@ export default function Modules({ settings, modules, setModules, moveModule }) {
                       index={index}
                       moveModule={moveModule}
                     >
-                      <h3>
-                        Module: <strong>{module.type}</strong>
-                      </h3>
-                      <div className="flex w-full justify-end p-2">
-                        {ModuleSettings && (
-                          <Fragment>
-                            <button
-                              type="button"
-                              className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
-                              onClick={() => setShowSettings(module.id)}
-                            >
-                              <span className="sr-only">
-                                View notifications
-                              </span>
-                              <CogIcon className="h-6 w-6" aria-hidden="true" />
-                            </button>
-                            <Modal
-                              open={settingsShown === module.id}
-                              setOpen={() => setShowSettings(null)}
-                            >
-                              <ModuleSettings
-                                configuration={module}
-                                setConfiguration={(key, value) => {
-                                  module[key] = value;
-                                  setModules([...modules]);
-                                }}
-                              />
-                            </Modal>
-                          </Fragment>
-                        )}
-                        <button
-                          type="button"
-                          className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
-                          onClick={() => {
-                            setModules(
-                              (modules ?? []).map((column) => {
-                                return (column ?? []).filter((toFilter) => {
-                                  return toFilter.id !== module.id;
-                                });
-                              })
-                            );
-                          }}
-                        >
-                          <span className="sr-only">Remove module</span>
-                          <TrashIcon className="h-6 w-6" aria-hidden="true" />
-                        </button>
-                      </div>
+                      <ErrorBoundary>
+                        <h3>
+                          Module: <strong>{module.type}</strong>
+                        </h3>
+                        <div className="flex w-full justify-end p-2">
+                          {ModuleSettings && (
+                            <Fragment>
+                              <button
+                                type="button"
+                                className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
+                                onClick={() => setShowSettings(module.id)}
+                              >
+                                <span className="sr-only">
+                                  View notifications
+                                </span>
+                                <CogIcon className="h-6 w-6" aria-hidden="true" />
+                              </button>
+                              <Modal
+                                open={settingsShown === module.id}
+                                setOpen={() => setShowSettings(null)}
+                              >
+                                <ModuleSettings
+                                  configuration={module}
+                                  setConfiguration={(key, value) => {
+                                    module[key] = value;
+                                    setModules([...modules]);
+                                  }}
+                                />
+                              </Modal>
+                            </Fragment>
+                          )}
+                          <button
+                            type="button"
+                            className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
+                            onClick={() => {
+                              setModules(
+                                (modules ?? []).map((column) => {
+                                  return (column ?? []).filter((toFilter) => {
+                                    return toFilter.id !== module.id;
+                                  });
+                                })
+                              );
+                            }}
+                          >
+                            <span className="sr-only">Remove module</span>
+                            <TrashIcon className="h-6 w-6" aria-hidden="true" />
+                          </button>
+                        </div>
+                      </ErrorBoundary>
                     </Module>
                   );
                 })}
