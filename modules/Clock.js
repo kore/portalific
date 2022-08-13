@@ -17,6 +17,7 @@ export default function Clock({ configuration }) {
     <div className="grid grid-flow-col gap-6">
       {configuration.showAnalogue && <div
         className="grid-span-1 relative max-w-xs aspect-square shadow-xl rounded-full bg-white dark:bg-black dark:bg-opacity-40 bg-opacity-60 center m-x-auto opacity-100"
+        style={{ minWidth: "128px" }}
       >
         <div
           className="absolute bg-gray-700 dark:bg-gray-300"

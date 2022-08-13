@@ -75,16 +75,13 @@ export default function CountdownConfiguration({ configuration, setConfiguration
                   type="button"
                   className="flex-shrink-0 rounded-full p-1 ml-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:outline-none focus:bg-primary-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-900 focus:ring-white"
                   onClick={() => {
-                      console.log(
-                        'countdowns',
-                        (configuration.countdowns ?? []).concat([{ name, date }])
-                      );
-                      setConfiguration(
-                        'countdowns',
-                        (configuration.countdowns ?? []).concat([{ name, date }])
-                      );
-                      setName('');
-                      setDate('');
+                    let countdowns = (configuration.countdowns ?? [])
+                      .concat([{ name, date }])
+                      .sort((a, b) => (a.date > b.date) ? 1 : -1);
+
+                    setConfiguration('countdowns', countdowns);
+                    setName('');
+                    setDate('');
                   }}
                 >
                   <span className="sr-only">Add countdown</span>

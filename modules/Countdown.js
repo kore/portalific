@@ -1,10 +1,22 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 
 export default function Countdown({ configuration }) {
+  const [time, setTime] = useState(new Date().getTime());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date().getTime());
+    }, 60 * 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <div className="flex flex-row flex-wrap justify-center gap-8">
       {(configuration.countdowns ?? []).map((countdown) => {
-        const daysRemaining = Math.ceil((new Date(countdown.date).getTime() - new Date().getTime()) / 1000 / 86400);
+        const daysRemaining = Math.ceil((new Date(countdown.date).getTime() - time) / 1000 / 86400);
 
         if (daysRemaining < 1) {
           return;
