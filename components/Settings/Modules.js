@@ -9,6 +9,7 @@ import Modal from "../Modal";
 const availableModules = {
   clock: dynamic(() => import("../../modules/Clock/Configuration")),
   countdown: dynamic(() => import("../../modules/Countdown/Configuration")),
+  feed: dynamic(() => import("../../modules/Feed/Configuration")),
 };
 
 function classNames(...classes) {
