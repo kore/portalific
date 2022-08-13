@@ -23,7 +23,6 @@ export default function Modules({ settings, modules, setModules }) {
 
   // @TODO:
   // * Allow to move modules by drag and drop
-  // * Allow to add multiple modules in a column
 
   // Dynamic class names: grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4
   const gridClassName = "grid-cols-" + (settings.columns ?? 3);
@@ -96,7 +95,7 @@ export default function Modules({ settings, modules, setModules }) {
                   return;
                 }
 
-                if (typeof modules[column] !== "Array") {
+                if (!Array.isArray(modules[column])) {
                   modules[column] = [];
                 }
 
