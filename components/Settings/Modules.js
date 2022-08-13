@@ -4,7 +4,9 @@ import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
 import { CogIcon, TrashIcon } from "@heroicons/react/outline";
 import { QRCodeSVG } from "qrcode.react";
 import useLocalStorage from "../../utils/useLocalStorage";
+import Column from "../Column";
 import Modal from "../Modal";
+import Module from "../Module";
 
 const availableModules = {
   clock: dynamic(() => import("../../modules/Clock/Configuration")),
@@ -116,16 +118,13 @@ export default function Modules({ settings, modules, setModules }) {
       <ul className={`${gridClassName} mt-6 grid w-full gap-6 pt-6`}>
         {[...Array(+settings.columns).keys()].map((column) => {
           return (
-            <li className={""} key={column}>
+            <Column key={column}>
               <ul>
                 {(modules[column] ?? []).map((module) => {
                   const ModuleSettings = availableModules[module.type] ?? null;
 
                   return (
-                    <li
-                      key={module.id}
-                      className="border border-b-0 border-gray-800/10 bg-white/10 p-4 backdrop-blur-lg transition last:border-b hover:border-b hover:bg-white/20 hovered-sibling:border-t-0 dark:border-white/10 dark:bg-black/30 dark:hover:bg-black/50 md:first:rounded-t-lg md:last:rounded-b-lg"
-                    >
+                    <Module key={module.id}>
                       <h3>
                         Module: <strong>{module.type}</strong>
                       </h3>
@@ -161,22 +160,24 @@ export default function Modules({ settings, modules, setModules }) {
                           type="button"
                           className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
                           onClick={() => {
-                            setModules((modules ?? []).map((column) => {
-                              return (column ?? []).filter((toFilter) => {
-                                return toFilter.id !== module.id;
-                              });
-                            }));
+                            setModules(
+                              (modules ?? []).map((column) => {
+                                return (column ?? []).filter((toFilter) => {
+                                  return toFilter.id !== module.id;
+                                });
+                              })
+                            );
                           }}
                         >
                           <span className="sr-only">Remove module</span>
                           <TrashIcon className="h-6 w-6" aria-hidden="true" />
                         </button>
                       </div>
-                    </li>
+                    </Module>
                   );
                 })}
               </ul>
-            </li>
+            </Column>
           );
         })}
       </ul>

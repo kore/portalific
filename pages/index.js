@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import ArrowIcon from "../components/ArrowIcon";
+import Column from "../components/Column";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Layout, { GradientBackground } from "../components/Layout";
+import Module from "../components/Module";
 import SEO from "../components/SEO";
 import NotFound from "../modules/NotFound";
 import Welcome from "../modules/Welcome";
@@ -35,19 +37,21 @@ export default function Index({}) {
   const setSettings = (settings) => {
     setSettingsState(settings);
     // Defer?
-    localStorage.setItem("settings", settings);
+    localStorage.setItem("settings", JSON.stringify(settings));
   };
 
   const setModules = (modules) => {
     setModulesState(modules);
     // Defer?
-    localStorage.setItem("modules", modules);
+    localStorage.setItem("modules", JSON.stringify(modules));
   };
 
   useEffect(() => {
     if (hasLocalStorage && !loaded) {
-      setSettingsState(JSON.parse(localStorage.getItem("settings")));
-      setModulesState(JSON.parse(localStorage.getItem("modules")));
+      setSettingsState(
+        JSON.parse(localStorage.getItem("settings")) || settings
+      );
+      setModulesState(JSON.parse(localStorage.getItem("modules")) || modules);
       setLoaded(true);
     }
   }, [hasLocalStorage]);
@@ -71,7 +75,7 @@ export default function Index({}) {
         >
           {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
             return (
-              <li className={""} key={column}>
+              <Column key={column + 1}>
                 <ul>
                   {(modules[column] ?? []).map((module) => {
                     const ModuleComponent =
@@ -79,16 +83,13 @@ export default function Index({}) {
                       availableModules["notfound"];
 
                     return (
-                      <li
-                        key={module.id}
-                        className="border border-b-0 border-gray-800/10 bg-white/10 p-4 backdrop-blur-lg transition last:border-b hover:border-b hover:bg-white/20 hovered-sibling:border-t-0 dark:border-white/10 dark:bg-black/30 dark:hover:bg-black/50 md:first:rounded-t-lg md:last:rounded-b-lg"
-                      >
+                      <Module key={module.id ?? "foo"}>
                         <ModuleComponent configuration={module} />
-                      </li>
+                      </Module>
                     );
                   })}
                 </ul>
-              </li>
+              </Column>
             );
           })}
         </ul>
