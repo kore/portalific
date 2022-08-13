@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 export default function Modal({ open, setOpen, children }) {
-  console.log("Dialog", open);
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
