@@ -8,6 +8,7 @@ export default function Feed({ configuration }) {
   // * Refresh feed regularly
   // * Store read feed items
   // * Clear read store from time to time
+  // * Also handle properties from RSS feeds and other feed styles
 
   useEffect(() => {
     (configuration.feeds ?? []).map(async (feed) => {
