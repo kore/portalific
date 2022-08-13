@@ -5,7 +5,6 @@
   "homepage": "https://torii2.netlify.app/",
   "scripts": {
     "dev": "next",
-    "dev:watch": "next-remote-watch ./posts",
     "build": "next build",
     "start": "next start",
     "export": "next build && next export",
@@ -15,7 +14,6 @@
   "dependencies": {
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
-    "@mapbox/rehype-prism": "^0.8.0",
     "@netlify/plugin-nextjs": "4.14",
     "@tailwindcss/typography": "^0.5.0",
     "classnames": "^2.3.1",
