@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import ArrowIcon from "../components/ArrowIcon";
 import Column from "../components/Column";
 import Footer from "../components/Footer";
@@ -74,61 +72,59 @@ export default function Index({}) {
 
   return (
     <Layout>
-      <DndProvider backend={HTML5Backend}>
-        <SEO title={globalData.name} description={globalData.blogTitle} />
-        <Header
-          name={globalData.name}
-          modules={modules}
-          setModules={setModules}
-          moveModule={moveModule}
-          settings={settings}
-          setSettings={setSettings}
-        />
-        <main className="w-full">
-          <ul
-            className={`${gridClassName} mb-6 grid w-full grid-cols-1 gap-6 pt-6`}
-          >
-            {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
-              return (
-                <Column
-                  key={column + 1}
-                  column={column}
-                  moveModule={moveModule}
-                >
-                  <ul>
-                    {(modules[column] ?? []).map((module, index) => {
-                      const ModuleComponent =
-                        availableModules[module.type] ??
-                        availableModules["notfound"];
+      <SEO title={globalData.name} description={globalData.blogTitle} />
+      <Header
+        name={globalData.name}
+        modules={modules}
+        setModules={setModules}
+        moveModule={moveModule}
+        settings={settings}
+        setSettings={setSettings}
+      />
+      <main className="w-full">
+        <ul
+          className={`${gridClassName} mb-6 grid w-full grid-cols-1 gap-6 pt-6`}
+        >
+          {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
+            return (
+              <Column
+                key={column + 1}
+                column={column}
+                moveModule={moveModule}
+              >
+                <ul>
+                  {(modules[column] ?? []).map((module, index) => {
+                    const ModuleComponent =
+                      availableModules[module.type] ??
+                      availableModules["notfound"];
 
-                      return (
-                        <Module
-                          key={module.id}
-                          id={module.id}
-                          column={column}
-                          index={index}
-                          moveModule={moveModule}
-                        >
-                          <ModuleComponent configuration={module} />
-                        </Module>
-                      );
-                    })}
-                  </ul>
-                </Column>
-              );
-            })}
-          </ul>
-        </main>
-        <Footer copyrightText={globalData.footerText} />
-        <GradientBackground
-          variant="large"
-          className="fixed top-20 opacity-40 dark:opacity-60"
-        />
-        <GradientBackground
-          variant="small"
-          className="absolute bottom-0 opacity-20 dark:opacity-10"
-        />
-      </DndProvider>
+                    return (
+                      <Module
+                        key={module.id}
+                        id={module.id}
+                        column={column}
+                        index={index}
+                        moveModule={moveModule}
+                      >
+                        <ModuleComponent configuration={module} />
+                      </Module>
+                    );
+                  })}
+                </ul>
+              </Column>
+            );
+          })}
+        </ul>
+      </main>
+      <Footer copyrightText={globalData.footerText} />
+      <GradientBackground
+        variant="large"
+        className="fixed top-20 opacity-40 dark:opacity-60"
+      />
+      <GradientBackground
+        variant="small"
+        className="absolute bottom-0 opacity-20 dark:opacity-10"
+      />
     </Layout>
   );
 }
