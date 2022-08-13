@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import { SunIcon, MoonIcon, GlobeIcon } from "@heroicons/react/outline";
+import { SunIcon, MoonIcon, ClockIcon } from "@heroicons/react/outline";
 
 const ThemeSwitcher = () => {
-  const [auto, setAuto] = useState(true);
   const [time, setTime] = useState(new Date().getTime());
+  const [auto, setAuto] = useState(false);
 
   useEffect(() => {
+    setAuto((typeof localStorage === 'undefined') ? false : localStorage.getItem('theme') === 'auto');
+
     const interval = setInterval(() => {
-      if (!auto) {
+      if (localStorage.getItem('theme') !== 'auto') {
         return;
       }
 
@@ -24,7 +26,7 @@ const ThemeSwitcher = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [auto]);
+  }, [typeof localStorage, auto]);
 
   return (
     <div className="ml-4 flex justify-center rounded-3xl bg-white p-1 dark:bg-gray-900">
@@ -63,7 +65,7 @@ const ThemeSwitcher = () => {
         }}
         className={"flex ml-2 h-8 w-12 items-center justify-center rounded-3xl p-1 text-center transition " + (auto ? "bg-primary-700" : "bg-gray-100 dark:bg-gray-800")}
       >
-        <GlobeIcon className={"h-6 w-6 " + (auto ? "text-white" : "text-gray-700")} aria-hidden="true" />
+        <ClockIcon className={"h-6 w-6 " + (auto ? "text-white" : "text-gray-700")} aria-hidden="true" />
       </button>
     </div>
   );
