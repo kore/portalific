@@ -28,8 +28,6 @@ export default function Index({}) {
   const [settings, setSettings] = useLocalStorage("settings", { columns: 1 });
   const [modules, setModules] = useLocalStorage("modules", [[{ type: 'welcome', id: 'welcome' }]]);
 
-  console.log("Initial state", settings, modules);
-
   // Dynamic class names: grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4
   const gridClassName = "lg:grid-cols-" + (settings.columns ?? 3);
 
