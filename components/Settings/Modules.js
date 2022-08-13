@@ -7,12 +7,8 @@ import useLocalStorage from "../../utils/useLocalStorage";
 import Modal from "../Modal";
 
 const availableModules = {
-  clock: dynamic(() => import("../../modules/Clock/Configuration"), {
-    suspense: false,
-  }),
-  countdown: dynamic(() => import("../../modules/Countdown/Configuration"), {
-    suspense: false,
-  }),
+  clock: dynamic(() => import("../../modules/Clock/Configuration")),
+  countdown: dynamic(() => import("../../modules/Countdown/Configuration")),
 };
 
 function classNames(...classes) {

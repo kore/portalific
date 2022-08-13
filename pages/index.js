@@ -9,8 +9,8 @@ import SEO from "../components/SEO";
 import useLocalStorage from "../utils/useLocalStorage";
 
 const availableModules = {
-  clock: dynamic(() => import("../modules/Clock"), { suspense: false }),
-  countdown: dynamic(() => import("../modules/Countdown"), { suspense: false }),
+  clock: dynamic(() => import("../modules/Clock")),
+  countdown: dynamic(() => import("../modules/Countdown")),
 };
 
 export default function Index({}) {
