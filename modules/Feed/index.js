@@ -30,6 +30,10 @@ export default function Feed({ configuration }) {
         ).values(),
       ]);
     });
+
+    // While we also access feedItems in this effect, we only care about the
+    // fee list change and not feed items added by other feeds:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [configuration.feeds]);
 
   return (
