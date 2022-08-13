@@ -24,7 +24,6 @@ export default function Modules({ settings, modules, setModules }) {
   // @TODO:
   // * Allow to move modules by drag and drop
   // * Allow to add multiple modules in a column
-  // * Allow to remove modules
 
   // Dynamic class names: grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4
   const gridClassName = "grid-cols-" + (settings.columns ?? 3);
@@ -162,7 +161,13 @@ export default function Modules({ settings, modules, setModules }) {
                         <button
                           type="button"
                           className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
-                          onClick={() => setShowSettings(module.id)}
+                          onClick={() => {
+                            setModules((modules ?? []).map((column) => {
+                              return (column ?? []).filter((toFilter) => {
+                                return toFilter.id !== module.id;
+                              });
+                            }));
+                          }}
                         >
                           <span className="sr-only">Remove module</span>
                           <TrashIcon className="h-6 w-6" aria-hidden="true" />
