@@ -157,7 +157,6 @@ export default function Modules({ settings, modules, setModules, moveModule }) {
                                 configuration={module}
                                 setConfiguration={(key, value) => {
                                   module[key] = value;
-                                  console.log(key, value, module);
                                   setModules([...modules]);
                                 }}
                               />
