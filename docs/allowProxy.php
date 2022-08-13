@@ -11,9 +11,11 @@ if (!in_array($allowedHost, $domainIncludeList)) {
 }
 
 header('Access-Control-Allow-Origin: ' . $allowedHost);
-header('Access-Control-Allow-Methods: *');
-header('Access-Control-Allow-Headers: Origin, Content-Type, Accept');
+header('Access-Control-Allow-Methods: GET, OPTIONS');
+header('Access-Control-Allow-Headers: User-Agent, Authorization, Origin, Content-Type, Accept');
+header('Access-Control-Expose-Headers: *');
 header('Access-Control-Allow-Credentials: true');
+header('Vary: Origin');
 
 if (empty($_GET['url'])) {
     http_response_code(412);
@@ -25,6 +27,10 @@ $context = stream_context_create(['http' => ['ignore_errors' => true]]);
 $result = file_get_contents($_GET['url'], false, $context);
 
 foreach ($http_response_header as $header) {
+    if (preg_match('(^(Vary|Accept))i', $header)) {
+        continue;
+    }
+
     header($header);
 }
 
