@@ -57,7 +57,7 @@ export default function Index({}) {
     }
     modules[targetColumn].splice(targetIndex, 0, removedModule);
 
-    setModulesState([...modules]);
+    setModules([...modules]);
   };
 
   useEffect(() => {
