@@ -123,8 +123,6 @@ export default function Modules({ settings, modules, setModules, moveModule }) {
             >
               <ul>
                 {(modules[column] ?? []).map((module, index) => {
-                  const ModuleSettings = availableModules[module.type] ?? null;
-
                   return (
                     <Module
                       key={module.id}
