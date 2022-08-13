@@ -1,5 +1,5 @@
-import { Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 
 export default function Modal({ open, setOpen, children }) {
   return (
@@ -48,5 +48,5 @@ export default function Modal({ open, setOpen, children }) {
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }

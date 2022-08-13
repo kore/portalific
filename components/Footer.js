@@ -54,8 +54,8 @@ const ThemeSwitcher = () => {
         type="button"
         aria-label="Use Dark Mode"
         onClick={() => {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
+          document.documentElement.classList.add("dark");
+          localStorage.setItem("theme", "dark");
         }}
         className="flex items-center h-full dark:bg-primary-500 rounded-3xl flex justify-center align-center p-1 w-16 h-8 transition"
       >
@@ -66,8 +66,8 @@ const ThemeSwitcher = () => {
         type="button"
         aria-label="Use Light Mode"
         onClick={() => {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
+          document.documentElement.classList.remove("dark");
+          localStorage.setItem("theme", "light");
         }}
         className="flex items-center h-full bg-primary-500 dark:bg-transparent rounded-3xl flex justify-center align-center p-1 w-16 h-8 transition"
       >
