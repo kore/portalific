@@ -34,7 +34,9 @@ export default function CountdownConfiguration({ configuration, setConfiguration
                     type="button"
                     className="flex-shrink-0 rounded-full p-1 ml-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:outline-none focus:bg-primary-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-900 focus:ring-white"
                     onClick={() => {
-                      setConfiguration('countdowns', []);
+                      setConfiguration('countdowns', (configuration.countdowns ?? []).filter(
+                        (toFilter) => (toFilter.name !== countdown.name)
+                      ));
                     }}
                   >
                     <span className="sr-only">Delete countdown</span>
