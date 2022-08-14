@@ -8,7 +8,7 @@ $domainIncludeList = [
 $allowedHost = $_SERVER['HTTP_ORIGIN'] ?? $_SERVER['HTTP_HOST'];
 if (!in_array($allowedHost, $domainIncludeList)) {
     http_response_code(401);
-    echo "<h1>Unauthorized<h1><p>Request host isn't in include list.</p>";
+    echo "<h1>Unauthorized</h1><p>Request host isn't in include list.</p>";
     exit();
 }
 
@@ -21,7 +21,7 @@ header('Vary: Origin');
 
 if (empty($_GET['url'])) {
     http_response_code(412);
-    echo "<h1>Precondition Failed<h1><p>URL request parameter required.</p>";
+    echo "<h1>Precondition Failed</h1><p>URL request parameter required.</p>";
     exit();
 }
 
