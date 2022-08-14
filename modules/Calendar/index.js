@@ -96,7 +96,7 @@ export default function Calendar({
                 summary,
                 start: date,
                 end,
-                fullDay: (end.getTime() - date.getTime()) >= 86400 * 1000,
+                fullDay: end.getTime() - date.getTime() >= 86400 * 1000,
                 color: calendar.color,
                 calendar: calendar.name,
               });
@@ -114,7 +114,7 @@ export default function Calendar({
           summary,
           start,
           end,
-          fullDay: (end.getTime() - start.getTime()) >= 86400 * 1000,
+          fullDay: end.getTime() - start.getTime() >= 86400 * 1000,
           color: calendar.color,
           calendar: calendar.name,
         });
@@ -169,7 +169,7 @@ export default function Calendar({
                     Nothing on today’s schedule
                   </p>
                 ) : (
-                  <ul className="grow divide-y flex-auto">
+                  <ul className="flex-auto grow divide-y">
                     {byDay.get(day.toLocaleDateString()).map((appointment) => {
                       return (
                         <li
@@ -181,12 +181,13 @@ export default function Calendar({
                             {appointment.summary}
                           </p>
                           <p className="flex-none sm:ml-6">
-                            {!appointment.fullDay &&
-                            <time dateTime={appointment.start.toISOString()}>
-                              {appointment.start.toLocaleTimeString("de-DE", {
-                                timeStyle: "short",
-                              })}
-                            </time>}
+                            {!appointment.fullDay && (
+                              <time dateTime={appointment.start.toISOString()}>
+                                {appointment.start.toLocaleTimeString("de-DE", {
+                                  timeStyle: "short",
+                                })}
+                              </time>
+                            )}
                           </p>
                         </li>
                       );

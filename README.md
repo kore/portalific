@@ -24,7 +24,7 @@ external sources. An example written in PHP can be found at
 
 There are some immediate TODOs to get this into a MVP state:
 
-* [ ] Implement background synchronization of configuration
-* [ ] Implement welcome screen
-* [ ] Allow to define proxy by environment variable
-* [ ] Add manifest and favicon
+- [ ] Implement background synchronization of configuration
+- [ ] Implement welcome screen
+- [ ] Allow to define proxy by environment variable
+- [ ] Add manifest and favicon
