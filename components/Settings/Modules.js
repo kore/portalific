@@ -79,9 +79,11 @@ export default function Modules({ settings, modules, setModules, moveModule }) {
               onChange={(event) => setColumn(+event.target.value)}
               className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
             >
-              {Array.from(Array(+settings.columns).keys()).map((column) => 
-                <option key={column} value={column + 1}>{column + 1}</option>
-              )}
+              {Array.from(Array(+settings.columns).keys()).map((column) => (
+                <option key={column} value={column + 1}>
+                  {column + 1}
+                </option>
+              ))}
             </select>
           </div>
 

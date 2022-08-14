@@ -45,8 +45,14 @@ export default function Index({}) {
     // If the number of columns is reduced map all modules to the still
     // available columns
     if (newSettings.columns < settings.columns) {
-      for (let column = newSettings.columns; column < settings.columns; column++) {
-        modules[newSettings.columns - 1] = modules[newSettings.columns - 1].concat(modules[column]).filter(item => !!item);
+      for (
+        let column = newSettings.columns;
+        column < settings.columns;
+        column++
+      ) {
+        modules[newSettings.columns - 1] = modules[newSettings.columns - 1]
+          .concat(modules[column])
+          .filter((item) => !!item);
         modules[column] = [];
       }
 
