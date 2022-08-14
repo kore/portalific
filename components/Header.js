@@ -20,7 +20,10 @@ export default function Header({
   return (
     <header className="flex w-full items-center p-2">
       <Link href="/">
-        <a className="grow text-left text-2xl dark:text-white">{name}</a>
+        <a className="grow text-left text-2xl dark:text-white">
+          {settings.name && settings.name + "'s "}
+          {name}
+        </a>
       </Link>
       {errors && !!errors.length && (
         <button
