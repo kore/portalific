@@ -154,7 +154,7 @@ export default function Calendar({
               <li className="py-4 sm:flex" key={day.toISOString()}>
                 <time
                   dateTime={day.toISOString()}
-                  className="mr-4 w-28 flex-none"
+                  className="mr-4 w-20 flex-none"
                 >
                   {day.toLocaleDateString(undefined, {
                     weekday: "short",
@@ -167,7 +167,7 @@ export default function Calendar({
                     Nothing on today’s schedule
                   </p>
                 ) : (
-                  <ul className="grow divide-y">
+                  <ul className="grow divide-y flex-auto">
                     {byDay.get(day.toLocaleDateString()).map((appointment) => {
                       return (
                         <li
