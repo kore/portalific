@@ -19,3 +19,12 @@ Open your browser and visit <http://localhost:3000>, your project should be runn
 Because of CORS we need an allow proxy to request data (RSS feed, ICAL, …) from
 external sources. An example written in PHP can be found at
 `docs/allowProxy.php`.
+
+### TODOs
+
+There are some immediate TODOs to get this into a MVP state:
+
+* [ ] Implement background synchronization of configuration
+* [ ] Implement welcome screen
+* [ ] Allow to define proxy by environment variable
+* [ ] Add manifest and favicon
