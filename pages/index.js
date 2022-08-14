@@ -146,6 +146,8 @@ export default function Index({}) {
                               setModules([...modules]);
                             }}
                             pushError={pushError}
+                            settings={settings}
+                            setSettings={setSettings}
                           />
                         </ErrorBoundary>
                       </Module>
