@@ -14,12 +14,13 @@ export default function Settings({ settings, setSettings }) {
         settings.identifier || (Math.random() + 1).toString(36).substring(2);
     }
 
-    settings[setting] = value;
-    setSettings({ ...settings });
+    setSettings({
+      ...settings,
+      [setting]: value,
+    });
   };
 
   // @TODO:
-  // * Remap modules, if the number of columns is reduced
   // * Implement backend synchronization of localStorage
 
   return (

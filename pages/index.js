@@ -35,16 +35,27 @@ export default function Index({}) {
   ]);
   const hasLocalStorage = typeof localStorage !== "undefined";
 
-  const setSettings = (settings) => {
-    setSettingsState(settings);
-    // Defer?
-    localStorage.setItem("settings", JSON.stringify(settings));
-  };
-
   const setModules = (modules) => {
     setModulesState(modules);
     // Defer?
     localStorage.setItem("modules", JSON.stringify(modules));
+  };
+
+  const setSettings = (newSettings) => {
+    // If the number of columns is reduced map all modules to the still
+    // available columns
+    if (newSettings.columns < settings.columns) {
+      for (let column = newSettings.columns; column < settings.columns; column++) {
+        modules[newSettings.columns - 1] = modules[newSettings.columns - 1].concat(modules[column]).filter(item => !!item);
+        modules[column] = [];
+      }
+
+      setModules(modules);
+    }
+
+    setSettingsState(newSettings);
+    // Defer?
+    localStorage.setItem("settings", JSON.stringify(newSettings));
   };
 
   const pushError = (error, errorInfo = null) => {
