@@ -96,6 +96,7 @@ export default function Calendar({
                 summary,
                 start: date,
                 end,
+                fullDay: (end.getTime() - date.getTime()) >= 86400 * 1000,
                 color: calendar.color,
                 calendar: calendar.name,
               });
@@ -113,6 +114,7 @@ export default function Calendar({
           summary,
           start,
           end,
+          fullDay: (end.getTime() - start.getTime()) >= 86400 * 1000,
           color: calendar.color,
           calendar: calendar.name,
         });
@@ -179,11 +181,12 @@ export default function Calendar({
                             {appointment.summary}
                           </p>
                           <p className="flex-none sm:ml-6">
+                            {!appointment.fullDay &&
                             <time dateTime={appointment.start.toISOString()}>
                               {appointment.start.toLocaleTimeString("de-DE", {
                                 timeStyle: "short",
                               })}
-                            </time>
+                            </time>}
                           </p>
                         </li>
                       );
