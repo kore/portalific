@@ -2,31 +2,37 @@ import { useState, useEffect } from "react";
 import { SunIcon, MoonIcon, ClockIcon } from "@heroicons/react/outline";
 
 const ThemeSwitcher = () => {
-  const [time, setTime] = useState(new Date().getTime());
-  const [auto, setAuto] = useState(false);
+  const [auto, setAuto] = useState(true);
   const hasLocalStorage = typeof localStorage !== "undefined";
 
+  const setAutoTheme = (auto) => {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    if (!auto) {
+      return;
+    }
+
+    const hours = new Date().getHours();
+    if (hours > 6 && hours < 20) {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+  };
+
+  setAutoTheme(auto);
   useEffect(() => {
     setAuto(
-      typeof localStorage === "undefined"
-        ? false
+      !hasLocalStorage || !localStorage.getItem("theme")
+        ? true
         : localStorage.getItem("theme") === "auto"
     );
 
-    const interval = setInterval(() => {
-      if (localStorage.getItem("theme") !== "auto") {
-        return;
-      }
+    setAutoTheme(auto);
 
-      const hours = new Date().getHours();
-      if (hours > 6 && hours < 20) {
-        document.documentElement.classList.remove("dark");
-      } else {
-        document.documentElement.classList.add("dark");
-      }
-
-      setTime(hours);
-    }, 1000);
+    const interval = setInterval(() => {}, 1000);
 
     return () => {
       clearInterval(interval);
