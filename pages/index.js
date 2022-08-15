@@ -24,7 +24,9 @@ export default function Index({}) {
   const globalData = {
     name: "Torii",
     description: "Offline first portal",
-    footerText: "Kore Nordmann 2022 - " + new Date().getFullYear(),
+    footerText:
+      "Kore Nordmann 2022" +
+      (new Date().getFullYear() > 2022 ? " - " + new Date().getFullYear() : ""),
   };
 
   const [loaded, setLoaded] = useState(false);
@@ -50,7 +52,9 @@ export default function Index({}) {
         column < settings.columns;
         column++
       ) {
-        modules[newSettings.columns - 1] = modules[newSettings.columns - 1]
+        modules[newSettings.columns - 1] = (
+          modules[newSettings.columns - 1] || []
+        )
           .concat(modules[column])
           .filter((item) => !!item);
         modules[column] = [];
@@ -148,6 +152,8 @@ export default function Index({}) {
                             pushError={pushError}
                             settings={settings}
                             setSettings={setSettings}
+                            modules={modules}
+                            setModules={setModules}
                           />
                         </ErrorBoundary>
                       </Module>

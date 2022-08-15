@@ -1,52 +1,136 @@
 import { Fragment } from "react";
 
-export default function Welcome() {
+export default function Welcome({
+  pushError,
+  settings,
+  setSettings,
+  modules,
+  setModules,
+}) {
+  const setSetting = (setting, value) => {
+    setSettings({
+      ...settings,
+      [setting]: value,
+    });
+  };
+
   return (
-    <div className="prose mx-auto text-base">
+    <div className="prose mx-auto mb-8 text-base dark:prose-invert">
       <h1>
         <span className="block text-center text-lg font-semibold text-primary-600">
           Offline-first, privacy-focussed, open-source personal portal
         </span>
-        <span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl sm:tracking-tight">
+        <span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:tracking-tight">
           Torii
         </span>
       </h1>
       <p className="mt-8 text-xl leading-8 text-gray-500">
         Torii is an OpenSource browser based portal, displaying your feeds, your
         calendars, and other information of personal relevance. It works (almost
-        <a href="#privacy">*</a>) entirely browser-based, so you data is safe
+        <a href="#privacy">*</a>) entirely browser-based, so your data is safe
         and secure. For cross-device synchronization you can optionally use a
         backend to synchronize the data continuously between devices.
       </p>
-      <h2>From beginner to expert in 30 days</h2>
+
+      <h2>Get Started</h2>
       <p>
-        Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in.
-        Convallis arcu ipsum urna nibh. Pharetra, euismod vitae interdum mauris
-        enim, consequat vulputate nibh. Maecenas pellentesque id sed tellus
-        mauris, ultrices mauris. Tincidunt enim cursus ridiculus mi.
-        Pellentesque nam sed nullam sed diam turpis ipsum eu a sed convallis
-        diam.
+        Hi
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value={settings.name ?? ""}
+          onChange={(event) => setSetting("name", event.target.value)}
+          placeholder="Your name"
+          className="mx-1 inline-block w-32 border-b-2 border-white bg-transparent focus:outline-none focus:ring-primary-500 dark:border-black"
+        />
+        , there are various settings you can configure. Most importantly it is
+        about the number of columns (
+        <select
+          type="text"
+          name="columns"
+          id="columns"
+          value={settings.columns ?? ""}
+          onChange={(event) => setSetting("columns", event.target.value)}
+          className="mx-1 inline-block w-12 border-b-2 border-white bg-transparent focus:outline-none focus:ring-primary-500 dark:border-black"
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        ) used for the portal and then the actual modules. Modules can be added
+        and configured in the settings dialog on the top-right and then moved by
+        drag and drop between those columns. If you like, you can, for example,
+        <button
+          name="columns"
+          id="columns"
+          onClick={() => {
+            modules[0].unshift({
+              type: "clock",
+              id: "firstModule-" + modules[0].length,
+              showAnalogue: true,
+              showSeconds: true,
+            });
+            setModules([...modules]);
+          }}
+          className="inline-block rounded border border-gray-400 bg-transparent py-1 px-2 font-semibold shadow hover:bg-white/80 hover:dark:bg-black/80"
+        >
+          add a watch module now
+        </button>
+        . You can then configure the module in the settings dialog afterwards.
+      </p>
+      <p>
+        Right now there are not too many modules available, but in the end they
+        are just React components, so feel free to add addionational ones:
       </p>
       <ul role="list">
-        <li>Quis elit egestas venenatis mattis dignissim.</li>
-        <li>Cras cras lobortis vitae vivamus ultricies facilisis tempus.</li>
-        <li>Orci in sit morbi dignissim metus diam arcu pretium.</li>
+        <li>
+          <h3 className="mb-1">Clock</h3>
+          <p>
+            A simple clock including a date, optionally including an analogue
+            clock.
+          </p>
+        </li>
+        <li>
+          <h3 className="mb-1">Countdown</h3>
+          <p>Show countdowns to (for you) important days.</p>
+        </li>
+        <li>
+          <h3 className="mb-1">Calendar</h3>
+          <p>
+            Show appointments for the next seven days from a set of ICAL
+            calendars.
+          </p>
+        </li>
+        <li>
+          <h3 className="mb-1">Feed</h3>
+          <p>Show new post from a set of RSS and Atom feeds.</p>
+        </li>
       </ul>
+
+      <h2>Error Handling</h2>
       <p>
-        Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in.
-        Convallis arcu ipsum urna nibh. Pharetra, euismod vitae interdum mauris
-        enim, consequat vulputate nibh. Maecenas pellentesque id sed tellus
-        mauris, ultrices mauris. Tincidunt enim cursus ridiculus mi.
-        Pellentesque nam sed nullam sed diam turpis ipsum eu a sed convallis
-        diam.
+        Since all data is fetched locally in your browser Torii will also show
+        you errors directly in this screen. If a feed or calendar can&apos;t be
+        retrieved or something similar happens an error notification will be
+        show on the top right.
+        <button
+          name="columns"
+          id="columns"
+          onClick={() => {
+            pushError(
+              "An error example",
+              "Created from the welcome screen to test errors."
+            );
+          }}
+          className="inline-block rounded border border-gray-400 bg-transparent py-1 px-2 font-semibold shadow hover:bg-white/80 hover:dark:bg-black/80"
+        >
+          Feel free to create an error
+        </button>{" "}
+        to see how this would look like.
       </p>
-      <blockquote>
-        <p>
-          Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum
-          urna sed consectetur neque tristique pellentesque. Blandit amet, sed
-          aenean erat arcu morbi.
-        </p>
-      </blockquote>
+
       <h2 id="privacy">Privacy</h2>
       <p>
         All data is, by default, stored only in your browser, in{" "}
@@ -56,7 +140,7 @@ export default function Welcome() {
         .
       </p>
       <p>
-        Browsers don&apos;t allo to request data from foreign domains, though,{" "}
+        Browsers don&apos;t allow to request data from foreign domains, though,{" "}
         <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">
           unless some very specific headers are set
         </a>

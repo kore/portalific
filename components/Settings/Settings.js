@@ -20,9 +20,6 @@ export default function Settings({ settings, setSettings }) {
     });
   };
 
-  // @TODO:
-  // * Implement backend synchronization of localStorage
-
   return (
     <Fragment>
       {/* Main section */}
