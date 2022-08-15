@@ -23,7 +23,7 @@ const availableModules = {
 export default function Index({}) {
   const globalData = {
     name: "Torii",
-    description: "Offline first portal",
+    description: "Offline-first, privacy-focussed, open-source personal portal",
     footerText:
       "Kore Nordmann 2022" +
       (new Date().getFullYear() > 2022 ? " - " + new Date().getFullYear() : ""),
@@ -107,7 +107,7 @@ export default function Index({}) {
 
   return (
     <Layout>
-      <SEO title={globalData.name} description={globalData.blogTitle} />
+      <SEO title={globalData.name} description={globalData.description} />
       <Header
         name={globalData.name}
         modules={modules}
