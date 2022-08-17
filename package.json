@@ -3,6 +3,7 @@
   "description": "Simple offline-first portal",
   "author": "Kore Nordmann",
   "homepage": "https://torii2.netlify.app/",
+  "license": "GPLv3",
   "scripts": {
     "dev": "next",
     "build": "next build",
