@@ -24,9 +24,6 @@ export default function Index({}) {
   const globalData = {
     name: "Torii",
     description: "Offline-first, privacy-focussed, open-source personal portal",
-    footerText:
-      "Kore Nordmann 2022" +
-      (new Date().getFullYear() > 2022 ? " - " + new Date().getFullYear() : ""),
   };
 
   const [loaded, setLoaded] = useState(false);

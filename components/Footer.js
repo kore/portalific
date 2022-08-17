@@ -98,7 +98,7 @@ export default function Footer({ copyrightText }) {
   return (
     <footer className="flex flex-row items-center py-2">
       <p className="mb-1 font-bold opacity-80 dark:text-white">
-        &copy; {copyrightText}
+        <a href="https://github.com/kore/Torii2/blob/main/LICENSE">GPLv3 by Kore Nordmann</a>
       </p>
       <ThemeSwitcher />
     </footer>
