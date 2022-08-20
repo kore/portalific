@@ -113,7 +113,7 @@ export default function Feed({
               className="hover:bg-white/30 dark:hover:bg-black/30"
             >
               <a
-                className="block border-l-4 pl-2 text-sm"
+                className="block border-l-4 pl-2 pb-1 text-sm"
                 style={{ borderColor: feedItem.color }}
                 href={feedItem.link}
                 onClick={() => {
