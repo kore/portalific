@@ -10,6 +10,8 @@ import Module from "../components/Module";
 import SEO from "../components/SEO";
 import NotFound from "../modules/NotFound";
 import Welcome from "../modules/Welcome";
+import { useDebouncedCallback } from 'use-debounce';
+import axios from "axios";
 
 const availableModules = {
   clock: dynamic(() => import("../modules/Clock")),
@@ -26,6 +28,7 @@ export default function Index({}) {
     description: "Offline-first, privacy-focussed, open-source personal portal",
   };
 
+  const [revision, setRevision] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [errors, setErrors] = useState([]);
   const [settings, setSettingsState] = useState({ columns: 1 });
@@ -34,11 +37,90 @@ export default function Index({}) {
   ]);
   const hasLocalStorage = typeof localStorage !== "undefined";
 
+  useEffect(() => {
+    if (!settings.synchronize) {
+      return;
+    }
+
+    axios.get(
+      `https://local-storage-storage.io/api/torii/${settings.identifier}`,
+      {
+        headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+      }
+    ).then((response) => {
+      const data = JSON.parse(response.data.data);
+      setRevision(response.data.revision);
+      setModulesState(data.modules);
+      setSettingsState(data.settings);
+    });
+
+    // We only want to run his effect once, actualy, when the localStorage is
+    // available. We only read loaded, settings, and modules but don't care if
+    // they (also) changed:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings.synchronize]);
+
+  const debouncedLocalStorageToServer = useDebouncedCallback(
+    (settings, revision) => {
+      if (!settings.synchronize) {
+        setRevision(null);
+        return;
+      }
+
+      if (!revision) {
+        axios.put(
+          `https://local-storage-storage.io/api/torii/${settings.identifier}`,
+          // @TODO: Encrypt data with settings.password
+          JSON.stringify({
+            modules: JSON.parse(localStorage.getItem("modules")),
+            settings: JSON.parse(localStorage.getItem("settings")),
+            theme: localStorage.getItem("theme"),
+          }),
+          {
+            headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+          }
+        ).then((response) => {
+          setRevision(response.data.revision);
+        });
+      } else {
+        axios.post(
+          `https://local-storage-storage.io/api/torii/${settings.identifier}?revision=${revision}`,
+          // @TODO: Encrypt data with settings.password
+          JSON.stringify({
+            modules: localStorage.getItem("modules"),
+            settings: localStorage.getItem("settings"),
+            theme: localStorage.getItem("theme"),
+          }),
+          {
+            headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+          }
+        ).then((response) => {
+          setRevision(response.data.revision);
+        });
+      }
+    },
+    1000
+  );
+
+  const debouncedModulesToLocalStorage = useDebouncedCallback(
+    (modules) => {
+      localStorage.setItem("modules", JSON.stringify(modules));
+    },
+    1000
+  );
+
   const setModules = (modules) => {
     setModulesState(modules);
-    // Defer?
-    localStorage.setItem("modules", JSON.stringify(modules));
+    debouncedModulesToLocalStorage(modules);
   };
+
+  const debouncedSettingsLocalStorage = useDebouncedCallback(
+    (settings) => {
+      localStorage.setItem("settings", JSON.stringify(settings));
+      debouncedLocalStorageToServer(settings, revision);
+    },
+    1000
+  );
 
   const setSettings = (newSettings) => {
     // If the number of columns is reduced map all modules to the still
@@ -61,8 +143,7 @@ export default function Index({}) {
     }
 
     setSettingsState(newSettings);
-    // Defer?
-    localStorage.setItem("settings", JSON.stringify(newSettings));
+    debouncedSettingsLocalStorage(newSettings);
   };
 
   const pushError = (error, errorInfo = null) => {
