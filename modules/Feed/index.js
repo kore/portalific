@@ -19,7 +19,9 @@ export default function Feed({
       return {
         ...feed,
         response: axios.get(
-          "https://k023.de/allowProxy.php?url=" + encodeURIComponent(feed.feed)
+          "https://local-storage-storage.io/proxy/torii?url=" +
+            encodeURIComponent(feed.feed),
+          { headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" } }
         ),
       };
     });

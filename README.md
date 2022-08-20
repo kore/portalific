@@ -18,7 +18,7 @@ Open your browser and visit <http://localhost:3000>, your project should be runn
 
 Because of CORS we need an allow proxy to request data (RSS feed, ICAL, …) from
 external sources. An example written in PHP can be found at
-`docs/allowProxy.php`.
+`docs/allowProxy.php` or at https://local-storage-storage.io/#proxy-request.
 
 ### TODOs
 

@@ -30,8 +30,9 @@ export default function Calendar({
       return {
         ...calendar,
         response: axios.get(
-          "https://k023.de/allowProxy.php?url=" +
-            encodeURIComponent(calendar.calendar)
+          "https://local-storage-storage.io/proxy/torii?url=" +
+            encodeURIComponent(calendar.calendar),
+          { headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" } }
         ),
       };
     });

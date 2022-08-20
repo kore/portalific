@@ -52,26 +52,30 @@ export default function Layout({ children, settings }) {
   return (
     <Fragment>
       <div
-        className="relative min-h-screen overflow-hidden bg-center bg-no-repeat	bg-auto"
+        className="relative min-h-screen overflow-hidden bg-auto bg-center bg-no-repeat"
         style={{
           backgroundColor: settings.backgroundColor || "transparent",
-          backgroundImage: settings.backgroundImage ? `url(${settings.backgroundImage})` : "none",
+          backgroundImage: settings.backgroundImage
+            ? `url(${settings.backgroundImage})`
+            : "none",
         }}
       >
         <div className="mx-auto flex w-full flex-col items-center px-1 lg:px-6">
           {children}
         </div>
       </div>
-      {!settings.backgroundColor && !settings.backgroundImage && <Fragment>
-        <GradientBackground
-          variant="large"
-          className="fixed top-20 opacity-40 dark:opacity-60"
-        />
-        <GradientBackground
-          variant="small"
-          className="absolute bottom-0 opacity-20 dark:opacity-10"
-        />
-      </Fragment>}
+      {!settings.backgroundColor && !settings.backgroundImage && (
+        <Fragment>
+          <GradientBackground
+            variant="large"
+            className="fixed top-20 opacity-40 dark:opacity-60"
+          />
+          <GradientBackground
+            variant="small"
+            className="absolute bottom-0 opacity-20 dark:opacity-10"
+          />
+        </Fragment>
+      )}
     </Fragment>
   );
 }
