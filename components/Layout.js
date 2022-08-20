@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import classNames from "classnames";
 import styles from "./Layout.module.css";
 
@@ -14,7 +14,7 @@ export function GradientBackground({ variant, className }) {
   return <div className={classes} />;
 }
 
-export default function Layout({ children }) {
+export default function Layout({ children, settings }) {
   const setAppTheme = () => {
     const darkMode = localStorage.getItem("theme") === "dark";
     const lightMode = localStorage.getItem("theme") === "light";
@@ -50,10 +50,28 @@ export default function Layout({ children }) {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <div className="mx-auto flex w-full flex-col items-center px-1 lg:px-6">
-        {children}
+    <Fragment>
+      <div
+        className="relative min-h-screen overflow-hidden bg-center bg-no-repeat	bg-auto"
+        style={{
+          backgroundColor: settings.backgroundColor || "transparent",
+          backgroundImage: settings.backgroundImage ? `url(${settings.backgroundImage})` : "none",
+        }}
+      >
+        <div className="mx-auto flex w-full flex-col items-center px-1 lg:px-6">
+          {children}
+        </div>
       </div>
-    </div>
+      {!settings.backgroundColor && !settings.backgroundImage && <Fragment>
+        <GradientBackground
+          variant="large"
+          className="fixed top-20 opacity-40 dark:opacity-60"
+        />
+        <GradientBackground
+          variant="small"
+          className="absolute bottom-0 opacity-20 dark:opacity-10"
+        />
+      </Fragment>}
+    </Fragment>
   );
 }

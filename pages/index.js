@@ -5,7 +5,7 @@ import Column from "../components/Column";
 import ErrorBoundary from "../components/ErrorBoundary";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Layout, { GradientBackground } from "../components/Layout";
+import Layout from "../components/Layout";
 import Module from "../components/Module";
 import SEO from "../components/SEO";
 import NotFound from "../modules/NotFound";
@@ -103,7 +103,7 @@ export default function Index({}) {
   const gridClassName = "lg:grid-cols-" + (settings.columns ?? 3);
 
   return (
-    <Layout>
+    <Layout settings={settings}>
       <SEO title={globalData.name} description={globalData.description} />
       <Header
         name={globalData.name}
@@ -163,14 +163,6 @@ export default function Index({}) {
         </ul>
       </main>
       <Footer copyrightText={globalData.footerText} />
-      <GradientBackground
-        variant="large"
-        className="fixed top-20 opacity-40 dark:opacity-60"
-      />
-      <GradientBackground
-        variant="small"
-        className="absolute bottom-0 opacity-20 dark:opacity-10"
-      />
     </Layout>
   );
 }

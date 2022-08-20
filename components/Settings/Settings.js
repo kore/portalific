@@ -34,7 +34,7 @@ export default function Settings({ settings, setSettings }) {
         </div>
 
         <div className="mt-6 grid grid-cols-12 gap-6">
-          <div className="col-span-12">
+          <div className="col-span-6">
             <label
               htmlFor="name"
               className="block text-sm font-medium text-gray-700 dark:text-gray-200"
@@ -51,7 +51,7 @@ export default function Settings({ settings, setSettings }) {
             />
           </div>
 
-          <div className="col-span-12">
+          <div className="col-span-6">
             <label
               htmlFor="columns"
               className="block text-sm font-medium text-gray-700 dark:text-gray-200"
@@ -71,6 +71,62 @@ export default function Settings({ settings, setSettings }) {
               <option value="3">3</option>
               <option value="4">4</option>
             </select>
+          </div>
+
+          <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100 col-span-12">
+            Background
+          </h2>
+
+          <div className="col-span-2">
+            <label
+              htmlFor="background-color"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+            >
+              Color
+            </label>
+            <input
+              type="color"
+              name="background-color"
+              id="background-color"
+              value={settings.backgroundColor ?? "#7D7AFF"}
+              onChange={(event) => setSetting("backgroundColor", event.target.value)}
+              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
+              style={{ height: "38px" }}
+            />
+          </div>
+
+          <div className="col-span-8">
+            <label
+              htmlFor="background-image"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+            >
+              Image (URL)
+            </label>
+            <input
+              type="text"
+              name="background-image"
+              id="background-image"
+              placeholder="Background image URL"
+              value={settings.backgroundImage ?? ""}
+              onChange={(event) => setSetting("backgroundImage", event.target.value)}
+              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
+            />
+          </div>
+
+          <div className="col-span-2">
+            <button
+              type="button"
+              className="mt-6 inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm"
+              onClick={() => {
+                setSettings({
+                  ...settings,
+                  backgroundImage: undefined,
+                  backgroundColor: undefined,
+                });
+              }}
+            >
+              Clear
+            </button>
           </div>
         </div>
       </div>
