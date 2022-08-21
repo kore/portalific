@@ -25,5 +25,24 @@ external sources. An example written in PHP can be found at
 There are some immediate TODOs to get this into a MVP state:
 
 - [ ] Implement cross-device server-based synchronization of configuration
-- [ ] Allow to define proxy by environment variable
 - [ ] Add manifest and favicon
+
+### Modules to create
+
+- [ ] TODO list (work vs. private), opened in defined time ranges
+- [ ] Simple weather module
+
+### General ideas
+
+#### Different environment modes
+
+It could make sense to show differen modules in different envuironment modes,
+think of:
+
+* Work
+* Relax
+* Travelling
+* Vacation
+
+Those could be explicitly chosen, but also be based on time / date and/or
+location.
