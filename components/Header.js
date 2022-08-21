@@ -6,19 +6,19 @@ import Settings from "./Settings";
 
 export default function Header({
   name,
-  modules,
-  setModules,
-  moveModule,
-  settings,
-  setSettings,
-  errors,
-  clearErrors,
+  modules = [],
+  setModules = null,
+  moveModule = null,
+  settings = {},
+  setSettings = null,
+  errors = [],
+  clearErrors = null,
 }) {
   const [showSettings, setShowSettings] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
 
   return (
-    <header className="flex w-full items-center p-2">
+    <header className="flex flex-grow-0 w-full items-center p-2">
       <Link href="/">
         <a className="grow text-left text-2xl dark:text-white">
           {settings.name && settings.name + "'s "}
@@ -81,14 +81,16 @@ export default function Header({
           Clear all errors
         </button>
       </Modal>
-      <button
-        type="button"
-        className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
-        onClick={() => setShowSettings(true)}
-      >
-        <span className="sr-only">View notifications</span>
-        <CogIcon className="h-6 w-6" aria-hidden="true" />
-      </button>
+      {setSettings && (
+        <button
+          type="button"
+          className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
+          onClick={() => setShowSettings(true)}
+        >
+          <span className="sr-only">View notifications</span>
+          <CogIcon className="h-6 w-6" aria-hidden="true" />
+        </button>
+      )}
       <Modal open={showSettings} setOpen={setShowSettings}>
         <Settings
           modules={modules}
