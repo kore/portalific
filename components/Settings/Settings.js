@@ -2,13 +2,15 @@ import { Fragment, useState } from "react";
 import { Switch } from "@headlessui/react";
 import { QRCodeSVG } from "qrcode.react";
 import useLocalStorage from "../../utils/useLocalStorage";
-import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { EyeIcon, EyeOffIcon, ClipboardCopyIcon, ClipboardCheckIcon, LockClosedIcon, LockOpenIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Settings({ settings, setSettings }) {
+  const [copied, setCopied] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [includePassword, setIncludePassword] = useState(false);
 
@@ -18,11 +20,14 @@ export default function Settings({ settings, setSettings }) {
         settings.identifier || (Math.random() + 1).toString(36).substring(2);
     }
 
+    setCopied(false);
     setSettings({
       ...settings,
       [setting]: value,
     });
   };
+
+  const setupLink = `${window.location.host}/setup?identifier=${settings.identifier}` + (includePassword ? `&password=${settings.password}` : "");
 
   return (
     <Fragment>
@@ -217,7 +222,7 @@ export default function Settings({ settings, setSettings }) {
                 htmlFor="password"
                 className="mt-6 block text-sm font-medium text-gray-700 dark:text-gray-200"
               >
-                Password
+                Password {includePassword ? " (included in link)" : " (not in link)"}
               </label>
               <div className="relative">
                 <input
@@ -247,8 +252,34 @@ export default function Settings({ settings, setSettings }) {
                   width="128"
                   height="128"
                   className="inline rounded-md border-4 border-white"
-                  value={`https://torii2.netlify.app/setup?identifier=${settings.identifier}&password=${settings.password}`}
+                  value={setupLink}
                 />
+                <div className="block mt-1" role="group">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIncludePassword(!includePassword);
+                      setCopied(false);
+                    }}
+                    className="inline-flex justify-center rounded-l-md border border-r-transparent border-gray-300 dark:border-gray-700 px-2 py-1 text-base font-medium text-white shadow-sm hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm"
+                  >
+                    {includePassword ?
+                      <LockOpenIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" aria-hidden="true" title="Include password in link" /> :
+                      <LockClosedIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" aria-hidden="true" title="Include password in link" />
+                    }
+                  </button>
+                  <CopyToClipboard text={setupLink} onCopy={() => setCopied(true)}>
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-r-md border border-gray-300 dark:border-gray-700 px-2 py-1 text-base font-medium text-white shadow-sm hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm"
+                    >
+                      {copied ?
+                        <ClipboardCheckIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" aria-hidden="true" /> :
+                        <ClipboardCopyIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" aria-hidden="true" />
+                      }
+                    </button>
+                  </CopyToClipboard>
+                </div>
               </div>
             )}
           </div>
