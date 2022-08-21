@@ -2,12 +2,16 @@ import { Fragment, useState } from "react";
 import { Switch } from "@headlessui/react";
 import { QRCodeSVG } from "qrcode.react";
 import useLocalStorage from "../../utils/useLocalStorage";
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Settings({ settings, setSettings }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [includePassword, setIncludePassword] = useState(false);
+
   const setSetting = (setting, value) => {
     if (setting === "synchronize" && value) {
       settings.identifier =
@@ -215,15 +219,27 @@ export default function Settings({ settings, setSettings }) {
               >
                 Password
               </label>
-              <input
-                type="text"
-                name="password"
-                id="password"
-                disabled={!settings.synchronize}
-                value={settings.password ?? ""}
-                onChange={(event) => setSetting("password", event.target.value)}
-                className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  disabled={!settings.synchronize}
+                  value={settings.password ?? ""}
+                  onChange={(event) => setSetting("password", event.target.value)}
+                  className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
+                />
+
+                <button
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                >
+                  {showPassword ?
+                    <EyeIcon className="h-6 w-6 text-gray-600 dark:text-gray-400" aria-hidden="true" /> :
+                    <EyeOffIcon className="h-6 w-6 text-gray-600 dark:text-gray-400" aria-hidden="true" />
+                  }
+                </button>
+              </div>
             </div>
             {settings.synchronize && (
               <div className="text-center">
