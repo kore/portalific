@@ -87,8 +87,8 @@ export default function Index({}) {
           `https://local-storage-storage.io/api/torii/${settings.identifier}?revision=${revision}`,
           // @TODO: Encrypt data with settings.password
           JSON.stringify({
-            modules: localStorage.getItem("modules"),
-            settings: localStorage.getItem("settings"),
+            modules: JSON.parse(localStorage.getItem("modules")),
+            settings: JSON.parse(localStorage.getItem("settings")),
             theme: localStorage.getItem("theme"),
           }),
           {
