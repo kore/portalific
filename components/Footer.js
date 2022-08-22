@@ -40,7 +40,7 @@ const ThemeSwitcher = () => {
   }, [hasLocalStorage, auto]);
 
   return (
-    <div className="ml-4 flex flex-grow-0 justify-center rounded-3xl bg-white p-1 dark:bg-gray-900">
+    <div className="ml-4 flex grow-0 justify-center rounded-3xl bg-white p-1 dark:bg-gray-900">
       <button
         type="button"
         aria-label="Use Dark Mode"

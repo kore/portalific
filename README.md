@@ -39,10 +39,10 @@ There are some immediate TODOs to get this into a MVP state:
 It could make sense to show differen modules in different envuironment modes,
 think of:
 
-* Work
-* Relax
-* Travelling
-* Vacation
+- Work
+- Relax
+- Travelling
+- Vacation
 
 Those could be explicitly chosen, but also be based on time / date and/or
 location.

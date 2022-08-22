@@ -60,7 +60,7 @@ export default function Layout({ children, settings = {} }) {
             : "none",
         }}
       >
-        <div className="mx-auto flex w-full h-full flex-col items-center px-1 lg:px-6">
+        <div className="mx-auto flex h-full w-full flex-col items-center px-1 lg:px-6">
           {children}
         </div>
       </div>

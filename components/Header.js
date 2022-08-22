@@ -18,7 +18,7 @@ export default function Header({
   const [showErrors, setShowErrors] = useState(false);
 
   return (
-    <header className="flex flex-grow-0 w-full items-center p-2">
+    <header className="flex w-full grow-0 items-center p-2">
       <Link href="/">
         <a className="grow text-left text-2xl dark:text-white">
           {settings.name && settings.name + "'s "}

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import axios from "axios";
+import { useDebouncedCallback } from "use-debounce";
 import Column from "../components/Column";
 import ErrorBoundary from "../components/ErrorBoundary";
 import Footer from "../components/Footer";
@@ -10,8 +12,6 @@ import Module from "../components/Module";
 import SEO from "../components/SEO";
 import NotFound from "../modules/NotFound";
 import Welcome from "../modules/Welcome";
-import { useDebouncedCallback } from 'use-debounce';
-import axios from "axios";
 
 const availableModules = {
   clock: dynamic(() => import("../modules/Clock")),
@@ -42,17 +42,19 @@ export default function Index({}) {
       return;
     }
 
-    axios.get(
-      `https://local-storage-storage.io/api/torii/${settings.identifier}`,
-      {
-        headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
-      }
-    ).then((response) => {
-      const data = JSON.parse(response.data.data);
-      setRevision(response.data.revision);
-      setModulesState(data.modules);
-      setSettingsState(data.settings);
-    });
+    axios
+      .get(
+        `https://local-storage-storage.io/api/torii/${settings.identifier}`,
+        {
+          headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+        }
+      )
+      .then((response) => {
+        const data = JSON.parse(response.data.data);
+        setRevision(response.data.revision);
+        setModulesState(data.modules);
+        setSettingsState(data.settings);
+      });
 
     // We only want to run his effect once, actualy, when the localStorage is
     // available. We only read loaded, settings, and modules but don't care if
@@ -68,59 +70,57 @@ export default function Index({}) {
       }
 
       if (!revision) {
-        axios.put(
-          `https://local-storage-storage.io/api/torii/${settings.identifier}`,
-          // @TODO: Encrypt data with settings.password
-          JSON.stringify({
-            modules: JSON.parse(localStorage.getItem("modules")),
-            settings: JSON.parse(localStorage.getItem("settings")),
-            theme: localStorage.getItem("theme"),
-          }),
-          {
-            headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
-          }
-        ).then((response) => {
-          setRevision(response.data.revision);
-        });
+        axios
+          .put(
+            `https://local-storage-storage.io/api/torii/${settings.identifier}`,
+            // @TODO: Encrypt data with settings.password
+            JSON.stringify({
+              modules: JSON.parse(localStorage.getItem("modules")),
+              settings: JSON.parse(localStorage.getItem("settings")),
+              theme: localStorage.getItem("theme"),
+            }),
+            {
+              headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+            }
+          )
+          .then((response) => {
+            setRevision(response.data.revision);
+          });
       } else {
-        axios.post(
-          `https://local-storage-storage.io/api/torii/${settings.identifier}?revision=${revision}`,
-          // @TODO: Encrypt data with settings.password
-          JSON.stringify({
-            modules: JSON.parse(localStorage.getItem("modules")),
-            settings: JSON.parse(localStorage.getItem("settings")),
-            theme: localStorage.getItem("theme"),
-          }),
-          {
-            headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
-          }
-        ).then((response) => {
-          setRevision(response.data.revision);
-        });
+        axios
+          .post(
+            `https://local-storage-storage.io/api/torii/${settings.identifier}?revision=${revision}`,
+            // @TODO: Encrypt data with settings.password
+            JSON.stringify({
+              modules: JSON.parse(localStorage.getItem("modules")),
+              settings: JSON.parse(localStorage.getItem("settings")),
+              theme: localStorage.getItem("theme"),
+            }),
+            {
+              headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+            }
+          )
+          .then((response) => {
+            setRevision(response.data.revision);
+          });
       }
     },
     1000
   );
 
-  const debouncedModulesToLocalStorage = useDebouncedCallback(
-    (modules) => {
-      localStorage.setItem("modules", JSON.stringify(modules));
-    },
-    1000
-  );
+  const debouncedModulesToLocalStorage = useDebouncedCallback((modules) => {
+    localStorage.setItem("modules", JSON.stringify(modules));
+  }, 1000);
 
   const setModules = (modules) => {
     setModulesState(modules);
     debouncedModulesToLocalStorage(modules);
   };
 
-  const debouncedSettingsLocalStorage = useDebouncedCallback(
-    (settings) => {
-      localStorage.setItem("settings", JSON.stringify(settings));
-      debouncedLocalStorageToServer(settings, revision);
-    },
-    1000
-  );
+  const debouncedSettingsLocalStorage = useDebouncedCallback((settings) => {
+    localStorage.setItem("settings", JSON.stringify(settings));
+    debouncedLocalStorageToServer(settings, revision);
+  }, 1000);
 
   const setSettings = (newSettings) => {
     // If the number of columns is reduced map all modules to the still

@@ -6,7 +6,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en" className="theme-compiled">
         <Head />
-        <body className="bg-white text-lg antialiased dark:bg-gray-900 dark:text-white overflow-x-hidden">
+        <body className="overflow-x-hidden bg-white text-lg antialiased dark:bg-gray-900 dark:text-white">
           <Main />
           <NextScript />
         </body>

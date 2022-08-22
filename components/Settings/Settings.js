@@ -1,9 +1,16 @@
 import { Fragment, useState } from "react";
 import { Switch } from "@headlessui/react";
+import {
+  EyeIcon,
+  EyeOffIcon,
+  ClipboardCopyIcon,
+  ClipboardCheckIcon,
+  LockClosedIcon,
+  LockOpenIcon,
+} from "@heroicons/react/outline";
 import { QRCodeSVG } from "qrcode.react";
-import useLocalStorage from "../../utils/useLocalStorage";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { EyeIcon, EyeOffIcon, ClipboardCopyIcon, ClipboardCheckIcon, LockClosedIcon, LockOpenIcon } from "@heroicons/react/outline";
+import useLocalStorage from "../../utils/useLocalStorage";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -27,7 +34,9 @@ export default function Settings({ settings, setSettings }) {
     });
   };
 
-  const setupLink = `${window.location.host}/setup?identifier=${settings.identifier}` + (includePassword ? `&password=${settings.password}` : "");
+  const setupLink =
+    `${window.location.host}/setup?identifier=${settings.identifier}` +
+    (includePassword ? `&password=${settings.password}` : "");
 
   return (
     <Fragment>
@@ -222,7 +231,8 @@ export default function Settings({ settings, setSettings }) {
                 htmlFor="password"
                 className="mt-6 block text-sm font-medium text-gray-700 dark:text-gray-200"
               >
-                Password {includePassword ? " (included in link)" : " (not in link)"}
+                Password{" "}
+                {includePassword ? " (included in link)" : " (not in link)"}
               </label>
               <div className="relative">
                 <input
@@ -231,18 +241,27 @@ export default function Settings({ settings, setSettings }) {
                   id="password"
                   disabled={!settings.synchronize}
                   value={settings.password ?? ""}
-                  onChange={(event) => setSetting("password", event.target.value)}
+                  onChange={(event) =>
+                    setSetting("password", event.target.value)
+                  }
                   className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
                 />
 
                 <button
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5"
                 >
-                  {showPassword ?
-                    <EyeIcon className="h-6 w-6 text-gray-600 dark:text-gray-400" aria-hidden="true" /> :
-                    <EyeOffIcon className="h-6 w-6 text-gray-600 dark:text-gray-400" aria-hidden="true" />
-                  }
+                  {showPassword ? (
+                    <EyeIcon
+                      className="h-6 w-6 text-gray-600 dark:text-gray-400"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <EyeOffIcon
+                      className="h-6 w-6 text-gray-600 dark:text-gray-400"
+                      aria-hidden="true"
+                    />
+                  )}
                 </button>
               </div>
             </div>
@@ -254,29 +273,48 @@ export default function Settings({ settings, setSettings }) {
                   className="inline rounded-md border-4 border-white"
                   value={setupLink}
                 />
-                <div className="block mt-1" role="group">
+                <div className="mt-1 block" role="group">
                   <button
                     type="button"
                     onClick={() => {
                       setIncludePassword(!includePassword);
                       setCopied(false);
                     }}
-                    className="inline-flex justify-center rounded-l-md border border-r-transparent border-gray-300 dark:border-gray-700 px-2 py-1 text-base font-medium text-white shadow-sm hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm"
+                    className="inline-flex justify-center rounded-l-md border border-gray-300 border-r-transparent px-2 py-1 text-base font-medium text-white shadow-sm hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:border-gray-700 sm:text-sm"
                   >
-                    {includePassword ?
-                      <LockOpenIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" aria-hidden="true" title="Include password in link" /> :
-                      <LockClosedIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" aria-hidden="true" title="Include password in link" />
-                    }
+                    {includePassword ? (
+                      <LockOpenIcon
+                        className="h-5 w-5 text-gray-600 dark:text-gray-400"
+                        aria-hidden="true"
+                        title="Include password in link"
+                      />
+                    ) : (
+                      <LockClosedIcon
+                        className="h-5 w-5 text-gray-600 dark:text-gray-400"
+                        aria-hidden="true"
+                        title="Include password in link"
+                      />
+                    )}
                   </button>
-                  <CopyToClipboard text={setupLink} onCopy={() => setCopied(true)}>
+                  <CopyToClipboard
+                    text={setupLink}
+                    onCopy={() => setCopied(true)}
+                  >
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-r-md border border-gray-300 dark:border-gray-700 px-2 py-1 text-base font-medium text-white shadow-sm hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm"
+                      className="inline-flex justify-center rounded-r-md border border-gray-300 px-2 py-1 text-base font-medium text-white shadow-sm hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:border-gray-700 sm:text-sm"
                     >
-                      {copied ?
-                        <ClipboardCheckIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" aria-hidden="true" /> :
-                        <ClipboardCopyIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" aria-hidden="true" />
-                      }
+                      {copied ? (
+                        <ClipboardCheckIcon
+                          className="h-5 w-5 text-gray-600 dark:text-gray-400"
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <ClipboardCopyIcon
+                          className="h-5 w-5 text-gray-600 dark:text-gray-400"
+                          aria-hidden="true"
+                        />
+                      )}
                     </button>
                   </CopyToClipboard>
                 </div>
