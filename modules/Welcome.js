@@ -63,8 +63,7 @@ export default function Welcome({
         and configured in the settings dialog on the top-right and then moved by
         drag and drop between those columns. If you like, you can, for example,
         <button
-          name="columns"
-          id="columns"
+          id="add-module"
           onClick={() => {
             modules[0].unshift({
               type: "clock",
@@ -116,8 +115,7 @@ export default function Welcome({
         retrieved or something similar happens an error notification will be
         show on the top right.
         <button
-          name="columns"
-          id="columns"
+          id="add-error"
           onClick={() => {
             pushError(
               "An error example",
