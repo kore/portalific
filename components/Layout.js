@@ -72,7 +72,7 @@ export default function Layout({ children, settings = {} }) {
           />
           <GradientBackground
             variant="small"
-            className="absolute bottom-0 opacity-20 dark:opacity-10"
+            className="fixed bottom-0 opacity-20 dark:opacity-10"
           />
         </Fragment>
       )}
