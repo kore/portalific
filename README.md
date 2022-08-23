@@ -25,7 +25,6 @@ external sources. An example written in PHP can be found at
 There are some immediate TODOs to get this into a MVP state:
 
 - [ ] Implement cross-device server-based synchronization of configuration
-- [ ] Add manifest and favicon
 
 ### Modules to create
 
