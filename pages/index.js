@@ -110,6 +110,7 @@ export default function Index({}) {
 
   const debouncedModulesToLocalStorage = useDebouncedCallback((modules) => {
     localStorage.setItem("modules", JSON.stringify(modules));
+    debouncedLocalStorageToServer(settings, revision);
   }, 1000);
 
   const setModules = (modules) => {
