@@ -12,7 +12,8 @@ Finally, you can run your project locally with:
 yarn run dev
 ```
 
-Open your browser and visit <http://localhost:3000>, your project should be running!
+Open your browser and visit <http://localhost:3000>, your project should be
+running!
 
 ### Dependencies
 
@@ -27,8 +28,17 @@ you an idea of where this software is heading.
 
 ### Modules to create
 
-- [ ] TODO list (work vs. private), opened in defined time ranges (also see environment modes)
+- [ ] TODO list (work vs. private), opened in defined time ranges (also see
+      environment modes)
 - [ ] Simple weather module
+
+### Improved offline support
+
+Next to the current settings and module configurations a module data storage
+can be introduced which is filled asynchronously by service workes in the
+background. Currently all module data (see feed, calendar) is only stored in
+the local state of the module components, which makes them volatile and prune
+to outages.
 
 ### Different environment modes
 
