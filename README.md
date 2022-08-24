@@ -20,20 +20,17 @@ Because of CORS we need an allow proxy to request data (RSS feed, ICAL, …) fro
 external sources. An example written in PHP can be found at
 `docs/allowProxy.php` or at https://local-storage-storage.io/#proxy-request.
 
-### TODOs
+## Ideas
 
-There are some immediate TODOs to get this into a MVP state:
-
-- [ ] Implement cross-device server-based synchronization of configuration
+A list of ideas and features which might be implemented at some point to give
+you an idea of where this software is heading.
 
 ### Modules to create
 
-- [ ] TODO list (work vs. private), opened in defined time ranges
+- [ ] TODO list (work vs. private), opened in defined time ranges (also see environment modes)
 - [ ] Simple weather module
 
-### General ideas
-
-#### Different environment modes
+### Different environment modes
 
 It could make sense to show differen modules in different envuironment modes,
 think of:
