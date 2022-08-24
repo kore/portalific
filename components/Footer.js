@@ -49,10 +49,10 @@ const ThemeSwitcher = () => {
           localStorage.setItem("theme", "dark");
           setAuto(false);
         }}
-        className="flex h-8 w-12 items-center justify-center rounded-3xl p-1 text-center transition dark:bg-primary-500"
+        className="flex h-6 w-8 items-center justify-center rounded-3xl p-1 text-center transition dark:bg-primary-500"
       >
         <MoonIcon
-          className="h-6 w-6 text-gray-300 dark:text-white"
+          className="h-5 w-5 text-gray-300 dark:text-white"
           aria-hidden="true"
         />
       </button>
@@ -65,10 +65,10 @@ const ThemeSwitcher = () => {
           localStorage.setItem("theme", "light");
           setAuto(false);
         }}
-        className="ml-2 flex h-8 w-12 items-center justify-center rounded-3xl bg-primary-500 p-1 text-center transition dark:bg-transparent"
+        className="ml-2 flex h-6 w-8 items-center justify-center rounded-3xl bg-primary-500 p-1 text-center transition dark:bg-transparent"
       >
         <SunIcon
-          className="h-6 w-6 text-gray-100 dark:text-gray-400"
+          className="h-5 w-5 text-gray-100 dark:text-gray-400"
           aria-hidden="true"
         />
       </button>
@@ -81,12 +81,12 @@ const ThemeSwitcher = () => {
           setAuto(true);
         }}
         className={
-          "flex ml-2 h-8 w-12 items-center justify-center rounded-3xl p-1 text-center transition " +
+          "flex ml-2 h-6 w-8 items-center justify-center rounded-3xl p-1 text-center transition " +
           (auto ? "bg-primary-700" : "bg-gray-100 dark:bg-gray-800")
         }
       >
         <ClockIcon
-          className={"h-6 w-6 " + (auto ? "text-white" : "text-gray-700")}
+          className={"h-5 w-5 " + (auto ? "text-white" : "text-gray-700")}
           aria-hidden="true"
         />
       </button>
@@ -97,10 +97,8 @@ const ThemeSwitcher = () => {
 export default function Footer({ copyrightText }) {
   return (
     <footer className="flex flex-row items-center py-2">
-      <p className="mb-1 font-bold opacity-80 dark:text-white">
-        <a href="https://github.com/kore/Torii2/blob/main/LICENSE">
-          GPLv3 by Kore Nordmann
-        </a>
+      <p className="mb-1 opacity-80 dark:text-white text-sm">
+        <a className="underline" href="https://github.com/kore/Torii2/blob/main/LICENSE">GPLv3</a> by <a className="underline" href="https://kore-nordmann.de/">Kore Nordmann</a>
       </p>
       <ThemeSwitcher />
     </footer>
