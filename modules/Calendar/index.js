@@ -97,7 +97,7 @@ export default function Calendar({
                 summary,
                 start: date,
                 end,
-                fullDay: end.getTime() - date.getTime() >= 86400 * 1000,
+                fullDay: end.getTime() - date.getTime() >= 20 * 3600 * 1000,
                 color: calendar.color,
                 calendar: calendar.name,
               });
