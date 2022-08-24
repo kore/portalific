@@ -94,7 +94,7 @@ const ThemeSwitcher = () => {
   );
 };
 
-export default function Footer({ copyrightText }) {
+export default function Footer() {
   return (
     <footer className="flex flex-row items-center py-2">
       <p className="mb-1 text-sm opacity-80 dark:text-white">

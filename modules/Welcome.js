@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 export default function Welcome({
   pushError,
   settings,

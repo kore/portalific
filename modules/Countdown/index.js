@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function Countdown({ configuration }) {
   const [time, setTime] = useState(new Date().getTime());

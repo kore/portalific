@@ -6,7 +6,7 @@ const THEME = "default";
 const FONT_PRIMARY = "sans-serif";
 const FONT_SECONDARY = "sans-serif";
 
-const hoveredSiblingPlugin = plugin(function ({ addVariant, e }) {
+const hoveredSiblingPlugin = plugin(function ({ addVariant }) {
   addVariant("hovered-sibling", ({ container }) => {
     container.walkRules((rule) => {
       rule.selector = `:hover + .hovered-sibling\\:${rule.selector.slice(1)}`;

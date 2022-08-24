@@ -1,7 +1,5 @@
-import { Fragment, useState } from "react";
-import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
+import { useState } from "react";
 import { CogIcon, ViewGridAddIcon } from "@heroicons/react/outline";
-import useLocalStorage from "../utils/useLocalStorage";
 import SettingsModules from "./Settings/Modules";
 import SettingsSettings from "./Settings/Settings";
 

@@ -1,9 +1,6 @@
 import { Fragment, useState } from "react";
 import dynamic from "next/dynamic";
-import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
 import { CogIcon, TrashIcon } from "@heroicons/react/outline";
-import { QRCodeSVG } from "qrcode.react";
-import useLocalStorage from "../../utils/useLocalStorage";
 import Column from "../Column";
 import ErrorBoundary from "../ErrorBoundary";
 import Modal from "../Modal";
@@ -15,10 +12,6 @@ const availableModules = {
   feed: dynamic(() => import("../../modules/Feed/Configuration")),
   calendar: dynamic(() => import("../../modules/Calendar/Configuration")),
 };
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Modules({ settings, modules, setModules, moveModule }) {
   const [module, setModule] = useState("none");

@@ -15,7 +15,7 @@ export default function Feed({
   // * Also handle properties from RSS feeds and other feed styles
 
   const updateFeeds = async () => {
-    const feeds = (configuration.feeds ?? []).map((feed) => {
+    let feeds = (configuration.feeds ?? []).map((feed) => {
       return {
         ...feed,
         response: axios.get(

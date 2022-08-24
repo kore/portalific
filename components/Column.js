@@ -11,7 +11,7 @@ export default function Column({ column, length, moveModule, children }) {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item, monitor) {
+    hover(item) {
       if (!ref.current) {
         return;
       }
@@ -23,7 +23,6 @@ export default function Column({ column, length, moveModule, children }) {
 
       // Time to actually perform the action
       moveModule(item.column, item.index, column, length);
-      // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
       // to avoid expensive index searches.

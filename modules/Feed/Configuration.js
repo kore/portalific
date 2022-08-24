@@ -1,10 +1,6 @@
 import { Fragment, useState } from "react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/outline";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function FeedConfiguration({ configuration, setConfiguration }) {
   const [color, setColor] = useState("");
   const [name, setName] = useState("");

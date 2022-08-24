@@ -1,5 +1,6 @@
 {
   "extends": [
+    "eslint:recommended",
     "next/core-web-vitals",
     "plugin:prettier/recommended",
     "plugin:tailwindcss/recommended",
@@ -13,6 +14,9 @@
       }
     }
   ],
+  "env": {
+    "es6": true
+  },
   "plugins": ["tailwindcss", "import"],
   "rules": {
     "tailwindcss/classnames-order": [
@@ -47,16 +51,6 @@
             "pattern": "next/**",
             "group": "external",
             "position": "before"
-          },
-          {
-            "pattern": "frontastic",
-            "group": "internal",
-            "position": "after"
-          },
-          {
-            "pattern": "frontastic/**",
-            "group": "internal",
-            "position": "after"
           }
         ],
         "pathGroupsExcludedImportTypes": ["react"],

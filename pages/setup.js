@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   ExclamationIcon,
@@ -18,7 +16,7 @@ import Header from "../components/Header";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 
-export default function Index({}) {
+export default function Setup() {
   const globalData = {
     name: "Torii",
     description: "Offline-first, privacy-focussed, open-source personal portal",

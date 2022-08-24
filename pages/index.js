@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import axios from "axios";
 import { useDebouncedCallback } from "use-debounce";
 import Column from "../components/Column";
@@ -22,7 +21,7 @@ const availableModules = {
   welcome: Welcome,
 };
 
-export default function Index({}) {
+export default function Index() {
   const globalData = {
     name: "Torii",
     description: "Offline-first, privacy-focussed, open-source personal portal",

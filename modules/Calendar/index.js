@@ -17,16 +17,12 @@ const groupBy = (list, keyGetter) => {
   return map;
 };
 
-export default function Calendar({
-  configuration,
-  updateModuleConfiguration,
-  pushError,
-}) {
+export default function Calendar({ configuration, pushError }) {
   const [calendarItems, setCalendarItems] = useState([]);
 
   // Use https://stackoverflow.com/questions/72540660/react-how-to-combine-data-from-multiple-api-and-render-it to fetch data from all feeds
   const updateCalendars = async () => {
-    const calendars = (configuration.calendars ?? []).map((calendar) => {
+    let calendars = (configuration.calendars ?? []).map((calendar) => {
       return {
         ...calendar,
         response: axios.get(

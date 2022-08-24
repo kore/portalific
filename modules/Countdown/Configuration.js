@@ -1,10 +1,6 @@
 import { Fragment, useState } from "react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/outline";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function CountdownConfiguration({
   configuration,
   setConfiguration,

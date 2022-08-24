@@ -10,7 +10,6 @@ import {
 } from "@heroicons/react/outline";
 import { QRCodeSVG } from "qrcode.react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import useLocalStorage from "../../utils/useLocalStorage";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
