@@ -100,12 +100,19 @@ export default function Footer({ copyrightText }) {
       <p className="mb-1 text-sm opacity-80 dark:text-white">
         <a
           className="underline"
+          target="_blank"
           href="https://github.com/kore/Torii2/blob/main/LICENSE"
+          rel="noreferrer"
         >
           GPLv3
         </a>{" "}
         by{" "}
-        <a className="underline" href="https://kore-nordmann.de/">
+        <a
+          className="underline"
+          target="_blank"
+          href="https://kore-nordmann.de/"
+          rel="noreferrer"
+        >
           Kore Nordmann
         </a>
       </p>
