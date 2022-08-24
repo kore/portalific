@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { CogIcon, ExclamationIcon } from "@heroicons/react/outline";
+import logo from "../images/logo.svg";
 import Modal from "./Modal";
 import Settings from "./Settings";
-import logo from "../images/logo.svg";
 
 export default function Header({
   name,
@@ -21,7 +21,7 @@ export default function Header({
 
   return (
     <header className="flex w-full grow-0 items-center p-2">
-      <div className="inline-block relative h-8 w-8 mr-2">
+      <div className="relative mr-2 inline-block h-8 w-8">
         <Image src={logo} layout="fill" alt="Torii" />
       </div>
       <Link href="/">

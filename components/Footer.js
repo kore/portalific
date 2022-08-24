@@ -97,8 +97,17 @@ const ThemeSwitcher = () => {
 export default function Footer({ copyrightText }) {
   return (
     <footer className="flex flex-row items-center py-2">
-      <p className="mb-1 opacity-80 dark:text-white text-sm">
-        <a className="underline" href="https://github.com/kore/Torii2/blob/main/LICENSE">GPLv3</a> by <a className="underline" href="https://kore-nordmann.de/">Kore Nordmann</a>
+      <p className="mb-1 text-sm opacity-80 dark:text-white">
+        <a
+          className="underline"
+          href="https://github.com/kore/Torii2/blob/main/LICENSE"
+        >
+          GPLv3
+        </a>{" "}
+        by{" "}
+        <a className="underline" href="https://kore-nordmann.de/">
+          Kore Nordmann
+        </a>
       </p>
       <ThemeSwitcher />
     </footer>
