@@ -173,7 +173,7 @@ export default function Calendar({ configuration, pushError }) {
                           className="flex border-l-4 pl-2 text-sm hover:bg-white/30 dark:hover:bg-black/30"
                           style={{ borderColor: appointment.color }}
                         >
-                          <p className="mt-2 grow font-semibold text-gray-900 dark:text-gray-100 sm:mt-0">
+                          <p className="mt-2 grow break-words font-semibold text-gray-900 dark:text-gray-100 sm:mt-0">
                             {appointment.summary}
                           </p>
                           <p className="flex-none sm:ml-6">
