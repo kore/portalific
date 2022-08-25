@@ -35,6 +35,7 @@ export default function Index() {
     [{ type: "welcome", id: "welcome" }],
   ]);
   const hasLocalStorage = typeof localStorage !== "undefined";
+  const hasWindow = typeof window !== "undefined";
 
   useEffect(() => {
     if (!settings.synchronize) {
@@ -60,6 +61,37 @@ export default function Index() {
     // they (also) changed:
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings.synchronize]);
+
+  useEffect(() => {
+    // Update configuration from server, once the window gets focus
+    if (!hasWindow || !settings.synchronize) {
+      return;
+    }
+
+    window.addEventListener("focus", () => {
+      axios
+        .get(
+          `https://local-storage-storage.io/api/torii/${settings.identifier}`,
+          {
+            headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+          }
+        )
+        .then((response) => {
+          const data = JSON.parse(response.data.data);
+          setRevision(response.data.revision);
+          setModulesState(data.modules);
+          setSettingsState(data.settings);
+        });
+
+      return () => {
+        window.removeEventListener("focus");
+      };
+    });
+    // We only want to run his effect once, actualy, when the window is
+    // available. We only read loaded, settings, and modules but don't care if
+    // they (also) changed:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasWindow]);
 
   const debouncedLocalStorageToServer = useDebouncedCallback(
     (settings, revision) => {
