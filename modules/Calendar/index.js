@@ -83,9 +83,8 @@ export default function Calendar({ configuration, pushError }) {
             }
 
             date = date.toJSDate();
-            endDate = new Date().setTime(
-              date.getTime() + (end.getTime() - start.getTime())
-            );
+            endDate = new Date();
+            endDate.setTime(date.getTime() + (end.getTime() - start.getTime()));
 
             if (endDate > calendarStart && date < calendarEnd) {
               appointments.push({
@@ -93,7 +92,7 @@ export default function Calendar({ configuration, pushError }) {
                 summary,
                 start: date,
                 end,
-                fullDay: end.getTime() - date.getTime() >= 20 * 3600 * 1000,
+                fullDay: endDate.getTime() - date.getTime() >= 24 * 3600 * 1000,
                 color: calendar.color,
                 calendar: calendar.name,
               });
@@ -178,7 +177,9 @@ export default function Calendar({ configuration, pushError }) {
                             {appointment.summary}
                           </p>
                           <p className="flex-none sm:ml-6">
-                            {!appointment.fullDay && (
+                            {appointment.fullDay ? (
+                              <em>full day</em>
+                            ) : (
                               <time dateTime={appointment.start.toISOString()}>
                                 {appointment.start.toLocaleTimeString("de-DE", {
                                   timeStyle: "short",
