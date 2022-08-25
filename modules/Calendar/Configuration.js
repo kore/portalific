@@ -39,7 +39,7 @@ export default function CalendarConfiguration({
                   >
                     {calendar.name}
                   </div>
-                  <div className="col-span-7">{calendar.calendar}</div>
+                  <div className="col-span-7 text-sm break-all">{calendar.calendar}</div>
                   <div className="col-span-1">
                     <button
                       type="button"

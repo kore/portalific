@@ -33,7 +33,7 @@ export default function FeedConfiguration({ configuration, setConfiguration }) {
                   >
                     {feed.name}
                   </div>
-                  <div className="col-span-7">{feed.feed}</div>
+                  <div className="col-span-7 text-sm break-all">{feed.feed}</div>
                   <div className="col-span-1">
                     <button
                       type="button"
