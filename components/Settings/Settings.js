@@ -343,6 +343,7 @@ export default function Settings({ settings, setSettings }) {
                   localStorage.removeItem("theme");
                   localStorage.removeItem("settings");
                   localStorage.removeItem("modules");
+                  window.location = "/";
                 }
               }}
             >
