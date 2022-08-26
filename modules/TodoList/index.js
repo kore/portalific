@@ -72,9 +72,7 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
                         : "text-gray-500"
                     }
                   >
-                    Due:{" "}
                     {dueDate.toLocaleDateString(undefined, {
-                      weekday: "short",
                       month: "short",
                       day: "numeric",
                     })}
