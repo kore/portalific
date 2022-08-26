@@ -15,7 +15,7 @@ const availableModules = {
 
 export default function Modules({ settings, modules, setModules, moveModule }) {
   const [module, setModule] = useState("none");
-  const [column, setColumn] = useState("1");
+  const [column, setColumn] = useState("0");
   const [settingsShown, setShowSettings] = useState(null);
 
   // Dynamic class names: grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4
