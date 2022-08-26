@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckIcon } from "@heroicons/react/outline";
+import { XIcon, CheckIcon } from "@heroicons/react/outline";
 
 export default function TodoList({ configuration, updateModuleConfiguration }) {
   const [newTodo, setNewTodo] = useState("");
@@ -41,7 +41,7 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
                     className="absolute h-8 w-8 rounded-full border-2 border-gray-500 bg-gray-100/50 hover:border-primary-500 hover:bg-primary-800 dark:bg-gray-900/50 hover:dark:bg-primary-200"
                   >
                     <CheckIcon
-                      className="p-1 text-gray-500/0 hover:text-primary-500"
+                      className="h-full w-full p-1 text-gray-500/30 hover:text-primary-500"
                       aria-hidden="true"
                     />
                   </label>
@@ -105,8 +105,8 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
                     htmlFor={"resolved-" + index}
                     className="absolute h-5 w-5 rounded-full border-2 border-gray-500 bg-gray-100/50 hover:border-primary-500 hover:bg-primary-800 dark:bg-gray-900/50 hover:dark:bg-primary-200"
                   >
-                    <CheckIcon
-                      className="text-gray-500 hover:text-primary-500"
+                    <XIcon
+                      className="h-full w-full text-gray-500 hover:text-primary-500"
                       aria-hidden="true"
                     />
                   </label>
