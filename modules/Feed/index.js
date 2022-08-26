@@ -116,16 +116,24 @@ export default function Feed({
                 className="block border-l-4 pl-2 pb-1 text-sm"
                 style={{ borderColor: feedItem.color }}
                 href={feedItem.link}
-                onClick={() => {
-                  if (!Array.isArray(configuration.read)) {
-                    configuration.read = [];
-                  }
+                onMouseUp={() => {
+                  // We delay marking the item as read, otherwise the link will
+                  // not open. 100ms seem to be reliable, but we might have to
+                  // increase this even further. With 10ms the link only opens
+                  // sometimes…
+                  window.setTimeout(() => {
+                    if (!Array.isArray(configuration.read)) {
+                      configuration.read = [];
+                    }
 
-                  configuration.read.push(feedItem.id);
+                    configuration.read.push(feedItem.id);
 
-                  // Limit read items to the last 256
-                  configuration.read = configuration.read.slice(-256);
-                  updateModuleConfiguration({ ...configuration });
+                    // Limit read items to the last 256
+                    configuration.read = configuration.read.slice(-256);
+                    updateModuleConfiguration({ ...configuration });
+                  }, 100);
+
+                  return true;
                 }}
                 target="_blank"
                 rel="noreferrer"
