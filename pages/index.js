@@ -17,6 +17,7 @@ const availableModules = {
   countdown: dynamic(() => import("../modules/Countdown")),
   feed: dynamic(() => import("../modules/Feed")),
   calendar: dynamic(() => import("../modules/Calendar")),
+  todo: dynamic(() => import("../modules/TodoList")),
   notfound: NotFound,
   welcome: Welcome,
 };

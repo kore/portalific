@@ -28,8 +28,6 @@ you an idea of where this software is heading.
 
 ### Modules to create
 
-- [ ] TODO list (work vs. private), opened in defined time ranges (also see
-      environment modes)
 - [ ] Simple weather module
 
 ### Improved offline support
@@ -42,7 +40,7 @@ to outages.
 
 ### Different environment modes
 
-It could make sense to show differen modules in different envuironment modes,
+It could make sense to show different modules in different envuironment modes,
 think of:
 
 - Work
@@ -50,5 +48,7 @@ think of:
 - Travelling
 - Vacation
 
-Those could be explicitly chosen, but also be based on time / date and/or
-location.
+Those could be explicitly chosen, but also be based on time/date, location,
+and/or device.
+
+This will especially make sense for TODO lists and shown calendars.
