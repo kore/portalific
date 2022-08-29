@@ -1,10 +1,17 @@
 import { Fragment, useState } from "react";
 import dynamic from "next/dynamic";
-import { CogIcon, TrashIcon } from "@heroicons/react/outline";
+import {
+  CogIcon,
+  TrashIcon,
+  DeviceMobileIcon,
+  DeviceTabletIcon,
+  DesktopComputerIcon,
+} from "@heroicons/react/outline";
 import Column from "../Column";
 import ErrorBoundary from "../ErrorBoundary";
 import Modal from "../Modal";
 import Module from "../Module";
+import ShowHideButton from "./ShowHideButton";
 
 const availableModules = {
   clock: dynamic(() => import("../../modules/Clock/Configuration")),
@@ -13,13 +20,40 @@ const availableModules = {
   calendar: dynamic(() => import("../../modules/Calendar/Configuration")),
 };
 
-export default function Modules({ settings, setSettings, modules, setModules, moveModule }) {
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export default function Modules({
+  settings,
+  setSettings,
+  modules,
+  setModules,
+  moveModule,
+}) {
   const [module, setModule] = useState("none");
   const [column, setColumn] = useState("0");
   const [settingsShown, setShowSettings] = useState(null);
 
   // Dynamic class names: grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4
   const gridClassName = "grid-cols-" + (settings.columns ?? 3);
+
+  const setDeviceVisibility = (column, index, device, hidden) => {
+    let moduleToUpdate = modules[column][index];
+    if (!Array.isArray(moduleToUpdate.hiddenOnDevices)) {
+      moduleToUpdate.hiddenOnDevices = [];
+    }
+
+    if (hidden) {
+      moduleToUpdate.hiddenOnDevices.push(device);
+    } else {
+      moduleToUpdate.hiddenOnDevices = moduleToUpdate.hiddenOnDevices.filter(
+        (item) => item !== device
+      );
+    }
+
+    setModules([...modules]);
+  };
 
   return (
     <Fragment>
@@ -47,7 +81,7 @@ export default function Modules({ settings, setSettings, modules, setModules, mo
               id="columns"
               value={settings.columns ?? ""}
               onChange={(event) => {
-                setSettings({ ... settings, columns: event.target.value });
+                setSettings({ ...settings, columns: event.target.value });
                 setColumn(Math.min(+column, event.target.value - 1));
               }}
               className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
@@ -156,55 +190,118 @@ export default function Modules({ settings, setSettings, modules, setModules, mo
                       moveModule={moveModule}
                     >
                       <ErrorBoundary>
-                        <h3>
-                          Module: <strong>{module.type}</strong>
-                        </h3>
-                        <div className="flex w-full justify-end p-2">
-                          {ModuleSettings && (
-                            <Fragment>
-                              <button
-                                type="button"
-                                className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
-                                onClick={() => setShowSettings(module.id)}
-                              >
-                                <span className="sr-only">
-                                  View notifications
-                                </span>
-                                <CogIcon
-                                  className="h-6 w-6"
-                                  aria-hidden="true"
-                                />
-                              </button>
-                              <Modal
-                                open={settingsShown === module.id}
-                                setOpen={() => setShowSettings(null)}
-                              >
-                                <ModuleSettings
-                                  configuration={module}
-                                  setConfiguration={(key, value) => {
-                                    module[key] = value;
-                                    setModules([...modules]);
-                                  }}
-                                />
-                              </Modal>
-                            </Fragment>
-                          )}
-                          <button
-                            type="button"
-                            className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
-                            onClick={() => {
-                              setModules(
-                                (modules ?? []).map((column) => {
-                                  return (column ?? []).filter((toFilter) => {
-                                    return toFilter.id !== module.id;
-                                  });
-                                })
+                        <div className="flex">
+                          <h3>
+                            <strong>
+                              {capitalizeFirstLetter(module.type)}
+                            </strong>
+                          </h3>
+                          <div className="flex grow justify-end">
+                            {ModuleSettings && (
+                              <Fragment>
+                                <button
+                                  type="button"
+                                  className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
+                                  onClick={() => setShowSettings(module.id)}
+                                >
+                                  <span className="sr-only">
+                                    View notifications
+                                  </span>
+                                  <CogIcon
+                                    className="h-6 w-6"
+                                    aria-hidden="true"
+                                  />
+                                </button>
+                                <Modal
+                                  open={settingsShown === module.id}
+                                  setOpen={() => setShowSettings(null)}
+                                >
+                                  <ModuleSettings
+                                    configuration={module}
+                                    setConfiguration={(key, value) => {
+                                      module[key] = value;
+                                      setModules([...modules]);
+                                    }}
+                                  />
+                                </Modal>
+                              </Fragment>
+                            )}
+                            <button
+                              type="button"
+                              className="ml-1 shrink-0 rounded-full p-1 text-primary-200 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900"
+                              onClick={() => {
+                                setModules(
+                                  (modules ?? []).map((column) => {
+                                    return (column ?? []).filter((toFilter) => {
+                                      return toFilter.id !== module.id;
+                                    });
+                                  })
+                                );
+                              }}
+                            >
+                              <span className="sr-only">Remove module</span>
+                              <TrashIcon
+                                className="h-6 w-6"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </div>
+                        </div>
+                        <div className="m-2 mx-auto flex grow-0 justify-center gap-2 rounded-3xl bg-gray-200 p-1 dark:bg-gray-800">
+                          <ShowHideButton
+                            hidden={(module.hiddenOnDevices || []).includes(
+                              "mobile"
+                            )}
+                            onClick={(hide) => {
+                              setDeviceVisibility(
+                                column,
+                                index,
+                                "mobile",
+                                hide
                               );
                             }}
                           >
-                            <span className="sr-only">Remove module</span>
-                            <TrashIcon className="h-6 w-6" aria-hidden="true" />
-                          </button>
+                            <DeviceMobileIcon
+                              className="h-5 w-5"
+                              aria-hidden="true"
+                            />
+                          </ShowHideButton>
+                          <ShowHideButton
+                            hidden={(module.hiddenOnDevices || []).includes(
+                              "tablet"
+                            )}
+                            onClick={(hide) => {
+                              setDeviceVisibility(
+                                column,
+                                index,
+                                "tablet",
+                                hide
+                              );
+                            }}
+                          >
+                            <DeviceTabletIcon
+                              className="h-5 w-5"
+                              aria-hidden="true"
+                            />
+                          </ShowHideButton>
+                          <ShowHideButton
+                            hidden={(module.hiddenOnDevices || []).includes(
+                              "desktop"
+                            )}
+                            onClick={(hide) => {
+                              setDeviceVisibility(
+                                column,
+                                index,
+                                "desktop",
+                                hide
+                              );
+                            }}
+                          >
+                            <DesktopComputerIcon
+                              className="h-5 w-5"
+                              aria-hidden="true"
+                            />
+                          </ShowHideButton>
                         </div>
                       </ErrorBoundary>
                     </Module>

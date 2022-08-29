@@ -252,6 +252,7 @@ export default function Index() {
                         column={column}
                         index={index}
                         moveModule={moveModule}
+                        hiddenOnDevices={module.hiddenOnDevices || []}
                       >
                         <ErrorBoundary pushError={pushError}>
                           <ModuleComponent
