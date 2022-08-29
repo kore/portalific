@@ -13,7 +13,7 @@ const availableModules = {
   calendar: dynamic(() => import("../../modules/Calendar/Configuration")),
 };
 
-export default function Modules({ settings, modules, setModules, moveModule }) {
+export default function Modules({ settings, setSettings, modules, setModules, moveModule }) {
   const [module, setModule] = useState("none");
   const [column, setColumn] = useState("0");
   const [settingsShown, setShowSettings] = useState(null);
@@ -34,6 +34,31 @@ export default function Modules({ settings, modules, setModules, moveModule }) {
         </div>
 
         <div className="mt-6 grid grid-cols-12 gap-6">
+          <div className="col-span-12">
+            <label
+              htmlFor="columns"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+            >
+              Number of columns
+            </label>
+            <select
+              type="text"
+              name="columns"
+              id="columns"
+              value={settings.columns ?? ""}
+              onChange={(event) => {
+                setSettings({ ... settings, columns: event.target.value });
+                setColumn(Math.min(+column, event.target.value - 1));
+              }}
+              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+
           <div className="col-span-12 md:col-span-8">
             <label
               htmlFor="columns"
@@ -109,7 +134,7 @@ export default function Modules({ settings, modules, setModules, moveModule }) {
         </div>
       </div>
 
-      <ul className={`${gridClassName} mt-6 grid w-full gap-6 pt-6`}>
+      <ul className={`${gridClassName} mt-6 grid w-full gap-6 p-2 pt-6`}>
         {[...Array(+settings.columns).keys()].map((column) => {
           return (
             <Column

@@ -62,6 +62,7 @@ export default function Settings({
         {group === "Modules" && (
           <SettingsModules
             settings={settings}
+            setSettings={setSettings}
             modules={modules}
             setModules={setModules}
             moveModule={moveModule}
