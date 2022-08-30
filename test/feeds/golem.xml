@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="FeedCreator 1.6" -->
+<feed xmlns="http://www.w3.org/2005/Atom"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xml:lang="de">
+    <title type="html">Golem.de</title>
+    <subtitle type="html">IT-News fuer Profis</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://rss.golem.de/rss.php?feed=ATOM1.0"/>
+    <link rel="alternate" type="text/html" href="https://www.golem.de/"/>
+    <id>https://www.golem.de/</id>
+    <logo>https://www.golem.de/staticrl/images/golem-rss.png</logo>
+    <icon>https://www.golem.de/favicon.ico</icon>
+    <updated>2022-08-30T07:42:02+02:00</updated>
+    <generator>FeedCreator 1.6</generator>
+    <link rel="hub" href="http://golem.superfeedr.com/" />
+    <entry>
+        <title type="html">In eigener Sache: Golem.de sucht Full Stack Developer (m/w/d)</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/in-eigener-sache-golem-de-sucht-full-stack-developer-m-w-d-2208-167907.html"/>
+        <published>2022-08-30T07:00:09+02:00</published>
+        <updated>2022-08-30T07:00:09+02:00</updated>
+        <id>https://www.golem.de/news/in-eigener-sache-golem-de-sucht-full-stack-developer-m-w-d-2208-167907.html</id>
+        <author>
+            <name> Golem.de</name>
+        </author>
+        <summary type="html">Guter Code für guten Tech-Journalismus: Wir suchen dich als Full Stack Developer für unser Entwicklungsteam mit abwechslungsreichen Aufgaben und wenig Overhead. (&lt;a href=&quot;https://www.golem.de/specials/golem.de/&quot;&gt;Golem.de&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/it-jobs/&quot;&gt;Arbeit&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167907&amp;amp;page=1&amp;amp;ts=1661835602&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">AMD Raphael (Zen 4): Ryzen 7000 schlagen Intel um bis zu 57 Prozent</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/amd-raphael-zen-4-ryzen-7000-schlagen-intel-um-bis-zu-57-prozent-2208-167946.html"/>
+        <published>2022-08-30T01:30:09+02:00</published>
+        <updated>2022-08-30T01:30:09+02:00</updated>
+        <id>https://www.golem.de/news/amd-raphael-zen-4-ryzen-7000-schlagen-intel-um-bis-zu-57-prozent-2208-167946.html</id>
+        <author>
+            <name>Marc Sauter</name>
+        </author>
+        <summary type="html">Schnelle CPU-Kerne mit 5 nm und mehr Energie-Budget: AMD geht bei den Ryzen 7000 samt DDR5-Speicher in die Vollen, nicht aber beim Preis. (&lt;a href=&quot;https://www.golem.de/specials/zen/&quot;&gt;AMD Zen&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/cpu/&quot;&gt;Prozessor&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167946&amp;amp;page=1&amp;amp;ts=1661815803&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Bundeskartellamt: Vormachtstellung von Google bei Werbetools festgestellt</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/bundeskartellamt-vormachtstellung-von-google-bei-werbetools-festgestellt-2208-167945.html"/>
+        <published>2022-08-29T19:15:07+02:00</published>
+        <updated>2022-08-29T19:15:07+02:00</updated>
+        <id>https://www.golem.de/news/bundeskartellamt-vormachtstellung-von-google-bei-werbetools-festgestellt-2208-167945.html</id>
+        <author>
+            <name>Friedhelm Greis</name>
+        </author>
+        <summary type="html">Das Bundeskartellamt hat sich den Handel mit Werbeplätzen im Internet angeschaut. Auch außerhalb seiner Suchmaschine ist Google dominant. (&lt;a href=&quot;https://www.golem.de/specials/bundeskartellamt/&quot;&gt;Bundeskartellamt&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/google/&quot;&gt;Google&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167945&amp;amp;page=1&amp;amp;ts=1661793302&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Gmail: Schrems legt Beschwerde gegen Googles Werbemails ein</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/gmail-schrems-legt-beschwerde-gegen-googles-werbemails-ein-2208-167944.html"/>
+        <published>2022-08-29T19:08:06+02:00</published>
+        <updated>2022-08-29T19:08:06+02:00</updated>
+        <id>https://www.golem.de/news/gmail-schrems-legt-beschwerde-gegen-googles-werbemails-ein-2208-167944.html</id>
+        <author>
+            <name>Friedhelm Greis</name>
+        </author>
+        <summary type="html">Eigentlich filtert Google Spammails aus den Postfächern seiner Kunden. Doch das gilt nicht bei bezahlten Werbemails. (&lt;a href=&quot;https://www.golem.de/specials/gmail/&quot;&gt;Gmail&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/google/&quot;&gt;Google&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167944&amp;amp;page=1&amp;amp;ts=1661792882&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Suchlauf: Vodafone sortiert alle TV-Sender für mehr Downstream neu</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/suchlauf-vodafone-sortiert-alle-tv-sender-fuer-mehr-downstream-neu-2208-167943.html"/>
+        <published>2022-08-29T18:30:05+02:00</published>
+        <updated>2022-08-29T18:30:05+02:00</updated>
+        <id>https://www.golem.de/news/suchlauf-vodafone-sortiert-alle-tv-sender-fuer-mehr-downstream-neu-2208-167943.html</id>
+        <author>
+            <name>Achim Sawall</name>
+        </author>
+        <summary type="html">Später kommt dazu die Abschaltung der analogen Radiosender in den Kabelnetzen in drei Bundesländern. Neue Kabeldosen sind bereits verfügbar. (&lt;a href=&quot;https://www.golem.de/specials/docsis-3.1/&quot;&gt;Docsis 3.1&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/vodafone/&quot;&gt;Vodafone&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167943&amp;amp;page=1&amp;amp;ts=1661790602&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Anzeige: Bis zu 50 Prozent Rabatt auf Workshops - nur noch 2 Tage!</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/anzeige-bis-zu-50-prozent-rabatt-auf-workshops-nur-noch-2-tage-2208-167942.html"/>
+        <published>2022-08-29T17:45:04+02:00</published>
+        <updated>2022-08-29T17:45:04+02:00</updated>
+        <id>https://www.golem.de/news/anzeige-bis-zu-50-prozent-rabatt-auf-workshops-nur-noch-2-tage-2208-167942.html</id>
+        <author>
+            <name> Golem Karrierewelt</name>
+        </author>
+        <summary type="html">Jetzt zuschlagen und 25 Rabatt auf Trainings der Golem Karrierewelt nutzen. Wer eine (Klein-)Gruppe anmeldet, kann weitere bis zu 25 Prozent sparen! (&lt;a href=&quot;https://www.golem.de/specials/golemakademie/&quot;&gt;Golem Karrierewelt&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/internet/&quot;&gt;Internet&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167942&amp;amp;page=1&amp;amp;ts=1661787902&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Playstation: Sony kauft Berliner Entwicklerstudio Savage Game</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/playstation-sony-kauft-berliner-entwicklerstudio-savage-game-2208-167941.html"/>
+        <published>2022-08-29T17:15:03+02:00</published>
+        <updated>2022-08-29T17:15:03+02:00</updated>
+        <id>https://www.golem.de/news/playstation-sony-kauft-berliner-entwicklerstudio-savage-game-2208-167941.html</id>
+        <author>
+            <name>Peter Steinlechner</name>
+        </author>
+        <summary type="html">Branchengrößen haben Savage Game gegründet, nun wird das Entwicklerstudio von Sony gekauft. Erstes Produkt soll ein AAA-Mobile-Shooter sein. (&lt;a href=&quot;https://www.golem.de/specials/playstation/&quot;&gt;Playstation&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/sony/&quot;&gt;Sony&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167941&amp;amp;page=1&amp;amp;ts=1661786102&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Elektromobilität: Elektroautos sind häufiger in Unfälle verwickelt</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/elektromobilitaet-elektroautos-sind-haeufiger-in-unfaelle-verwickelt-2208-167940.html"/>
+        <published>2022-08-29T16:00:02+02:00</published>
+        <updated>2022-08-29T16:00:02+02:00</updated>
+        <id>https://www.golem.de/news/elektromobilitaet-elektroautos-sind-haeufiger-in-unfaelle-verwickelt-2208-167940.html</id>
+        <author>
+            <name>Werner Pluta</name>
+        </author>
+        <summary type="html">Elektroautos, vor allem stark motorisierte, haben einen guten Antritt. Das kann verhängnisvoll enden. (&lt;a href=&quot;https://www.golem.de/specials/verkehr/&quot;&gt;Verkehr&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/studie/&quot;&gt;Studie&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167940&amp;amp;page=1&amp;amp;ts=1661781602&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Anzeige: Samsung-Fernseher bei Amazon mit über 800 Euro Rabatt</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/anzeige-samsung-fernseher-bei-amazon-mit-ueber-800-euro-rabatt-2208-167939.html"/>
+        <published>2022-08-29T15:38:12+02:00</published>
+        <updated>2022-08-29T15:38:12+02:00</updated>
+        <id>https://www.golem.de/news/anzeige-samsung-fernseher-bei-amazon-mit-ueber-800-euro-rabatt-2208-167939.html</id>
+        <author>
+            <name>Simon Krebs</name>
+        </author>
+        <summary type="html">Bei Amazon sind derzeit hochwertige Samsung-Fernseher im Angebot. Außerdem gibt es Geräte anderer Hersteller, SSDs, Gaming-Zubehör und mehr. (&lt;a href=&quot;https://www.golem.de/specials/fernseher/&quot;&gt;Fernseher&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/speichermedien/&quot;&gt;Speichermedien&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167939&amp;amp;page=1&amp;amp;ts=1661780283&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Artemis: Erster Startversuch von SLS abgebrochen</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/artemis-erster-startversuch-von-sls-abgebrochen-2208-167938.html"/>
+        <published>2022-08-29T15:30:10+02:00</published>
+        <updated>2022-08-29T15:30:10+02:00</updated>
+        <id>https://www.golem.de/news/artemis-erster-startversuch-von-sls-abgebrochen-2208-167938.html</id>
+        <author>
+            <name>Frank Wunderlich-Pfeiffer</name>
+        </author>
+        <summary type="html">Wegen diverser Probleme mit dem flüssigen Wasserstofftreibstoff wurde der erste Testflug zum Mond mit der SLS-Schwerlastrakete verschoben. (&lt;a href=&quot;https://www.golem.de/specials/raumfahrt/&quot;&gt;Raumfahrt&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/nasa/&quot;&gt;Nasa&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167938&amp;amp;page=1&amp;amp;ts=1661779802&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Truth Social: Trumps Twitter-Klon in Schwierigkeiten</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/truth-social-trumps-twitter-klon-in-schwierigkeiten-2208-167936.html"/>
+        <published>2022-08-29T15:17:08+02:00</published>
+        <updated>2022-08-29T15:17:08+02:00</updated>
+        <id>https://www.golem.de/news/truth-social-trumps-twitter-klon-in-schwierigkeiten-2208-167936.html</id>
+        <author>
+            <name>Friedhelm Greis</name>
+        </author>
+        <summary type="html">Donald Trumps soziales Netzwerk ist alles andere als ein Erfolg. Nicht einmal seinen Hoster kann Truth Social angeblich bezahlen. (&lt;a href=&quot;https://www.golem.de/specials/donaldtrump/&quot;&gt;Donald Trump&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/socialnetwork/&quot;&gt;Soziales Netz&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167936&amp;amp;page=1&amp;amp;ts=1661779022&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">RISC-V: Nicht nur frei, sondern sanktionsfrei</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/risc-v-nicht-nur-frei-sondern-sanktionsfrei-2208-167929.html"/>
+        <published>2022-08-29T14:45:12+02:00</published>
+        <updated>2022-08-29T14:45:12+02:00</updated>
+        <id>https://www.golem.de/news/risc-v-nicht-nur-frei-sondern-sanktionsfrei-2208-167929.html</id>
+        <author>
+            <name>Johannes Hiltscher</name>
+        </author>
+        <summary type="html">Der offene RISC-V-Befehlssatz erfreut sich immer größerer Beliebtheit. Das hat ökonomische Gründe, aber auch Politik spielt eine Rolle. Eine Analyse von Johannes Hiltscher (&lt;a href=&quot;https://www.golem.de/specials/riscv/&quot;&gt;RISCV&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/cpu/&quot;&gt;Prozessor&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167929&amp;amp;page=1&amp;amp;ts=1661777103&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Reverse Engineering: Gameboy Color lässt sich aus der Ferne übernehmen</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/reverse-engineering-gameboy-color-laesst-sich-aus-der-ferne-uebernehmen-2208-167934.html"/>
+        <published>2022-08-29T14:00:06+02:00</published>
+        <updated>2022-08-29T14:00:06+02:00</updated>
+        <id>https://www.golem.de/news/reverse-engineering-gameboy-color-laesst-sich-aus-der-ferne-uebernehmen-2208-167934.html</id>
+        <author>
+            <name>Sebastian Grüner</name>
+        </author>
+        <summary type="html">Dank einem Mobile-Adapter und neuen Exploits ist einem Hacker ein überraschender Angriff auf das alte Handheld von Nintendo gelungen. (&lt;a href=&quot;https://www.golem.de/specials/gameboy/&quot;&gt;Game Boy&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/sicherheitsluecke/&quot;&gt;Sicherheitslücke&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167934&amp;amp;page=1&amp;amp;ts=1661774402&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Whopper: Burger King und Post stellen Packstationen auf</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/whopper-burger-king-und-post-stellen-packstation-auf-2208-167935.html"/>
+        <published>2022-08-29T13:45:07+02:00</published>
+        <updated>2022-08-29T13:45:07+02:00</updated>
+        <id>https://www.golem.de/news/whopper-burger-king-und-post-stellen-packstation-auf-2208-167935.html</id>
+        <author>
+            <name>Achim Sawall</name>
+        </author>
+        <summary type="html">Ein riesiger Whopper-Aufdruck macht die neue Kooperation von Burger King und Deutsche Post DHL kenntlich. Mehr Packstationen sollen folgen. (&lt;a href=&quot;https://www.golem.de/specials/packstation/&quot;&gt;Packstation&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/wirtschaft/&quot;&gt;Wirtschaft&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167935&amp;amp;page=1&amp;amp;ts=1661773502&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">eth.link: DNS-Domain für Web3 abgelaufen und Besitzer im Gefängnis</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/eth-link-dns-domain-fuer-web3-abgelaufen-und-besitzer-im-gefaengnis-2208-167923.html"/>
+        <published>2022-08-29T13:05:05+02:00</published>
+        <updated>2022-08-29T13:05:05+02:00</updated>
+        <id>https://www.golem.de/news/eth-link-dns-domain-fuer-web3-abgelaufen-und-besitzer-im-gefaengnis-2208-167923.html</id>
+        <author>
+            <name>Lennart Mühlenmeier</name>
+        </author>
+        <summary type="html">Die Domain ist am 26. August 2022 abgelaufen und wird in einer Woche zurück auf dem Markt sein. Sie wird für DNS genutzt. (&lt;a href=&quot;https://www.golem.de/specials/blockchain/&quot;&gt;Blockchain&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/dns/&quot;&gt;DNS&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167923&amp;amp;page=1&amp;amp;ts=1661771102&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Ultragear 45GR95QE: LGs großer OLED-Monitor hat einen Biegeradius von nur 80 cm</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/ultragear-45gr95qe-lgs-grosser-oled-monitor-hat-einen-biegeradius-von-nur-80-cm-2208-167930.html"/>
+        <published>2022-08-29T12:45:03+02:00</published>
+        <updated>2022-08-29T12:45:03+02:00</updated>
+        <id>https://www.golem.de/news/ultragear-45gr95qe-lgs-grosser-oled-monitor-hat-einen-biegeradius-von-nur-80-cm-2208-167930.html</id>
+        <author>
+            <name>Oliver Nickel</name>
+        </author>
+        <summary type="html">45 Zoll ist der LG Ultragear 45GR95QE groß. Das OLED-Panel ist zudem mit 800R sehr stark gekrümmt. Er eignet sich mit 240 Hz für Games. (&lt;a href=&quot;https://www.golem.de/specials/lg-electronics/&quot;&gt;LG&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/display/&quot;&gt;Display&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167930&amp;amp;page=1&amp;amp;ts=1661769903&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Revision CFI-1200: Playstation 5 verliert erneut 300 Gramm</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/revision-cfi-1200-playstation-5-verliert-erneut-300-gramm-2208-167931.html"/>
+        <published>2022-08-29T12:30:03+02:00</published>
+        <updated>2022-08-29T12:30:03+02:00</updated>
+        <id>https://www.golem.de/news/revision-cfi-1200-playstation-5-verliert-erneut-300-gramm-2208-167931.html</id>
+        <author>
+            <name>Peter Steinlechner</name>
+        </author>
+        <summary type="html">In Australien ist die neuste Revision der Playstation 5 bereits in den Läden. Das Gerät ist wieder deutlich leichter geworden. (&lt;a href=&quot;https://www.golem.de/specials/playstation-5/&quot;&gt;Playstation 5&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/sony/&quot;&gt;Sony&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167931&amp;amp;page=1&amp;amp;ts=1661769002&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Cloud in Unternehmen: Zeit, sich von einigen Mythen zu verabschieden</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/cloud-in-unternehmen-zeit-sich-von-einigen-mythen-zu-verabschieden-2208-165867.html"/>
+        <published>2022-08-29T12:13:08+02:00</published>
+        <updated>2022-08-29T12:13:08+02:00</updated>
+        <id>https://www.golem.de/news/cloud-in-unternehmen-zeit-sich-von-einigen-mythen-zu-verabschieden-2208-165867.html</id>
+        <author>
+            <name>Adam Jaskowiec</name>
+        </author>
+        <summary type="html">Deutsche Firmen sind bei der Cloudnutzung zurückhaltend. Teilweise zu Recht, aber die Vorteile überwiegen eindeutig. Ein IMHO von Adam Jaskowiec (&lt;a href=&quot;https://www.golem.de/specials/cloud-computing/&quot;&gt;Cloud Computing&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/webservice/&quot;&gt;Web Service&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=165867&amp;amp;page=1&amp;amp;ts=1661767981&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Star64: Erstes RISC-V-Board von Pine64</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/star64-erstes-risc-v-board-von-pine64-2208-167924.html"/>
+        <published>2022-08-29T11:46:07+02:00</published>
+        <updated>2022-08-29T11:46:07+02:00</updated>
+        <id>https://www.golem.de/news/star64-erstes-risc-v-board-von-pine64-2208-167924.html</id>
+        <author>
+            <name>Johannes Hiltscher</name>
+        </author>
+        <summary type="html">Nach mehreren ARM-Platinen kündigt Pine64 den ersten Bastelrechner mit RISC-V-Chip an. Interessant: Er verfügt über einen PCIe-Slot. (&lt;a href=&quot;https://www.golem.de/specials/pine64/&quot;&gt;Pine64&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/usb-3.0/&quot;&gt;USB 3.0&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167924&amp;amp;page=1&amp;amp;ts=1661766363&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">VW ID.2: VWs 20.000-Euro-Elektroauto wird deutlich teurer</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/vw-id-2-vws-20-000-euro-elektroauto-wird-deutlich-teurer-2208-167927.html"/>
+        <published>2022-08-29T11:04:09+02:00</published>
+        <updated>2022-08-29T11:04:09+02:00</updated>
+        <id>https://www.golem.de/news/vw-id-2-vws-20-000-euro-elektroauto-wird-deutlich-teurer-2208-167927.html</id>
+        <author>
+            <name>Werner Pluta</name>
+        </author>
+        <summary type="html">Wegen der steigenden Rohstoffpreise wird VW den angekündigten Preis für sein Einstiegselektroauto nicht halten. (&lt;a href=&quot;https://www.golem.de/specials/volkswagen-id/&quot;&gt;Volkswagen ID.&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/technologie/&quot;&gt;Technologie&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167927&amp;amp;page=1&amp;amp;ts=1661763842&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">(g+) Alternativen zu Google Analytics: Tools für Reichweitenanalyse datenschutzkonform nutzen</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/alternativen-zu-google-analytics-tools-fuer-reichweitenanalyse-datenschutzkonform-nutzen-2208-167868.html"/>
+        <published>2022-08-29T11:00:11+02:00</published>
+        <updated>2022-08-29T11:00:11+02:00</updated>
+        <id>https://www.golem.de/news/alternativen-zu-google-analytics-tools-fuer-reichweitenanalyse-datenschutzkonform-nutzen-2208-167868.html</id>
+        <author>
+            <name>Christiane Schulzki-Haddouti</name>
+        </author>
+        <summary type="html"> Der DSGVO-konforme Einsatz von Google Analytics ist nur mit einer aufwendigen Proxylösung möglich. Doch es gibt selbstgehostete Alternativen. Eine Anleitung von Christiane Schulzki-Haddouti (&lt;a href=&quot;https://www.golem.de/specials/datenschutz/&quot;&gt;Datenschutz&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/cloud-computing/&quot;&gt;Cloud Computing&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167868&amp;amp;page=1&amp;amp;ts=1661763603&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Energiekrise: Werbedisplays müssen nachts ausbleiben, mit Ausnahmen</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/energiekrise-werbedisplays-muessen-nachts-ausbleiben-mit-ausnahmen-2208-167925.html"/>
+        <published>2022-08-29T10:48:08+02:00</published>
+        <updated>2022-08-29T10:48:08+02:00</updated>
+        <id>https://www.golem.de/news/energiekrise-werbedisplays-muessen-nachts-ausbleiben-mit-ausnahmen-2208-167925.html</id>
+        <author>
+            <name>Oliver Nickel</name>
+        </author>
+        <summary type="html">Von 22 bis 6 Uhr sollen Digital-Signage-Displays ausgeschaltet werden, um Energie für den Winter zu sparen. Das gilt aber nicht immer. (&lt;a href=&quot;https://www.golem.de/specials/digital-signage/&quot;&gt;Digital Signage&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/display/&quot;&gt;Display&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167925&amp;amp;page=1&amp;amp;ts=1661762883&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">iPhone: Webseiten und Tracker können Lockdown-Mode einfach erkennen</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/iphone-webseiten-und-tracker-koennen-lockdown-mode-einfach-erkennen-2208-167922.html"/>
+        <published>2022-08-29T10:15:04+02:00</published>
+        <updated>2022-08-29T10:15:04+02:00</updated>
+        <id>https://www.golem.de/news/iphone-webseiten-und-tracker-koennen-lockdown-mode-einfach-erkennen-2208-167922.html</id>
+        <author>
+            <name>Sebastian Grüner</name>
+        </author>
+        <summary type="html">Eigentlich soll der Lockdown-Modus im iPhone den Schutz der Nutzer verbessern. Der Modus könnte aber Fingerprinting erhöhen. (&lt;a href=&quot;https://www.golem.de/specials/apple/&quot;&gt;Apple&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/iphone/&quot;&gt;iPhone&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167922&amp;amp;page=1&amp;amp;ts=1661760902&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Microsoft 365: Neuer Adoption Score soll Mitarbeiter nicht ausspähen können</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/microsoft-365-neuer-adoption-score-soll-mitarbeiter-nicht-ausspaehen-koennen-2208-167921.html"/>
+        <published>2022-08-29T09:49:03+02:00</published>
+        <updated>2022-08-29T09:49:03+02:00</updated>
+        <id>https://www.golem.de/news/microsoft-365-neuer-adoption-score-soll-mitarbeiter-nicht-ausspaehen-koennen-2208-167921.html</id>
+        <author>
+            <name>Oliver Nickel</name>
+        </author>
+        <summary type="html">Schon 2020 wollte Microsoft einen Score für das Nutzungsverhalten in Microsoft 365 einführen. Das Unternehmen will es diesmal besser machen. (&lt;a href=&quot;https://www.golem.de/specials/office-365/&quot;&gt;Microsoft 365&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/microsoft/&quot;&gt;Microsoft&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167921&amp;amp;page=1&amp;amp;ts=1661759342&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Taschenrechner DM42: Einfach Dreisatz rechnen</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/taschenrechner-dm42-einfach-dreisatz-rechnen-2208-165983.html"/>
+        <published>2022-08-29T08:31:04+02:00</published>
+        <updated>2022-08-29T08:31:04+02:00</updated>
+        <id>https://www.golem.de/news/taschenrechner-dm42-einfach-dreisatz-rechnen-2208-165983.html</id>
+        <author>
+            <name>Thomas Ell</name>
+        </author>
+        <summary type="html">Alltägliche, aber nicht ganz banale Rechnungen fallen vielen Menschen schwer. Ein programmierbarer Taschenrechner ist da ein gutes Hilfsmittel. Eine Anleitung von Thomas Ell (&lt;a href=&quot;https://www.golem.de/specials/taschenrechner/&quot;&gt;Taschenrechner&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/softwareentwicklung/&quot;&gt;Softwareentwicklung&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=165983&amp;amp;page=1&amp;amp;ts=1661754661&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Gamescom: Rund 265.000 Besucher und viele neue Spiele</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/gamescom-rund-265-000-besucher-und-viele-neue-spiele-2208-167918.html"/>
+        <published>2022-08-28T18:35:11+02:00</published>
+        <updated>2022-08-28T18:35:11+02:00</updated>
+        <id>https://www.golem.de/news/gamescom-rund-265-000-besucher-und-viele-neue-spiele-2208-167918.html</id>
+        <author>
+            <name>Peter Steinlechner</name>
+        </author>
+        <summary type="html"> Rund 100.000 Besucher weniger als im Jahr vor der Coronakrise haben sich in Köln die neusten Spiele angeschaut. (&lt;a href=&quot;https://www.golem.de/specials/gamescom-22/&quot;&gt;Gamescom 22&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/dead-island/&quot;&gt;Dead Island&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167918&amp;amp;page=1&amp;amp;ts=1661704503&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Actionspiel: Battlefield 2042 bekommt überarbeitete Spezialisten und Maps</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/actionspiel-battlefield-2042-bekommt-ueberarbeitete-spezialisten-und-maps-2208-167917.html"/>
+        <published>2022-08-28T12:32:09+02:00</published>
+        <updated>2022-08-28T12:32:09+02:00</updated>
+        <id>https://www.golem.de/news/actionspiel-battlefield-2042-bekommt-ueberarbeitete-spezialisten-und-maps-2208-167917.html</id>
+        <author>
+            <name>Peter Steinlechner</name>
+        </author>
+        <summary type="html"> Mehr Deckung und Zerstörung auf den Karten, klar erkennbare Klassen: Dice hat Änderungen für Season 2 und 3 von Battlefield 2042 vorgestellt. (&lt;a href=&quot;https://www.golem.de/specials/battlefield2042/&quot;&gt;Battlefield 2042&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/electronic-arts/&quot;&gt;Electronic Arts&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167917&amp;amp;page=1&amp;amp;ts=1661682722&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Apple Watch, iPad Air: Apple Homepod Mini und andere Produkte vergünstigt bei Lidl</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/apple-watch-ipad-air-apple-homepod-mini-und-andere-produkte-verguenstigt-bei-lidl-2208-167915.html"/>
+        <published>2022-08-28T12:00:07+02:00</published>
+        <updated>2022-08-28T12:00:07+02:00</updated>
+        <id>https://www.golem.de/news/apple-watch-ipad-air-apple-homepod-mini-und-andere-produkte-verguenstigt-bei-lidl-2208-167915.html</id>
+        <author>
+            <name>Michael Linden</name>
+        </author>
+        <summary type="html">Lidl bietet online zahlreiche Apple-Produkte teils deutlich vergünstigt an. Der Homepod Mini ist dort für 89 Euro zu bekommen. (&lt;a href=&quot;https://www.golem.de/specials/lidl/&quot;&gt;Lidl&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/soundhardware/&quot;&gt;Sound-Hardware&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167915&amp;amp;page=1&amp;amp;ts=1661680802&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Umweltschutz: Greenwashing-Vorwürfe gegen Google Flüge</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/umweltschutz-greenwashing-vorwuerfe-gegen-google-fluege-2208-167916.html"/>
+        <published>2022-08-28T11:40:09+02:00</published>
+        <updated>2022-08-28T11:40:09+02:00</updated>
+        <id>https://www.golem.de/news/umweltschutz-greenwashing-vorwuerfe-gegen-google-fluege-2208-167916.html</id>
+        <author>
+            <name>Peter Steinlechner</name>
+        </author>
+        <summary type="html">Statt 1.070 kg nur 521 kg CO2-Emissionen beim Flug von Seattle nach Paris: Google soll mit Industriepartnern Greenwashing betreiben. (&lt;a href=&quot;https://www.golem.de/specials/google/&quot;&gt;Google&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/greenit/&quot;&gt;GreenIT&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167916&amp;amp;page=1&amp;amp;ts=1661679603&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Lightguide: Neue Philips-Hue-Leuchtmittel mit Glaskolben</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/lightguide-philips-hue-leuchtmittel-mit-glaskolben-aufgetaucht-2208-167914.html"/>
+        <published>2022-08-28T11:05:07+02:00</published>
+        <updated>2022-08-28T11:05:07+02:00</updated>
+        <id>https://www.golem.de/news/lightguide-philips-hue-leuchtmittel-mit-glaskolben-aufgetaucht-2208-167914.html</id>
+        <author>
+            <name>Michael Linden</name>
+        </author>
+        <summary type="html">Die neuen Philips-Hue-LED-Leuchtmittel Lightguide von Signify sind bereits auf Amazon zu sehen. Die übergroßen Leuchtmittel sind ohne Lampenschirm nutzbar. (&lt;a href=&quot;https://www.golem.de/specials/philips-hue/&quot;&gt;Hue&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/technologie/&quot;&gt;Technologie&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167914&amp;amp;page=1&amp;amp;ts=1661677503&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">(g+) Unistellar eVScope 2 im Test: Ein fast echter Blick in den Himmel</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/unistellar-evscope-2-im-test-ein-fast-echter-blick-in-den-himmel-2208-165826.html"/>
+        <published>2022-08-28T11:00:08+02:00</published>
+        <updated>2022-08-28T11:00:08+02:00</updated>
+        <id>https://www.golem.de/news/unistellar-evscope-2-im-test-ein-fast-echter-blick-in-den-himmel-2208-165826.html</id>
+        <author>
+            <name>Mario Keller</name>
+        </author>
+        <summary type="html">Ein Automatikteleskop mit elektronischem Okular verspricht Bilder, die das Auge so nicht wahrnehmen kann. Das funktioniert erstaunlich gut - mit Luft nach oben. Ein Test von Mario Keller (&lt;a href=&quot;https://www.golem.de/specials/astronomie/&quot;&gt;Astronomie&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/golemplus/&quot;&gt;Golem Plus&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=165826&amp;amp;page=1&amp;amp;ts=1661677202&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Verbraucherschutz: Smartphone-Reparaturkosten viel zu hoch</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/verbraucherschutz-smartphone-reparaturkosten-viel-zu-hoch-2208-167913.html"/>
+        <published>2022-08-28T10:47:05+02:00</published>
+        <updated>2022-08-28T10:47:05+02:00</updated>
+        <id>https://www.golem.de/news/verbraucherschutz-smartphone-reparaturkosten-viel-zu-hoch-2208-167913.html</id>
+        <author>
+            <name>Peter Steinlechner</name>
+        </author>
+        <summary type="html">Das Recht auf Reparatur soll um Bonuszahlungen bei günstigen Geräten erweitert werden: Das ist eine neue Forderung des Verbraucherschutzes. (&lt;a href=&quot;https://www.golem.de/specials/elektronikschrott/&quot;&gt;Elektronikschrott&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/smartphone/&quot;&gt;Smartphone&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167913&amp;amp;page=1&amp;amp;ts=1661676422&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">35 Jahre Predator: Als der Dschungel unsicher wurde</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/35-jahre-predator-als-der-dschungel-unsicher-wurde-2208-167737.html"/>
+        <published>2022-08-28T09:00:09+02:00</published>
+        <updated>2022-08-28T09:00:09+02:00</updated>
+        <id>https://www.golem.de/news/35-jahre-predator-als-der-dschungel-unsicher-wurde-2208-167737.html</id>
+        <author>
+            <name>Peter Osteried</name>
+        </author>
+        <summary type="html">Mit Prey hat das Predator-Franchise gerade einen neuen Höhenflug erlebt. Vor 35 Jahren begann alles mit einem Kampf im südamerikanischen Dschungel. Von Peter Osteried (&lt;a href=&quot;https://www.golem.de/specials/audio-video/&quot;&gt;Audio/Video&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/film/&quot;&gt;Film&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167737&amp;amp;page=1&amp;amp;ts=1661670002&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Anzeige: Google Pixel 6a bei Saturn im Bundle mit Prämie sichern</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/anzeige-google-pixel-6a-bei-saturn-im-bundle-mit-praemie-sichern-2208-167902.html"/>
+        <published>2022-08-27T15:00:04+02:00</published>
+        <updated>2022-08-27T15:00:04+02:00</updated>
+        <id>https://www.golem.de/news/anzeige-google-pixel-6a-bei-saturn-im-bundle-mit-praemie-sichern-2208-167902.html</id>
+        <author>
+            <name>Simon Krebs</name>
+        </author>
+        <summary type="html">Bei Saturn gibt es bis einschließlich Ende des Monats noch eine spannende Aktion: das neue Google Pixel 6a im Bundle mit passendem Case sichern. (&lt;a href=&quot;https://www.golem.de/specials/google-pixel/&quot;&gt;Google Pixel&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/saturn/&quot;&gt;Saturn&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167902&amp;amp;page=1&amp;amp;ts=1661605202&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Windows 11: Microsoft macht Windows Terminal zum Standard</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/windows-11-microsoft-macht-windows-terminal-zum-standard-2208-167912.html"/>
+        <published>2022-08-27T12:31:04+02:00</published>
+        <updated>2022-08-27T12:31:04+02:00</updated>
+        <id>https://www.golem.de/news/windows-11-microsoft-macht-windows-terminal-zum-standard-2208-167912.html</id>
+        <author>
+            <name>Sebastian Grüner</name>
+        </author>
+        <summary type="html">Sämtliche Kommandozeilenprogramme in Windows 11 werden künftig über das neue Terminal ausgeführt. Der Schritt ist lange vorbereitet worden. (&lt;a href=&quot;https://www.golem.de/specials/windows-11/&quot;&gt;Windows 11&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/windows/&quot;&gt;Windows&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167912&amp;amp;page=1&amp;amp;ts=1661596262&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Homeoffice: Google-Angestellte mit Frust und Memes gegen Office-Pflicht</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/homeoffice-google-angestellte-mit-frust-und-memes-gegen-office-pflicht-2208-167911.html"/>
+        <published>2022-08-27T11:45:03+02:00</published>
+        <updated>2022-08-27T11:45:03+02:00</updated>
+        <id>https://www.golem.de/news/homeoffice-google-angestellte-mit-frust-und-memes-gegen-office-pflicht-2208-167911.html</id>
+        <author>
+            <name>Sebastian Grüner</name>
+        </author>
+        <summary type="html">Die Rückkehr ins Büro bei Google sorgt offenbar für zahlreiche Corona-Infektionen. Die Angestellten scheinen nicht begeistert zu sein. (&lt;a href=&quot;https://www.golem.de/specials/google/&quot;&gt;Google&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/apple/&quot;&gt;Apple&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167911&amp;amp;page=1&amp;amp;ts=1661593502&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Streaming: Netflix-Abo mit Werbung wird wohl nicht kostenlos</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/streaming-netflix-abo-mit-werbung-wird-wohl-nicht-kostenlos-2208-167910.html"/>
+        <published>2022-08-27T11:20:02+02:00</published>
+        <updated>2022-08-27T11:20:02+02:00</updated>
+        <id>https://www.golem.de/news/streaming-netflix-abo-mit-werbung-wird-wohl-nicht-kostenlos-2208-167910.html</id>
+        <author>
+            <name>Sebastian Grüner</name>
+        </author>
+        <summary type="html">Das geplante Abo mit Werbung könnte bei Netflix zwischen 7 und 9 US-Dollar kosten. Die Werbung soll auch während des Streams laufen. (&lt;a href=&quot;https://www.golem.de/specials/netflix/&quot;&gt;Netflix&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/online-werbung/&quot;&gt;Onlinewerbung&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167910&amp;amp;page=1&amp;amp;ts=1661592002&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">Publisher: EA-Aktie schwankt nach Gerüchten zu Amazon-Übernahme</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/publisher-ea-aktie-schwankt-nach-geruechten-zu-amazon-uebernahme-2208-167909.html"/>
+        <published>2022-08-27T11:03:11+02:00</published>
+        <updated>2022-08-27T11:03:11+02:00</updated>
+        <id>https://www.golem.de/news/publisher-ea-aktie-schwankt-nach-geruechten-zu-amazon-uebernahme-2208-167909.html</id>
+        <author>
+            <name>Sebastian Grüner</name>
+        </author>
+        <summary type="html">Ein unbestätigtes Gerücht hat ausgereicht, um die EA-Aktie in die Höhe zu treiben. Der Spielehersteller sucht weiter einen Käufer. (&lt;a href=&quot;https://www.golem.de/specials/electronic-arts/&quot;&gt;Electronic Arts&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/apple/&quot;&gt;Apple&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167909&amp;amp;page=1&amp;amp;ts=1661590982&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">(g+) Status quo im Metaverse: Virtuelle Spielplätze ohne Vision</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/status-quo-im-metaverse-virtuelle-spielplaetze-ohne-vision-2208-166643.html"/>
+        <published>2022-08-27T11:00:06+02:00</published>
+        <updated>2022-08-27T11:00:06+02:00</updated>
+        <id>https://www.golem.de/news/status-quo-im-metaverse-virtuelle-spielplaetze-ohne-vision-2208-166643.html</id>
+        <author>
+            <name>Florian Zandt</name>
+        </author>
+        <summary type="html">Das Metaverse soll dank Blockchain Abenteuer in virtuellen Welten vereinen - fühlt sich nur nach altbackener und überteuerter Technik an. Von Florian Zandt (&lt;a href=&quot;https://www.golem.de/specials/metaversum/&quot;&gt;Metaversum&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/mark-zuckerberg/&quot;&gt;Mark Zuckerberg&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=166643&amp;amp;page=1&amp;amp;ts=1661590803&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+    <entry>
+        <title type="html">30 Jahre Super Mario Kart: Als Nintendo den Fun-Racer neu erfand</title>
+        <link rel="alternate" type="text/html" href="https://www.golem.de/news/30-jahre-super-mario-kart-als-nintendo-den-fun-racer-neu-erfand-2208-167879.html"/>
+        <published>2022-08-27T09:00:12+02:00</published>
+        <updated>2022-08-27T09:00:12+02:00</updated>
+        <id>https://www.golem.de/news/30-jahre-super-mario-kart-als-nintendo-den-fun-racer-neu-erfand-2208-167879.html</id>
+        <author>
+            <name>Andreas Altenheimer</name>
+        </author>
+        <summary type="html">Vor 30 Jahren feierte Nintendo-Klempner Mario in Super Mario Kart sein Rennspieldebüt. Golem.de hat das alte Modul aus dem Schrank geholt. Von Andreas Altenheimer (&lt;a href=&quot;https://www.golem.de/specials/supermario/&quot;&gt;Super Mario&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/nintendo/&quot;&gt;Nintendo&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=167879&amp;amp;page=1&amp;amp;ts=1661583603&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</summary>
+    </entry>
+</feed>

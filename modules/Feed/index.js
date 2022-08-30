@@ -3,6 +3,7 @@ import { CheckIcon } from "@heroicons/react/outline";
 import axios from "axios";
 import Parser from "rss-parser";
 import resolveAllPromises from "../../utils/resolveAllPromises";
+import mapFeedItems from "./mapFeedItems";
 
 export default function Feed({
   configuration,
@@ -10,9 +11,6 @@ export default function Feed({
   pushError,
 }) {
   const [feedItems, setFeedItems] = useState([]);
-
-  // @TODO:
-  // * Also handle properties from RSS feeds and other feed styles
 
   const updateFeeds = async () => {
     let feeds = (configuration.feeds ?? []).map((feed) => {
@@ -50,14 +48,10 @@ export default function Feed({
       .filter((item) => !!item);
     feeds = await resolveAllPromises(feeds);
 
-    const allItems = feeds.map((feed) => {
-      return feed.parsed.items.map((item) => {
-        return { ...item, color: feed.color, source: feed.name };
-      });
-    });
+    const allItems = feeds.map(mapFeedItems);
 
     const items = [].concat.apply([], allItems);
-    items.sort((a, b) => (a.isoDate < b.isoDate ? 1 : -1));
+    items.sort((a, b) => (a.date < b.date ? 1 : -1));
     setFeedItems([...new Map(items.map((item) => [item.id, item])).values()]);
   };
 

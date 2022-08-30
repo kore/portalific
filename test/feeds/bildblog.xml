@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>BILDblog</title>
+	<atom:link href="https://bildblog.de/feed/" rel="self" type="application/rss+xml" />
+	<link>https://bildblog.de</link>
+	<description>Ein Watchblog für deutsche Medien</description>
+	<lastBuildDate>Mon, 29 Aug 2022 06:59:32 +0000</lastBuildDate>
+	<language>de-DE</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.5</generator>
+	<item>
+		<title>Nächste Runde, &#8220;NZZ&#8221; redet Diktatur schön, Text-zu-Bild-Generierung</title>
+		<link>https://bildblog.de/135214/naechste-runde-nzz-redet-diktatur-schoen-text-zu-bild-generierung/</link>
+		
+		<dc:creator><![CDATA[Lorenz Meyer]]></dc:creator>
+		<pubDate>Mon, 29 Aug 2022 06:54:22 +0000</pubDate>
+				<category><![CDATA[6 vor 9]]></category>
+		<guid isPermaLink="false">https://bildblog.de/?p=135214</guid>
+
+					<description><![CDATA[1. Nächste Runde (sueddeutsche.de, Anna Ernst) Die ARD kommt nicht zur Ruhe. Erst der Skandal beim rbb, nun ist die Landesfunkhausdirektorin des MDR in Sachsen-Anhalt, Ines Hoge-Lorenz, wegen mangelnder Transparenz von ihrem Amt zurückgetreten. Und auch beim NDR gärt es. Nach Berichten von &#8220;Business Insider&#8221; (hier eine Erwiderung des NDR) und &#8220;Stern&#8221; erhöben NDR-Redakteure schwere [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p><a href="https://www.sueddeutsche.de/medien/rbb-mdr-udo-foht-1.5646824" rel="noopener noreferrer" target="_blank"><strong>1. Nächste Runde</strong></a><br />
+<em>(sueddeutsche.de, Anna Ernst)</em><br />
+Die ARD kommt nicht zur Ruhe. Erst der Skandal beim rbb, nun ist die Landesfunkhausdirektorin des MDR in Sachsen-Anhalt, Ines Hoge-Lorenz, wegen mangelnder Transparenz <a href="https://taz.de/Neuer-Aerger-bei-der-ARD/!5877309/" rel="noopener noreferrer" target="_blank">von ihrem Amt zurückgetreten</a>. Und auch beim NDR gärt es. Nach Berichten <a href="https://www.businessinsider.de/wirtschaft/politischer-filter-klima-der-angst-ndr-redakteure-erheben-laut-vertraulichem-untersuchungsbericht-schwere-vorwuerfe-gegen-senderleitung-b/" rel="noopener noreferrer" target="_blank">von &#8220;Business Insider&#8221;</a> (hier eine <a href="https://www.ndr.de/der_ndr/unternehmen/Stellungnahme-des-NDR-Redaktionsausschusses-zur-Veroeffentlichung-des-business-insider,redaktionsausschuss102.html" rel="noopener noreferrer" target="_blank">Erwiderung des NDR</a>) und <a href="https://www.presseportal.de/pm/6329/5305780" rel="noopener noreferrer" target="_blank">&#8220;Stern&#8221;</a> erhöben NDR-Redakteure schwere Vorwürfe gegen die Senderleitung des Landfunkhauses Schleswig-Holstein. Von einem &#8220;politischen Filter&#8221;, einem &#8220;Klima der Angst&#8221; und &#8220;Hofberichterstattung&#8221; sei die Rede.<br />
+Weiterer Lesehinweis: Laut &#8220;Übermedien&#8221; diskutierten Mitarbeiter und Funkhauschefs beim NDR Schleswig-Holstein die Vorwürfe gegen den Sender: <a href="https://uebermedien.de/76092/hier-wird-ein-bild-gezeichnet-was-nicht-das-wahre-bild-des-ndr-ist/" rel="noopener noreferrer" target="_blank">&#8220;Hier wird ein Bild gezeichnet, was nicht das wahre Bild des NDR ist&#8221;</a>.<img src="https://vg07.met.vgwort.de/na/e34a88fefb374b1d9f28c1b338ab01cf" width="1" height="1" alt=""></p>
+<p><a href="https://www.infosperber.ch/frau-mann/diskriminierung/die-nzz-redete-die-diktatur-in-saudi-arabien-schoen/" rel="noopener noreferrer" target="_blank"><strong>2. Die NZZ redete die Diktatur in Saudi-Arabien schön</strong></a><br />
+<em>(infosperber.ch, Urs P. Gasche)</em><br />
+Beim Lesen der &#8220;NZZ&#8221; ist Urs P. Gasche etwas Interessantes aufgefallen: &#8220;Die NZZ nennt autoritäre Herrscher, die geopolitisch als Feinde gelten, häufig &#8216;Diktator&#8217; oder &#8216;Machthaber&#8217;. Wenn es sich aber um autoritäre Herrscher handelt, die dem Werte-Westen geopolitisch nützlich sind, hält sich die NZZ meistens an deren offiziellen Funktionen und bezeichnet sie beispielsweise als &#8216;Präsident as-Sisi&#8217; oder eben &#8216;Kronprinz bin Salman&#8217;.&#8221;</p>
+<p><a href="https://www.reporter-ohne-grenzen.de/pressemitteilungen/meldung/koenigshaus-haelt-familie-von-exil-journalisten-fest" rel="noopener noreferrer" target="_blank"><strong>3. Königshaus hält Familie von Exil-Journalisten fest</strong></a><br />
+<em>(reporter-ohne-grenzen.de)</em><br />
+Sechs Familienmitglieder des Journalisten Yusuf Omran Abdulla werden seit über einer Woche gegen ihren Willen in Bahrain festgehalten, berichtet Reporter ohne Grenzen: &#8220;Die Behörden in Bahrain versuchen offenbar, Druck auf einen ihrer Kritiker auszuüben. Auch aus dem Exil war Yusuf Abdulla weiter eine kritische Stimme zur politischen Lage in Bahrain. Deshalb will ihn die Regierung von König Hamad bin Isa al-Chalifa zum Schweigen bringen.&#8221; Der Fall hat auch eine politische Dimension: Seit 2020 besitzen alle sieben Familienmitglieder die deutsche Staatsbürgerschaft.</p>
+<p><a class="noline" href="/bildblog-unterstuetzen/" target="_blank" rel="noopener noreferrer"><img width="540" height="81" src="/wp-content/bildblogunterstuetzen.png" alt="Bildblog unterstuetzen" /></a></p>
+<p><a href="https://netzpolitik.org/2022/text-zu-bild-generierung-der-anfang-von-etwas-grossem/" rel="noopener noreferrer" target="_blank"><strong>4. Der Anfang von etwas Großem</strong></a><br />
+<em>(netzpolitik.org, Sebastian Meineck)</em><br />
+Sebastian Meineck zeigt sich angetan von den Ergebnissen der Software &#8220;StableDiffusion&#8221; und spricht gar von einer bevorstehenden Medienrevolution: &#8220;Jetzt isses soweit: Ich glaube, Text-zu-Bild-Generierung wird ein großes Ding. Die Technologie wird verändern, welche Bilder wir in unserem Alltag sehen und wie wir mit Bildern kommunizieren. Sie wird unsere Fantasie auf das nächste Level bringen und künftige Generationen werden uns belächeln, wenn sie hören, dass wir tatsächlich ein Leben ohne diese Technologie geführt haben.&#8221;</p>
+<p><a href="https://taz.de/Rechtes-Magazin-Compact/!5873719/" rel="noopener noreferrer" target="_blank"><strong>5. Jammern als Identität</strong></a><br />
+<em>(taz.de, Andreas Speit)</em><br />
+Das Magazin &#8220;Compact&#8221; wolle das &#8220;Flaggschiff der alternativen Medien&#8221; sein, habe sich jedoch längst zum &#8220;strömungsübergreifenden Kampfblatt der Extremen Rechten&#8221; entwickelt, befindet Andreas Speit. Mit der &#8220;Querdenken&#8221;-Bewegung habe die Redaktion zudem eine neue Zielgruppe ­gefunden. Gelegentlich gerate &#8220;Compact&#8221; jedoch auch ins Stolpern. So musste eine Autobiographie von Chefredakteur Jürgen Elsässer sowie eine Interview-DVD zurückgezogen werden. Dies jedoch nicht aus inhaltlichen Gründen &#8211; das verwendete Logo habe dem Logo eines bekannten Buchverlags zum Verwechseln ähnlich gesehen.</p>
+<p><a href="https://www1.wdr.de/mediathek/audio/wdr5/wdr5-toene-texte-bilder/audio-games-leitmedium-des-jahrhunderts-100.html" rel="noopener noreferrer" target="_blank"><strong>6. Games: Leitmedium des 21. Jahrhunderts?</strong></a><br />
+<em>(wdr.de, Steffi Orbach, Audio: 55:11 Minuten)</em><br />
+In den vergangenen Tagen fand in Köln die Computerspielemesse Gamescom statt. Der Radiosender WDR 5 hat der &#8220;europäischen Leitmesse für digitale Spielekultur&#8221; eine ganze Sendung gewidmet: Was sind die großen Themen dieses Jahres, und sind Games das Leitmedium des 21. Jahrhunderts? Wie ist es um den Jugendschutz bestellt? Wo lauern Kostenfallen? Und wie ist der aktuelle Stand beim Games-Journalismus?</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>KW 34/22: Hör- und Gucktipps zum Wochenende</title>
+		<link>https://bildblog.de/135206/kw-3422-hoer-und-gucktipps-zum-wochenende/</link>
+		
+		<dc:creator><![CDATA[Lorenz Meyer]]></dc:creator>
+		<pubDate>Sat, 27 Aug 2022 06:54:49 +0000</pubDate>
+				<category><![CDATA[6 vor 9]]></category>
+		<guid isPermaLink="false">https://bildblog.de/?p=135206</guid>
+
+					<description><![CDATA[Hurra, endlich Wochenende &#8211; und damit mehr Zeit zum Hören und Sehen! In unserer Samstagsausgabe präsentieren wir Euch eine Auswahl empfehlenswerter Filme und Podcasts mit Medienbezug. Viel Spaß bei Erkenntnisgewinn und Unterhaltung! *** 1. Instagram &#8211; Das toxische Netzwerk (arte.tv, Olivier Lemaire, Video: 1:26:34 Stunden) Anfangs war es nur eine kleine App zum Teilen von [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p><em>Hurra, endlich Wochenende &#8211; und damit mehr Zeit zum Hören und Sehen! In unserer Samstagsausgabe präsentieren wir Euch eine Auswahl empfehlenswerter Filme und Podcasts mit Medienbezug. Viel Spaß bei Erkenntnisgewinn und Unterhaltung!</em></p>
+<p align="center">***</p>
+<p><a href="https://www.arte.tv/de/videos/095729-000-A/instagram-das-toxische-netzwerk/" rel="noopener noreferrer" target="_blank"><strong>1. Instagram &#8211; Das toxische Netzwerk</strong></a><br />
+<em>(arte.tv, Olivier Lemaire, Video: 1:26:34 Stunden)</em><br />
+Anfangs war es nur eine kleine App zum Teilen von Fotos, mittlerweile nutzen eine Milliarde Menschen Instagram. Was so vermeintlich positiv und harmlos daherkommt, hat seine Tücken, wie eine Arte-Doku filmisch analysiert: &#8220;Die ungebremste Inszenierung der eigenen Person, die im Ozean des Konsums illusorisch Glück verspricht, beeinflusst das Leben der Menschen schleichend. Die Flut an Bildern schlägt in Übersättigung um, in eine nie endende Pornografie aus Klamotten, Gegenständen, Essen und muskulösen, sonnengebräunten, eingeölten Körpern.&#8221; Der Film geht der Frage nach, welche Einflüsse Instagram auf Individuum und Gesellschaft hat.<br />
+Weiterer Gucktipp: Beim öffentlich-rechtlichen Jugendkanal &#8220;funk&#8221; gibt es einen zehnminütigen Beitrag <a href="https://www.funk.net/playlist/neuesteVideos/douyin-so-kontrolliert-china-sein-eigenes-tiktok-1826383" rel="noopener noreferrer" target="_blank">über Douyin, das chinesische TikTok</a>: &#8220;Warum Douyin in China so erfolgreich ist, und wie die kommunistische Partei vorgeht, wenn sich User zum Beispiel kritisch gegenüber der Regierung äußern.&#8221;</p>
+<p><a href="https://www.deutschlandfunk.de/wallraff-investigativ-journalist-100.html" rel="noopener noreferrer" target="_blank"><strong>2. Publizist, Aktivist, Nonkonformist</strong></a><br />
+<em>(deutschlandfunk.de, Stefan Koldehoff, Audio: 54:52 Minuten)</em><br />
+Günter Wallraff gilt vielen als Legende des Investigativjournalismus. Er schlich sich in Industrieunternehmen ein, schlüpfte in verschiedene Rollen und Identitäten und war <a href="https://www.kiwi-verlag.de/buch/guenter-wallraff-der-aufmacher-9783462003215" rel="noopener noreferrer" target="_blank">&#8220;der Mann, der bei &#8216;Bild&#8217; Hans Esser war&#8221;</a>. Im Deutschlandfunk spricht Wallraff über seine bekanntesten Recherchen, zum Beispiel in der &#8220;Bild&#8221;-Redaktion oder bei McDonald&#8217;s, und gibt Einblick in sein Inneres: &#8220;Ich fühle mich Menschen nahe, die geächtet sind.&#8221;<br />
+Transparenzhinweis und Werbung in eigener Sache: 44 Jahre nach seinem eigenen Buch über &#8220;Bild&#8221; hat sich Wallraff für <a href="https://www.kiwi-verlag.de/buch/moritz-tschermak-mats-schoenauer-ohne-ruecksicht-auf-verluste-9783462053548" rel="noopener noreferrer" target="_blank">&#8220;Ohne Rücksicht auf Verluste&#8221;</a>, das Buch meiner BILDblog-Kollegen Mats Schönauer und Moritz Tschermak, ausgesprochen: &#8220;Eine überzeugende und erschütternde Beweisführung.&#8221;</p>
+<p><a href="https://www.deutschlandfunkkultur.de/social-media-plattform-odysee-102.html" rel="noopener noreferrer" target="_blank"><strong>3. Das neue YouTube für Rechte?</strong></a><br />
+<em>(deutschlandfunkkultur.de, Vera Linß &#038; Tim Wiese, Audio: 7:05 Minuten)</em><br />
+&#8220;Lange konnten rechtsextreme Inhalte auf Plattformen wie YouTube und Facebook ungehindert veröffentlicht werden. Gesetzesänderungen erschweren das nun. Menschen aus dem rechten Spektrum suchen nach Alternativen und werden fündig&#8221;, schreibt die Redaktion von Deutschlandfunk Kultur zu einem Gespräch mit Paula Matlach, Analystin <a href="https://www.isdglobal.org/isd-germany/" rel="noopener noreferrer" target="_blank">beim ISD Germany</a>. Matlach untersucht dort die Verbreitung von Desinformation und extremistischen Ideologien in deutsch- und englischsprachigen Ländern. Im Interview spricht Matlach über die von Rechten und Rechtsradikalen immer öfter genutzte Youtube-Alternative Odysee.<br />
+Weiterer Hörtipp: Im &#8220;Übermedien&#8221;-Podcast geht es <a href="https://uebermedien.de/75935/wer-ist-dieser-hypermaskuline-frauenhasser-mit-gott-komplex/" rel="noopener noreferrer" target="_blank">um den radikalen Frauenfeind Andrew Tate</a>: &#8220;Gut vier Millionen Follower hatte er auf Twitter, noch mehr auf Insta, bei Tiktok wurden seine Clips rund zwölf Milliarden Mal aufgerufen, und auf Google wird häufiger nach ihm gesucht als nach Kim Kardashian und Donald Trump zusammen! Wer ist dieser vor Ego platzende Muskelmann namens Andrew Tate? Und was macht ihn so erfolgreich?&#8221; Holger Klein spricht darüber mit Samira El Ouassil (uebermedien.de, Audio: 23:03 Minuten).<img src="https://vg07.met.vgwort.de/na/f7cc20722c404a5bad2c63620da2f094" width="1" height="1" alt=""></p>
+<p><a class="noline" href="/bildblog-unterstuetzen/" target="_blank" rel="noopener noreferrer"><img width="540" height="81" src="/wp-content/bildblogunterstuetzen.png" alt="Bildblog unterstuetzen" /></a></p>
+<p><a href="https://medienmacherin.podigee.io/51-new-episode" rel="noopener noreferrer" target="_blank"><strong>4. Rebecca Barth, Journalistin, berichtet u.a. für die ARD aus der Ukraine</strong></a><br />
+<em>(medienmacherin.podigee.io, Freddie Schürheck, Audio: 51:59 Minuten)</em><br />
+Beim &#8220;Medienmacherin&#8221;-Podcast trifft Freddie Schürheck die Journalistin Rebecca Barth, die unter anderem für die ARD aus der Ukraine berichtet. In dem Gespräch geht um Barths journalistische Arbeit im Kriegsgebiet, ihre Verarbeitungsstrategien und die Frage, was sie immer wieder in die Ukraine zurückzieht.</p>
+<p><a href="https://www.ndr.de/fernsehen/sendungen/zapp/Morde-in-Mexiko-Frei-berichten-trotz-Lebensgefahr,zapp13700.html" rel="noopener noreferrer" target="_blank"><strong>5. Morde in Mexiko: Frei berichten trotz Lebensgefahr?</strong></a><br />
+<em>(ndr.de, Zapp, Anna Mundt &#038; Lisa Maria Hagen, Video: 26:15 Minuten)</em><br />
+Mexiko gilt für Medienschaffende <a href="https://www.reporter-ohne-grenzen.de/mexiko" rel="noopener noreferrer" target="_blank">als eines der gefährlichsten Länder der Welt</a>. &#8220;Was passiert da? Und wie kann man in einem solchen Land noch frei berichten?&#8221; Für ihren &#8220;Zapp&#8221;-Beitrag haben Anna Mundt und Lisa Maria Hagenin Mexiko Angehörige von Opfern getroffen, sie thematisieren die kritikwürdige Politik des Präsidenten und zeigen, &#8220;wie unzureichend das staatliche Schutzprogramm für Journalist:innen ist.&#8221;</p>
+<p><a href="https://omrmedia.podigee.io/111-podtalk-45-klare-vision-statt-trends-und-hypes-mit-podigee-grunder-mati-sojka" rel="noopener noreferrer" target="_blank"><strong>6. Klare Vision statt Trends und Hypes &#8211; mit Podigee-Gründer Mati Sójka</strong></a><br />
+<em>(omrmedia.podigee.io, Vincent Kittmann, Audio: 30:11 Minuten)</em><br />
+2013 hatten Mati Sójka und Ben Zimmer eine brillante Geschäftsidee: Sie gründeten die Podcast-Hosting-Plattform Podigee. Zunächst beherbergten sie nur einige wenige Hörformate, nun seien es etwa 15.000 aktive Podcasts mit insgesamt rund 150 Millionen Downloads pro Monat. Im aktuellen &#8220;OMR&#8221;-&#8220;Podtalk&#8221; unterhält sich Vincent Kittmann mit Podigee-Gründer Sójka über dessen Unternehmen und die Podcast-Welt.<br />
+Passender Hörtipp dazu: Im Podcast &#8220;turi2 Clubraum&#8221; ist <a href="https://www.turi2.de/aktuell/sebastian-esser/" rel="noopener noreferrer" target="_blank">Sebastian Esser zu Gast</a>, der mit Steady ein Finanzierungsportal anbietet, das auch für die Vermarktung von Podcasts genutzt werden kann (Aline von Drateln &#038; Markus Trantow, Audio: 44:20 Minuten). Auch hier ein Transparenzhinweis: Wir vom BILDblog <a href="/bildblog-unterstuetzen/" rel="noopener noreferrer" target="_blank">nutzen ebenfalls Steady</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Champagner und Entenstopfleber, Irrtümer mitdenken, Streaming Wars</title>
+		<link>https://bildblog.de/135202/champagner-und-entenstopfleber-irrtuemer-mitdenken-streaming-wars/</link>
+		
+		<dc:creator><![CDATA[Lorenz Meyer]]></dc:creator>
+		<pubDate>Fri, 26 Aug 2022 06:54:51 +0000</pubDate>
+				<category><![CDATA[6 vor 9]]></category>
+		<guid isPermaLink="false">https://bildblog.de/?p=135202</guid>
+
+					<description><![CDATA[1. Die Intendantin und ihr Kontrolleur (tagesschau.de, Gabi Probst &#038; René Althammer &#038; Jo Goll &#038; Daniel Laufer &#038; Oliver Noffke) Eigentlich soll im öffentlich-rechtlichen System ein Verwaltungsratsvorsitzender die Arbeit des Intendanten oder der Intendantin überwachen. Der rbb-Verwaltungsratsvorsitzende Wolf-Dieter Wolf und die rbb-Intendantin Patricia Schlesinger pflegten jedoch ein enges, womöglich freundschaftliches Verhältnis, wie neu aufgetauchte [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p><a href="https://www.tagesschau.de/investigativ/schlesinger-wolf-rbb-101.html" rel="noopener noreferrer" target="_blank"><strong>1. Die Intendantin und ihr Kontrolleur</strong></a><br />
+<em>(tagesschau.de, Gabi Probst &#038; René Althammer &#038; Jo Goll &#038; Daniel Laufer &#038; Oliver Noffke)</em><br />
+Eigentlich soll im öffentlich-rechtlichen System ein Verwaltungsratsvorsitzender die Arbeit des Intendanten oder der Intendantin überwachen. Der rbb-Verwaltungsratsvorsitzende Wolf-Dieter Wolf und die rbb-Intendantin Patricia Schlesinger pflegten jedoch ein enges, womöglich freundschaftliches Verhältnis, wie neu aufgetauchte Dokumente belegen. Auf Kosten der Beitragszahler erfreute man sich an Delikatessen wie Entenstopfleber (deren Herstellung in Deutschland übrigens aus guten Gründen <a href="https://www.lto.de/recht/hintergruende/h/gaensestopfleber-tierschutz-import-europarecht-frankreich-delikatesse-gourmet/" rel="noopener noreferrer" target="_blank">verboten ist</a>, Anmerkung des &#8220;6-vor-9&#8221;-Kurators) und Champagner und wäre sogar fast miteinander verreist.<img src="https://vg07.met.vgwort.de/na/68975e2943f94ebd89e3fbe74c83b33c" width="1" height="1" alt=""></p>
+<p><a href="https://www.journalist.de/startseite/detail/article/im-auftrag-der-pressefreiheit" rel="noopener noreferrer" target="_blank"><strong>2. Im Auftrag der Pressefreiheit</strong></a><br />
+<em>(journalist.de, Celine Schäfer)</em><br />
+Beim &#8220;journalist&#8221; zeichnet Celine Schäfer der Werdegang von Vera Deleja-Hotko nach, die das Rechercheteam von <a href="https://fragdenstaat.de" rel="noopener noreferrer" target="_blank">&#8220;FragDenStaat&#8221;</a> leitet. Dort recherchiere sie auf Grundlage von Dokumenten, die sie und ihr Team durch Informationsfreiheitsgesetze erhalten. Bis zu ihrer jetzigen Position war es für Deleja-Hotko ein harter und entbehrungsreicher Weg: &#8220;Wäre ich es nicht schon aus meiner Schulzeit gewohnt gewesen, so viele Stunden zu arbeiten und Nachtschichten zu machen, hätte ich diesen Weg nicht gehen können.&#8221;</p>
+<p><a href="https://www.boersenblatt.net/news/literaturszene/die-eigenen-irrtuemer-mitdenken-251525" rel="noopener noreferrer" target="_blank"><strong>3. Die eigenen Irrtümer mitdenken</strong></a><br />
+<em>(boersenblatt.net, Lennart Schaefer)</em><br />
+In die Debatte um das Zurückziehen von Begleitbüchern zu einem Winnetou-Spin-off schaltet sich Lennart Schaefer ein und räumt mit Missverständnissen auf: &#8220;Es geht nicht um die Empörung einer Gruppe von Aktivisten auf Social Media, sondern um die Kritik der Betroffenen. Es gibt auch keine Zensur, weil nichts verboten wurde, sondern nur Rücksicht genommen. Es steht auch keine Bücherverbrennung vor der Tür, weil das aus einer Diktatur hervorgegangen ist und es gerade um das Gegenteil geht &#8211; um Vielfalt, darum, allen zuzuhören und alle verstehen zu wollen.&#8221;</p>
+<p><a class="noline" href="/bildblog-unterstuetzen/" target="_blank" rel="noopener noreferrer"><img width="540" height="81" src="/wp-content/bildblogunterstuetzen.png" alt="Bildblog unterstuetzen" /></a></p>
+<p><a href="https://www.rnd.de/panorama/querdenker-wegen-hasskommentaren-und-mordaufrufen-verurteilt-elf-monate-auf-bewaehrung-und-IFNAWDE3TFFNRBDIAYCEGNJCUA.html" rel="noopener noreferrer" target="_blank"><strong>4. Gericht verurteilt Querdenker wegen Mordaufrufen im Netz</strong></a><br />
+<em>(rnd.de)</em><br />
+Ein 63-jähriger Betreiber einer Facebook-Gruppe wollte die von anderen Gruppenmitgliedern geposteten Hasskommentare und Mordaufrufe partout nicht löschen. Das Amtsgericht Weiden hat den &#8220;Querdenker&#8221; daraufhin zu einer Bewährungsstrafe von elf Monaten und einer Zahlung von 1.200 Euro an eine gemeinnützige Einrichtung verurteilt.</p>
+<p><a href="https://netzwerkrecherche.org/blog/newsletter-netzwerk-recherche-212-vom-24-08-2022/" rel="noopener noreferrer" target="_blank"><strong>5. Newsletter Netzwerk Recherche 212</strong></a><br />
+<em>(netzwerkrecherche.org, Daniel Drepper &#038; Albrecht Ude)</em><br />
+Wie immer eine Empfehlung wert, nicht nur für Journalistinnen und Journalisten aus dem Investigativbereich: der Newsletter des Netzwerk Recherche (nr). Die neueste Ausgabe liefert den gewohnten aktuellen Überblick über Nachrichten, Veranstaltungen, Seminare, Stipendien und Preise. Außerdem gibt es Informationen zur alljährlichen nr-Jahreskonferenz, die am 30. September und 1. Oktober dieses Jahres in Hamburg stattfindet. Im Pressespiegel gibt es zudem wertvolle Lesetipps zu ausgesuchten Themen.</p>
+<p><a href="https://www.tagesspiegel.de/gesellschaft/medien/netflix-wird-26-streaming-wars/28627030.html" rel="noopener noreferrer" target="_blank"><strong>6. Streaming Wars</strong></a><br />
+<em>(tagesspiegel.de, Joachim Huber &#038; Hannes Breustedt &#038; Andrej Sokolow)</em><br />
+In wenigen Tagen feiert der ehemalige DVD-Verleiher und heutige Streaminganbieter Netflix ein Jubiläum, doch die Freude dürfte getrübt sein: &#8220;An seinem 25. Geburtstag am 29. August steht der Streaming-Marktführer unter Druck wie selten zuvor und es ist unklarer als je zuvor, wer die Streaming Wars gewinnt.&#8221;</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Nicht mal die Hälfte der Energie geht ins Recherchieren</title>
+		<link>https://bildblog.de/135159/nicht-mal-die-haelfte-der-energie-geht-ins-recherchieren/</link>
+		
+		<dc:creator><![CDATA[Moritz Tschermak]]></dc:creator>
+		<pubDate>Thu, 25 Aug 2022 13:25:48 +0000</pubDate>
+				<category><![CDATA[Bild]]></category>
+		<guid isPermaLink="false">https://bildblog.de/?p=135159</guid>
+
+					<description><![CDATA[Die &#8220;Bild&#8221;-Redaktion glaubt, mal wieder was entdeckt zu haben: Gemeint ist das Programm des öffentlich-rechtlichen Rundfunks. &#8220;Bild&#8221; schreibt dazu: ARD, ZDF und Deutschlandradio verwenden weniger als die Häflte ihres Budgets fürs Programm. Das geht aus dem jüngsten KEF-Bericht (&#8220;Kommission zur Ermittlung des Finanzbedarfs der Rundfunkanstalten&#8221;) vom Februar 2022 hervor. Demnach beläuft sich der Gesamtaufwand über [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p>Die &#8220;Bild&#8221;-Redaktion glaubt, mal wieder was entdeckt zu haben:<img src="https://vg07.met.vgwort.de/na/5ad9fa83beca4aab896727457513d1db" width="1" height="1" alt=""></p>
+<p><img src="https://bildblog.de/wp-content/kefardzdfdlr03.png" alt="Ausriss Bild-Zeitung - Nicht mal die Hälfte des Etats geht ins Programm" /></p>
+<p>Gemeint ist das Programm des öffentlich-rechtlichen Rundfunks. &#8220;Bild&#8221; schreibt dazu:</p>
+<blockquote><p>ARD, ZDF und Deutschlandradio verwenden weniger als die Häflte ihres Budgets fürs Programm. Das geht aus dem jüngsten KEF-Bericht (&#8220;Kommission zur Ermittlung des Finanzbedarfs der Rundfunkanstalten&#8221;) vom Februar 2022 hervor. Demnach beläuft sich der Gesamtaufwand über den Vierjahreszeitraum 2021 bis 2024 auf 38,3 Milliarden Euro. Davon gehen 16,65 Milliarden Euro (43,5 %) ins Programm.</p></blockquote>
+<p>Die Zahlen, die die Redaktion am Ende nennt, sind richtig &#8211; sie stehen so im erwähnten KEF-Bericht. Alles andere ist falsch.</p>
+<p>Zweifel an der Behauptung, dass die Öffentlich-Rechlichten &#8220;weniger als die Hälfte ihres Budgets fürs Programm&#8221; verwenden, hätte &#8220;Bild&#8221; spätestens beim Erstellen dieser Grafik kommen müssen, die heute neben dem Artikel in der Zeitung zu finden ist:</p>
+<p><img src="https://bildblog.de/wp-content/kefardzdfdlr02.png" alt="Ausriss Bild-Zeitung - zu sehen ist ein Diagramm, in dem die verschiedenen Ausgabenbereiche der öffentlich-rechtlichen Sender zu sehen sind, darunter Programmaufwand, Personal ohne Altersvorsorge, Sachaufwand, Altersvorsorge, Investitionen/Sonstiges, Programmverbreitung" /></p>
+<p>&#8220;Bild&#8221; meint zu wissen, dass lediglich Gelder aus dem Bereich &#8220;Programmaufwand&#8221; für das Programm von ARD, ZDF und Deutschlandradio verwendet werden, eben 43,5 Prozent des Gesamtbudgets. Aber was ist zum Beispiel mit dem Bereich &#8220;Personal ohne Altersversorgung&#8221;? Sind das die Pförtnerinnen, die Hausmeister, das Kantinenpersonal &#8211; also all jene, die mit dem Programm nichts zu tun haben?</p>
+<p>Im 23. Bericht der KEF, auf den sich die &#8220;Bild&#8221;-Redaktion bei ihrem Vorwurf bezieht, steht extra zu Beginn des Abschnitts &#8220;Programmaufwand&#8221; (<a href="https://kef-online.de/fileadmin/KEF/Dateien/Berichte/23._Bericht.pdf" rel="noopener noreferrer" target="_blank">PDF</a>, Seite 92): </p>
+<blockquote><p>Die Kommission erfasst als Programmaufwand insbesondere Kosten für Produktionen, die außerhalb der Anstalten entstehen. Die Erläuterungen dazu sowie das methodische Vorgehen der Kommission sind im 22. Bericht ausführlich beschrieben (vgl. dort Tzn. 72 f.).</p></blockquote>
+<p>Also mal schnell in den 22. Bericht der KEF geschaut (<a href="https://kef-online.de/fileadmin/KEF/Dateien/Berichte/22._Bericht.pdf" rel="noopener noreferrer" target="_blank">PDF</a>, Seite 80):</p>
+<blockquote><p>Die Kommission erfasst als Programmaufwand insbesondere Kosten für Produktionen, die außerhalb der Anstalten entstehen. Dazu gehören:</p>
+<div class="kenkel">
+<ul>
+<li>Ankauf fertiger Produktionen von Dritten,</li>
+<li>Erstellung von Koproduktionen und Auftragsproduktionen,</li>
+<li>Erwerb von Sende-­ und Übertragungsrechten, namentlich Sportrechten,</li>
+<li>Leistungsvergütungen für freie Mitarbeiter,</li>
+<li>Vergütungen für Urheberrechts­- und Leistungsschutzberechtigte.</li>
+</ul>
+</div>
+<p>Kosten von Eigenproduktionen sind nur zum Teil im Programmaufwand enthalten. Sie werden daneben auch aus dem Personalaufwand und dem Sachaufwand finanziert.</p></blockquote>
+<p>Das heißt: Die vielen festangestellten Redakteurinnen und Redakteure zum Beispiel, die jeden Tag dazu beitragen, dass es im Fernsehen, im Radio und online Programm geben kann, oder die Korrespondetinnen und Korrespondenten, die selbst Beiträge erstellen, oder die Nachrichtensendungen, Politmagazine und Dokumentationen, die in den Häusern entstehen und nicht von außen eingekauft werden, oder selbstproduzierte fiktionale Serien &#8211; die dafür anfallenden Kosten fehlen in der &#8220;Bild&#8221;-Rechnung.</p>
+<p>Es gibt zweifelsohne eine Menge zu kritisieren am öffentlich-rechtlichen System. Man kann den Anstalten gern alles mögliche vorwerfen: die träge Behördenhaftigkeit, die Programmgestaltung oder eben einen falschen Einsatz des vielen Geldes. Aber dann wäre es doch keine schlechte Idee, vorher wenigstens einmal ordentlich in den dafür maßgeblichen Bericht zu schauen.</p>
+<p><em>Gesehen bei <a href="https://twitter.com/daniel_bouhs/status/1562558907465142273" rel="noopener noreferrer" target="_blank">@daniel_bouhs</a>.</em></p>
+<p><a class="noline" href="/bildblog-unterstuetzen/" target="_blank" rel="noopener noreferrer"><img width="540" height="81" src="/wp-content/bildblogunterstuetzen.png" alt="Bildblog unterstuetzen" /></a></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Angriff auf BR-Reporter, Feinheiten der Kündigung, Hubschrauber-Foto</title>
+		<link>https://bildblog.de/135153/angriff-auf-br-reporter-feinheiten-der-kuendigung-hubschrauber-foto/</link>
+		
+		<dc:creator><![CDATA[Lorenz Meyer]]></dc:creator>
+		<pubDate>Thu, 25 Aug 2022 06:54:19 +0000</pubDate>
+				<category><![CDATA[6 vor 9]]></category>
+		<guid isPermaLink="false">https://bildblog.de/?p=135153</guid>
+
+					<description><![CDATA[1. Angriff auf BR-Reporter am Rande von Corona-Pressekonferenz (br.de, BR24-Redaktion &#038; Henning Pfeifer &#038; Simon Emmerlich) Nach einer Pressekonferenz zur Corona-Pandemie des bayerischen Gesundheitsministers führte ein Reporter des Bayerischen Rundfunks (BR) Interviews, als ein Mann erschien und den Journalisten von der Seite mit mehreren Faustschlägen angriff. Später lauerte derselbe Mann dem BR-Mitarbeiter auf dem Weg [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p><a href="https://www.br.de/nachrichten/bayern/angriff-auf-br-reporter-am-rande-von-corona-pressekonferenz,TFPBBcQ" rel="noopener noreferrer" target="_blank"><strong>1. Angriff auf BR-Reporter am Rande von Corona-Pressekonferenz</strong></a><br />
+<em>(br.de, BR24-Redaktion &#038; Henning Pfeifer &#038; Simon Emmerlich)</em><br />
+Nach einer Pressekonferenz zur Corona-Pandemie des bayerischen Gesundheitsministers führte ein Reporter des Bayerischen Rundfunks (BR) Interviews, als ein Mann erschien und den Journalisten von der Seite mit mehreren Faustschlägen angriff. Später lauerte derselbe Mann dem BR-Mitarbeiter auf dem Weg zum Auto auf und attackierte ihn erneut. Der Täter sei nach BR-Recherchen dem äußeren rechten Spektrum zuzuordnen.</p>
+<p><a href="https://taz.de/Schlesinger-Skandal-beim-RBB/!5876935/" rel="noopener noreferrer" target="_blank"><strong>2. Feinheiten der Kündigung</strong></a><br />
+<em>(taz.de, Christian Rath)</em><br />
+Der Rundfunk Berlin-Brandenburg (rbb) habe am Montag der nunmehr ehemaligen rbb-Intendantin Patricia Schlesinger &#8220;vorsorglich außerordentlich fristlos&#8221; gekündigt. In der Pressemitteilung des rbb sei das Wort &#8220;vorsorglich&#8221; sogar unterstrichen gewesen. Christian Rath, rechtspolitischer Korrespondent der &#8220;taz&#8221;, erklärt, welche juristischen Gründe hinter dieser Formulierung stecken.</p>
+<p><a href="https://www.tagesspiegel.de/gesellschaft/medien/rbb-krise-beschaeftigte-wollen-kommission-aufklaerung-aus-eigener-kraft/28623606.html" rel="noopener noreferrer" target="_blank"><strong>3. Aufklärung aus eigener Kraft</strong></a><br />
+<em>(tagesspiegel.de, Joachim Huber)</em><br />
+In einer dem &#8220;Tagesspiegel&#8221; vorliegenden Resolution verlangen rbb-Beschäftigte eine Mitsprache bei der Besetzung des Interims-Intendanten und des künftigen Senderchefs. Eine neu einzurichtende Kommission solle darüber aufklären, &#8220;wie die Missstände in der Geschäftsleitung über einen so langen Zeitraum toleriert werden konnten, wie allen hehren Unternehmenszielen zum Trotz eine Unternehmenskultur gedeihen konnte, in der selbst offenkundige Verfehlungen und fragwürdige Führungsentscheidungen hingenommen werden konnten.&#8221;</p>
+<p><a class="noline" href="/bildblog-unterstuetzen/" target="_blank" rel="noopener noreferrer"><img width="540" height="81" src="/wp-content/bildblogunterstuetzen.png" alt="Bildblog unterstuetzen" /></a></p>
+<p><a href="https://www.faz.net/aktuell/politik/inland/lambrecht-muss-pressefragen-zu-hubschrauber-foto-beantworten-18265481.html" rel="noopener noreferrer" target="_blank"><strong>4. Lambrecht muss Fragen zu Hubschrauber-Foto beantworten</strong></a><br />
+<em>(faz.net)</em><br />
+Bundesverteidigungsministerin Christine Lambrecht muss einem Urteil des Verwaltungsgerichts Köln zufolge einem Journalisten Fragen zu einem Hubschrauber-Flug mit ihrem Sohn beantworten &#8211; zumindest zu den Aspekten, die einen dienstlichen Bezug zur Bundeswehr aufweisen.</p>
+<p><a href="https://www.fachjournalist.de/praxistipps-fuer-den-lokaljournalismus/" rel="noopener noreferrer" target="_blank"><strong>5. Praxistipps für den Lokaljournalismus</strong></a><br />
+<em>(fachjournalist.de, Ralf Falbe)</em><br />
+Ralf Falbe berichtet von interessanten Karrierechancen im Lokaljournalismus: &#8220;Auch für Einsteiger ist es möglich, mit dem Lokaljournalismus Geld zu verdienen. Aufgrund der hohen Fluktuation und der manchmal schwierigen Lebensbedingungen in abgelegenen Provinzstädten werden neue Kolleginnen und Kollegen auch in Festanstellung händeringend gesucht. Selbst branchenfremde Redakteure werden aufgrund des Fachkräftemangels im ländlichen Raum eingestellt.&#8221; Außerdem verrät er einige bewährte Praxistipps für die Arbeit im Lokaljournalismus.<img src="https://vg07.met.vgwort.de/na/e9222128c61741bd912ef7dcd7150d6b" width="1" height="1" alt=""></p>
+<p><a href="https://www.flurfunk-dresden.de/2022/08/24/deutschlandradio-startet-dlf-podcastfinder-de/" rel="noopener noreferrer" target="_blank"><strong>6. Deutschlandradio startet Dlf-Podcastfinder.de</strong></a><br />
+<em>(flurfunk-dresden.de)</em><br />
+Mit <a href="https://dlf-podcastfinder.de" rel="noopener noreferrer" target="_blank">dem &#8220;Dlf Podcastfinder&#8221;</a> bietet der Deutschlandfunk eine neue Möglichkeit, sich in der Podcastwelt von Deutschlandfunk, Deutschlandfunk Kultur und Deutschlandfunk Nova zurechtzufinden. Ein paar Klicks auf Lieblingsthemen, gewünschte Eigenschaften und Länge reichen, und das Tool macht drei Vorschläge aus insgesamt 60 Inhalten.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Weigelts Welt, Journalisten freigesprochen, Videotheken-Dinos</title>
+		<link>https://bildblog.de/135140/weigelts-welt-journalisten-freigesprochen-videotheken-dinos/</link>
+		
+		<dc:creator><![CDATA[Lorenz Meyer]]></dc:creator>
+		<pubDate>Wed, 24 Aug 2022 06:54:35 +0000</pubDate>
+				<category><![CDATA[6 vor 9]]></category>
+		<guid isPermaLink="false">https://bildblog.de/?p=135140</guid>
+
+					<description><![CDATA[1. Weigelts Welt (sueddeutsche.de, Ulrike Nimz) Ein Bürgermeister, der einen Journalisten schubst, wie es in der thüringischen Kleinstadt Bad Lobenstein passiert ist, sei keine Provinzposse, sondern das Resultat wachsender Demokratieverachtung, kommentiert Ulrike Nimz. Die nachgeschobene Stellungnahme des Bürgermeisters sei &#8220;der Versuch, das Geschehen umzudeuten, alternative Fakten zu schaffen. Es ist, im ganz Kleinen, die Strategie [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p><a href="https://www.sueddeutsche.de/meinung/thomas-weigelt-ostthueringer-zeitung-reichsbuerger-bad-lobenstein-1.5643925" rel="noopener noreferrer" target="_blank"><strong>1. Weigelts Welt</strong></a><br />
+<em>(sueddeutsche.de, Ulrike Nimz)</em><br />
+Ein Bürgermeister, der einen Journalisten schubst, wie es in der thüringischen Kleinstadt Bad Lobenstein passiert ist, sei keine Provinzposse, sondern das Resultat wachsender Demokratieverachtung, kommentiert Ulrike Nimz. Die nachgeschobene Stellungnahme des Bürgermeisters sei &#8220;der Versuch, das Geschehen umzudeuten, alternative Fakten zu schaffen. Es ist, im ganz Kleinen, die Strategie eines Donald Trump, es ist die Strategie eines Wladimir Putin, eine Strategie, die dazu führt, dass niemand mehr seinen Augen und Ohren glauben mag. Aber die Wahrheit ist nichts Verhandelbares, nichts, das man nach Belieben interpretieren kann.&#8221;<br />
+Weiterer Lesehinweis: Der Deutsche Journalisten-Verband Thüringen <a href="https://www.djv-thueringen.de/startseite/aktuell/neuigkeiten/news/details/news-wer-journalistinnen-angreift-greift-die-demokratie-an" rel="noopener noreferrer" target="_blank">fordert den Rücktritt des Bürgermeisters</a>: &#8220;Wer Journalist:innen angreift, greift die Demokratie an. Er tritt Grundrechte wie die Pressefreiheit mit Füßen.&#8221; (djv-thueringen.de)</p>
+<p><a href="https://mmm.verdi.de/recht/journalisten-in-fulda-freigesprochen-83503" rel="noopener noreferrer" target="_blank"><strong>2. Journalisten in Fulda freigesprochen</strong></a><br />
+<em>(verdi.de, Peter Nowak)</em><br />
+&#8220;Das Fuldaer Amtsgericht hat am 22. August zwei Journalist*innen freigesprochen, die sich auf der Online-Plattform &#8216;Belltower-News&#8217; kritisch mit einem Polizeieinsatz in Fulda auseinandergesetzt hatten, bei dem ein afghanischer Geflüchteter ums Leben kam. Damit obsiegte die Pressefreiheit.&#8221; Peter Nowak fasst den Fall zusammen, bei dem <a href="https://www.belltower.news/text-ueber-polizeigewalt-freispruch-fuer-belltower-news-autorinnen-137685/" rel="noopener noreferrer" target="_blank">laut &#8220;Belltower.News&#8221;</a> selbst die Staatsanwaltschaft auf Freispruch plädiert habe.<img src="https://vg07.met.vgwort.de/na/c328cfece7364e3db9c653c0c272c35a" width="1" height="1" alt=""></p>
+<p><a href="https://www.tagesspiegel.de/gesellschaft/medien/interims-intendant-dringend-gesucht-wer-soll-den-rbbretten/28620460.html" rel="noopener noreferrer" target="_blank"><strong>3. Wer soll den RBB retten?</strong></a><br />
+<em>(tagesspiegel.de, Joachim Huber &#038; Kurt Sagatz)</em><br />
+Bei der Suche nach einem Interims-Intendanten beziehungsweise einer -Intendantin für den öffentlich-rechtlichen rbb würden erste Namen die Runde machen: Roland Jahn, letzter Leiter der Stasiunterlagenbehörde, der ehemalige SWR-Intendant Peter Boudgoust, der ehemalige BR-Intendant Ulrich Wilhelm sowie Ulrich Deppendorf, ehemaliger Studioleiter und Chefredakteur Fernsehen im ARD-Hauptstadtstudio.</p>
+<p><a class="noline" href="/bildblog-unterstuetzen/" target="_blank" rel="noopener noreferrer"><img width="540" height="81" src="/wp-content/bildblogunterstuetzen.png" alt="Bildblog unterstuetzen" /></a></p>
+<p><a href="https://www.lto.de/recht/nachrichten/n/regierungsflieger-masken-luftwaffe/" rel="noopener noreferrer" target="_blank"><strong>4. Keine Mas­kenpf­licht im Regie­rungs­f­lie­ger?</strong></a><br />
+<em>(lto.de)</em><br />
+Wer von einem deutschen Flughafen aus startet, muss an Bord in der Regel eine Corona-Maske tragen. Für den Regierungsflieger, der mit Olaf Scholz und Robert Habeck am Sonntag von Berlin aus nach Montreal gestartet ist, scheint diese Regel nicht zu gelten. Dort trugen die mehr als 80 Passagiere, darunter 25 Medienvertreter, keinen Mund-Nasen-Schutz. Ein Regierungssprecher wies darauf hin, dass die Reiseteilnehmer und -teilnehmerinnen einen aktuellen negativen PCR-Test vorgelegt hätten. Dennoch ist in den Sozialen Netzwerken und auch in der Berichterstattung mancher Medien die Empörung groß. &#8220;Legal Tribune Online&#8221; beleuchtet die Rechtslage genauer.</p>
+<p><a href="https://www.zeit.de/digital/2022-08/cybersicherheit-twitter-vorwuerfe-datenschutz-hackerangriffe" rel="noopener noreferrer" target="_blank"><strong>5. Ex-Sicherheitschef wirft Twitter &#8220;schockierende Schwachstellen&#8221; vor</strong></a><br />
+<em>(zeit.de)</em><br />
+Peiter Zatko, ehemaliger Sicherheitschef des Onlinedienstes Twitter, wirft seinem früheren Arbeitgeber gravierende Sicherheitslücken vor. Berichten von &#8220;Washington Post&#8221; und CNN zufolge habe er eine Beschwerde als Whistleblower bei der US-Börsenaufsicht SEC eingereicht. Darin berichte Zatko von &#8220;schweren und schockierenden Schwachstellen&#8221; und einer Bedrohung der &#8220;nationalen Sicherheit und der Demokratie&#8221;.</p>
+<p><a href="https://www.deutschlandfunkkultur.de/dinosaurier-im-streamingzeitalter-die-situation-von-videotheken-in-deutschland-dlf-kultur-5e4e9494-100.html" rel="noopener noreferrer" target="_blank"><strong>6. Dinosaurier im Streamingzeitalter? Die Situation von Videotheken in Deutschland</strong></a><br />
+<em>(deutschlandfunkkultur.de, Jörg Taszman, Audio: 5:25 Minuten)</em><br />
+Jörg Taszman hat für Deutschlandfunk Kultur recherchiert, wie es um die Situation der Videotheken bestellt ist: Wie schlagen sie die Läden angesichts der Streaming-Übermacht? Taszman hat eine der nur noch 50 in Deutschland existierenden Videotheken besucht.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>&#8220;BILD ist mitgelaufen&#8221;, leider</title>
+		<link>https://bildblog.de/135119/bild-ist-mitgelaufen-leider/</link>
+		
+		<dc:creator><![CDATA[Moritz Tschermak]]></dc:creator>
+		<pubDate>Tue, 23 Aug 2022 19:49:29 +0000</pubDate>
+				<category><![CDATA[Bild]]></category>
+		<category><![CDATA[Bild.de]]></category>
+		<guid isPermaLink="false">https://bildblog.de/?p=135119</guid>
+
+					<description><![CDATA[&#8220;Wir betreiben hier keinen Elends-Tourismus, Drogenkranke werden nicht vorgeführt.&#8221; Das sagen die zwei Männer, die in Frankfurt am Main für Interessierte eine Führung durch das Bahnhofsviertel anbieten, durch jene Gegend also, die auch und vor allem für ihre offene Drogenszene bekannt ist. Der Titel der Tour: &#8220;Crack, Koks, Heroin im Bahnhofsviertel &#8211; Warum Frankfurt auch [&#8230;]]]></description>
+										<content:encoded><![CDATA[<blockquote><p>&#8220;Wir betreiben hier keinen Elends-Tourismus, Drogenkranke werden nicht vorgeführt.&#8221;</p></blockquote>
+<p>Das sagen die zwei Männer, die in Frankfurt am Main für Interessierte eine Führung durch das Bahnhofsviertel anbieten, durch jene Gegend also, die auch und vor allem für ihre offene Drogenszene bekannt ist. Der Titel der Tour: &#8220;Crack, Koks, Heroin im Bahnhofsviertel &#8211; Warum Frankfurt auch &#8216;Crack-City&#8217; heißt&#8221;.<img src="https://vg07.met.vgwort.de/na/ac95a2b7e528406f83724589570282e8" width="1" height="1" alt=""></p>
+<p>Das Zitat der beiden stammt aus einem großen Artikel, der am vergangenen Freitag in der Frankfurt-Ausgabe der &#8220;Bild&#8221;-Zeitung und bei Bild.de erschienen ist. Der Ansatz, vorhandene Probleme sichtbar zu machen und die üble Situation der Drogenkranken zu thematisieren, dabei aber keinen Elends-Tourismus fördern und niemanden vorführen zu wollen, ist sehr lobenswert. Ob die &#8220;Bild&#8221;-Redaktion den gleichen Ansatz verfolgt, da haben wir allerdings Zweifel.</p>
+<p>Bereits in der Überschrift klingt es stark nach Elends-Tourismus:</p>
+<p><img src="https://bildblog.de/wp-content/bahnhofsviertelffmtour01.png" alt="Ausriss Bild-Zeitung - Neue Tour führt in den Drogensumpf im Bahnhofsviertel - Ausflug ins Elend" /><br />
+<img src="https://bildblog.de/wp-content/bahnhofsviertelffmtour02.png" alt="Screenshot Bild.de - Neue Tour in den Frankfurter Drogensumpf - Crack, Koks, Heroin! 25-Euro-Ausflug ins Elend - Bild ist mitgelaufen" /></p>
+<p>Im Artikel gibt es mehrere Fotos, auf denen Süchtige entweder gerade Drogen konsumieren oder anscheinend kürzlich konsumiert haben und nun benommen auf der Straße sitzen. Was gut ist: Die &#8220;Bild&#8221;-Redaktion hat alle Gesichter verpixelt oder so fotografiert, dass sie verdeckt sind (wobei wir vermuten, dass das nähere Umfeld der Personen sie durch andere, nicht verpixelte Merkmale trotzdem identifizieren können dürfte). Was hingegen schlecht ist und doch stark nach Vorführen von Drogenkranken aussieht: die dazugehörigen Bildunterschriften. Zu einem Foto eines Mannes, der in einem Hauseingang liegt, schreibt Bild.de beispielsweise:</p>
+<blockquote><p>Das Frankfurter Bahnhofsviertel: Elends-Gestalten, wo man hinblickt</p></blockquote>
+<p>Und noch etwas hämischer zu einem Foto eines Mannes, der offenbar zugedröhnt auf einer Treppe liegt:</p>
+<blockquote><p>Crack-Süchtiger am Ziel seiner Träume&#8230;</p></blockquote>
+<p>Einer der zwei Tour-Guides sagt gegenüber &#8220;Bild&#8221; noch: &#8220;Wir wollen eine Lanze für diese Leute brechen.&#8221; Auch das ist sehr lobenswert. Aber vielleicht sollte man dann beim nächsten Mal nicht &#8220;Bild&#8221; mit auf Tour nehmen.</p>
+<p><a class="noline" href="/bildblog-unterstuetzen/" target="_blank" rel="noopener noreferrer"><img width="540" height="81" src="/wp-content/bildblogunterstuetzen.png" alt="Bildblog unterstuetzen" /></a></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Schlesinger fristlos entlassen, Reichelts Youtube-Welt, Maaßen</title>
+		<link>https://bildblog.de/135110/schlesinger-fristlos-entlassen-reichelts-youtube-welt-maassen/</link>
+		
+		<dc:creator><![CDATA[Lorenz Meyer]]></dc:creator>
+		<pubDate>Tue, 23 Aug 2022 06:54:27 +0000</pubDate>
+				<category><![CDATA[6 vor 9]]></category>
+		<guid isPermaLink="false">https://bildblog.de/?p=135110</guid>
+
+					<description><![CDATA[1. DJV begrüßt fristlose Kündigung (djv.de) Der Deutsche Journalisten-Verband (DJV) begrüßt den gestrigen Schritt des rbb-Verwaltungsrats, den Vertrag der ehemaligen Intendantin Patricia Schlesinger außerordentlich und fristlos zu kündigen: &#8220;Das war überfällig. Die fristlose Kündigung von Patricia Schlesinger ist ein erster Schritt, um Schaden von der gesamten ARD abzuwenden&#8221;, so der DJV-Bundesvorsitzender Frank Überall: &#8220;Damit stellt [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p><a href="https://www.djv.de/startseite/profil/der-djv/pressebereich-download/pressemitteilungen/detail/news-djv-begruesst-fristlose-kuendigung" rel="noopener noreferrer" target="_blank"><strong>1. DJV begrüßt fristlose Kündigung</strong></a><br />
+<em>(djv.de)</em><br />
+Der Deutsche Journalisten-Verband (DJV) begrüßt den gestrigen Schritt des rbb-Verwaltungsrats, den Vertrag der ehemaligen Intendantin Patricia Schlesinger außerordentlich und fristlos zu kündigen: &#8220;Das war überfällig. Die fristlose Kündigung von Patricia Schlesinger ist ein erster Schritt, um Schaden von der gesamten ARD abzuwenden&#8221;, so der DJV-Bundesvorsitzender Frank Überall: &#8220;Damit stellt der Verwaltungsrat eine wichtige Weiche bei der Aufarbeitung des Skandals und wendet hoffentlich weiteren finanziellen Schaden vom RBB ab.&#8221;<br />
+Schlesinger selbst sieht sich hingegen <a href="https://www.dwdl.de/nachrichten/89330/schlesinger_entscheidung_offensichtlich_politisch_motiviert/" rel="noopener noreferrer" target="_blank">als politisches Opfer und &#8220;Sündenbock&#8221;</a>.<br />
+Weiterer Lesehinweis: &#8220;Nach dem Rücktritt von Patricia Schlesinger hat Hagen Brandstäter die Leitung des RBB übernommen. Nun ist er für mehrere Woche krankgeschrieben.&#8221; &#8211; <a href="https://www.tagesspiegel.de/gesellschaft/medien/amtierender-rbb-intendant-faellt-fuer-mehrere-woche-aus-schulte-kellinghaus-vertritt-brandstaeter/28617702.html" rel="noopener noreferrer" target="_blank">Schulte-Kellinghaus vertritt Brandstäter</a> (tagesspiegel.de, Kurt Sagatz).<img src="https://vg07.met.vgwort.de/na/ac40d223835a42d2be874bcc64b10226" width="1" height="1" alt=""></p>
+<p><a href="https://www.deutschlandfunk.de/verwaltungsraete-der-oeffentlich-rechtlichen-nach-schlesinger-100.html" rel="noopener noreferrer" target="_blank"><strong>2. So unterschiedlich arbeiten die Gremien bei ARD &#038; Co.</strong></a><br />
+<em>(deutschlandfunk.de, Christoph Sterz, Audio: 8:34 Minuten)</em><br />
+Für die Aufsichtsgremien der neun ARD-Anstalten, des ZDF und des Deutschlandradios gälten laut einer Deutschlandfunk-Recherche jeweils sehr unterschiedliche Regeln. Die Gremienbüros seien zum Teil mit wenig Personal besetzt, und bei der Überwachung der Finanzen gebe es Auffälligkeiten, befindet Christoph Sterz, der sich mit einem Fragenkatalog an die zuständigen Gremien gewandt hatte.</p>
+<p><a href="https://www.tagesschau.de/faktenfinder/reichelt-youtube-101.html" rel="noopener noreferrer" target="_blank"><strong>3. Rechtspopulistisches Comeback auf YouTube?</strong></a><br />
+<em>(tagesschau.de, Carla Reveland &#038; Pascal Siggelkow)</em><br />
+Carla Reveland und Pascal Siggelkow haben sich angeschaut, was der frühere &#8220;Bild&#8221;-Chefredakteur Julian Reichelt auf Youtube so treibt. Die Frage sei: &#8220;Kann Reichelt mit seinem im Juli gestarteten Kanal die für sich auserkorene Lücke zwischen boulevardistischen oder konservativen Medien und den sogenannten Alternativen Medien schließen und erfolgreich bedienen?&#8221;</p>
+<p><a class="noline" href="/bildblog-unterstuetzen/" target="_blank" rel="noopener noreferrer"><img width="540" height="81" src="/wp-content/bildblogunterstuetzen.png" alt="Bildblog unterstuetzen" /></a></p>
+<p><a href="https://www.lto.de/recht/hintergruende/h/beck-verlag-hans-georg-maassen-grundgesetz-kommentar-epping-hillgruber-dav-rav-nrv-brf/" rel="noopener noreferrer" target="_blank"><strong>4. Beck-Verlag soll die Zusam­men­ar­beit mit Hans-Georg Maaßen auf­kün­digen</strong></a><br />
+<em>(lto.de, Hasso Suliak)</em><br />
+Der erzkonservative CDU-Rechtsaußen und Ex-Verfassungsschützer Hans-Georg Maaßen arbeitet am Grundgesetz-Kommentar des renommierten Verlags C. H. Beck mit und bearbeitet dort ausgerechnet das Asylgrundrecht. Das sorgt für heftige Kritik bei Autoren, Juristinnen und Anwaltsverbänden. Der Co-Bundessprecher der Neuen Richtervereinigung wird beispielsweise mit folgenden Worten zitiert: &#8220;Der Beck Verlag zeigt damit abermals mangelnde Reflexion über die Verantwortung, die gerade der deutschen Rechtswissenschaft im Kampf gegen Rechtsextremismus und Faschismus zukommt.&#8221;</p>
+<p><a href="https://mmm.verdi.de/medienwirtschaft/das-ende-der-ersten-nachkriegszeitung-83453" rel="noopener noreferrer" target="_blank"><strong>5. Das Ende der ersten Nachkriegszeitung</strong></a><br />
+<em>(verdi.de)</em><br />
+Die &#8220;Aachener Nachrichten&#8221; gelten als erste freie und demokratische Zeitung in Deutschland, doch heute stehen sie vor dem Aus beziehungsweise vor der Verschmelzung mit der &#8220;Aachener Zeitung&#8221; &#8211; mit unangenehmen Folgen für die Beschäftigten: &#8220;Wie aus dem Haus zu hören ist, haben die neuen Besitzer bereits angekündigt, sich der Tarifbindung entziehen zu wollen.&#8221;</p>
+<p><a href="https://www.tagesspiegel.de/gesellschaft/medien/nachruf-auf-theo-sommer-ein-grosser-zeitungsmacher-mit-witz-und-esprit/28617992.html" rel="noopener noreferrer" target="_blank"><strong>6. Ein großer Zeitungsmacher mit Witz und Esprit</strong></a><br />
+<em>(tagesspiegel.de, Hermann Rudolph)</em><br />
+Theo Sommer, Publizist, langjähriger Chefredakeur und später Herausgeber der &#8220;Zeit&#8221;, ist im Alter von 92 Jahren gestorben. In seinem Nachruf erinnert Hermann Rudolph an das Leben und Wirken des großen Zeitungsmachers.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Ja, wie nur?</title>
+		<link>https://bildblog.de/135094/ja-wie-nur/</link>
+		
+		<dc:creator><![CDATA[Moritz Tschermak]]></dc:creator>
+		<pubDate>Mon, 22 Aug 2022 20:50:10 +0000</pubDate>
+				<category><![CDATA[Bild]]></category>
+		<guid isPermaLink="false">https://bildblog.de/?p=135094</guid>
+
+					<description><![CDATA[Heute vor 30 Jahren begannen die rassistisch und fremdenfeindlich motivierten Angriffe in Rostock-Lichtenhagen. Die Attacken richteten sich damals gegen die Zentrale Aufnahmestelle für Asylbewerber sowie ein Wohnheim für frühere vietnamesische DDR-Vertragsarbeiter. Bild.de fragt heute: Die wichtigste Frage bei der Aufarbeitung der schrecklichen Ereignisse von 1992 bleibt bis heute: Wie konnte es damals überhaupt so weit [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p>Heute vor 30 Jahren begannen <a href="https://de.wikipedia.org/wiki/Ausschreitungen_in_Rostock-Lichtenhagen" rel="noopener noreferrer" target="_blank">die rassistisch und fremdenfeindlich motivierten Angriffe in Rostock-Lichtenhagen</a>. Die Attacken richteten sich damals gegen die Zentrale Aufnahmestelle für Asylbewerber sowie ein Wohnheim für frühere vietnamesische DDR-Vertragsarbeiter.<img src="https://vg07.met.vgwort.de/na/2b2f615209de4fb7a52e67d9b9124f78" width="1" height="1" alt=""></p>
+<p>Bild.de fragt heute:</p>
+<p><img src="https://bildblog.de/wp-content/lichtenhagenbildwienur01.png" alt="Screenshot Bild.de - Rechtsextreme Ausschreitungen starteten heute vor 30 Jahren - Wie konnte es zu den Krawallen in Lichtenhagen kommen?" /></p>
+<blockquote><p>Die wichtigste Frage bei der Aufarbeitung der schrecklichen Ereignisse von 1992 bleibt bis heute: Wie konnte es damals überhaupt so weit kommen?</p></blockquote>
+<p>Als Antwort präsentiert <a href="https://archive.ph/c55NF" rel="noopener noreferrer" target="_blank">der Artikel</a> gleich mehrere Gründe beziehungsweise Schuldige:</p>
+<div class="kenkel">
+<ul>
+<li>die verlorene Arbeit, &#8220;Verunsicherung, Perspektivlosigkeit und auch Frust&#8221; der Menschen in Rostock-Lichtenhagen</li>
+<li>die Landesregierung aus CDU und FDP</li>
+<li>Rostocks Oberbürgermeister Klaus Kilimann</li>
+<li>Mecklenburg-Vorpommerns Innenminister Lothar Kupfer</li>
+<li>Schlepper, die &#8220;auf LKW immer neue Ausländer nach Lichtenhagen&#8221; &#8220;karrten&#8221;</li>
+<li>&#8220;die Politik&#8221;</li>
+<li>die &#8220;überforderte Polizei&#8221;</li>
+</ul>
+</div>
+<p>Und irgendwie klingt es auch so, als hätten &#8220;die mittellosen Asylanten&#8221;, die damals in Rostock kampierten, eine Mitschuld am &#8220;Frust der Anwohner&#8221;:</p>
+<blockquote><p>Die mittellosen Asylanten schliefen unter Decken und Planen auf Wiesen und in Vorgärten. Ihre Notdurft verrichteten sie &#8211; aufgrund fehlender Toiletten &#8211; im Freien. Der Frust der Anwohner verstärkte sich. Mit ihren Problemen wurden sie alleingelassen.</p></blockquote>
+<p>Was in dem Bild.de-Artikel jedenfalls an keiner Stelle erwähnt wird: <a href="https://uebermedien.de/19234/die-leute-werden-aus-den-fenstern-schauen-und-beifall-klatschen/" rel="noopener noreferrer" target="_blank">die Rolle der Medien damals</a>, speziell die von &#8220;Bild&#8221;. Daher hier ein kleiner Ausschnitt aus der &#8220;Bild&#8221;-Berichterstattung im Jahr 1992:</p>
+<p><img src="https://bildblog.de/wp-content/lichtenhagenbildwienur02.png" alt="Ausriss Bild-Zeitung - Der Schreckens-Asylant" /><br />
+<small>(Alle Unkenntlichmachungen in diesem Beitrag durch uns.)</small></p>
+<p>Die &#8220;Bild&#8221;-Redaktion schrieb damals auf der Titelseite:</p>
+<blockquote><p>Wir haben uns lange gefragt, ob wir Ihnen diese Geschichte schildern. Es geht um beispiellosen Mißbrauch des Asylrechts. Aber dieser Fall &#8211; er wurde uns von einer deutschen Behörde offziell mitgeteilt &#8211; ist kein Einzelfall, sondern ein Dokument. Es beweist, daß der Streit der Politiker um die Asylproblematik jetzt ganz schnell aufhören muß &#8211; es muß gehandelt werden. Der Mann, der im Mittelpunkt dieser Geschichte steht, heißt Henry [&#8230;]. Er ist 41, stammt aus Ghana. Sein Foto zeigen wir aus naheliegenden Gründen nicht &#8211; zu aufgeheizt ist die Asyldiskussion. [&#8230;] Zweimal wurde er ausgewiesen &#8211; er kam wieder. Auch jetzt lebt [Henry] wahrscheinlich wieder illegal unter uns. Der Schreckens-Asylant.</p></blockquote>
+<p>Und so ging es weiter bei &#8220;Bild&#8221;:</p>
+<p><img src="https://bildblog.de/wp-content/lichtenhagenbildwienur03.png" alt="Ausriss Bild-Zeitung - Miet-Hai ekelt Deutsche raus - für Asylanten" /><br />
+<img src="https://bildblog.de/wp-content/lichtenhagenbildwienur11.png" alt="Ausriss Bild-Zeitung - Die Flut steigt - wann sinkt das Boot? Fast jede Minute ein neues Asylant" /><br />
+<img src="https://bildblog.de/wp-content/lichtenhagenbildwienur05.png" alt="Ausriss Bild-Zeitung - Motiv Sex - Falscher Asylant erschlug neun Frauen" /><br />
+<img src="https://bildblog.de/wp-content/lichtenhagenbildwienur06.png" alt="Ausriss Bild-Zeitung - Deutsches Essen schlecht - Asylanten im Hungerstreik" /></p>
+<p>Auch nach den Ereignissen in Rostock-Lichtenhagen setzte die &#8220;Bild&#8221;-Redaktion <a href="https://bildblog.de/56629/zum-schaemen/" rel="noopener noreferrer" target="_blank">ihre Art der Berichterstattung fort</a>:</p>
+<p><img src="https://bildblog.de/wp-content/lichtenhagenbildwienur07.png" alt="Ausriss Bild-Zeitung - Asylanten jetzt auf Schulhöfe - Neue Welle - und bis Weihnachten kommen noch 400000" /><br />
+<img src="https://bildblog.de/wp-content/lichtenhagenbildwienur09.png" alt="Ausriss Bild-Zeitung - Asylanten jetzt auch in Büros" /><br />
+<img src="https://bildblog.de/wp-content/lichtenhagenbildwienur10.png" alt="Ausriss Bild-Zeitung - Neue Asylantenschwemme - Kommen zwei Millionen Russen?" /></p>
+<p>Keine drei Wochen, nachdem in Rostock-Lichtenhagen das Wohnheim der Vietnamesen mit Molotowcocktails in Brand gesteckt wurde, am 8. September, brachte die &#8220;Bild&#8221;-Redaktion diese Titelstory:</p>
+<p><img src="https://bildblog.de/wp-content/lichtenhagenbildwienur08.png" alt="Ausriss Bild-Zeitung - Wohnraum beschlagnahmt - Familie muss Asylanten aufnehmen" /></p>
+<p>Zwei Tage später <a href="https://taz.de/!1653605/" rel="noopener noreferrer" target="_blank">löste die &#8220;taz&#8221;</a> die &#8220;Bild&#8221;-Geschichte auf:</p>
+<blockquote><p>Was wirklich geschah: Familie Stegmann, Vater, Mutter und drei erwachsene Kinder, lebten in Lemförde bei Bremen in einer Sieben-Zimmer-Wohnung für 515 Mark kalt. Wegen Eigenbedarf mußten sie ausziehen. Die Gemeinde wies ihnen vorübergehend Räume in einem Obdachlosenhaus in der Pommernstraße zu. Obdachlose haben keine Mietverträge und müssen zweimal monatlich Wohnungssuche nachweisen. Stegmanns leben von drei Einkommen und einer Arbeitslosenunterstüzung. &#8220;Wir konnten uns bisher zu keiner neuen Wohnung entschließen&#8221;, so Frau Stegmann zur taz, &#8220;da uns 1.000 bis 1.200 Mark Miete zuviel sind.&#8221;</p>
+<p>Gemeindedirektor Petering hat die Unterbringung der beiden polnischen Asylsuchenden in einem Zimmer der Pommernstraße verfügt. Im Zuge der Unterbringung von Obdachlosen und Flüchtlingen ein völlig üblicher Vorgang. [&#8230;] Stegmanns bewohnen drei Räume. Allen Bewohnern steht mehr Platz zur Verfügung, als die vom Gesetz knapp bemessene Quadratmeterzahl. Bild weiß das! Zieht es aber vor, unberechtigte Ängste zu schüren und damit die alltägliche Hetze gegen Ausländer fortzusetzen. Dieses Blatt könnte der Fidibus am nächsten Molotowcocktail gegen ein Asylbewerberheim sein.</p></blockquote>
+<p><a class="noline" href="/bildblog-unterstuetzen/" target="_blank" rel="noopener noreferrer"><img width="540" height="81" src="/wp-content/bildblogunterstuetzen.png" alt="Bildblog unterstuetzen" /></a></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Offener Klau</title>
+		<link>https://bildblog.de/135069/offener-klau/</link>
+		
+		<dc:creator><![CDATA[Moritz Tschermak]]></dc:creator>
+		<pubDate>Mon, 22 Aug 2022 10:51:00 +0000</pubDate>
+				<category><![CDATA[Bild am Sonntag]]></category>
+		<guid isPermaLink="false">https://bildblog.de/?p=135069</guid>
+
+					<description><![CDATA[In &#8220;Bild am Sonntag&#8221; ist gestern unter anderem diese Seite erschienen: Rechts ein bisschen was zum rbb, die Wahlumfrage &#8220;Sonntagstrend&#8221; sowie eine Aussage des Bundesbank-Präsidenten zur Inflation. Den größten Teil der &#8220;BamS&#8221;-Seite macht aber eine Geschichte über einen Bürgermeister einer ostdeutschen Kreisstadt aus, der anonym von seinem Verdienst im Amt erzählt. Auf der Website der [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p>In &#8220;Bild am Sonntag&#8221; ist gestern unter anderem diese Seite erschienen:<img src="https://vg07.met.vgwort.de/na/2857eb5b658d4f7cb8b3e8bce6967984" width="1" height="1" alt=""></p>
+<p><img src="https://bildblog.de/wp-content/lvzbamsbuergermeister01.png" alt="Ausriss Bild am Sonntag - Zu sehen ist die komplette Seite 6 der Bild am Sonntag von gestern - Überschrift des Aufmachers - 7800 Euro netto sind eher wenig für einen Bürgermeister" /></p>
+<p>Rechts ein bisschen was zum rbb, die Wahlumfrage &#8220;Sonntagstrend&#8221; sowie eine Aussage des Bundesbank-Präsidenten zur Inflation. Den größten Teil der &#8220;BamS&#8221;-Seite macht aber eine Geschichte über einen Bürgermeister einer ostdeutschen Kreisstadt aus, der anonym von seinem Verdienst im Amt erzählt.</p>
+<p>Auf der Website der &#8220;Leipziger Volkszeitung&#8221; (&#8220;LVZ&#8221;) ist am Freitag <a href="https://www.lvz.de/mitteldeutschland/was-verdient-ein-buergermeister-ich-lege-jeden-monat-3000-euro-zurueck-VWBFC3TDRVPPW6CGTJPOBDTDTQ.html" rel="noopener noreferrer" target="_blank">dieser Artikel</a> erschienen (nur mit Abo lesbar):</p>
+<p><img src="https://bildblog.de/wp-content/lvzbamsbuergermeister03.png" alt="Sreenshot der Leipziger Volkszeitung - Kassensturz - ﻿Bürgermeister verdient 10.000 Euro im Monat - und findet das zu wenig für den Job" /></p>
+<p>Darin erzählt ein Bürgermeister einer ostdeutschen Kreisstadt anonym von seinem Verdienst im Amt. &#8220;LVZ&#8221;-Reporter Josa Mania-Schlegel hat für seinen Beitrag <a href="https://breaking.blogs.uni-hamburg.de/ein-erstes-gespraech/" rel="noopener noreferrer" target="_blank">die journalistische Form des Protokolls</a> gewählt: Man spricht mit einer Person und gießt das daraus entstandene Interview in einen Fließtext in der Ich-Form. Es entsteht also eine lange zusammenhängende Aussage des Protagonisten. Meist folgt dann noch eine Autorisierung durch die Person, mit der man gesprochen hat. Es ist einiges an Arbeit, ein journalistisches Protokoll zu schreiben.</p>
+<p>&#8220;Bild am Sonntag&#8221; hat das Protokoll, das zuvor online bei der &#8220;LVZ&#8221; erschienen ist, einfach zu einem &#8220;offenen Brief&#8221; des Kommunalpolitikers umgewidmet und sich daran bedient. Und das nicht nur punktuell mit ein paar Zitatfetzen, die die Redaktion in einem eigenen Fließtext eingebettet hat; der &#8220;BamS&#8221;-Artikel besteht zu über 80 Prozent aus dem &#8220;LVZ&#8221;-Protokoll. Dutzende Zeilen hat die Redaktion wortwörtlich übernommen. Bei den von uns gelb eingefärbten Stellen handelt es sich um die Aussage des Bürgermeisters, die ursprünglich bei der &#8220;LVZ&#8221; erschienen ist:</p>
+<p><img src="https://bildblog.de/wp-content/lvzbamsbuergermeister02.png" alt="Ausriss Bild am Sonntag - Zu sehen ist erneut die komplette Seite 6 der Bild am Sonntag von gestern dieses Mal mit Markeirung der von der LVZ übernommenen Stellen" /></p>
+<p>Das &#8220;BamS&#8221;-Team hat lediglich eine kurze Einleitung verfasst (darin auch ein Verweis auf die &#8220;Leipziger Volkszeitung&#8221;), zwei knappe Anmerkungen eingefügt und das Protokoll an manchen Stellen etwas gekürzt. Das war&#8217;s. &#8220;LVZ&#8221;-Chefredakteurin Hannah Suppa sieht im Vorgehen der &#8220;BamS&#8221;-Redaktion <a href="https://twitter.com/hannah_suppa/status/1561422173083942912" rel="noopener noreferrer" target="_blank">einen &#8220;Klau unserer Protokoll-Form&#8221;</a>:</p>
+<p><img src="https://bildblog.de/wp-content/lvzbamsbuergermeister04.jpg" alt="Sreenshot eines Tweets von Hannah Suppa - So kriegt man Seiten in der Bild am Sonntag auch voll: Einfach mal den Text von Josa Mania-Schlegel von der Leipziger Volkszeitung wörtlich kopieren und so tun als sei der Klau unserer Protokoll-Form ein Zitat. Aber freut uns, dass der Text anscheinend gefallen hat." /></p>
+<p><a class="noline" href="/bildblog-unterstuetzen/" target="_blank" rel="noopener noreferrer"><img width="540" height="81" src="/wp-content/bildblogunterstuetzen.png" alt="Bildblog unterstuetzen" /></a></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
