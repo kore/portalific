@@ -6,7 +6,7 @@ export default function mapFeedItems(feed) {
       source: feed.name,
       title: item.title,
       link: item.link,
-      date: (new Date(item.isoDate || item.pubDate)).toISOString(),
+      date: new Date(item.isoDate || item.pubDate).toISOString(),
       summary: item.summary,
     };
   });
