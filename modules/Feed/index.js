@@ -139,7 +139,7 @@ export default function Feed({
                     return (
                       <Menu.Item key={feed.name}>
                         <button
-                          className="block w-full px-4 py-1 text-left text-sm hover:dark:bg-gray-900"
+                          className="block w-full px-4 py-1 text-left text-sm hover:bg-gray-100 hover:dark:bg-gray-900"
                           onClick={() => markRead(feed.name)}
                         >
                           {feed.name}{" "}
