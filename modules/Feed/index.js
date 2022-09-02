@@ -89,7 +89,9 @@ export default function Feed({
     <Fragment>
       <div className="mt-0 mb-2 flex w-full justify-end px-2">
         <div className="h-6 grow text-clip text-base">
-          {(configuration.feeds ?? []).map((feed) => feed.name).join(", ")}
+          {configuration.title
+            ? configuration.title
+            : (configuration.feeds ?? []).map((feed) => feed.name).join(", ")}
         </div>
         {(configuration.feeds || []).length < 2 ? (
           <button
@@ -199,6 +201,11 @@ export default function Feed({
                 rel="noreferrer"
               >
                 [{feedItem.source}] {feedItem.title}
+                {configuration.showSummary && feedItem.summary && (
+                  <span className="block text-xs">
+                    {feedItem.summary.replace(/<[^>]*>/g, "")}
+                  </span>
+                )}
               </a>
             </li>
           );
