@@ -94,7 +94,7 @@ export default function Feed({
         {(configuration.feeds || []).length < 2 ? (
           <button
             type="button"
-            className="ml-1 shrink-0 rounded-full bg-white/30 p-1 text-primary-800 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:bg-black/30"
+            className="ml-1 shrink-0 rounded-full bg-white/30 p-1 text-primary-800 hover:bg-primary-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:bg-black/30"
             onClick={() => markRead()}
           >
             <span className="sr-only">Mark all entries read</span>
@@ -109,7 +109,7 @@ export default function Feed({
             <div>
               <button
                 type="button"
-                className="ml-1 shrink-0 rounded-l-full bg-white/30 p-1 pl-2 text-primary-800 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:bg-black/30"
+                className="ml-1 shrink-0 rounded-l-full bg-white/30 p-1 pl-2 text-primary-800 hover:bg-primary-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:bg-black/30"
                 onClick={() => markRead()}
               >
                 <span className="sr-only">Mark all entries read</span>
@@ -119,7 +119,7 @@ export default function Feed({
                   title="Mark all entries read"
                 />
               </button>
-              <Menu.Button className="shrink-0 rounded-r-full border-l-2 border-white bg-white/30 p-1 pr-2 text-primary-800 hover:bg-primary-800 hover:text-white focus:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:border-black dark:bg-black/30">
+              <Menu.Button className="shrink-0 rounded-r-full border-l-2 border-white bg-white/30 p-1 pr-2 text-primary-800 hover:bg-primary-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:border-black dark:bg-black/30">
                 <ChevronDownIcon className="h-4 w-4" aria-hidden="true" />
               </Menu.Button>
             </div>
@@ -133,7 +133,7 @@ export default function Feed({
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-black">
+              <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:bg-black">
                 <div className="p-1">
                   {configuration.feeds.map((feed) => {
                     return (
