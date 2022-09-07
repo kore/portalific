@@ -7,7 +7,7 @@ import {
   ClipboardCheckIcon,
   LockClosedIcon,
   LockOpenIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import { QRCodeSVG } from "qrcode.react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 

@@ -1,6 +1,10 @@
 import { Fragment, useState, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon, CheckIcon } from "@heroicons/react/outline";
+import {
+  ArrowPathIcon,
+  ChevronDownIcon,
+  CheckIcon,
+} from "@heroicons/react/24/outline";
 import axios from "axios";
 import Parser from "rss-parser";
 import resolveAllPromises from "../../utils/resolveAllPromises";
@@ -12,8 +16,10 @@ export default function Feed({
   pushError,
 }) {
   const [feedItems, setFeedItems] = useState([]);
+  const [updated, setUpdated] = useState(null);
 
   const updateFeeds = async () => {
+    setUpdated(null);
     let feeds = (configuration.feeds ?? []).map((feed) => {
       return {
         ...feed,
@@ -54,6 +60,7 @@ export default function Feed({
     const items = [].concat.apply([], allItems);
     items.sort((a, b) => (a.date < b.date ? 1 : -1));
     setFeedItems([...new Map(items.map((item) => [item.id, item])).values()]);
+    setUpdated(new Date());
   };
 
   const markRead = (source = null) => {
@@ -92,6 +99,12 @@ export default function Feed({
           {configuration.title
             ? configuration.title
             : (configuration.feeds ?? []).map((feed) => feed.name).join(", ")}
+        </div>
+        <div className="text-sm text-gray-500">
+          {updated ?
+            <span className="p-2">{updated.toLocaleTimeString("de-DE", { timeStyle: "short" })}</span> :
+            <ArrowPathIcon className="h-6 w-6 animate-spin" aria-hidden="true" />
+          }
         </div>
         {(configuration.feeds || []).length < 2 ? (
           <button

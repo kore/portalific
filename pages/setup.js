@@ -9,7 +9,7 @@ import {
   SaveIcon,
   CheckCircleIcon,
   ArrowCircleRightIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import axios from "axios";
 import Footer from "../components/Footer";
 import Header from "../components/Header";

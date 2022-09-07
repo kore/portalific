@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { XIcon, CheckIcon } from "@heroicons/react/outline";
+import { XIcon, CheckIcon } from "@heroicons/react/24/outline";
 
 export default function TodoList({ configuration, updateModuleConfiguration }) {
   const [newTodo, setNewTodo] = useState("");

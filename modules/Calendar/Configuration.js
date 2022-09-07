@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { PlusIcon, TrashIcon } from "@heroicons/react/outline";
+import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 export default function CalendarConfiguration({
   configuration,

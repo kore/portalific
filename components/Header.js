@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CogIcon, ExclamationIcon } from "@heroicons/react/outline";
+import { Cog8ToothIcon, ExclamationIcon } from "@heroicons/react/24/outline";
 import logo from "../images/logo.svg";
 import Modal from "./Modal";
 import Settings from "./Settings";
@@ -93,7 +93,7 @@ export default function Header({
           onClick={() => setShowSettings(true)}
         >
           <span className="sr-only">View notifications</span>
-          <CogIcon className="h-6 w-6" aria-hidden="true" />
+          <Cog8ToothIcon className="h-6 w-6" aria-hidden="true" />
         </button>
       )}
       <Modal open={showSettings} setOpen={setShowSettings}>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { SunIcon, MoonIcon, ClockIcon } from "@heroicons/react/outline";
+import { SunIcon, MoonIcon, ClockIcon } from "@heroicons/react/24/outline";
 
 const ThemeSwitcher = () => {
   const [auto, setAuto] = useState(true);

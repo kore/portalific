@@ -1,12 +1,12 @@
 import { Fragment, useState } from "react";
 import dynamic from "next/dynamic";
 import {
-  CogIcon,
+  Cog8ToothIcon,
   TrashIcon,
   DeviceMobileIcon,
   DeviceTabletIcon,
   DesktopComputerIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import Column from "../Column";
 import ErrorBoundary from "../ErrorBoundary";
 import Modal from "../Modal";
@@ -207,7 +207,7 @@ export default function Modules({
                                   <span className="sr-only">
                                     View notifications
                                   </span>
-                                  <CogIcon
+                                  <Cog8ToothIcon
                                     className="h-6 w-6"
                                     aria-hidden="true"
                                   />

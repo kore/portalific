@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { Switch } from "@headlessui/react";
-import { PlusIcon, TrashIcon } from "@heroicons/react/outline";
+import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

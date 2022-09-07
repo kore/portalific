@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { CogIcon, ViewGridAddIcon } from "@heroicons/react/outline";
+import { Cog8ToothIcon, ViewGridAddIcon } from "@heroicons/react/24/outline";
 import SettingsModules from "./Settings/Modules";
 import SettingsSettings from "./Settings/Settings";
 
 const groups = [
-  { name: "Settings", href: "#", icon: CogIcon },
+  { name: "Settings", href: "#", icon: Cog8ToothIcon },
   { name: "Modules", href: "#", icon: ViewGridAddIcon },
 ];
 

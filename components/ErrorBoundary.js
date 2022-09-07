@@ -1,5 +1,5 @@
 import React from "react";
-import { ExclamationIcon } from "@heroicons/react/outline";
+import { ExclamationIcon } from "@heroicons/react/24/outline";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
