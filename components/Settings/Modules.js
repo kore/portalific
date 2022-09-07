@@ -3,9 +3,9 @@ import dynamic from "next/dynamic";
 import {
   Cog8ToothIcon,
   TrashIcon,
-  DeviceMobileIcon,
+  DevicePhoneMobileIcon,
   DeviceTabletIcon,
-  DesktopComputerIcon,
+  ComputerDesktopIcon,
 } from "@heroicons/react/24/outline";
 import Column from "../Column";
 import ErrorBoundary from "../ErrorBoundary";
@@ -261,7 +261,7 @@ export default function Modules({
                               );
                             }}
                           >
-                            <DeviceMobileIcon
+                            <DevicePhoneMobileIcon
                               className="h-5 w-5"
                               aria-hidden="true"
                             />
@@ -297,7 +297,7 @@ export default function Modules({
                               );
                             }}
                           >
-                            <DesktopComputerIcon
+                            <ComputerDesktopIcon
                               className="h-5 w-5"
                               aria-hidden="true"
                             />

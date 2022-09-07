@@ -2,9 +2,9 @@ import { Fragment, useState } from "react";
 import { Switch } from "@headlessui/react";
 import {
   EyeIcon,
-  EyeOffIcon,
-  ClipboardCopyIcon,
-  ClipboardCheckIcon,
+  EyeSlashIcon,
+  ClipboardDocumentIcon,
+  ClipboardDocumentCheckIcon,
   LockClosedIcon,
   LockOpenIcon,
 } from "@heroicons/react/24/outline";
@@ -256,7 +256,7 @@ export default function Settings({ settings, setSettings }) {
                       aria-hidden="true"
                     />
                   ) : (
-                    <EyeOffIcon
+                    <EyeSlashIcon
                       className="h-6 w-6 text-gray-600 dark:text-gray-400"
                       aria-hidden="true"
                     />
@@ -304,12 +304,12 @@ export default function Settings({ settings, setSettings }) {
                       className="inline-flex justify-center rounded-r-md border border-gray-300 px-2 py-1 text-base font-medium text-white shadow-sm hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:border-gray-700 sm:text-sm"
                     >
                       {copied ? (
-                        <ClipboardCheckIcon
+                        <ClipboardDocumentCheckIcon
                           className="h-5 w-5 text-gray-600 dark:text-gray-400"
                           aria-hidden="true"
                         />
                       ) : (
-                        <ClipboardCopyIcon
+                        <ClipboardDocumentIcon
                           className="h-5 w-5 text-gray-600 dark:text-gray-400"
                           aria-hidden="true"
                         />

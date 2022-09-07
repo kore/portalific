@@ -1,5 +1,5 @@
 import React from "react";
-import { ExclamationIcon } from "@heroicons/react/24/outline";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class ErrorBoundary extends React.Component {
         <div className="rounded-md bg-red-50 p-4 dark:bg-red-900">
           <div className="flex">
             <div className="shrink-0">
-              <ExclamationIcon
+              <ExclamationTriangleIcon
                 className="h-5 w-5 text-red-400"
                 aria-hidden="true"
               />

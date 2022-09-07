@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { XIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { XCircleIcon, CheckIcon } from "@heroicons/react/24/outline";
 
 export default function TodoList({ configuration, updateModuleConfiguration }) {
   const [newTodo, setNewTodo] = useState("");
@@ -103,7 +103,7 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
                     htmlFor={"resolved-" + index}
                     className="absolute h-5 w-5 rounded-full border-2 border-gray-500 bg-gray-100/50 hover:border-primary-500 hover:bg-primary-800 dark:bg-gray-900/50 hover:dark:bg-primary-200"
                   >
-                    <XIcon
+                    <XCircleIcon
                       className="h-full w-full text-gray-500/30 hover:text-primary-500"
                       aria-hidden="true"
                     />

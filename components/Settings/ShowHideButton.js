@@ -1,4 +1,4 @@
-import { XIcon } from "@heroicons/react/24/outline";
+import { XCircleIcon } from "@heroicons/react/24/outline";
 
 export default function ShowHideButton({ hidden, onClick, children }) {
   return (
@@ -13,7 +13,7 @@ export default function ShowHideButton({ hidden, onClick, children }) {
       }
     >
       {hidden && (
-        <XIcon
+        <XCircleIcon
           className="absolute h-6 w-6 text-white dark:text-black"
           aria-hidden="true"
         />

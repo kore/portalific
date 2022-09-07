@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
-  ExclamationIcon,
+  ExclamationTriangleIcon,
   EyeIcon,
-  EyeOffIcon,
-  CloudDownloadIcon,
+  EyeSlashIcon,
+  CloudArrowDownIcon,
   LockOpenIcon,
-  SaveIcon,
+  ArrowDownTrayIcon,
   CheckCircleIcon,
-  ArrowCircleRightIcon,
+  ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 import axios from "axios";
 import Footer from "../components/Footer";
@@ -27,7 +27,7 @@ export default function Setup() {
   const [showPassword, setShowPassword] = useState(false);
   const [steps, setSteps] = useState([
     {
-      icon: CloudDownloadIcon,
+      icon: CloudArrowDownIcon,
       completed: false,
       message: "Loading data",
       info: null,
@@ -39,13 +39,13 @@ export default function Setup() {
       info: null,
     },
     {
-      icon: SaveIcon,
+      icon: ArrowDownTrayIcon,
       completed: false,
       message: "Storing settings locally",
       info: null,
     },
     {
-      icon: ArrowCircleRightIcon,
+      icon: ArrowRightCircleIcon,
       completed: false,
       message: "Go to portal…",
       info: null,
@@ -85,7 +85,7 @@ export default function Setup() {
       })
       .catch((response) => {
         console.log(response);
-        steps[0].icon = ExclamationIcon;
+        steps[0].icon = ExclamationTriangleIcon;
         steps[0].info = `Could not find data for identifier ${router.query.identifier}`;
         setSteps([...steps]);
       });
@@ -145,7 +145,7 @@ export default function Setup() {
                         aria-hidden="true"
                       />
                     ) : (
-                      <EyeOffIcon
+                      <EyeSlashIcon
                         className="h-6 w-6 text-gray-600 dark:text-gray-400"
                         aria-hidden="true"
                       />

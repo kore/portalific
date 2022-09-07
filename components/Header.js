@@ -1,7 +1,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Cog8ToothIcon, ExclamationIcon } from "@heroicons/react/24/outline";
+import {
+  Cog8ToothIcon,
+  ExclamationTriangleIcon,
+} from "@heroicons/react/24/outline";
 import logo from "../images/logo.svg";
 import Modal from "./Modal";
 import Settings from "./Settings";
@@ -37,7 +40,7 @@ export default function Header({
           onClick={() => setShowErrors(true)}
         >
           <span className="sr-only">View notifications</span>
-          <ExclamationIcon className="h-6 w-6" aria-hidden="true" />
+          <ExclamationTriangleIcon className="h-6 w-6" aria-hidden="true" />
         </button>
       )}
       <Modal open={showErrors} setOpen={setShowErrors}>
@@ -54,7 +57,7 @@ export default function Header({
                 <div className="relative flex space-x-3">
                   <div>
                     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 ring-8 ring-white">
-                      <ExclamationIcon
+                      <ExclamationTriangleIcon
                         className="h-5 w-5 text-white"
                         aria-hidden="true"
                       />

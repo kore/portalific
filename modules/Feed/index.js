@@ -101,10 +101,16 @@ export default function Feed({
             : (configuration.feeds ?? []).map((feed) => feed.name).join(", ")}
         </div>
         <div className="text-sm text-gray-500">
-          {updated ?
-            <span className="p-2">{updated.toLocaleTimeString("de-DE", { timeStyle: "short" })}</span> :
-            <ArrowPathIcon className="h-6 w-6 animate-spin" aria-hidden="true" />
-          }
+          {updated ? (
+            <span className="p-2">
+              {updated.toLocaleTimeString("de-DE", { timeStyle: "short" })}
+            </span>
+          ) : (
+            <ArrowPathIcon
+              className="h-6 w-6 animate-spin"
+              aria-hidden="true"
+            />
+          )}
         </div>
         {(configuration.feeds || []).length < 2 ? (
           <button
