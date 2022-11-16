@@ -1,3 +1,15 @@
+## About
+
+Portalific is an OpenSource browser based portal, displaying your feeds, your
+calendars, and other information of personal relevance. It works (almost)
+entirely browser-based, so your data is safe and secure. For cross-device
+synchronization you can optionally use a backend to synchronize the data
+continuously between devices.
+
+![image](https://raw.githubusercontent.com/kore/portalific/main/images/screnshot.png)
+
+For more information visit https://portalific.com
+
 ### Setting Up Locally
 
 From there, you can install the project's dependencies by running:
