@@ -101,7 +101,7 @@ export default function Footer() {
         <a
           className="underline"
           target="_blank"
-          href="https://github.com/kore/Torii2/blob/main/LICENSE"
+          href="https://github.com/kore/portalific/blob/main/LICENSE"
           rel="noreferrer"
         >
           GPLv3

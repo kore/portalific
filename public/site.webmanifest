@@ -1,6 +1,6 @@
 {
-  "name": "Torii",
-  "short_name": "Torii",
+  "name": "Portalific",
+  "short_name": "Portalific",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -16,6 +16,6 @@
   ],
   "theme_color": "#4b4999",
   "background_color": "#4b4999",
-  "start_url": "https://torii2.netlify.app/",
+  "start_url": "https://portalific.com",
   "display": "standalone"
 }

@@ -18,7 +18,7 @@ import SEO from "../components/SEO";
 
 export default function Setup() {
   const globalData = {
-    name: "Torii",
+    name: "Portalific",
     description: "Offline-first, privacy-focussed, open-source personal portal",
   };
 
@@ -55,9 +55,9 @@ export default function Setup() {
   const startImport = () => {
     axios
       .get(
-        `https://local-storage-storage.io/api/torii/${router.query.identifier}`,
+        `https://local-storage-storage.io/api/portalific/${router.query.identifier}`,
         {
-          headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+          headers: { Authorization: "Bearer dslafki92esakflu8qfasdf" },
         }
       )
       .then((response) => {

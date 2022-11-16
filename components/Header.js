@@ -25,7 +25,7 @@ export default function Header({
   return (
     <header className="flex w-full grow-0 items-center p-2">
       <div className="relative mr-2 inline-block h-8 w-8">
-        <Image src={logo} layout="fill" alt="Torii" />
+        <Image src={logo} layout="fill" alt="Portalific" />
       </div>
       <Link href="/">
         <a className="grow text-left text-2xl dark:text-white">

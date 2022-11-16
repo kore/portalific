@@ -24,7 +24,7 @@ const availableModules = {
 
 export default function Index() {
   const globalData = {
-    name: "Torii",
+    name: "Portalific",
     description: "Offline-first, privacy-focussed, open-source personal portal",
   };
 
@@ -45,9 +45,9 @@ export default function Index() {
 
     axios
       .get(
-        `https://local-storage-storage.io/api/torii/${settings.identifier}`,
+        `https://local-storage-storage.io/api/portalific/${settings.identifier}`,
         {
-          headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+          headers: { Authorization: "Bearer dslafki92esakflu8qfasdf" },
         }
       )
       .then((response) => {
@@ -72,9 +72,9 @@ export default function Index() {
     window.addEventListener("focus", () => {
       axios
         .get(
-          `https://local-storage-storage.io/api/torii/${settings.identifier}`,
+          `https://local-storage-storage.io/api/portalific/${settings.identifier}`,
           {
-            headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+            headers: { Authorization: "Bearer dslafki92esakflu8qfasdf" },
           }
         )
         .then((response) => {
@@ -104,7 +104,7 @@ export default function Index() {
       if (!revision) {
         axios
           .put(
-            `https://local-storage-storage.io/api/torii/${settings.identifier}`,
+            `https://local-storage-storage.io/api/portalific/${settings.identifier}`,
             // @TODO: Encrypt data with settings.password
             JSON.stringify({
               modules: JSON.parse(localStorage.getItem("modules")),
@@ -112,7 +112,7 @@ export default function Index() {
               theme: localStorage.getItem("theme"),
             }),
             {
-              headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+              headers: { Authorization: "Bearer dslafki92esakflu8qfasdf" },
             }
           )
           .then((response) => {
@@ -121,7 +121,7 @@ export default function Index() {
       } else {
         axios
           .post(
-            `https://local-storage-storage.io/api/torii/${settings.identifier}?revision=${revision}`,
+            `https://local-storage-storage.io/api/portalific/${settings.identifier}?revision=${revision}`,
             // @TODO: Encrypt data with settings.password
             JSON.stringify({
               modules: JSON.parse(localStorage.getItem("modules")),
@@ -129,7 +129,7 @@ export default function Index() {
               theme: localStorage.getItem("theme"),
             }),
             {
-              headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" },
+              headers: { Authorization: "Bearer dslafki92esakflu8qfasdf" },
             }
           )
           .then((response) => {

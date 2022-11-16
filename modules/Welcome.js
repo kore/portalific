@@ -19,15 +19,15 @@ export default function Welcome({
           Offline-first, privacy-focussed, open-source personal portal
         </span>
         <span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:tracking-tight">
-          Torii
+          Portalific
         </span>
       </h1>
       <p className="mt-8 text-xl leading-8 text-gray-500">
-        Torii is an OpenSource browser based portal, displaying your feeds, your
-        calendars, and other information of personal relevance. It works (almost
-        <a href="#privacy">*</a>) entirely browser-based, so your data is safe
-        and secure. For cross-device synchronization you can optionally use a
-        backend to synchronize the data continuously between devices.
+        Portalific is an OpenSource browser based portal, displaying your feeds,
+        your calendars, and other information of personal relevance. It works
+        (almost <a href="#privacy">*</a>) entirely browser-based, so your data
+        is safe and secure. For cross-device synchronization you can optionally
+        use a backend to synchronize the data continuously between devices.
       </p>
 
       <h2>Get Started</h2>
@@ -108,10 +108,10 @@ export default function Welcome({
 
       <h2>Error Handling</h2>
       <p>
-        Since all data is fetched locally in your browser Torii will also show
-        you errors directly in this screen. If a feed or calendar can&apos;t be
-        retrieved or something similar happens an error notification will be
-        show on the top right.
+        Since all data is fetched locally in your browser Portalific will also
+        show you errors directly in this screen. If a feed or calendar
+        can&apos;t be retrieved or something similar happens an error
+        notification will be show on the top right.
         <button
           id="add-error"
           onClick={() => {
@@ -144,14 +144,14 @@ export default function Welcome({
         server-side proxy. This proxy, in theory, would allow to log all your
         calendar and feed contents. The used implementation does not log
         anything like this, and{" "}
-        <a href="https://github.com/kore/torii2/blob/main/docs/allowProxy.php">
+        <a href="https://github.com/kore/portalific/blob/main/docs/allowProxy.php">
           can be found in the code repository
         </a>
-        . If you want to be super safe, you should host Torii yourself and
+        . If you want to be super safe, you should host Portalific yourself and
         deploy your own allow-proxy.
       </p>
       <p>
-        Optionally we allow for cross-device synchronozation of your Torii
+        Optionally we allow for cross-device synchronozation of your Portalific
         configuration. This will require your configuration to be stored on a
         server. You must explicitly enable this, since it is
         <strong> not</strong> enabled by default. Your configuration will be

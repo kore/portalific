@@ -7,7 +7,7 @@ export default function TodoListConfiguration() {
             TodoList
           </h2>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
-            Manage your TODOs in Torii
+            Manage your TODOs
           </p>
         </div>
       </div>

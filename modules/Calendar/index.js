@@ -26,9 +26,9 @@ export default function Calendar({ configuration, pushError }) {
       return {
         ...calendar,
         response: axios.get(
-          "https://local-storage-storage.io/proxy/torii?url=" +
+          "https://local-storage-storage.io/proxy/portalific?url=" +
             encodeURIComponent(calendar.calendar),
-          { headers: { Authorization: "Bearer flsdgi902rjsldfgus8gusg" } }
+          { headers: { Authorization: "Bearer dslafki92esakflu8qfasdf" } }
         ),
       };
     });

@@ -2,7 +2,7 @@
 
 $domainIncludeList = [
     'http://localhost:3000',
-    'https://torii2.netlify.app',
+    'https://portalific.com',
 ];
 
 $allowedHost = $_SERVER['HTTP_ORIGIN'] ?? $_SERVER['HTTP_HOST'];
