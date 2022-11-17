@@ -27,11 +27,9 @@ export default function Header({
       <div className="relative mr-2 inline-block h-8 w-8">
         <Image src={logo} layout="fill" alt="Portalific" />
       </div>
-      <Link href="/">
-        <a className="grow text-left text-2xl dark:text-white">
-          {settings.name && settings.name + "'s "}
-          {name}
-        </a>
+      <Link href="/" className="grow text-left text-2xl dark:text-white">
+        {settings.name && settings.name + "'s "}
+        {name}
       </Link>
       {errors && !!errors.length && (
         <button
