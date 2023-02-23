@@ -182,7 +182,7 @@ export default function Settings({ settings, setSettings }) {
                 </Switch.Label>
                 <Switch.Description className="text-sm text-gray-500 dark:text-gray-300">
                   Once enabled we will transfer your encrypted configuration to
-                  a storage backend. You can then cnnect addtional devices which
+                  a storage backend. You can then connect additional devices which
                   will use the same configuration.
                 </Switch.Description>
               </div>
