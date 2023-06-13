@@ -16,9 +16,24 @@ export default function Countdown({ configuration }) {
   return (
     <div className="flex flex-row flex-wrap justify-center gap-8">
       {(configuration.countdowns ?? []).map((countdown) => {
-        const daysRemaining = Math.ceil(
+        let type = "days";
+        let daysRemaining = Math.ceil(
           (new Date(countdown.date).getTime() - time) / 1000 / 86400
         );
+
+        if (daysRemaining >= 30) {
+          daysRemaining = (daysRemaining / 30.4375).toFixed(0);
+          type = "months";
+
+          if (daysRemaining >= 12) {
+            daysRemaining = (daysRemaining / 12).toFixed(0);
+            type = "years";
+          }
+        }
+
+        if (daysRemaining == 1) {
+          type = type.substring(0, type.length - 1);
+        }
 
         if (daysRemaining < 1) {
           return;
@@ -56,7 +71,7 @@ export default function Countdown({ configuration }) {
                 );
               })}
             </div>
-            <p className="uppercase">days</p>
+            <p className="uppercase">{type}</p>
           </div>
         );
       })}
