@@ -20,12 +20,15 @@ export default function Countdown({ configuration }) {
         let daysRemaining = Math.ceil(
           (new Date(countdown.date).getTime() - time) / 1000 / 86400
         );
+        let caption = daysRemaining + " days";
 
         if (daysRemaining >= 30) {
+          caption = Math.floor(daysRemaining / 30.4375) + " months, " + (daysRemaining % 30.4375).toFixed(0) + " days";
           daysRemaining = (daysRemaining / 30.4375).toFixed(0);
           type = "months";
 
           if (daysRemaining >= 12) {
+            caption = Math.floor(daysRemaining / 12) + " years, " + (daysRemaining % 12).toFixed(0) + " months";
             daysRemaining = (daysRemaining / 12).toFixed(0);
             type = "years";
           }
@@ -49,6 +52,7 @@ export default function Countdown({ configuration }) {
                     key={index}
                     className="relative rounded-lg bg-gray-100 shadow-md dark:bg-gray-900"
                     style={{ width: "40px", height: "55px" }}
+                    title={caption}
                   >
                     <span
                       className="absolute inset-x-0 top-0 rounded-t-lg border-b border-white bg-gray-200 dark:border-black dark:bg-gray-800"
