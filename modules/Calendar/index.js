@@ -140,7 +140,7 @@ export default function Calendar({ configuration, pushError }) {
   var byDay = groupBy(calendarItems, (item) => item.start.toLocaleDateString());
   return (
     <Fragment>
-      <ul className="divide-y divide-gray-200 text-sm leading-6 text-gray-500 dark:divide-gray-800 dark:text-gray-300">
+      <ul className="calendar">
         {[...Array(7).keys()]
           .map((index) => {
             const date = new Date();
@@ -149,10 +149,10 @@ export default function Calendar({ configuration, pushError }) {
           })
           .map((day) => {
             return (
-              <li className="py-4 sm:flex" key={day.toISOString()}>
+              <li className="calendar__day" key={day.toISOString()}>
                 <time
                   dateTime={day.toISOString()}
-                  className="mr-4 w-20 flex-none"
+                  className="calendar__day-date"
                 >
                   {day.toLocaleDateString(undefined, {
                     weekday: "short",
@@ -161,26 +161,26 @@ export default function Calendar({ configuration, pushError }) {
                   })}
                 </time>
                 {!byDay.has(day.toLocaleDateString()) ? (
-                  <p className="mt-2 flex-auto sm:mt-0">
+                  <p className="calendar__empty-message">
                     Nothing on today’s schedule
                   </p>
                 ) : (
-                  <ul className="flex-auto grow divide-y">
+                  <ul className="calendar__events">
                     {byDay.get(day.toLocaleDateString()).map((appointment) => {
                       return (
                         <li
                           key={appointment.id}
-                          className="flex border-l-4 pl-2 text-sm hover:bg-white/30 dark:hover:bg-black/30"
+                          className="calendar__event"
                           style={{ borderColor: appointment.color }}
                         >
-                          <p className="mt-2 grow break-words font-semibold text-gray-900 dark:text-gray-100 sm:mt-0">
+                          <p className="calendar__event-summary">
                             {appointment.summary}
                           </p>
-                          <p className="flex-none sm:ml-6">
+                          <p className="calendar__event-time">
                             {appointment.fullDay ? (
-                              <em>full day</em>
+                              <em className="calendar__event-fullday">full day</em>
                             ) : (
-                              <time dateTime={appointment.start.toISOString()}>
+                              <time dateTime={appointment.start.toISOString()} className="calendar__event-starttime">
                                 {appointment.start.toLocaleTimeString("de-DE", {
                                   timeStyle: "short",
                                 })}

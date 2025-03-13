@@ -16,21 +16,21 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
   );
 
   return (
-    <ul>
+    <ul className="todo-list">
       {todos
         .filter((todo) => !todo.resolved)
         .map((todo, index) => {
           const dueDate = todo.dueDate ? new Date(todo.dueDate) : null;
 
           return (
-            <li className="relative flex items-start pb-2" key={todo.create}>
-              <div className="flex items-center">
-                <div className="relative h-8 w-8 pt-1">
+            <li className="todo-list__item" key={todo.create}>
+              <div className="todo-list__checkbox-container">
+                <div className="todo-list__checkbox-wrapper">
                   <input
                     id={"todo-" + index}
                     aria-describedby="comments-description"
                     type="checkbox"
-                    className="hidden"
+                    className="todo-list__checkbox"
                     onChange={() => {
                       todo.resolved = new Date().toISOString();
                       updateModuleConfiguration({ ...configuration });
@@ -38,20 +38,20 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
                   />
                   <label
                     htmlFor={"todo-" + index}
-                    className="absolute h-8 w-8 rounded-full border-2 border-gray-500 bg-gray-100/50 transition hover:border-primary-500 hover:bg-primary-800 dark:bg-gray-900/50 hover:dark:bg-primary-200"
+                    className="todo-list__checkbox-label"
                   >
                     <CheckIcon
-                      className="h-full w-full p-1 text-gray-500/30 transition hover:text-primary-500"
+                      className="todo-list__checkbox-icon"
                       aria-hidden="true"
                     />
                   </label>
                 </div>
               </div>
-              <div className="ml-3 grow text-sm">
-                <p className="font-medium text-black dark:text-white">
+              <div className="todo-list__content">
+                <p className="todo-list__text">
                   {todo.text}
                 </p>
-                <p className="italic text-gray-500">
+                <p className="todo-list__created-date">
                   Created{" "}
                   {new Date(todo.create).toLocaleDateString(undefined, {
                     weekday: "short",
@@ -60,17 +60,17 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
                   })}
                 </p>
               </div>
-              <div className="ml-3 text-sm">
+              <div className="todo-list__due-date">
                 {dueDate && (
                   <p
-                    className={
+                    className={`todo-list__due-date-text ${
                       today.toLocaleDateString() ===
                       dueDate.toLocaleDateString()
-                        ? "text-black dark:text-white"
+                        ? "todo-list__due-date-text--today"
                         : dueDate < today
-                        ? "text-red-500"
-                        : "text-gray-500"
-                    }
+                        ? "todo-list__due-date-text--overdue"
+                        : "todo-list__due-date-text--future"
+                    }`}
                   >
                     {dueDate.toLocaleDateString(undefined, {
                       month: "short",
@@ -86,14 +86,14 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
         .filter((todo) => todo.resolved && new Date(todo.resolved) > today)
         .map((todo, index) => {
           return (
-            <li className="relative flex items-start pb-2" key={todo.create}>
-              <div className="flex items-center">
-                <div className="relative h-8 w-8 pt-1 pl-3">
+            <li className="todo-list__item todo-list__item--resolved" key={todo.create}>
+              <div className="todo-list__checkbox-container">
+                <div className="todo-list__checkbox-wrapper todo-list__checkbox-wrapper--resolved">
                   <input
                     id={"resolved-" + index}
                     aria-describedby="comments-description"
                     type="checkbox"
-                    className="hidden"
+                    className="todo-list__checkbox"
                     onChange={() => {
                       todo.resolved = null;
                       updateModuleConfiguration({ ...configuration });
@@ -101,25 +101,25 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
                   />
                   <label
                     htmlFor={"resolved-" + index}
-                    className="absolute h-5 w-5 rounded-full border-2 border-gray-500 bg-gray-100/50 hover:border-primary-500 hover:bg-primary-800 dark:bg-gray-900/50 hover:dark:bg-primary-200"
+                    className="todo-list__checkbox-label todo-list__checkbox-label--resolved"
                   >
                     <XCircleIcon
-                      className="h-full w-full text-gray-500/30 hover:text-primary-500"
+                      className="todo-list__checkbox-icon todo-list__checkbox-icon--resolved"
                       aria-hidden="true"
                     />
                   </label>
                 </div>
               </div>
-              <div className="ml-3 grow py-1 text-sm">
-                <p className="font-medium text-gray-500">{todo.text}</p>
+              <div className="todo-list__content todo-list__content--resolved">
+                <p className="todo-list__text todo-list__text--resolved">{todo.text}</p>
               </div>
-              <div className="ml-3 text-sm" />
+              <div className="todo-list__due-date" />
             </li>
           );
         })}
-      <li className="mt-2">
+      <li className="todo-list__form-container">
         <form
-          className="flex items-start"
+          className="todo-list__form"
           onSubmit={(event) => {
             let todos = (configuration.todos || []).concat([
               {
@@ -145,7 +145,7 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
             id="duedate"
             value={dueDate}
             onChange={(event) => setDueDate(event.target.value)}
-            className="mx-1 h-6 border-b-2 border-gray-500 bg-transparent text-sm focus:outline-none"
+            className="todo-list__date-input"
           />
           <input
             type="text"
@@ -154,7 +154,7 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
             value={newTodo}
             onChange={(event) => setNewTodo(event.target.value)}
             placeholder="Add a TODO item (with optional due date)"
-            className="mx-1 h-6 grow border-b-2 border-gray-500 bg-transparent text-sm focus:outline-none"
+            className="todo-list__text-input"
           />
         </form>
       </li>

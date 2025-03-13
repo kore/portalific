@@ -94,20 +94,20 @@ export default function Feed({
 
   return (
     <Fragment>
-      <div className="mt-0 mb-2 flex w-full justify-end px-2">
-        <div className="h-6 grow text-clip text-base">
+      <div className="feed__header">
+        <div className="feed__title">
           {configuration.title
             ? configuration.title
             : (configuration.feeds ?? []).map((feed) => feed.name).join(", ")}
         </div>
-        <div className="text-sm text-gray-500">
+        <div className="feed__update-time">
           {updated ? (
-            <span className="p-2">
+            <span className="feed__time">
               {updated.toLocaleTimeString("de-DE", { timeStyle: "short" })}
             </span>
           ) : (
             <ArrowPathIcon
-              className="h-6 w-6 animate-spin"
+              className="feed__loading-icon"
               aria-hidden="true"
             />
           )}
@@ -115,33 +115,33 @@ export default function Feed({
         {(configuration.feeds || []).length < 2 ? (
           <button
             type="button"
-            className="ml-1 shrink-0 rounded-full bg-white/30 p-1 text-primary-800 hover:bg-primary-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:bg-black/30"
+            className="feed__mark-read-button"
             onClick={() => markRead()}
           >
             <span className="sr-only">Mark all entries read</span>
             <CheckIcon
-              className="h-4 w-4"
+              className="feed__button-icon"
               aria-hidden="true"
               title="Mark all entries read"
             />
           </button>
         ) : (
-          <Menu as="div" className="relative inline-block text-left">
-            <div>
+          <Menu as="div" className="feed__mark-read-menu">
+            <div className="feed__menu-buttons">
               <button
                 type="button"
-                className="ml-1 shrink-0 rounded-l-full bg-white/30 p-1 pl-2 text-primary-800 hover:bg-primary-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:bg-black/30"
+                className="feed__mark-all-button"
                 onClick={() => markRead()}
               >
                 <span className="sr-only">Mark all entries read</span>
                 <CheckIcon
-                  className="h-4 w-4"
+                  className="feed__button-icon"
                   aria-hidden="true"
                   title="Mark all entries read"
                 />
               </button>
-              <Menu.Button className="shrink-0 rounded-r-full border-l-2 border-white bg-white/30 p-1 pr-2 text-primary-800 hover:bg-primary-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:border-black dark:bg-black/30">
-                <ChevronDownIcon className="h-4 w-4" aria-hidden="true" />
+              <Menu.Button className="feed__dropdown-button">
+                <ChevronDownIcon className="feed__button-icon" aria-hidden="true" />
               </Menu.Button>
             </div>
 
@@ -154,18 +154,18 @@ export default function Feed({
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900 dark:bg-black">
-                <div className="p-1">
+              <Menu.Items className="feed__dropdown-menu">
+                <div className="feed__dropdown-content">
                   {configuration.feeds.map((feed) => {
                     return (
                       <Menu.Item key={feed.name}>
                         <button
-                          className="block w-full px-4 py-1 text-left text-sm hover:bg-gray-100 hover:dark:bg-gray-900"
+                          className="feed__dropdown-item"
                           onClick={() => markRead(feed.name)}
                         >
                           {feed.name}{" "}
                           <CheckIcon
-                            className="inline h-4 w-4"
+                            className="feed__dropdown-icon"
                             aria-hidden="true"
                             title="Mark all entries read"
                           />
@@ -179,22 +179,22 @@ export default function Feed({
           </Menu>
         )}
       </div>
-      <ul>
+      <ul className="feed__list">
         {feedItems.map((feedItem) => {
           if (
             Array.isArray(configuration.read) &&
             configuration.read.includes(feedItem.id)
           ) {
-            return;
+            return null;
           }
 
           return (
             <li
               key={feedItem.id}
-              className="hover:bg-white/30 dark:hover:bg-black/30"
+              className="feed__item"
             >
               <a
-                className="block border-l-4 pl-2 pb-1 text-sm"
+                className="feed__link"
                 style={{ borderColor: feedItem.color }}
                 href={feedItem.link}
                 onMouseUp={() => {
@@ -219,9 +219,9 @@ export default function Feed({
                 target="_blank"
                 rel="noreferrer"
               >
-                [{feedItem.source}] {feedItem.title}
+                <span className="feed__source">[{feedItem.source}]</span> {feedItem.title}
                 {configuration.showSummary && feedItem.summary && (
-                  <span className="block text-xs">
+                  <span className="feed__summary">
                     {feedItem.summary.replace(/<[^>]*>/g, "")}
                   </span>
                 )}

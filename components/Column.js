@@ -34,7 +34,7 @@ export default function Column({ column, length, moveModule, children }) {
   drop(ref);
 
   return (
-    <li className={""} ref={ref} data-handler-id={handlerId}>
+    <li className="column" ref={ref} data-handler-id={handlerId}>
       {children}
     </li>
   );

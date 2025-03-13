@@ -14,14 +14,11 @@ export default function Clock({ configuration }) {
   }, []);
 
   return (
-    <div className="grid grid-flow-col gap-6">
+    <div className="clock">
       {configuration.showAnalogue && (
-        <div
-          className="relative mx-auto aspect-square max-w-xs rounded-full bg-white/60 text-center opacity-100 shadow-xl dark:bg-black/40"
-          style={{ minWidth: "128px" }}
-        >
+        <div className="clock__analog" style={{ minWidth: "128px" }}>
           <div
-            className="absolute bg-gray-700 dark:bg-gray-300"
+            className="clock__hour-hand"
             style={{
               width: "2.5%",
               height: "20%",
@@ -34,7 +31,7 @@ export default function Clock({ configuration }) {
             }}
           />
           <div
-            className="absolute bg-gray-700 dark:bg-gray-300"
+            className="clock__minute-hand"
             style={{
               width: "1.5%",
               height: "28%",
@@ -48,7 +45,7 @@ export default function Clock({ configuration }) {
           />
           {configuration.showSeconds && (
             <div
-              className="absolute bg-primary-500"
+              className="clock__second-hand"
               style={{
                 width: "0.8%",
                 height: "39%",
@@ -60,58 +57,58 @@ export default function Clock({ configuration }) {
             />
           )}
 
-          {/* Move this into a loop? */}
+          {/* Clock markers */}
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", top: "3%", left: "49%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", top: "10%", right: "27%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", top: "26%", right: "10%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", right: "3%", top: "49%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", right: "10%", top: "72%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", right: "26%", top: "88%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", bottom: "3%", left: "50%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", left: "26%", top: "88%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", left: "11%", top: "72%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", left: "3%", top: "49%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", top: "26%", left: "10%" }}
           />
           <span
-            className="absolute rounded-full bg-gray-700 dark:bg-gray-300"
+            className="clock__marker"
             style={{ width: "2%", height: "2%", top: "10%", left: "27%" }}
           />
 
           <div
-            className="absolute z-20 rounded-full border-2 border-white bg-gray-700 dark:border-black dark:bg-gray-300"
+            className="clock__center"
             style={{
               width: "4%",
               height: "4%",
@@ -122,14 +119,14 @@ export default function Clock({ configuration }) {
           />
         </div>
       )}
-      <div className="flex flex-col justify-center text-center">
-        <span className="text-center text-xl">
-          <h2 className="font-extrabold">
+      <div className="clock__digital">
+        <div className="clock__display">
+          <h2 className="clock__time">
             {time.getHours()}:{String(time.getMinutes()).padStart(2, "0")}
             {configuration.showSeconds &&
               ":" + String(time.getSeconds()).padStart(2, "0")}
           </h2>
-          <h3>
+          <h3 className="clock__date">
             {time.toLocaleDateString(undefined, {
               weekday: "long",
               year: "numeric",
@@ -137,7 +134,7 @@ export default function Clock({ configuration }) {
               day: "numeric",
             })}
           </h3>
-        </span>
+        </div>
       </div>
     </div>
   );

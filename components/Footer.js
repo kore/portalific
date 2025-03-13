@@ -16,9 +16,9 @@ const ThemeSwitcher = () => {
 
     const hours = new Date().getHours();
     if (hours > 6 && hours < 20) {
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("theme--dark");
     } else {
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.add("theme--dark");
     }
   };
 
@@ -40,19 +40,21 @@ const ThemeSwitcher = () => {
   }, [hasLocalStorage, auto]);
 
   return (
-    <div className="ml-4 flex grow-0 justify-center rounded-3xl bg-white p-1 dark:bg-gray-900">
+    <div className="theme-switcher">
       <button
         type="button"
         aria-label="Use Dark Mode"
         onClick={() => {
-          document.documentElement.classList.add("dark");
+          document.documentElement.classList.add("theme--dark");
           localStorage.setItem("theme", "dark");
           setAuto(false);
         }}
-        className="flex h-6 w-8 items-center justify-center rounded-3xl p-1 text-center transition dark:bg-primary-500"
+        className={`theme-switcher__button theme-switcher__button--dark ${
+          localStorage.getItem("theme") === "dark" ? "theme-switcher__button--active" : ""
+        }`}
       >
         <MoonIcon
-          className="h-5 w-5 text-gray-300 dark:text-white"
+          className="theme-switcher__icon"
           aria-hidden="true"
         />
       </button>
@@ -61,14 +63,16 @@ const ThemeSwitcher = () => {
         type="button"
         aria-label="Use Light Mode"
         onClick={() => {
-          document.documentElement.classList.remove("dark");
+          document.documentElement.classList.remove("theme--dark");
           localStorage.setItem("theme", "light");
           setAuto(false);
         }}
-        className="ml-2 flex h-6 w-8 items-center justify-center rounded-3xl bg-primary-500 p-1 text-center transition dark:bg-transparent"
+        className={`theme-switcher__button theme-switcher__button--light ${
+          localStorage.getItem("theme") === "light" ? "theme-switcher__button--active" : ""
+        }`}
       >
         <SunIcon
-          className="h-5 w-5 text-gray-100 dark:text-gray-400"
+          className="theme-switcher__icon"
           aria-hidden="true"
         />
       </button>
@@ -80,13 +84,12 @@ const ThemeSwitcher = () => {
           localStorage.setItem("theme", "auto");
           setAuto(true);
         }}
-        className={
-          "flex ml-2 h-6 w-8 items-center justify-center rounded-3xl p-1 text-center transition " +
-          (auto ? "bg-primary-700" : "bg-gray-100 dark:bg-gray-800")
-        }
+        className={`theme-switcher__button theme-switcher__button--auto ${
+          auto ? "theme-switcher__button--active" : ""
+        }`}
       >
         <ClockIcon
-          className={"h-5 w-5 " + (auto ? "text-white" : "text-gray-700")}
+          className="theme-switcher__icon"
           aria-hidden="true"
         />
       </button>
@@ -96,10 +99,10 @@ const ThemeSwitcher = () => {
 
 export default function Footer() {
   return (
-    <footer className="flex flex-row items-center py-2">
-      <p className="mb-1 text-sm opacity-80 dark:text-white">
+    <footer className="footer">
+      <p className="footer__copyright">
         <a
-          className="underline"
+          className="footer__link"
           target="_blank"
           href="https://github.com/kore/portalific/blob/main/LICENSE"
           rel="noreferrer"
@@ -108,7 +111,7 @@ export default function Footer() {
         </a>{" "}
         by{" "}
         <a
-          className="underline"
+          className="footer__link"
           target="_blank"
           href="https://kore-nordmann.de/"
           rel="noreferrer"
