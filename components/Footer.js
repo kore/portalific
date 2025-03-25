@@ -50,7 +50,7 @@ const ThemeSwitcher = () => {
           setAuto(false);
         }}
         className={`theme-switcher__button theme-switcher__button--dark ${
-          localStorage.getItem("theme") === "dark" ? "theme-switcher__button--active" : ""
+          hasLocalStorage && localStorage.getItem("theme") === "dark" ? "theme-switcher__button--active" : ""
         }`}
       >
         <MoonIcon
@@ -68,7 +68,7 @@ const ThemeSwitcher = () => {
           setAuto(false);
         }}
         className={`theme-switcher__button theme-switcher__button--light ${
-          localStorage.getItem("theme") === "light" ? "theme-switcher__button--active" : ""
+          hasLocalStorage && localStorage.getItem("theme") === "light" ? "theme-switcher__button--active" : ""
         }`}
       >
         <SunIcon
