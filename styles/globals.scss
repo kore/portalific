@@ -1,0 +1,96 @@
+@import "normalize.css/normalize.css";
+
+:root {
+  // Primary colors
+  --color-primary-50: #f2f2ff;
+  --color-primary-100: #e5e4ff;
+  --color-primary-200: #cbcaff;
+  --color-primary-300: #b1afff;
+  --color-primary-400: #9795ff;
+  --color-primary-500: #7D7AFF;
+  --color-primary-600: #6462cc;
+  --color-primary-700: #4b4999;
+  --color-primary-800: #323166;
+  --color-primary-900: #26254d;
+  
+  // Gradient colors
+  --color-gradient-1: #7d7aff;
+  --color-gradient-2: #2121e2;
+  --color-gradient-3: #00fff0;
+  --color-gradient-4: #8785FF;
+  
+  // Fonts
+  --font-primary: ui-sans-serif, system-ui, sans-serif;
+  --font-secondary: ui-sans-serif, system-ui, sans-serif;
+  
+  // Spacing
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+  
+  // Breakpoints
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+body, html {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+input, button, select {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.typography {
+  font-family: var(--font-primary);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  background-color: white;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  
+  .theme--dark & {
+    background-color: #1f2937; // dark:bg-gray-900  
+    color: white;
+  }
+  
+  &__heading {
+    font-weight: 700;
+    
+    &--1 {
+      font-size: 2rem;
+      line-height: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    &--2 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    &--3 {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  &__body {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    
+    &--small {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+  }
+}
