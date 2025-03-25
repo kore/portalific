@@ -113,6 +113,8 @@
     flex-grow: 1;
     text-align: left;
     font-size: 1.5rem;
+    color: #000;
+    text-decoration: none;
     
     .theme--dark & {
       color: white;
@@ -1295,23 +1297,6 @@
     
     .theme--dark & {
       color: #d1d5db; // text-gray-300
-    }
-  }
-  
-  &__link {
-    color: var(--color-primary-600);
-    text-decoration: underline;
-    
-    &:hover {
-      color: var(--color-primary-800);
-    }
-    
-    .theme--dark & {
-      color: var(--color-primary-400);
-      
-      &:hover {
-        color: var(--color-primary-300);
-      }
     }
   }
 }

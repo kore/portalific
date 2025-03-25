@@ -99,7 +99,7 @@ export default function Setup() {
     <Layout>
       <SEO title={globalData.name} description={globalData.description} />
       <Header name={globalData.name} />
-      <main className="w-full grow">
+      <main>
         <div className="my-6 mx-auto max-w-lg border border-b-0 border-gray-800/10 bg-white/10 p-4 backdrop-blur-lg transition last:border-b hover:border-b hover:bg-white/20 hovered-sibling:border-t-0 dark:border-white/10 dark:bg-black/30 dark:hover:bg-black/50 md:first:rounded-t-lg md:last:rounded-b-lg">
           <h1 className="mt-6 text-center text-3xl font-bold tracking-tight">
             Import Settings

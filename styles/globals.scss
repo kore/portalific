@@ -49,6 +49,42 @@ input, button, select {
   background: none;
 }
 
+main {
+  width: 100%;
+}
+
+a {
+  color: #000;
+}
+
+.grid {
+  margin: 0;
+  padding: 0;
+  display: grid;
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.grid__cols-2 {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+}
+
+.grid__cols-3 {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+}
+
+.grid__cols-4 {
+  grid-template-columns: repeat(4,minmax(0,1fr));
+}
+
+.modules {
+  margin: 0;
+  padding: 0;
+}
+
 .typography {
   font-family: var(--font-primary);
   font-size: 1.125rem;

@@ -214,7 +214,7 @@ export default function Index() {
   }, [hasLocalStorage]);
 
   // Dynamic class names: grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4
-  const gridClassName = "lg:grid-cols-" + (settings.columns ?? 3);
+  const gridClassName = "grid__cols-" + (settings.columns ?? 3);
 
   return (
     <Layout settings={settings}>
@@ -229,8 +229,8 @@ export default function Index() {
         errors={errors}
         clearErrors={() => setErrors([])}
       />
-      <main className="w-full">
-        <ul className={`${gridClassName} mb-6 grid w-full grid-cols-1 gap-6`}>
+      <main>
+        <ul className={`grid ${gridClassName}`}>
           {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
             return (
               <Column
@@ -239,7 +239,7 @@ export default function Index() {
                 length={(modules[column] ?? []).length}
                 moveModule={moveModule}
               >
-                <ul>
+                <ul className="modules">
                   {(modules[column] ?? []).map((module, index) => {
                     const ModuleComponent =
                       availableModules[module.type] ??
