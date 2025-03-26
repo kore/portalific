@@ -249,6 +249,12 @@ a {
     }
   }
   
+  &__buttons {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+
   &__button {
     margin-left: var(--spacing-xs);
     flex-shrink: 0;
@@ -716,8 +722,6 @@ a {
     &__header {
       display: flex;
       align-items: center;
-      padding: var(--spacing-sm);
-      border-bottom: 1px solid var(--color-primary-100);
       
       .variant--dark & {
         border-bottom-color: var(--color-primary-700);
@@ -728,6 +732,7 @@ a {
       font-size: 1.125rem;
       font-weight: 500;
       flex-grow: 1;
+      margin: var(--spacing-xs) 0;
       
       .variant--dark & {
         color: white;
@@ -1211,6 +1216,16 @@ a {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: var(--spacing-md);
   }
+}
+
+.visibility-switcher {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  margin: var(--spacing-xs) 0;
+  padding: var(--spacing-xs) 0;
+  background-color: #9ca3af; // text-gray-400
+  border-radius: var(--spacing-md);
 }
 
 // Modules
