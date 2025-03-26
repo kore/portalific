@@ -16,9 +16,9 @@ const ThemeSwitcher = () => {
 
     const hours = new Date().getHours();
     if (hours > 6 && hours < 20) {
-      document.documentElement.classList.remove("theme--dark");
+      document.documentElement.classList.remove("variant--dark");
     } else {
-      document.documentElement.classList.add("theme--dark");
+      document.documentElement.classList.add("variant--dark");
     }
   };
 
@@ -45,7 +45,7 @@ const ThemeSwitcher = () => {
         type="button"
         aria-label="Use Dark Mode"
         onClick={() => {
-          document.documentElement.classList.add("theme--dark");
+          document.documentElement.classList.add("variant--dark");
           localStorage.setItem("theme", "dark");
           setAuto(false);
         }}
@@ -63,7 +63,7 @@ const ThemeSwitcher = () => {
         type="button"
         aria-label="Use Light Mode"
         onClick={() => {
-          document.documentElement.classList.remove("theme--dark");
+          document.documentElement.classList.remove("variant--dark");
           localStorage.setItem("theme", "light");
           setAuto(false);
         }}

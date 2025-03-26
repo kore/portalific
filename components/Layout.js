@@ -16,9 +16,9 @@ export default function Layout({ children, settings = {} }) {
     const lightMode = localStorage.getItem("theme") === "light";
 
     if (darkMode) {
-      document.documentElement.classList.add("theme--dark");
+      document.documentElement.classList.add("variant--dark");
     } else if (lightMode) {
-      document.documentElement.classList.remove("theme--dark");
+      document.documentElement.classList.remove("variant--dark");
     }
     return;
   };
@@ -28,10 +28,10 @@ export default function Layout({ children, settings = {} }) {
 
     darkQuery.onchange = (e) => {
       if (e.matches) {
-        document.documentElement.classList.add("theme--dark");
+        document.documentElement.classList.add("variant--dark");
         localStorage.setItem("theme", "dark");
       } else {
-        document.documentElement.classList.remove("theme--dark");
+        document.documentElement.classList.remove("variant--dark");
         localStorage.setItem("theme", "light");
       }
     };
