@@ -143,8 +143,6 @@ a {
 }
 
 // Layout
-// ------
-
 .layout {
   min-height: 100vh;
   position: relative;
@@ -224,8 +222,6 @@ a {
 }
 
 // Header
-// ------
-
 .header {
   display: flex;
   width: calc(100% - 2 * var(--spacing-sm));
@@ -476,8 +472,6 @@ a {
 }
 
 // Footer
-// ------
-
 .footer {
   display: flex;
   flex-direction: row;
@@ -500,8 +494,6 @@ a {
 }
 
 // Theme Switcher
-// -------------
-
 .theme-switcher {
   margin-left: var(--spacing-md);
   display: flex;
@@ -681,15 +673,11 @@ a {
 }
 
 // Column
-// ------
-
 .column {
   list-style-type: none;
 }
 
 // Settings Panel
-// -------------
-
 .settings-panel {
   display: flex;
   flex-direction: column;
@@ -703,7 +691,6 @@ a {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     border-top: none;
-    border-left: 1px solid #e5e7eb;
     
     .theme--dark & {
       border-color: #4b5563;
@@ -715,6 +702,7 @@ a {
     
     @media (min-width: 1024px) {
       grid-column: span 3 / span 3;
+      border-right: 1px solid #e5e7eb;
     }
   }
   
@@ -822,19 +810,17 @@ a {
 }
 
 // Settings
-// --------
-
 .settings {
   &__section {
-    padding: var(--spacing-lg) var(--spacing-md);
+    padding: var(--spacing-xs);
     
     @media (min-width: 640px) {
-      padding: var(--spacing-lg) var(--spacing-lg);
+      padding: var(--spacing-xs) var(--spacing-md);
     }
     
     &--border {
+      margin-top: var(--spacing-md);
       border-top: 1px solid #e5e7eb; // divide-gray-200
-      padding-top: var(--spacing-lg);
       
       .theme--dark & {
         border-color: #4b5563; // dark:divide-gray-600
@@ -891,6 +877,7 @@ a {
   
   &__form-group {
     grid-column: span 6 / span 6;
+    vertical-align: bottom;
     
     &--small {
       grid-column: span 2 / span 2;
@@ -898,6 +885,11 @@ a {
     
     &--large {
       grid-column: span 8 / span 8;
+    }
+
+    input:first-child,
+    button:first-child {
+      margin-top: 2rem;
     }
   }
   
@@ -1154,7 +1146,6 @@ a {
 }
 
 // Modules
-// -------
 
 // Clock Module
 .clock {
@@ -1933,8 +1924,6 @@ a {
 }
 
 // Utilities
-// ---------
-
 .sr-only {
   position: absolute;
   width: 1px;
