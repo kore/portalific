@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import { Menu, Transition } from "@headlessui/react";
+import { Menu } from "@headlessui/react";
 import {
   ArrowPathIcon,
   ChevronDownIcon,
@@ -145,37 +145,27 @@ export default function Feed({
               </Menu.Button>
             </div>
 
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
-            >
-              <Menu.Items className="feed__dropdown-menu">
-                <div className="feed__dropdown-content">
-                  {configuration.feeds.map((feed) => {
-                    return (
-                      <Menu.Item key={feed.name}>
-                        <button
-                          className="feed__dropdown-item"
-                          onClick={() => markRead(feed.name)}
-                        >
-                          {feed.name}{" "}
-                          <CheckIcon
-                            className="feed__dropdown-icon"
-                            aria-hidden="true"
-                            title="Mark all entries read"
-                          />
-                        </button>
-                      </Menu.Item>
-                    );
-                  })}
-                </div>
-              </Menu.Items>
-            </Transition>
+            <Menu.Items className="feed__dropdown-menu">
+              <div className="feed__dropdown-content">
+                {configuration.feeds.map((feed) => {
+                  return (
+                    <Menu.Item key={feed.name}>
+                      <button
+                        className="feed__dropdown-item"
+                        onClick={() => markRead(feed.name)}
+                      >
+                        {feed.name}{" "}
+                        <CheckIcon
+                          className="feed__dropdown-icon"
+                          aria-hidden="true"
+                          title="Mark all entries read"
+                        />
+                      </button>
+                    </Menu.Item>
+                  );
+                })}
+              </div>
+            </Menu.Items>
           </Menu>
         )}
       </div>
