@@ -1304,7 +1304,9 @@ a {
   
   &__name {
     text-transform: uppercase;
-    margin-bottom: var(--spacing-xs);
+    margin: var(--spacing-xs) auto;
+    font-size: 1.2rem;
+    font-weight: normal;
   }
   
   &__digits {
@@ -1712,7 +1714,17 @@ a {
   &__events {
     flex: 1 1 auto;
     flex-grow: 1;
-    
+    padding: 0;
+
+    li {
+      padding: var(--spacing-xs);
+      margin: var(--spacing-xs) 0;
+
+      p {
+        margin: 0 var(--spacing-xs);
+      }
+    }
+
     & > *:not(:first-child) {
       border-top: 1px solid #e5e7eb; // divide-y
       
@@ -1781,6 +1793,7 @@ a {
     font-size: 0.875rem;
     word-break: break-all;
   }
+
   &__header {
     display: flex;
     width: 100%;
@@ -1985,6 +1998,7 @@ a {
     font-size: 0.875rem;
     text-decoration: none;
     color: inherit;
+    line-height: 1.25rem;
     
     &:hover {
       text-decoration: underline;
