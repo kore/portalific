@@ -51,7 +51,8 @@ body, html {
 input, button, select {
   border: none;
   outline: none;
-  background: none;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 main {
@@ -428,6 +429,10 @@ a {
 .error-list {
   list-style-type: none;
   padding: 0;
+
+  &--import {
+    padding-left: var(--spacing-lg);
+  }
   
   &__item {
     position: relative;
@@ -441,18 +446,12 @@ a {
       margin-left: -1px;
       height: 100%;
       width: 2px;
-      background-color: #e5e7eb; // bg-gray-200
+      background-color: var(--color-bg);
     }
-  }
-  
-  &__item-line {
-    position: absolute;
-    top: 4rem;
-    left: 1rem;
-    margin-left: -1px;
-    height: 100%;
-    width: 2px;
-    background-color: white;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
   
   &__content {
@@ -469,7 +468,11 @@ a {
     justify-content: center;
     border-radius: 9999px;
     background-color: #ef4444; // bg-red-500
-    box-shadow: 0 0 0 4px white;
+    box-shadow: 0 0 0 4px var(--color-bg);
+  }
+  
+  &--import &__icon-container {
+    background-color: var(--color-primary-500);
   }
   
   &__icon {
@@ -646,6 +649,29 @@ a {
 .modules {
   margin: 0;
   padding: 0;
+
+  &--setup {
+    max-width: 500px;
+
+    .typography__heading--1 {
+      text-align: center;
+    }
+
+    .settings__input-group input {
+      margin: 0;
+      max-width: calc(100% - 2 * var(--spacing-md));
+      border-radius: 0px;
+    }
+
+    .settings__input-group .settings__input-button {
+      background: none;
+    }
+
+    .button {
+      margin: var(--spacing-md) auto;
+      width: calc(100% - 2 * var(--spacing-xs));
+    }
+  }
 
   .module {
     width: calc(100% - 2 * var(--spacing-md));

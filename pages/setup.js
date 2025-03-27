@@ -99,7 +99,7 @@ export default function Setup() {
     <Layout>
       <SEO title={globalData.name} description={globalData.description} />
       <Header name={globalData.name} />
-      <main>
+      <main className="modules modules--setup">
         <div className="module">
           <h1 className="typography__heading typography__heading--1">
             Import Settings
@@ -108,7 +108,7 @@ export default function Setup() {
           <div className="settings__form">
             <div className="settings__input-group">
               <div>
-                <label htmlFor="email-address" className="sr-only">
+                <label htmlFor="identifier" className="sr-only">
                   Identifier
                 </label>
                 <input
@@ -166,12 +166,9 @@ export default function Setup() {
             </div>
           </div>
 
-          <ul role="list" className="error-list">
+          <ul role="list" className="error-list error-list--import">
             {steps.map((step, index) => (
               <li className="error-list__item" key={step.message}>
-                {index !== steps.length - 1 ? (
-                  <span className="error-list__item-line" aria-hidden="true" />
-                ) : null}
                 <div className="error-list__content">
                   <div className="error-list__icon-container">
                     <step.icon
