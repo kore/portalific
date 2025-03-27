@@ -4,7 +4,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en" className="theme-compiled">
+      <Html lang="en">
         <Head>
           <link
             rel="apple-touch-icon"
@@ -28,7 +28,7 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#603cba" />
           <meta name="theme-color" content="#4b4999" />
         </Head>
-        <body className="overflow-x-hidden bg-white text-lg antialiased dark:bg-gray-900 dark:text-white">
+        <body className="typography theme-transition">
           <Main />
           <NextScript />
         </body>

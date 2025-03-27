@@ -14,7 +14,7 @@ export default function Countdown({ configuration }) {
   }, []);
 
   return (
-    <div className="flex flex-row flex-wrap justify-center gap-8">
+    <div className="countdown">
       {(configuration.countdowns ?? []).map((countdown) => {
         let type = "days";
         let daysRemaining = Math.ceil(
@@ -39,23 +39,23 @@ export default function Countdown({ configuration }) {
         }
 
         if (daysRemaining < 1) {
-          return;
+          return null;
         }
 
         return (
-          <div className="text-center" key={countdown.name}>
-            <h3 className="uppercase">{countdown.name}</h3>
-            <div className="flex flex-row justify-center gap-2">
+          <div className="countdown__item" key={countdown.name}>
+            <h3 className="countdown__name">{countdown.name}</h3>
+            <div className="countdown__digits">
               {[...String(daysRemaining)].map((number, index) => {
                 return (
                   <div
                     key={index}
-                    className="relative rounded-lg bg-gray-100 shadow-md dark:bg-gray-900"
+                    className="countdown__digit"
                     style={{ width: "40px", height: "55px" }}
                     title={caption}
                   >
                     <span
-                      className="absolute inset-x-0 top-0 rounded-t-lg border-b border-white bg-gray-200 dark:border-black dark:bg-gray-800"
+                      className="countdown__digit-top"
                       style={{
                         font: "bold 3em/55px sans-serif",
                         height: "50%",
@@ -66,7 +66,7 @@ export default function Countdown({ configuration }) {
                       {number}
                     </span>
                     <span
-                      className="rounded-b-lg"
+                      className="countdown__digit-bottom"
                       style={{ font: "bold 3em/55px sans-serif" }}
                     >
                       {number}
@@ -75,7 +75,7 @@ export default function Countdown({ configuration }) {
                 );
               })}
             </div>
-            <p className="uppercase">{type}</p>
+            <p className="countdown__type">{type}</p>
           </div>
         );
       })}

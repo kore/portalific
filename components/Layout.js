@@ -1,13 +1,9 @@
 import { Fragment, useEffect } from "react";
 import classNames from "classnames";
-import styles from "./Layout.module.css";
 
 export function GradientBackground({ variant, className }) {
   const classes = classNames(
-    {
-      [styles.colorBackground]: variant === "large",
-      [styles.colorBackgroundBottom]: variant === "small",
-    },
+    `layout__gradient layout__gradient--${variant}`,
     className
   );
 
@@ -20,9 +16,9 @@ export default function Layout({ children, settings = {} }) {
     const lightMode = localStorage.getItem("theme") === "light";
 
     if (darkMode) {
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.add("variant--dark");
     } else if (lightMode) {
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("variant--dark");
     }
     return;
   };
@@ -32,10 +28,10 @@ export default function Layout({ children, settings = {} }) {
 
     darkQuery.onchange = (e) => {
       if (e.matches) {
-        document.documentElement.classList.add("dark");
+        document.documentElement.classList.add("variant--dark");
         localStorage.setItem("theme", "dark");
       } else {
-        document.documentElement.classList.remove("dark");
+        document.documentElement.classList.remove("variant--dark");
         localStorage.setItem("theme", "light");
       }
     };
@@ -52,7 +48,7 @@ export default function Layout({ children, settings = {} }) {
   return (
     <Fragment>
       <div
-        className="relative min-h-screen overflow-hidden bg-auto bg-center bg-no-repeat"
+        className="layout theme-transition"
         style={{
           backgroundColor: settings.backgroundColor || "transparent",
           backgroundImage: settings.backgroundImage
@@ -60,20 +56,14 @@ export default function Layout({ children, settings = {} }) {
             : "none",
         }}
       >
-        <div className="mx-auto flex h-full w-full flex-col items-center px-1 lg:px-6">
+        <div className="layout__container">
           {children}
         </div>
       </div>
       {!settings.backgroundColor && !settings.backgroundImage && (
         <Fragment>
-          <GradientBackground
-            variant="large"
-            className="fixed top-20 opacity-40 dark:opacity-60"
-          />
-          <GradientBackground
-            variant="small"
-            className="fixed bottom-0 opacity-20 dark:opacity-10"
-          />
+          <GradientBackground variant="large" />
+          <GradientBackground variant="small" />
         </Fragment>
       )}
     </Fragment>

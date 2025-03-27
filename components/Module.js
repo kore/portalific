@@ -77,19 +77,25 @@ export default function Module({
 
   drag(drop(ref));
 
-  const visibility =
-    hiddenOnDevices.length > 0
-      ? (hiddenOnDevices.includes("mobile") ? " hidden" : "") +
-        (hiddenOnDevices.includes("tablet") ? " md:hidden" : " md:block") +
-        (hiddenOnDevices.includes("desktop") ? " lg:hidden" : " lg:block")
-      : "";
+  // Create BEM visibility modifiers
+  let visibilityClasses = [];
+  if (hiddenOnDevices.includes("mobile")) {
+    visibilityClasses.push("module--hidden-mobile");
+  }
+  if (hiddenOnDevices.includes("tablet")) {
+    visibilityClasses.push("module--hidden-tablet");
+  } else {
+    visibilityClasses.push("module--visible-tablet");
+  }
+  if (hiddenOnDevices.includes("desktop")) {
+    visibilityClasses.push("module--hidden-desktop");
+  } else {
+    visibilityClasses.push("module--visible-desktop");
+  }
 
   return (
     <li
-      className={
-        "border border-b-0 border-gray-800/10 bg-white/10 p-4 backdrop-blur-lg transition last:border-b hover:border-b hover:bg-white/20 hovered-sibling:border-t-0 dark:border-white/10 dark:bg-black/30 dark:hover:bg-black/50 md:first:rounded-t-lg md:last:rounded-b-lg" +
-        visibility
-      }
+      className={`module ${visibilityClasses.join(" ")} theme-transition`}
       style={{ opacity: isDragging ? 0.2 : 1 }}
       ref={ref}
       data-handler-id={handlerId}

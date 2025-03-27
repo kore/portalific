@@ -11,10 +11,6 @@ import {
 import { QRCodeSVG } from "qrcode.react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Settings({ settings, setSettings }) {
   const [copied, setCopied] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -40,182 +36,144 @@ export default function Settings({ settings, setSettings }) {
   return (
     <Fragment>
       {/* Main section */}
-      <div className="py-6 px-4 sm:p-6 lg:pb-8">
-        <div>
-          <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
-            Profile
-          </h2>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
+      <div className="settings__section">
+        <div className="settings__header">
+          <h2 className="settings__heading">Profile</h2>
+          <p className="settings__description">
             General settings affecting the overall behavior.
           </p>
         </div>
 
-        <div className="mt-6 grid grid-cols-12 gap-6">
-          <div className="col-span-6">
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              value={settings.name ?? ""}
-              onChange={(event) => setSetting("name", event.target.value)}
-              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
-            />
+        <div className="settings__form">
+          <div className="settings__form-row">
+            <div className="settings__form-group">
+              <label htmlFor="name" className="settings__label">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={settings.name ?? ""}
+                onChange={(event) => setSetting("name", event.target.value)}
+                className="settings__input"
+              />
+            </div>
+
+            <div className="settings__form-group">
+              <label htmlFor="columns" className="settings__label">
+                Number of columns
+              </label>
+              <select
+                name="columns"
+                id="columns"
+                value={settings.columns ?? ""}
+                onChange={(event) => setSetting("columns", event.target.value)}
+                className="settings__input"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
           </div>
 
-          <div className="col-span-6">
-            <label
-              htmlFor="columns"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-            >
-              Number of columns
-            </label>
-            <select
-              type="text"
-              name="columns"
-              id="columns"
-              value={settings.columns ?? ""}
-              onChange={(event) => setSetting("columns", event.target.value)}
-              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-          </div>
+          <h2 className="settings__subheading">Background</h2>
 
-          <h2 className="col-span-12 text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
-            Background
-          </h2>
+          <div className="settings__form-row">
+            <div className="settings__form-group settings__form-group--small">
+              <label htmlFor="background-color" className="settings__label">
+                Color
+              </label>
+              <input
+                type="color"
+                name="background-color"
+                id="background-color"
+                value={settings.backgroundColor ?? "#7D7AFF"}
+                onChange={(event) =>
+                  setSetting("backgroundColor", event.target.value)
+                }
+                className="settings__input"
+                style={{ height: "38px" }}
+              />
+            </div>
 
-          <div className="col-span-2">
-            <label
-              htmlFor="background-color"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-            >
-              Color
-            </label>
-            <input
-              type="color"
-              name="background-color"
-              id="background-color"
-              value={settings.backgroundColor ?? "#7D7AFF"}
-              onChange={(event) =>
-                setSetting("backgroundColor", event.target.value)
-              }
-              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
-              style={{ height: "38px" }}
-            />
-          </div>
+            <div className="settings__form-group settings__form-group--large">
+              <label htmlFor="background-image" className="settings__label">
+                Image (URL)
+              </label>
+              <input
+                type="text"
+                name="background-image"
+                id="background-image"
+                placeholder="Background image URL"
+                value={settings.backgroundImage ?? ""}
+                onChange={(event) =>
+                  setSetting("backgroundImage", event.target.value)
+                }
+                className="settings__input"
+              />
+            </div>
 
-          <div className="col-span-8">
-            <label
-              htmlFor="background-image"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-            >
-              Image (URL)
-            </label>
-            <input
-              type="text"
-              name="background-image"
-              id="background-image"
-              placeholder="Background image URL"
-              value={settings.backgroundImage ?? ""}
-              onChange={(event) =>
-                setSetting("backgroundImage", event.target.value)
-              }
-              className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
-            />
-          </div>
-
-          <div className="col-span-2">
-            <button
-              type="button"
-              className="mt-6 inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm"
-              onClick={() => {
-                setSettings({
-                  ...settings,
-                  backgroundImage: undefined,
-                  backgroundColor: undefined,
-                });
-              }}
-            >
-              Clear
-            </button>
+            <div className="settings__form-group settings__form-group--small">
+              <button
+                type="button"
+                className="button button--danger"
+                onClick={() => {
+                  setSettings({
+                    ...settings,
+                    backgroundImage: undefined,
+                    backgroundColor: undefined,
+                  });
+                }}
+              >
+                Clear
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Sync section */}
-      <div className="divide-y divide-gray-200 pt-6 dark:divide-gray-600">
-        <div className="px-4 sm:px-6">
-          <div>
-            <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
-              Synchronization
-            </h2>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
+      <div className="settings__section settings__section--border">
+        <div className="settings__content">
+          <div className="settings__header">
+            <h2 className="settings__heading">Synchronization</h2>
+            <p className="settings__description">
               Enable synchronization with a backend to enable cross-device
               synchronization.
             </p>
           </div>
-          <ul
-            role="list"
-            className="mt-2 divide-y divide-gray-200 dark:divide-gray-600"
-          >
-            <Switch.Group
-              as="li"
-              className="flex items-center justify-between py-4"
-            >
-              <div className="flex flex-col">
-                <Switch.Label
-                  as="p"
-                  className="text-sm font-medium text-gray-900 dark:text-gray-100"
-                  passive
-                >
+          
+          <ul className="settings__toggle-list">
+            <Switch.Group as="li" className="settings__toggle-item">
+              <div className="settings__toggle-content">
+                <Switch.Label as="p" className="settings__toggle-label" passive>
                   Enable synchronization
                 </Switch.Label>
-                <Switch.Description className="text-sm text-gray-500 dark:text-gray-300">
+                <Switch.Description className="settings__toggle-description">
                   Once enabled we will transfer your encrypted configuration to
-                  a storage backend. You can then cnnect addtional devices which
+                  a storage backend. You can then connect additional devices which
                   will use the same configuration.
                 </Switch.Description>
               </div>
               <Switch
                 checked={settings.synchronize}
                 onChange={(value) => setSetting("synchronize", value)}
-                className={classNames(
-                  settings.synchronize ? "bg-primary-500" : "bg-gray-200",
-                  "ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                )}
+                className={`settings__switch ${settings.synchronize ? 'settings__switch--active' : ''}`}
               >
                 <span
                   aria-hidden="true"
-                  className={classNames(
-                    settings.synchronize ? "translate-x-5" : "translate-x-0",
-                    "inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
-                  )}
+                  className={`settings__switch-handle ${settings.synchronize ? 'settings__switch-handle--active' : ''}`}
                 />
               </Switch>
             </Switch.Group>
           </ul>
 
-          <div
-            className={
-              "grid grid-cols-2 gap-6 mb-6 " +
-              (settings.synchronize || "opacity-50")
-            }
-          >
-            <div className="">
-              <label
-                htmlFor="identifier"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-              >
+          <div className={`settings__sync-panel ${!settings.synchronize ? 'settings__sync-panel--disabled' : ''}`}>
+            <div className="settings__sync-form">
+              <label htmlFor="identifier" className="settings__label">
                 Identifier
               </label>
               <input
@@ -224,16 +182,13 @@ export default function Settings({ settings, setSettings }) {
                 id="identifier"
                 value={settings.identifier ?? ""}
                 disabled
-                className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
+                className="settings__input"
               />
-              <label
-                htmlFor="password"
-                className="mt-6 block text-sm font-medium text-gray-700 dark:text-gray-200"
-              >
+              <label htmlFor="password" className="settings__label settings__label--spaced">
                 Password{" "}
                 {includePassword ? " (included in link)" : " (not in link)"}
               </label>
-              <div className="relative">
+              <div className="settings__input-group">
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
@@ -243,53 +198,54 @@ export default function Settings({ settings, setSettings }) {
                   onChange={(event) =>
                     setSetting("password", event.target.value)
                   }
-                  className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:bg-gray-800 dark:text-white sm:text-sm"
+                  className="settings__input"
                 />
 
                 <button
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5"
+                  className="settings__input-button"
                 >
                   {showPassword ? (
                     <EyeIcon
-                      className="h-6 w-6 text-gray-600 dark:text-gray-400"
+                      className="settings__input-icon"
                       aria-hidden="true"
                     />
                   ) : (
                     <EyeSlashIcon
-                      className="h-6 w-6 text-gray-600 dark:text-gray-400"
+                      className="settings__input-icon"
                       aria-hidden="true"
                     />
                   )}
                 </button>
               </div>
             </div>
+            
             {settings.synchronize && (
-              <div className="text-center">
+              <div className="settings__sync-qr">
                 <QRCodeSVG
                   width="128"
                   height="128"
-                  className="inline rounded-md border-4 border-white"
+                  className="settings__qr-code"
                   value={setupLink}
                 />
-                <div className="mt-1 block" role="group">
+                <div className="settings__button-group">
                   <button
                     type="button"
                     onClick={() => {
                       setIncludePassword(!includePassword);
                       setCopied(false);
                     }}
-                    className="inline-flex justify-center rounded-l-md border border-gray-300 border-r-transparent px-2 py-1 text-base font-medium text-white shadow-sm hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:border-gray-700 sm:text-sm"
+                    className="settings__button-group-item settings__button-group-item--left"
                   >
                     {includePassword ? (
                       <LockOpenIcon
-                        className="h-5 w-5 text-gray-600 dark:text-gray-400"
+                        className="settings__button-icon"
                         aria-hidden="true"
                         title="Include password in link"
                       />
                     ) : (
                       <LockClosedIcon
-                        className="h-5 w-5 text-gray-600 dark:text-gray-400"
+                        className="settings__button-icon"
                         aria-hidden="true"
                         title="Include password in link"
                       />
@@ -301,16 +257,16 @@ export default function Settings({ settings, setSettings }) {
                   >
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-r-md border border-gray-300 px-2 py-1 text-base font-medium text-white shadow-sm hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:border-gray-700 sm:text-sm"
+                      className="settings__button-group-item settings__button-group-item--right"
                     >
                       {copied ? (
                         <ClipboardDocumentCheckIcon
-                          className="h-5 w-5 text-gray-600 dark:text-gray-400"
+                          className="settings__button-icon"
                           aria-hidden="true"
                         />
                       ) : (
                         <ClipboardDocumentIcon
-                          className="h-5 w-5 text-gray-600 dark:text-gray-400"
+                          className="settings__button-icon"
                           aria-hidden="true"
                         />
                       )}
@@ -324,20 +280,18 @@ export default function Settings({ settings, setSettings }) {
       </div>
 
       {/* Danger zone */}
-      <div className="divide-y divide-gray-200 pt-6 dark:divide-gray-600">
-        <div className="px-4 sm:px-6">
-          <div>
-            <h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
-              Danger Zone
-            </h2>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
+      <div className="settings__section settings__section--border">
+        <div className="settings__content">
+          <div className="settings__header">
+            <h2 className="settings__heading">Danger Zone</h2>
+            <p className="settings__description">
               Danger zone, resetting all current state
             </p>
           </div>
-          <div className="text-right">
+          <div className="settings__actions">
             <button
               type="button"
-              className="inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm"
+              className="button button--danger"
               onClick={() => {
                 if (confirm("Really remove all data?")) {
                   localStorage.removeItem("theme");
