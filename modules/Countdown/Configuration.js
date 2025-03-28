@@ -26,8 +26,8 @@ export default function CountdownConfiguration({
                   className="settings__form-row"
                   key={countdown.name}
                 >
-                  <div className="settings__form-group">{countdown.name}</div>
-                  <div className="settings__form-group">{countdown.date}</div>
+                  <div className="settings__form-group countdown__date">{countdown.date}</div>
+                  <div className="settings__form-group countdown__name">{countdown.name}</div>
                   <div className="settings__form-group settings__form-group--small">
                     <button
                       type="button"

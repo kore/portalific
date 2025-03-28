@@ -978,9 +978,21 @@ a {
   &__form-group {
     grid-column: span 6 / span 6;
     vertical-align: bottom;
+
+    &.countdown__date,
+    &.feed__name {
+      grid-column: span 4 / span 4;
+    }
+    
+    &.countdown__name,
+    &.feed__url {
+      grid-column: span 6 / span 6;
+      text-align: left;
+    }
     
     &--small {
       grid-column: span 2 / span 2;
+      text-align: right;
     }
     
     &--large {
@@ -988,7 +1000,7 @@ a {
     }
 
     input:first-child,
-    button:first-child {
+    button:first-child:not(.header__button) {
       margin-top: 2rem;
     }
   }
