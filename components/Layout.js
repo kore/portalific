@@ -39,24 +39,24 @@ export default function Layout({ children, settings = {} }) {
   return (
     <Fragment>
       <div
-        className="layout theme-transition"
+        className="layout theme-transition theme--black"
         style={{
-          backgroundColor: settings.backgroundColor || "transparent",
+          backgroundColor: settings.backgroundColor || null,
           backgroundImage: settings.backgroundImage
             ? `url(${settings.backgroundImage})`
-            : "none",
+            : null,
         }}
       >
         <div className="layout__container">
           {children}
         </div>
+        {!settings.backgroundColor && !settings.backgroundImage && (
+          <Fragment>
+            <div className="layout__gradient layout__gradient--large" />
+            <div className="layout__gradient layout__gradient--small" />
+          </Fragment>
+        )}
       </div>
-      {!settings.backgroundColor && !settings.backgroundImage && (
-        <Fragment>
-          <div className="layout__gradient layout__gradient--large" />
-          <div className="layout__gradient layout__gradient--small" />
-        </Fragment>
-      )}
     </Fragment>
   );
 }
