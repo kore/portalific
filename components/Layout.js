@@ -1,15 +1,6 @@
 import { Fragment, useEffect } from "react";
 import classNames from "classnames";
 
-export function GradientBackground({ variant, className }) {
-  const classes = classNames(
-    `layout__gradient layout__gradient--${variant}`,
-    className
-  );
-
-  return <div className={classes} />;
-}
-
 export default function Layout({ children, settings = {} }) {
   const setAppTheme = () => {
     const darkMode = localStorage.getItem("theme") === "dark";
@@ -62,8 +53,8 @@ export default function Layout({ children, settings = {} }) {
       </div>
       {!settings.backgroundColor && !settings.backgroundImage && (
         <Fragment>
-          <GradientBackground variant="large" />
-          <GradientBackground variant="small" />
+          <div className="layout__gradient layout__gradient--large" />
+          <div className="layout__gradient layout__gradient--small" />
         </Fragment>
       )}
     </Fragment>
