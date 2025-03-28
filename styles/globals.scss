@@ -1561,6 +1561,7 @@ a {
   &__checkbox-container {
     display: flex;
     align-items: center;
+    aspect-ratio: 1/1;
   }
   
   &__checkbox-wrapper {
@@ -1589,7 +1590,7 @@ a {
     border: 2px solid #6b7280; // border-gray-500
     background-color: rgba(243, 244, 246, 0.5); // bg-gray-100/50
     transition: all 0.2s ease;
-    
+
     &:hover {
       border-color: var(--color-primary-500);
       background-color: var(--color-primary-800);
@@ -1612,7 +1613,6 @@ a {
   &__checkbox-icon {
     height: 100%;
     width: 100%;
-    padding: var(--spacing-xs);
     color: rgba(107, 114, 128, 0.3); // text-gray-500/30
     transition: color 0.2s ease;
     
@@ -1626,9 +1626,15 @@ a {
   }
   
   &__content {
-    margin-left: var(--spacing-sm);
+    margin-left: var(--spacing-md);
     flex-grow: 1;
     font-size: 0.875rem;
+    line-height: 1.4rem;
+    margin-bottom: var(--spacing-xs);
+    
+    p {
+      margin: 0;
+    }
     
     &--resolved {
       margin-left: var(--spacing-sm);
@@ -1657,7 +1663,6 @@ a {
   }
   
   &__due-date {
-    margin-left: var(--spacing-sm);
     font-size: 0.875rem;
   }
   
