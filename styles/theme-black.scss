@@ -40,7 +40,7 @@
   
   // Mixed alpha colors - essential combinations only
   --color-gray-900-50: rgba(17, 24, 39, 0.5); // Used for overlays
-  --color-gray-900-10: rgba(17, 24, 39, 0.1); // Used for borders
+  --color-gray-900-10: rgba(17, 24, 39, 0.2); // Used for borders
   
   --color-primary-500-30: rgba(125, 122, 255, 0.3); // Essential for button highlights
   
@@ -54,6 +54,12 @@
   --spacing-md: 1rem;
   --spacing-lg: 2rem;
   --spacing-xl: 4rem;
+
+  // Border radius
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0.2rem;
+  --radius-lg: 0.5rem;
   
   // Breakpoints
   --breakpoint-sm: 640px;
@@ -67,6 +73,10 @@
 
   .theme-switcher {
     display: none;
+  }
+
+  .grid {
+    gap: var(--spacing-lg);
   }
 
   .layout {
@@ -91,13 +101,29 @@
         width: 100%;
         
         background:
-          radial-gradient(at 90% 10%, #535353 0, var(--color-bg) 50%);
+          radial-gradient(at 90% 10%, var(--color-gray-300) 0, var(--color-bg) 70%);
       }
 
       &--small {
         display: none;
       }
     }
+  }
+
+  .modules {
+     box-shadow: 1px 0px 1px 0px var(--color-gray-500) , -3px 3px 4px 1px var(--color-white-50);
+
+     .module {
+        background-color: var(--color-white-20);
+     }
+  }
+
+  // Add some more accents
+  .clock__time,
+  .countdown__name,
+  .todo-list__checkbox-icon,
+  .feed__source {
+    color: var(--color-primary-500);
   }
 }
 
