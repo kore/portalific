@@ -261,6 +261,7 @@ a {
     flex-shrink: 0;
     padding: var(--spacing-xs);
     border-radius: 9999px;
+    aspect-ratio: 1/1;
     
     &--settings {
       color: var(--color-primary-200);
@@ -1887,6 +1888,8 @@ a {
     background-color: rgba(255, 255, 255, 0.3);
     padding: var(--spacing-xs);
     color: var(--color-primary-800);
+    aspect-ratio: 1/1;
+    height: 24px;
     
     &:hover {
       background-color: var(--color-primary-800);
