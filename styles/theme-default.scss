@@ -1,0 +1,63 @@
+// Default theme
+
+:root {
+  --color-gradient-1: #7d7aff;
+  --color-gradient-2: #2121e2;
+  --color-gradient-3: #00fff0;
+  --color-gradient-4: #8785ff;
+}
+
+// Dark mode variables
+.variant--dark {
+}
+
+.layout {
+  &__gradient {
+    position: fixed;
+    z-index: -1;
+    filter: blur(44px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    
+    &--large {
+      max-height: 800px;
+      height: 80vh;
+      max-width: 1400px;
+      top: 5rem;
+      opacity: 0.4;
+      
+      background: radial-gradient(
+          at 71% 77%,
+          var(--color-gradient-1) 0,
+          transparent 21%
+        ),
+        radial-gradient(at 36% 47%, var(--color-gradient-3) 0, transparent 50%),
+        radial-gradient(at 54% 29%, var(--color-gradient-3) 0, transparent 28%),
+        radial-gradient(at 45% 51%, var(--color-gradient-1) 0, transparent 53%),
+        radial-gradient(at 73% 44%, var(--color-gradient-2) 0, transparent 54%),
+        radial-gradient(at 24% 7%, var(--color-gradient-2) 0, transparent 40%),
+        radial-gradient(at 76% 46%, var(--color-gradient-1) 0, transparent 50%);
+    }
+    
+    &--small {
+      height: 600px;
+      max-width: 900px;
+      bottom: 0;
+      transform: translateX(-50%) rotate(190deg);
+      opacity: 0.2;
+      
+      background: radial-gradient(
+          at 83% 25%,
+          var(--color-gradient-1) 0,
+          transparent 21%
+        ),
+        radial-gradient(at 36% 47%, var(--color-gradient-3) 0, transparent 50%),
+        radial-gradient(at 79% 45%, var(--color-gradient-3) 0, transparent 28%),
+        radial-gradient(at 66% 38%, var(--color-gradient-1) 0, transparent 53%),
+        radial-gradient(at 89% 13%, var(--color-gradient-2) 0, transparent 54%),
+        radial-gradient(at 24% 7%, var(--color-gradient-2) 0, transparent 40%),
+        radial-gradient(at 76% 46%, var(--color-gradient-1) 0, transparent 50%);
+    }
+  }
+}
