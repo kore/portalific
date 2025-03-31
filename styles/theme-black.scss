@@ -114,7 +114,8 @@
      box-shadow: 1px 0px 1px 0px var(--color-gray-500) , -3px 3px 4px 1px var(--color-white-50);
 
      .module {
-        background-color: var(--color-white-20);
+       background-color: var(--color-white-80);
+	   backdrop-filter: blur(10px);
      }
   }
 
