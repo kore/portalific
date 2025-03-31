@@ -3,7 +3,7 @@ import { Dialog } from "@headlessui/react";
 
 export default function Modal({ open, setOpen, children }) {
   return (
-      <Dialog as="div" className="modal theme--black" open={open} onClose={setOpen}>
+      <Dialog as="div" className="modal theme--green" open={open} onClose={setOpen}>
         <Dialog.Panel className="modal__content">
           <div className="modal__body">
             {children}

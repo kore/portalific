@@ -1,0 +1,123 @@
+// Default theme
+
+.theme--green {
+  // Base colors
+  --color-text: #627270;
+  --color-bg: #f0f4f7;
+  --color-error: #ff6b6b;
+
+  // Primary colors - consolidated to 5 variants
+  --color-primary-100: #f4f9f8;
+  --color-primary-300: #387561;
+  --color-primary-500: #1d5745;
+  --color-primary-700: #0a3728;
+  --color-primary-900: #06271b;
+
+  --color-secondary-500: #e0bb52;
+  
+  // Gray colors - consolidated to 5 variants
+  --color-gray-100: #f3f3f3;
+  --color-gray-300: #d1d1d1;
+  --color-gray-500: #6b6b6b;
+  --color-gray-700: #373737;
+  --color-gray-900: #202020;
+  
+  // Red colors - consolidated to 3 variants for error states
+  --color-red-100: #fee2e2;
+  --color-red-500: #ef4444;
+  --color-red-900: #7f1d1d;
+  
+  // Basic colors
+  --color-transparent: transparent;
+  
+  // Alpha colors - consolidated
+  --color-green-75: rgba(0, 0, 0, 0.75);
+  --color-green-50: rgba(0, 0, 0, 0.5);
+  --color-green-25: rgba(0, 0, 0, 0.25);
+  --color-green-10: rgba(0, 0, 0, 0.1);
+  
+  --color-white-80: rgba(255, 255, 255, 0.8);
+  --color-white-50: rgba(255, 255, 255, 0.5);
+  --color-white-20: rgba(255, 255, 255, 0.2);
+  
+  // Mixed alpha colors - essential combinations only
+  --color-gray-900-50: rgba(17, 24, 39, 0.5); // Used for overlays
+  --color-gray-900-10: rgba(17, 24, 39, 0.2); // Used for borders
+  
+  --color-primary-500-40: rgba(19, 77, 58, 0.4); // Essential for module highlights
+  --color-primary-500-30: rgba(19, 77, 58, 0.3); // Essential for button highlights
+  
+  // Fonts
+  --font-primary: ui-sans-serif, system-ui, sans-serif;
+  --font-secondary: ui-sans-serif, system-ui, sans-serif;
+  
+  // Spacing
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+
+  // Border radius
+  --radius-xs: 0.2rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 1.0rem;
+  --radius-lg: 1.5rem;
+  
+  // Breakpoints
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+.theme--green {
+  color: var(--color-text);
+
+  .theme-switcher {
+    display: none;
+  }
+
+  .grid {
+    gap: var(--spacing-lg);
+  }
+
+  .layout {
+    &__gradient {
+      display: none;
+    }
+  }
+
+  .modules {
+    box-shadow:
+       1px 1px 4px 1px var(--color-black-10),
+       5px 5px 50px 0px var(--color-primary-500-40),
+       5px 5px 100px 0px var(--color-primary-500-40);
+
+    .module {
+       background-color: #fdffff;
+       border: none;
+    }
+
+    .module--clock {
+      background:
+        radial-gradient(at 10% 10%, var(--color-primary-700) 0, var(--color-primary-300) 70%),
+        radial-gradient(at 30% 90%, var(--color-primary-700) 0, var(--color-primary-300) 50%);
+      color: var(--color-bg);
+    }
+
+    .feed__header {
+      background-color: var(--color-primary-100);
+      box-shadow: 0px 1px 3px 0px var(--color-black-10);
+    }
+  }
+
+  // Add some more accents
+  .clock__time,
+  .countdown__name,
+  .todo-list__checkbox-icon,
+  .feed__source {
+    color: var(--color-secondary-500);
+  }
+}
+

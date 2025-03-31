@@ -39,7 +39,7 @@ export default function Layout({ children, settings = {} }) {
   return (
     <Fragment>
       <div
-        className="layout theme-transition theme--black"
+        className="layout theme-transition theme--green"
         style={{
           backgroundColor: settings.backgroundColor || null,
           backgroundImage: settings.backgroundImage
