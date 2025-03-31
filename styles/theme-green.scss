@@ -119,5 +119,21 @@
   .feed__source {
     color: var(--color-secondary-500);
   }
+
+  .countdown {
+    &__digit {
+      border-radius: var(--radius-xs);
+    }
+    
+    &__digit-top {
+      border-top-left-radius: var(--radius-xs);
+      border-top-right-radius: var(--radius-xs);
+    }
+    
+    &__digit-bottom {
+      border-bottom-left-radius: var(--radius-xs);
+      border-bottom-right-radius: var(--radius-xs);
+    }
+  }
 }
 
