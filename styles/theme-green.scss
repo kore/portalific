@@ -3,7 +3,7 @@
 .theme--green {
   // Base colors
   --color-text: #627270;
-  --color-bg: #f0f4f7;
+  --color-bg: #f8f4f4;
   --color-error: #ff6b6b;
 
   // Primary colors - consolidated to 5 variants
@@ -73,9 +73,18 @@
 
 .theme--green {
   color: var(--color-text);
+  background-color: var(--color-bg);
 
   .theme-switcher {
     display: none;
+  }
+
+  .header {
+    padding: var(--spacing-md) var(--spacing-sm);
+
+    &__title {
+      color: var(--color-primary-500);
+    }
   }
 
   .grid {
