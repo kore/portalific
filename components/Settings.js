@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Cog8ToothIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
+import { Cog8ToothIcon, ArrowPathIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
+import SettingsDisplay from "./Settings/Display";
+import SettingsSynchronization from "./Settings/Synchronization";
 import SettingsModules from "./Settings/Modules";
-import SettingsSettings from "./Settings/Settings";
 
 const groups = [
-  { name: "Settings", href: "#", icon: Cog8ToothIcon },
+  { name: "Display", href: "#", icon: Cog8ToothIcon },
+  { name: "Synchronization", href: "#", icon: ArrowPathIcon },
   { name: "Modules", href: "#", icon: ViewColumnsIcon },
 ];
 
@@ -15,7 +17,7 @@ export default function Settings({
   settings,
   setSettings,
 }) {
-  const [group, setGroup] = useState("Settings");
+  const [group, setGroup] = useState("Display");
 
   return (
     <div className="settings-panel">
@@ -42,8 +44,11 @@ export default function Settings({
       </aside>
 
       <div className="settings-panel__content">
-        {group === "Settings" && (
-          <SettingsSettings settings={settings} setSettings={setSettings} />
+        {group === "Display" && (
+          <SettingsDisplay settings={settings} setSettings={setSettings} />
+        )}
+        {group === "Synchronization" && (
+          <SettingsSynchronization settings={settings} setSettings={setSettings} />
         )}
         {group === "Modules" && (
           <SettingsModules

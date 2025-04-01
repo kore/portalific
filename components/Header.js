@@ -38,7 +38,7 @@ export default function Header({
           <ExclamationTriangleIcon className="header__icon" aria-hidden="true" />
         </button>
       )}
-      <Modal open={showErrors} setOpen={setShowErrors}>
+      <Modal settings={settings} open={showErrors} setOpen={setShowErrors}>
         <ul className="error-list">
           {errors.map((error, index) => (
             <li key={index} className="error-list__item">
@@ -87,7 +87,7 @@ export default function Header({
           <Cog8ToothIcon className="header__icon" aria-hidden="true" />
         </button>
       )}
-      <Modal open={showSettings} setOpen={setShowSettings}>
+      <Modal settings={settings} open={showSettings} setOpen={setShowSettings}>
         <Settings
           modules={modules}
           setModules={setModules}
