@@ -45,7 +45,7 @@ export default function Welcome({
           className="welcome__input welcome__input--name"
         />
         , there are various settings you can configure. Most importantly it is
-        about the number of columns (
+        about the number of <label htmlFor="columns">columns</label> (
         <select
           type="text"
           name="columns"
