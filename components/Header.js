@@ -1,13 +1,12 @@
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   Cog8ToothIcon,
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/outline";
-import logo from "../images/logo.svg";
 import Modal from "./Modal";
 import Settings from "./Settings";
+import Logo from "./Logo";
 
 export default function Header({
   name,
@@ -24,9 +23,7 @@ export default function Header({
 
   return (
     <header className="header">
-      <div className="header__logo">
-        <Image src={logo} layout="fill" alt="Portalific" />
-      </div>
+      <Logo className="header__logo" />
       <Link href="/" className="header__title">
         {settings.name && settings.name + "'s "}
         {name}
@@ -41,7 +38,7 @@ export default function Header({
           <ExclamationTriangleIcon className="header__icon" aria-hidden="true" />
         </button>
       )}
-      <Modal open={showErrors} setOpen={setShowErrors}>
+      <Modal settings={settings} open={showErrors} setOpen={setShowErrors}>
         <ul className="error-list">
           {errors.map((error, index) => (
             <li key={index} className="error-list__item">
@@ -90,7 +87,7 @@ export default function Header({
           <Cog8ToothIcon className="header__icon" aria-hidden="true" />
         </button>
       )}
-      <Modal open={showSettings} setOpen={setShowSettings}>
+      <Modal settings={settings} open={showSettings} setOpen={setShowSettings}>
         <Settings
           modules={modules}
           setModules={setModules}

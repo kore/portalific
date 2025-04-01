@@ -158,7 +158,7 @@ export default function Modules({
       </div>
 
       <div className="settings__section settings__section--border">
-        <ul className={`grid grid__cols-${settings.columns}`}>
+        <ul className={`grid grid__cols-${settings.columns}`} style={{ marginTop: "2rem" }}>
           {[...Array(+settings.columns).keys()].map((column) => {
             return (
               <Column
@@ -201,6 +201,7 @@ export default function Modules({
                                     />
                                   </button>
                                   <Modal
+                                    settings={settings}
                                     open={settingsShown === module.id}
                                     setOpen={() => setShowSettings(null)}
                                   >

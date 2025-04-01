@@ -1,0 +1,130 @@
+// Default theme
+
+.theme--black {
+  // Base colors
+  --color-text: #f2f2ff;
+  --color-bg: #1c1c1c;
+  --color-error: #ff6b6b;
+
+  // Primary colors - consolidated to 5 variants
+  --color-primary-100: #f5cdad;
+  --color-primary-300: #efb17e;
+  --color-primary-500: #ed9f5a;
+  --color-primary-700: #9e5315;
+  --color-primary-900: #68370e;
+  
+  // Gray colors - consolidated to 5 variants
+  --color-gray-100: #202020;
+  --color-gray-300: #373737;
+  --color-gray-500: #6b6b6b;
+  --color-gray-700: #d1d1d1;
+  --color-gray-900: #f3f3f3;
+  
+  // Red colors - consolidated to 3 variants for error states
+  --color-red-100: #fee2e2;
+  --color-red-500: #ef4444;
+  --color-red-900: #7f1d1d;
+  
+  // Basic colors
+  --color-transparent: transparent;
+  
+  // Alpha colors - consolidated
+  --color-black-75: rgba(255, 255, 255, 0.75);
+  --color-black-50: rgba(255, 255, 255, 0.5);
+  --color-black-25: rgba(255, 255, 255, 0.25);
+  --color-black-10: rgba(255, 255, 255, 0.1);
+  
+  --color-white-80: rgba(0, 0, 0, 0.8);
+  --color-white-50: rgba(0, 0, 0, 0.5);
+  --color-white-20: rgba(0, 0, 0, 0.2);
+  
+  // Mixed alpha colors - essential combinations only
+  --color-gray-900-50: rgba(17, 24, 39, 0.5); // Used for overlays
+  --color-gray-900-10: rgba(17, 24, 39, 0.2); // Used for borders
+  
+  --color-primary-500-30: rgba(125, 122, 255, 0.3); // Essential for button highlights
+  
+  // Fonts
+  --font-primary: ui-sans-serif, system-ui, sans-serif;
+  --font-secondary: ui-sans-serif, system-ui, sans-serif;
+  
+  // Spacing
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+
+  // Border radius
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0.2rem;
+  --radius-lg: 0.5rem;
+  
+  // Breakpoints
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+.theme--black {
+  color: var(--color-text);
+
+  .theme-switcher {
+    display: none;
+  }
+
+  .grid {
+    gap: var(--spacing-lg);
+  }
+
+  .layout {
+    &__gradient {
+      position: fixed;
+      z-index: -1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      filter: none;
+      transform: none;
+      opacity: 1;
+      
+      &--large {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        min-height: 100vh;
+        width: 100%;
+        
+        background:
+          radial-gradient(at 90% 10%, var(--color-gray-300) 0, var(--color-bg) 70%);
+      }
+
+      &--small {
+        display: none;
+      }
+    }
+  }
+
+  .modules {
+     box-shadow: 1px 0px 1px 0px var(--color-gray-500) , -3px 3px 4px 1px var(--color-white-50);
+
+     .module {
+       background-color: var(--color-white-80);
+	   backdrop-filter: blur(10px);
+     }
+  }
+
+  // Add some more accents
+  .clock__time,
+  .countdown__name,
+  .todo-list__checkbox-icon,
+  .feed__source {
+    color: var(--color-primary-500);
+  }
+}
+

@@ -248,6 +248,7 @@ export default function Index() {
                     return (
                       <Module
                         key={module.id}
+                        type={module.type}
                         id={module.id}
                         column={column}
                         index={index}

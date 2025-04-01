@@ -14,8 +14,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#4b4999",
-  "background_color": "#4b4999",
+  "theme_color": "#748e63",
+  "background_color": "#748e63",
   "start_url": "https://portalific.com",
   "display": "standalone"
 }

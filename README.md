@@ -6,9 +6,18 @@ entirely browser-based, so your data is safe and secure. For cross-device
 synchronization you can optionally use a backend to synchronize the data
 continuously between devices.
 
-![image](https://raw.githubusercontent.com/kore/portalific/main/images/screnshot.png)
+![Screenshot of Default Light Theme](images/screenshot-default-light.png)
 
 For more information visit https://portalific.com
+
+### Themes
+
+There're different themes available, where you can also customize the
+background using colors or images. Custom theme could be developed using BEM
+based styling as you can see when checking out the exsting themes in
+`styles/theme-*.scss`.
+
+<img alt="Default Dark Theme" src="images/screenshot-default-dark.png" width="400" /> <img alt="Black Satin Theme" src="images/screenshot-black-satin.png" width="400" /> <img alt="Polished Nature Theme" src="images/screenshot-nature.png" width="400" /> <img alt="Nature Theme with background" src="images/screenshot-nature-bg.png" width="400" />
 
 ### Setting Up Locally
 
