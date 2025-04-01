@@ -1,5 +1,4 @@
 import { Fragment, useEffect } from "react";
-import classNames from "classnames";
 
 export default function Layout({ children, settings = {} }) {
   const setAppTheme = () => {
@@ -47,9 +46,7 @@ export default function Layout({ children, settings = {} }) {
             : null,
         }}
       >
-        <div className="layout__container">
-          {children}
-        </div>
+        <div className="layout__container">{children}</div>
         {!settings.backgroundColor && !settings.backgroundImage && (
           <Fragment>
             <div className="layout__gradient layout__gradient--large" />

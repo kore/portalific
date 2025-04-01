@@ -50,13 +50,12 @@ const ThemeSwitcher = () => {
           setAuto(false);
         }}
         className={`theme-switcher__button theme-switcher__button--dark ${
-          hasLocalStorage && localStorage.getItem("theme") === "dark" ? "theme-switcher__button--active" : ""
+          hasLocalStorage && localStorage.getItem("theme") === "dark"
+            ? "theme-switcher__button--active"
+            : ""
         }`}
       >
-        <MoonIcon
-          className="theme-switcher__icon"
-          aria-hidden="true"
-        />
+        <MoonIcon className="theme-switcher__icon" aria-hidden="true" />
       </button>
 
       <button
@@ -68,13 +67,12 @@ const ThemeSwitcher = () => {
           setAuto(false);
         }}
         className={`theme-switcher__button theme-switcher__button--light ${
-          hasLocalStorage && localStorage.getItem("theme") === "light" ? "theme-switcher__button--active" : ""
+          hasLocalStorage && localStorage.getItem("theme") === "light"
+            ? "theme-switcher__button--active"
+            : ""
         }`}
       >
-        <SunIcon
-          className="theme-switcher__icon"
-          aria-hidden="true"
-        />
+        <SunIcon className="theme-switcher__icon" aria-hidden="true" />
       </button>
 
       <button
@@ -88,10 +86,7 @@ const ThemeSwitcher = () => {
           auto ? "theme-switcher__button--active" : ""
         }`}
       >
-        <ClockIcon
-          className="theme-switcher__icon"
-          aria-hidden="true"
-        />
+        <ClockIcon className="theme-switcher__icon" aria-hidden="true" />
       </button>
     </div>
   );

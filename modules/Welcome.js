@@ -18,16 +18,18 @@ export default function Welcome({
         <span className="welcome__subtitle">
           Offline-first, privacy-focussed, open-source personal portal
         </span>
-        <span className="welcome__main-title">
-          Portalific
-        </span>
+        <span className="welcome__main-title">Portalific</span>
       </h1>
       <p className="welcome__intro">
         Portalific is an OpenSource browser based portal, displaying your feeds,
         your calendars, and other information of personal relevance. It works
-        (almost <a href="#privacy" className="welcome__link">*</a>) entirely browser-based, so your data
-        is safe and secure. For cross-device synchronization you can optionally
-        use a backend to synchronize the data continuously between devices.
+        (almost{" "}
+        <a href="#privacy" className="welcome__link">
+          *
+        </a>
+        ) entirely browser-based, so your data is safe and secure. For
+        cross-device synchronization you can optionally use a backend to
+        synchronize the data continuously between devices.
       </p>
 
       <h2 className="welcome__section-title">Get Started</h2>
@@ -91,7 +93,9 @@ export default function Welcome({
         </li>
         <li className="welcome__module-item">
           <h3 className="welcome__module-title">Countdown</h3>
-          <p className="welcome__module-description">Show countdowns to (for you) important days.</p>
+          <p className="welcome__module-description">
+            Show countdowns to (for you) important days.
+          </p>
         </li>
         <li className="welcome__module-item">
           <h3 className="welcome__module-title">Calendar</h3>
@@ -102,7 +106,9 @@ export default function Welcome({
         </li>
         <li className="welcome__module-item">
           <h3 className="welcome__module-title">Feed</h3>
-          <p className="welcome__module-description">Show new post from a set of RSS and Atom feeds.</p>
+          <p className="welcome__module-description">
+            Show new post from a set of RSS and Atom feeds.
+          </p>
         </li>
       </ul>
 
@@ -127,24 +133,35 @@ export default function Welcome({
         to see how this would look like.
       </p>
 
-      <h2 className="welcome__section-title" id="privacy">Privacy</h2>
+      <h2 className="welcome__section-title" id="privacy">
+        Privacy
+      </h2>
       <p className="welcome__text">
         All data is, by default, stored only in your browser, in{" "}
-        <a className="welcome__link" href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">
+        <a
+          className="welcome__link"
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"
+        >
           Local Storage
         </a>
         .
       </p>
       <p className="welcome__text">
         Browsers don&apos;t allow to request data from foreign domains, though,{" "}
-        <a className="welcome__link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">
+        <a
+          className="welcome__link"
+          href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS"
+        >
           unless some very specific headers are set
         </a>
         . This is why requesting feeds or calendar data has to go through a
         server-side proxy. This proxy, in theory, would allow to log all your
         calendar and feed contents. The used implementation does not log
         anything like this, and{" "}
-        <a className="welcome__link" href="https://github.com/kore/portalific/blob/main/docs/allowProxy.php">
+        <a
+          className="welcome__link"
+          href="https://github.com/kore/portalific/blob/main/docs/allowProxy.php"
+        >
           can be found in the code repository
         </a>
         . If you want to be super safe, you should host Portalific yourself and

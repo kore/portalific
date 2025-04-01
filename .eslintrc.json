@@ -3,7 +3,6 @@
     "eslint:recommended",
     "next/core-web-vitals",
     "plugin:prettier/recommended",
-    "plugin:tailwindcss/recommended",
     "plugin:import/recommended"
   ],
   "overrides": [
@@ -18,20 +17,8 @@
     "es6": true,
     "jest": true
   },
-  "plugins": ["tailwindcss", "import"],
+  "plugins": ["import"],
   "rules": {
-    "tailwindcss/classnames-order": [
-      "warn",
-      {
-        "officialSorting": true
-      }
-    ],
-    "tailwindcss/enforces-negative-arbitrary-values": "warn",
-    "tailwindcss/enforces-shorthand": "warn",
-    "tailwindcss/migration-from-tailwind-2": "warn",
-    "tailwindcss/no-arbitrary-value": "warn",
-    "tailwindcss/no-custom-classname": "warn",
-    "tailwindcss/no-contradicting-classname": "error",
     "prettier/prettier": "error",
     "import/order": [
       "warn",

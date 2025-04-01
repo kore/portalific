@@ -7,8 +7,8 @@ import {
 } from "@heroicons/react/24/outline";
 import axios from "axios";
 import Parser from "rss-parser";
-import resolveAllPromises from "../../utils/resolveAllPromises";
 import mapFeedItems from "./mapFeedItems";
+import resolveAllPromises from "../../utils/resolveAllPromises";
 
 export default function Feed({
   configuration,
@@ -106,10 +106,7 @@ export default function Feed({
               {updated.toLocaleTimeString("de-DE", { timeStyle: "short" })}
             </span>
           ) : (
-            <ArrowPathIcon
-              className="feed__loading-icon"
-              aria-hidden="true"
-            />
+            <ArrowPathIcon className="feed__loading-icon" aria-hidden="true" />
           )}
         </div>
         {(configuration.feeds || []).length < 2 ? (
@@ -141,7 +138,10 @@ export default function Feed({
                 />
               </button>
               <Menu.Button className="feed__dropdown-button">
-                <ChevronDownIcon className="feed__button-icon" aria-hidden="true" />
+                <ChevronDownIcon
+                  className="feed__button-icon"
+                  aria-hidden="true"
+                />
               </Menu.Button>
             </div>
 
@@ -179,10 +179,7 @@ export default function Feed({
           }
 
           return (
-            <li
-              key={feedItem.id}
-              className="feed__item"
-            >
+            <li key={feedItem.id} className="feed__item">
               <a
                 className="feed__link"
                 style={{ borderColor: feedItem.color }}
@@ -209,7 +206,8 @@ export default function Feed({
                 target="_blank"
                 rel="noreferrer"
               >
-                <span className="feed__source">[{feedItem.source}]</span> {feedItem.title}
+                <span className="feed__source">[{feedItem.source}]</span>{" "}
+                {feedItem.title}
                 {configuration.showSummary && feedItem.summary && (
                   <span className="feed__summary">
                     {feedItem.summary.replace(/<[^>]*>/g, "")}

@@ -96,7 +96,9 @@ export default function Module({
 
   return (
     <li
-      className={`module module--${type} ${visibilityClasses.join(" ")} theme-transition`}
+      className={`module module--${type} ${visibilityClasses.join(
+        " "
+      )} theme-transition`}
       style={{ opacity: isDragging ? 0.2 : 1 }}
       ref={ref}
       data-handler-id={handlerId}

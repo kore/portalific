@@ -23,12 +23,20 @@ export default function Countdown({ configuration }) {
         let caption = daysRemaining + " days";
 
         if (daysRemaining >= 30) {
-          caption = Math.floor(daysRemaining / 30.4375) + " months, " + (daysRemaining % 30.4375).toFixed(0) + " days";
+          caption =
+            Math.floor(daysRemaining / 30.4375) +
+            " months, " +
+            (daysRemaining % 30.4375).toFixed(0) +
+            " days";
           daysRemaining = (daysRemaining / 30.4375).toFixed(0);
           type = "months";
 
           if (daysRemaining >= 12) {
-            caption = Math.floor(daysRemaining / 12) + " years, " + (daysRemaining % 12).toFixed(0) + " months";
+            caption =
+              Math.floor(daysRemaining / 12) +
+              " years, " +
+              (daysRemaining % 12).toFixed(0) +
+              " months";
             daysRemaining = (daysRemaining / 12).toFixed(0);
             type = "years";
           }

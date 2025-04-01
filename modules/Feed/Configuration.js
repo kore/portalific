@@ -38,11 +38,17 @@ export default function FeedConfiguration({ configuration, setConfiguration }) {
             <Switch
               checked={configuration.showSummary}
               onChange={(value) => setConfiguration("showSummary", value)}
-              className={`settings__switch ${configuration.showSummary ? 'settings__switch--active' : ''}`}
+              className={`settings__switch ${
+                configuration.showSummary ? "settings__switch--active" : ""
+              }`}
             >
               <span
                 aria-hidden="true"
-                className={`settings__switch-handle ${configuration.showSummary ? 'settings__switch-handle--active' : ''}`}
+                className={`settings__switch-handle ${
+                  configuration.showSummary
+                    ? "settings__switch-handle--active"
+                    : ""
+                }`}
               />
             </Switch>
           </Switch.Group>
@@ -51,9 +57,7 @@ export default function FeedConfiguration({ configuration, setConfiguration }) {
 
       <div className="settings__section settings__section--border">
         <div className="settings__header">
-          <h2 className="settings__heading">
-            Feed
-          </h2>
+          <h2 className="settings__heading">Feed</h2>
           <p className="settings__description">
             Configure a set of Atom and RSS feed sources to collect news items
             from

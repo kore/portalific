@@ -9,12 +9,10 @@ export default function ClockConfiguration({
     <Fragment>
       <div className="settings__section settings__section--border">
         <div className="settings__header">
-          <h2 className="settings__heading">
-            Clock
-          </h2>
+          <h2 className="settings__heading">Clock</h2>
           <p className="settings__description">
-            A simple (optionally analogue) watch displaying the current time
-            and date.
+            A simple (optionally analogue) watch displaying the current time and
+            date.
           </p>
         </div>
         <ul className="settings__toggle-list">
@@ -27,11 +25,17 @@ export default function ClockConfiguration({
             <Switch
               checked={configuration.showAnalogue}
               onChange={(value) => setConfiguration("showAnalogue", value)}
-              className={`settings__switch ${configuration.showAnalogue ? 'settings__switch--active' : ''}`}
+              className={`settings__switch ${
+                configuration.showAnalogue ? "settings__switch--active" : ""
+              }`}
             >
               <span
                 aria-hidden="true"
-                className={`settings__switch-handle ${configuration.showAnalogue ? 'settings__switch-handle--active' : ''}`}
+                className={`settings__switch-handle ${
+                  configuration.showAnalogue
+                    ? "settings__switch-handle--active"
+                    : ""
+                }`}
               />
             </Switch>
           </Switch.Group>
@@ -44,11 +48,17 @@ export default function ClockConfiguration({
             <Switch
               checked={configuration.showSeconds}
               onChange={(value) => setConfiguration("showSeconds", value)}
-              className={`settings__switch ${configuration.showSeconds ? 'settings__switch--active' : ''}`}
+              className={`settings__switch ${
+                configuration.showSeconds ? "settings__switch--active" : ""
+              }`}
             >
               <span
                 aria-hidden="true"
-                className={`settings__switch-handle ${configuration.showSeconds ? 'settings__switch-handle--active' : ''}`}
+                className={`settings__switch-handle ${
+                  configuration.showSeconds
+                    ? "settings__switch-handle--active"
+                    : ""
+                }`}
               />
             </Switch>
           </Switch.Group>

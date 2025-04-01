@@ -13,9 +13,7 @@ export default function CalendarConfiguration({
     <Fragment>
       <div className="settings__section settings__section--border">
         <div className="settings__header">
-          <h2 className="settings__heading">
-            Calendar
-          </h2>
+          <h2 className="settings__heading">Calendar</h2>
           <p className="settings__description">
             Configure iCalendar files to be shown in a simplified calendar
             overview.

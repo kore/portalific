@@ -7,11 +7,11 @@ import {
   DeviceTabletIcon,
   ComputerDesktopIcon,
 } from "@heroicons/react/24/outline";
+import ShowHideButton from "./ShowHideButton";
 import Column from "../Column";
 import ErrorBoundary from "../ErrorBoundary";
 import Modal from "../Modal";
 import Module from "../Module";
-import ShowHideButton from "./ShowHideButton";
 
 const availableModules = {
   clock: dynamic(() => import("../../modules/Clock/Configuration")),
@@ -35,9 +35,6 @@ export default function Modules({
   const [column, setColumn] = useState("0");
   const [settingsShown, setShowSettings] = useState(null);
 
-  // Dynamic class names: grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4
-  const gridClassName = "grid-cols-" + (settings.columns ?? 3);
-
   const setDeviceVisibility = (column, index, device, hidden) => {
     let moduleToUpdate = modules[column][index];
     if (!Array.isArray(moduleToUpdate.hiddenOnDevices)) {
@@ -59,9 +56,7 @@ export default function Modules({
     <Fragment>
       <div className="settings__section">
         <div className="settings__header">
-          <h2 className="settings__heading">
-            Configure Modules
-          </h2>
+          <h2 className="settings__heading">Configure Modules</h2>
           <p className="settings__description">
             Add modules from the list of available modules and configure them.
           </p>
@@ -158,7 +153,10 @@ export default function Modules({
       </div>
 
       <div className="settings__section settings__section--border">
-        <ul className={`grid grid__cols-${settings.columns}`} style={{ marginTop: "2rem" }}>
+        <ul
+          className={`grid grid__cols-${settings.columns}`}
+          style={{ marginTop: "2rem" }}
+        >
           {[...Array(+settings.columns).keys()].map((column) => {
             return (
               <Column
@@ -169,7 +167,8 @@ export default function Modules({
               >
                 <ul className="modules">
                   {(modules[column] ?? []).map((module, index) => {
-                    const ModuleSettings = availableModules[module.type] ?? null;
+                    const ModuleSettings =
+                      availableModules[module.type] ?? null;
 
                     return (
                       <Module
@@ -221,9 +220,11 @@ export default function Modules({
                                 onClick={() => {
                                   setModules(
                                     (modules ?? []).map((column) => {
-                                      return (column ?? []).filter((toFilter) => {
-                                        return toFilter.id !== module.id;
-                                      });
+                                      return (column ?? []).filter(
+                                        (toFilter) => {
+                                          return toFilter.id !== module.id;
+                                        }
+                                      );
                                     })
                                   );
                                 }}

@@ -19,14 +19,14 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    
+
     &--large {
       max-height: 800px;
       height: 80vh;
       max-width: 1400px;
       top: 5rem;
       opacity: 0.4;
-      
+
       background: radial-gradient(
           at 71% 77%,
           var(--color-gradient-1) 0,
@@ -39,14 +39,14 @@
         radial-gradient(at 24% 7%, var(--color-gradient-2) 0, transparent 40%),
         radial-gradient(at 76% 46%, var(--color-gradient-1) 0, transparent 50%);
     }
-    
+
     &--small {
       height: 600px;
       max-width: 900px;
       bottom: 0;
       transform: translateX(-50%) rotate(190deg);
       opacity: 0.2;
-      
+
       background: radial-gradient(
           at 83% 25%,
           var(--color-gradient-1) 0,

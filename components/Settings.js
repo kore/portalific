@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { Cog8ToothIcon, ArrowPathIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
+import {
+  Cog8ToothIcon,
+  ArrowPathIcon,
+  ViewColumnsIcon,
+} from "@heroicons/react/24/outline";
 import SettingsDisplay from "./Settings/Display";
-import SettingsSynchronization from "./Settings/Synchronization";
 import SettingsModules from "./Settings/Modules";
+import SettingsSynchronization from "./Settings/Synchronization";
 
 const groups = [
   { name: "Display", href: "#", icon: Cog8ToothIcon },
@@ -29,11 +33,15 @@ export default function Settings({
               <button
                 key={item.name}
                 onClick={() => setGroup(item.name)}
-                className={`settings-panel__nav-button ${current ? 'settings-panel__nav-button--active' : ''}`}
+                className={`settings-panel__nav-button ${
+                  current ? "settings-panel__nav-button--active" : ""
+                }`}
                 aria-current={current ? "page" : undefined}
               >
                 <item.icon
-                  className={`settings-panel__nav-icon ${current ? 'settings-panel__nav-icon--active' : ''}`}
+                  className={`settings-panel__nav-icon ${
+                    current ? "settings-panel__nav-icon--active" : ""
+                  }`}
                   aria-hidden="true"
                 />
                 <span className="settings-panel__nav-text">{item.name}</span>
@@ -48,7 +56,10 @@ export default function Settings({
           <SettingsDisplay settings={settings} setSettings={setSettings} />
         )}
         {group === "Synchronization" && (
-          <SettingsSynchronization settings={settings} setSettings={setSettings} />
+          <SettingsSynchronization
+            settings={settings}
+            setSettings={setSettings}
+          />
         )}
         {group === "Modules" && (
           <SettingsModules

@@ -1,38 +1,6 @@
-import { Fragment, useState } from "react";
-import { Switch } from "@headlessui/react";
-import {
-  EyeIcon,
-  EyeSlashIcon,
-  ClipboardDocumentIcon,
-  ClipboardDocumentCheckIcon,
-  LockClosedIcon,
-  LockOpenIcon,
-} from "@heroicons/react/24/outline";
-import { QRCodeSVG } from "qrcode.react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Fragment } from "react";
 
 export default function Settings({ settings, setSettings }) {
-  const [copied, setCopied] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [includePassword, setIncludePassword] = useState(false);
-
-  const setSetting = (setting, value) => {
-    if (setting === "synchronize" && value) {
-      settings.identifier =
-        settings.identifier || (Math.random() + 1).toString(36).substring(2);
-    }
-
-    setCopied(false);
-    setSettings({
-      ...settings,
-      [setting]: value,
-    });
-  };
-
-  const setupLink =
-    `${window.location.host}/setup?identifier=${settings.identifier}` +
-    (includePassword ? `&password=${settings.password}` : "");
-
   return (
     <Fragment>
       {/* Main section */}
@@ -55,7 +23,12 @@ export default function Settings({ settings, setSettings }) {
                 name="name"
                 id="name"
                 value={settings.name ?? ""}
-                onChange={(event) => setSetting("name", event.target.value)}
+                onChange={(event) =>
+                  setSettings({
+                    ...settings,
+                    name: event.target.value,
+                  })
+                }
                 className="settings__input"
               />
             </div>
@@ -68,7 +41,9 @@ export default function Settings({ settings, setSettings }) {
                 name="columns"
                 id="columns"
                 value={settings.columns ?? ""}
-                onChange={(event) => setSetting("columns", event.target.value)}
+                onChange={(event) =>
+                  setSettings({ ...settings, columns: event.target.value })
+                }
                 className="settings__input"
               >
                 <option value="1">1</option>
@@ -86,7 +61,10 @@ export default function Settings({ settings, setSettings }) {
           <h2 className="settings__subheading">Theme</h2>
 
           <div className="settings__form-row">
-            <div className="settings__form-group" style={{ gridColumn: "1/13" }}>
+            <div
+              className="settings__form-group"
+              style={{ gridColumn: "1/13" }}
+            >
               <label htmlFor="theme" className="settings__label">
                 Theme
               </label>
@@ -94,7 +72,9 @@ export default function Settings({ settings, setSettings }) {
                 name="theme"
                 id="theme"
                 value={settings.theme ?? "default"}
-                onChange={(event) => setSetting("theme", event.target.value)}
+                onChange={(event) =>
+                  setSettings({ ...settings, theme: event.target.value })
+                }
                 className="settings__input"
               >
                 <option value="default">Default</option>
@@ -117,14 +97,20 @@ export default function Settings({ settings, setSettings }) {
                 id="background-color"
                 value={settings.backgroundColor ?? "#7D7AFF"}
                 onChange={(event) =>
-                  setSetting("backgroundColor", event.target.value)
+                  setSettings({
+                    ...settings,
+                    backgroundColor: event.target.value,
+                  })
                 }
                 className="settings__input"
                 style={{ height: "38px" }}
               />
             </div>
 
-            <div className="settings__form-group" style={{ gridColumn: "3/11" }}>
+            <div
+              className="settings__form-group"
+              style={{ gridColumn: "3/11" }}
+            >
               <label htmlFor="background-image" className="settings__label">
                 Image (URL)
               </label>
@@ -135,13 +121,19 @@ export default function Settings({ settings, setSettings }) {
                 placeholder="Background image URL"
                 value={settings.backgroundImage ?? ""}
                 onChange={(event) =>
-                  setSetting("backgroundImage", event.target.value)
+                  setSettings({
+                    ...settings,
+                    backgroundImage: event.target.value,
+                  })
                 }
                 className="settings__input"
               />
             </div>
 
-            <div className="settings__form-group" style={{ gridColumn: "11/13" }}>
+            <div
+              className="settings__form-group"
+              style={{ gridColumn: "11/13" }}
+            >
               <button
                 type="button"
                 className="button button--danger"
@@ -150,7 +142,7 @@ export default function Settings({ settings, setSettings }) {
                     ...settings,
                     backgroundImage: undefined,
                     backgroundColor: undefined,
-                    theme: 'default',
+                    theme: "default",
                   });
                 }}
               >

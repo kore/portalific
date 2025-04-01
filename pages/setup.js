@@ -167,8 +167,8 @@ export default function Setup() {
           </div>
 
           <ul role="list" className="error-list error-list--import">
-            {steps.map((step, index) => (
-              <li className="error-list__item" key={step.message}>
+            {steps.map((step, i) => (
+              <li className="error-list__item" key={step.message + i}>
                 <div className="error-list__content">
                   <div className="error-list__icon-container">
                     <step.icon

@@ -178,9 +178,14 @@ export default function Calendar({ configuration, pushError }) {
                           </p>
                           <p className="calendar__event-time">
                             {appointment.fullDay ? (
-                              <em className="calendar__event-fullday">full day</em>
+                              <em className="calendar__event-fullday">
+                                full day
+                              </em>
                             ) : (
-                              <time dateTime={appointment.start.toISOString()} className="calendar__event-starttime">
+                              <time
+                                dateTime={appointment.start.toISOString()}
+                                className="calendar__event-starttime"
+                              >
                                 {appointment.start.toLocaleTimeString("de-DE", {
                                   timeStyle: "short",
                                 })}

@@ -5,7 +5,11 @@ export default function ShowHideButton({ hidden, onClick, children }) {
     <button
       type="button"
       onClick={() => onClick(!hidden)}
-      className={`theme-switcher__button ${hidden ? 'theme-switcher__button--hidden' : 'theme-switcher__button--visible'}`}
+      className={`theme-switcher__button ${
+        hidden
+          ? "theme-switcher__button--hidden"
+          : "theme-switcher__button--visible"
+      }`}
     >
       {hidden && (
         <XCircleIcon

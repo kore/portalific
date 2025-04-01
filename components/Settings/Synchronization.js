@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { Switch } from "@headlessui/react";
 import {
   EyeIcon,
@@ -43,7 +43,7 @@ export default function Settings({ settings, setSettings }) {
             synchronization.
           </p>
         </div>
-        
+
         <ul className="settings__toggle-list">
           <Switch.Group as="li" className="settings__toggle-item">
             <div className="settings__toggle-content">
@@ -51,25 +51,33 @@ export default function Settings({ settings, setSettings }) {
                 Enable synchronization
               </Switch.Label>
               <Switch.Description className="settings__toggle-description">
-                Once enabled we will transfer your encrypted configuration to
-                a storage backend. You can then connect additional devices which
+                Once enabled we will transfer your encrypted configuration to a
+                storage backend. You can then connect additional devices which
                 will use the same configuration.
               </Switch.Description>
             </div>
             <Switch
               checked={settings.synchronize}
               onChange={(value) => setSetting("synchronize", value)}
-              className={`settings__switch ${settings.synchronize ? 'settings__switch--active' : ''}`}
+              className={`settings__switch ${
+                settings.synchronize ? "settings__switch--active" : ""
+              }`}
             >
               <span
                 aria-hidden="true"
-                className={`settings__switch-handle ${settings.synchronize ? 'settings__switch-handle--active' : ''}`}
+                className={`settings__switch-handle ${
+                  settings.synchronize ? "settings__switch-handle--active" : ""
+                }`}
               />
             </Switch>
           </Switch.Group>
         </ul>
 
-        <div className={`settings__sync-panel ${!settings.synchronize ? 'settings__sync-panel--disabled' : ''}`}>
+        <div
+          className={`settings__sync-panel ${
+            !settings.synchronize ? "settings__sync-panel--disabled" : ""
+          }`}
+        >
           <div className="settings__sync-form">
             <label htmlFor="identifier" className="settings__label">
               Identifier
@@ -82,7 +90,10 @@ export default function Settings({ settings, setSettings }) {
               disabled
               className="settings__input"
             />
-            <label htmlFor="password" className="settings__label settings__label--spaced">
+            <label
+              htmlFor="password"
+              className="settings__label settings__label--spaced"
+            >
               Password{" "}
               {includePassword ? " (included in link)" : " (not in link)"}
             </label>
@@ -93,9 +104,7 @@ export default function Settings({ settings, setSettings }) {
                 id="password"
                 disabled={!settings.synchronize}
                 value={settings.password ?? ""}
-                onChange={(event) =>
-                  setSetting("password", event.target.value)
-                }
+                onChange={(event) => setSetting("password", event.target.value)}
                 className="settings__input"
               />
 
@@ -117,7 +126,7 @@ export default function Settings({ settings, setSettings }) {
               </button>
             </div>
           </div>
-          
+
           {settings.synchronize && (
             <div className="settings__sync-qr">
               <QRCodeSVG

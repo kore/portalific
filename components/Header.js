@@ -4,9 +4,9 @@ import {
   Cog8ToothIcon,
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/outline";
+import Logo from "./Logo";
 import Modal from "./Modal";
 import Settings from "./Settings";
-import Logo from "./Logo";
 
 export default function Header({
   name,
@@ -35,7 +35,10 @@ export default function Header({
           onClick={() => setShowErrors(true)}
         >
           <span className="sr-only">View notifications</span>
-          <ExclamationTriangleIcon className="header__icon" aria-hidden="true" />
+          <ExclamationTriangleIcon
+            className="header__icon"
+            aria-hidden="true"
+          />
         </button>
       )}
       <Modal settings={settings} open={showErrors} setOpen={setShowErrors}>
@@ -57,9 +60,7 @@ export default function Header({
                 <div className="error-list__message">
                   <p>{error.error}</p>
                   {error.info && (
-                    <div className="error-list__message-info">
-                      {error.info}
-                    </div>
+                    <div className="error-list__message-info">{error.info}</div>
                   )}
                 </div>
               </div>

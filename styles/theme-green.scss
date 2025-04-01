@@ -14,43 +14,53 @@
   --color-primary-900: #06271b;
 
   --color-secondary-500: #e0bb52;
-  
+
   // Gray colors - consolidated to 5 variants
   --color-gray-100: #f3f3f3;
   --color-gray-300: #d1d1d1;
   --color-gray-500: #6b6b6b;
   --color-gray-700: #373737;
   --color-gray-900: #202020;
-  
+
   // Red colors - consolidated to 3 variants for error states
   --color-red-100: #fee2e2;
   --color-red-500: #ef4444;
   --color-red-900: #7f1d1d;
-  
+
   // Basic colors
   --color-transparent: transparent;
-  
+
   // Alpha colors - consolidated
   --color-green-75: rgba(0, 0, 0, 0.75);
   --color-green-50: rgba(0, 0, 0, 0.5);
   --color-green-25: rgba(0, 0, 0, 0.25);
   --color-green-10: rgba(0, 0, 0, 0.1);
-  
+
   --color-white-80: rgba(255, 255, 255, 0.8);
   --color-white-50: rgba(255, 255, 255, 0.5);
   --color-white-20: rgba(255, 255, 255, 0.2);
-  
+
   // Mixed alpha colors - essential combinations only
   --color-gray-900-50: rgba(17, 24, 39, 0.5); // Used for overlays
   --color-gray-900-10: rgba(17, 24, 39, 0.2); // Used for borders
-  
-  --color-primary-500-40: rgba(19, 77, 58, 0.4); // Essential for module highlights
-  --color-primary-500-30: rgba(19, 77, 58, 0.3); // Essential for button highlights
-  
+
+  --color-primary-500-40: rgba(
+    19,
+    77,
+    58,
+    0.4
+  ); // Essential for module highlights
+  --color-primary-500-30: rgba(
+    19,
+    77,
+    58,
+    0.3
+  ); // Essential for button highlights
+
   // Fonts
   --font-primary: ui-sans-serif, system-ui, sans-serif;
   --font-secondary: ui-sans-serif, system-ui, sans-serif;
-  
+
   // Spacing
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -61,9 +71,9 @@
   // Border radius
   --radius-xs: 0.2rem;
   --radius-sm: 0.5rem;
-  --radius-md: 1.0rem;
+  --radius-md: 1rem;
   --radius-lg: 1.5rem;
-  
+
   // Breakpoints
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
@@ -107,7 +117,7 @@
       filter: none;
       transform: none;
       opacity: 1;
-      
+
       &--large {
         position: fixed;
         top: 0;
@@ -116,7 +126,7 @@
         bottom: 0;
         min-height: 100vh;
         width: 100%;
-        
+
         background: var(--color-bg);
       }
 
@@ -127,21 +137,27 @@
   }
 
   .modules {
-    box-shadow:
-       1px 1px 4px 1px var(--color-black-10),
-       5px 5px 50px 0px var(--color-primary-500-40),
-       5px 5px 100px 0px var(--color-primary-500-40);
+    box-shadow: 1px 1px 4px 1px var(--color-black-10),
+      5px 5px 50px 0px var(--color-primary-500-40),
+      5px 5px 100px 0px var(--color-primary-500-40);
 
     .module {
-       background-color: var(--color-white-80);
-	   backdrop-filter: blur(10px);
-       border: none;
+      background-color: var(--color-white-80);
+      backdrop-filter: blur(10px);
+      border: none;
     }
 
     .module--clock {
-      background:
-        radial-gradient(at 10% 10%, var(--color-primary-700) 0, var(--color-primary-300) 70%),
-        radial-gradient(at 30% 90%, var(--color-primary-700) 0, var(--color-primary-300) 50%);
+      background: radial-gradient(
+          at 10% 10%,
+          var(--color-primary-700) 0,
+          var(--color-primary-300) 70%
+        ),
+        radial-gradient(
+          at 30% 90%,
+          var(--color-primary-700) 0,
+          var(--color-primary-300) 50%
+        );
       color: var(--color-bg);
     }
 
@@ -163,16 +179,15 @@
     &__digit {
       border-radius: var(--radius-xs);
     }
-    
+
     &__digit-top {
       border-top-left-radius: var(--radius-xs);
       border-top-right-radius: var(--radius-xs);
     }
-    
+
     &__digit-bottom {
       border-bottom-left-radius: var(--radius-xs);
       border-bottom-right-radius: var(--radius-xs);
     }
   }
 }
-

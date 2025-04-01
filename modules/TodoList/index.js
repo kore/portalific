@@ -48,9 +48,7 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
                 </div>
               </div>
               <div className="todo-list__content">
-                <p className="todo-list__text">
-                  {todo.text}
-                </p>
+                <p className="todo-list__text">{todo.text}</p>
                 <p className="todo-list__created-date">
                   Created{" "}
                   {new Date(todo.create).toLocaleDateString(undefined, {
@@ -86,7 +84,10 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
         .filter((todo) => todo.resolved && new Date(todo.resolved) > today)
         .map((todo, index) => {
           return (
-            <li className="todo-list__item todo-list__item--resolved" key={todo.create}>
+            <li
+              className="todo-list__item todo-list__item--resolved"
+              key={todo.create}
+            >
               <div className="todo-list__checkbox-container">
                 <div className="todo-list__checkbox-wrapper todo-list__checkbox-wrapper--resolved">
                   <input
@@ -111,7 +112,9 @@ export default function TodoList({ configuration, updateModuleConfiguration }) {
                 </div>
               </div>
               <div className="todo-list__content todo-list__content--resolved">
-                <p className="todo-list__text todo-list__text--resolved">{todo.text}</p>
+                <p className="todo-list__text todo-list__text--resolved">
+                  {todo.text}
+                </p>
               </div>
               <div className="todo-list__due-date" />
             </li>
