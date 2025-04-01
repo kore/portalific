@@ -242,8 +242,8 @@ a {
   margin: var(--spacing-sm);
   align-items: center;
   padding: var(--spacing-sm);
-  background-color: var(--color-white-50);
-  backdrop-filter: blur(2px);
+  background-color: var(--color-white-20);
+  backdrop-filter: blur(5px);
   border-radius: var(--radius-md);
   
   &__logo {
@@ -508,11 +508,13 @@ a {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   margin: var(--spacing-sm);
   padding: var(--spacing-xs) var(--spacing-md);
-  background-color: var(--color-white-50);
-  backdrop-filter: blur(2px);
+  background-color: var(--color-white-20);
+  backdrop-filter: blur(5px);
   border-radius: var(--radius-md);
+  width: calc(100% - 2 * var(--spacing-md));
   
   &__copyright {
     margin-bottom: var(--spacing-xs);
