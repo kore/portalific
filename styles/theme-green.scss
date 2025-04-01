@@ -2,7 +2,7 @@
 
 .theme--green {
   // Base colors
-  --color-text: #627270;
+  --color-text: #080404;
   --color-bg: #f8f4f4;
   --color-error: #ff6b6b;
 
@@ -36,9 +36,9 @@
   --color-green-25: rgba(0, 0, 0, 0.25);
   --color-green-10: rgba(0, 0, 0, 0.1);
 
-  --color-white-80: rgba(255, 255, 255, 0.8);
-  --color-white-50: rgba(255, 255, 255, 0.5);
-  --color-white-20: rgba(255, 255, 255, 0.2);
+  --color-white-80: rgba(248, 244, 244, 0.8);
+  --color-white-50: rgba(248, 244, 244, 0.5);
+  --color-white-20: rgba(248, 244, 244, 0.2);
 
   // Mixed alpha colors - essential combinations only
   --color-gray-900-50: rgba(17, 24, 39, 0.5); // Used for overlays
@@ -48,7 +48,7 @@
     19,
     77,
     58,
-    0.4
+    0.2
   ); // Essential for module highlights
   --color-primary-500-30: rgba(
     19,
@@ -70,9 +70,9 @@
 
   // Border radius
   --radius-xs: 0.2rem;
-  --radius-sm: 0.5rem;
-  --radius-md: 1rem;
-  --radius-lg: 1.5rem;
+  --radius-sm: 0.3rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1.0rem;
 
   // Breakpoints
   --breakpoint-sm: 640px;
@@ -95,8 +95,6 @@
   }
 
   .header {
-    padding: var(--spacing-md) var(--spacing-sm);
-
     &__title {
       color: var(--color-primary-500);
     }
@@ -142,7 +140,7 @@
       5px 5px 100px 0px var(--color-primary-500-40);
 
     .module {
-      background-color: var(--color-white-80);
+      background-color: var(--color-white-50);
       backdrop-filter: blur(10px);
       border: none;
     }
@@ -162,16 +160,14 @@
     }
 
     .feed__header {
-      background-color: var(--color-primary-100);
+      background-color: var(--color-white-20);
       box-shadow: 0px 1px 3px 0px var(--color-black-10);
+      padding: var(--spacing-xs) var(--spacing-md);
     }
   }
 
   // Add some more accents
-  .clock__time,
-  .countdown__name,
-  .todo-list__checkbox-icon,
-  .feed__source {
+  .clock__time {
     color: var(--color-secondary-500);
   }
 
