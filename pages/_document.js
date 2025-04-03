@@ -26,7 +26,7 @@ class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#748e63" />
           <meta name="msapplication-TileColor" content="#748e63" />
-          <meta name="theme-color" content="#4b4999" />
+          <meta name="theme-color" content="#748e63" />
         </Head>
         <body className="typography theme-transition">
           <Main />
