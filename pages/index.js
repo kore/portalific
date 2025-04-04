@@ -1,26 +1,11 @@
 import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import axios from "axios";
 import { useDebouncedCallback } from "use-debounce";
-import Column from "../components/Column";
-import ErrorBoundary from "../components/ErrorBoundary";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
-import Module from "../components/Module";
+import Modules from "../components/Modules";
 import SEO from "../components/SEO";
-import NotFound from "../modules/NotFound";
-import Welcome from "../modules/Welcome";
-
-const availableModules = {
-  clock: dynamic(() => import("../modules/Clock")),
-  countdown: dynamic(() => import("../modules/Countdown")),
-  feed: dynamic(() => import("../modules/Feed")),
-  calendar: dynamic(() => import("../modules/Calendar")),
-  todo: dynamic(() => import("../modules/TodoList")),
-  notfound: NotFound,
-  welcome: Welcome,
-};
 
 export default function Index() {
   const globalData = {
@@ -135,6 +120,7 @@ export default function Index() {
           .then((response) => {
             setRevision(response.data.revision);
           });
+        // @TODO: Handle 409 (Conflict)
       }
     },
     1000
@@ -183,21 +169,6 @@ export default function Index() {
     setErrors([...errors, { error: error, info: errorInfo }]);
   };
 
-  const moveModule = (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
-    const removedModule = modules[sourceColumn][sourceIndex];
-
-    // Remove item from source column
-    modules[sourceColumn].splice(sourceIndex, 1);
-
-    // Put item into target column
-    if (!Array.isArray(modules[targetColumn])) {
-      modules[targetColumn] = [];
-    }
-    modules[targetColumn].splice(targetIndex, 0, removedModule);
-
-    setModules([...modules]);
-  };
-
   useEffect(() => {
     if (hasLocalStorage && !loaded) {
       setSettingsState(
@@ -213,9 +184,6 @@ export default function Index() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasLocalStorage]);
 
-  // Dynamic class names: grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4
-  const gridClassName = "grid__cols-" + (settings.columns ?? 3);
-
   return (
     <Layout settings={settings}>
       <SEO title={globalData.name} description={globalData.description} />
@@ -223,60 +191,19 @@ export default function Index() {
         name={globalData.name}
         modules={modules}
         setModules={setModules}
-        moveModule={moveModule}
         settings={settings}
         setSettings={setSettings}
         errors={errors}
         clearErrors={() => setErrors([])}
       />
       <main>
-        <ul className={`grid ${gridClassName}`}>
-          {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
-            return (
-              <Column
-                key={column}
-                column={column}
-                length={(modules[column] ?? []).length}
-                moveModule={moveModule}
-              >
-                <ul className="modules">
-                  {(modules[column] ?? []).map((module, index) => {
-                    const ModuleComponent =
-                      availableModules[module.type] ??
-                      availableModules["notfound"];
-
-                    return (
-                      <Module
-                        key={module.id}
-                        type={module.type}
-                        id={module.id}
-                        column={column}
-                        index={index}
-                        moveModule={moveModule}
-                        hiddenOnDevices={module.hiddenOnDevices || []}
-                      >
-                        <ErrorBoundary pushError={pushError}>
-                          <ModuleComponent
-                            configuration={module}
-                            updateModuleConfiguration={(configuration) => {
-                              modules[column][index] = configuration;
-                              setModules([...modules]);
-                            }}
-                            pushError={pushError}
-                            settings={settings}
-                            setSettings={setSettings}
-                            modules={modules}
-                            setModules={setModules}
-                          />
-                        </ErrorBoundary>
-                      </Module>
-                    );
-                  })}
-                </ul>
-              </Column>
-            );
-          })}
-        </ul>
+        <Modules
+          pushError={pushError}
+          setSettings={setSettings}
+          settings={settings}
+          modules={modules}
+          setModules={setModules}
+        />
       </main>
       <Footer copyrightText={globalData.footerText} />
     </Layout>

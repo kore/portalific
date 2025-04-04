@@ -8,10 +8,9 @@ import {
   ComputerDesktopIcon,
 } from "@heroicons/react/24/outline";
 import ShowHideButton from "./ShowHideButton";
-import Column from "../Column";
 import ErrorBoundary from "../ErrorBoundary";
 import Modal from "../Modal";
-import Module from "../Module";
+import Modules from "../Modules";
 
 const availableModules = {
   clock: dynamic(() => import("../../modules/Clock/Configuration")),
@@ -24,12 +23,11 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export default function Modules({
+export default function ModulesManager({
   settings,
   setSettings,
   modules,
   setModules,
-  moveModule,
 }) {
   const [module, setModule] = useState("none");
   const [column, setColumn] = useState("0");
@@ -152,156 +150,111 @@ export default function Modules({
         </div>
       </div>
 
-      <div className="settings__section settings__section--border">
-        <ul
-          className={`grid grid__cols-${settings.columns}`}
-          style={{ marginTop: "2rem" }}
-        >
-          {[...Array(+settings.columns).keys()].map((column) => {
-            return (
-              <Column
-                key={column}
-                column={column}
-                length={(modules[column] ?? []).length}
-                moveModule={moveModule}
-              >
-                <ul className="modules">
-                  {(modules[column] ?? []).map((module, index) => {
-                    const ModuleSettings =
-                      availableModules[module.type] ?? null;
+      <div
+        className="settings__section settings__section--border"
+        style={{ paddingTop: "1.5rem" }}
+      >
+        <Modules
+          pushError={() => {}}
+          setSettings={setSettings}
+          settings={settings}
+          modules={modules}
+          setModules={setModules}
+          moduleRenderer={(module, index) => {
+            const ModuleSettings = availableModules[module.type] ?? null;
 
-                    return (
-                      <Module
-                        key={module.id}
-                        id={module.id}
-                        column={column}
-                        index={index}
-                        moveModule={moveModule}
-                      >
-                        <ErrorBoundary>
-                          <div className="module__header">
-                            <h3 className="module__title">
-                              {capitalizeFirstLetter(module.type)}
-                            </h3>
-                            <div className="header__buttons">
-                              {ModuleSettings && (
-                                <Fragment>
-                                  <button
-                                    type="button"
-                                    className="header__button header__button--settings"
-                                    onClick={() => setShowSettings(module.id)}
-                                  >
-                                    <span className="sr-only">
-                                      View settings
-                                    </span>
-                                    <Cog8ToothIcon
-                                      className="header__icon"
-                                      aria-hidden="true"
-                                    />
-                                  </button>
-                                  <Modal
-                                    settings={settings}
-                                    open={settingsShown === module.id}
-                                    setOpen={() => setShowSettings(null)}
-                                  >
-                                    <ModuleSettings
-                                      configuration={module}
-                                      setConfiguration={(key, value) => {
-                                        module[key] = value;
-                                        setModules([...modules]);
-                                      }}
-                                    />
-                                  </Modal>
-                                </Fragment>
-                              )}
-                              <button
-                                type="button"
-                                className="header__button header__button--danger"
-                                onClick={() => {
-                                  setModules(
-                                    (modules ?? []).map((column) => {
-                                      return (column ?? []).filter(
-                                        (toFilter) => {
-                                          return toFilter.id !== module.id;
-                                        }
-                                      );
-                                    })
-                                  );
-                                }}
-                              >
-                                <span className="sr-only">Remove module</span>
-                                <TrashIcon
-                                  className="header__icon"
-                                  aria-hidden="true"
-                                />
-                              </button>
-                            </div>
-                          </div>
-                          <div className="visibility-switcher">
-                            <ShowHideButton
-                              hidden={(module.hiddenOnDevices || []).includes(
-                                "mobile"
-                              )}
-                              onClick={(hide) => {
-                                setDeviceVisibility(
-                                  column,
-                                  index,
-                                  "mobile",
-                                  hide
-                                );
-                              }}
-                            >
-                              <DevicePhoneMobileIcon
-                                className="visibility-switcher__icon"
-                                aria-hidden="true"
-                              />
-                            </ShowHideButton>
-                            <ShowHideButton
-                              hidden={(module.hiddenOnDevices || []).includes(
-                                "tablet"
-                              )}
-                              onClick={(hide) => {
-                                setDeviceVisibility(
-                                  column,
-                                  index,
-                                  "tablet",
-                                  hide
-                                );
-                              }}
-                            >
-                              <DeviceTabletIcon
-                                className="visibility-switcher__icon"
-                                aria-hidden="true"
-                              />
-                            </ShowHideButton>
-                            <ShowHideButton
-                              hidden={(module.hiddenOnDevices || []).includes(
-                                "desktop"
-                              )}
-                              onClick={(hide) => {
-                                setDeviceVisibility(
-                                  column,
-                                  index,
-                                  "desktop",
-                                  hide
-                                );
-                              }}
-                            >
-                              <ComputerDesktopIcon
-                                className="visibility-switcher__icon"
-                                aria-hidden="true"
-                              />
-                            </ShowHideButton>
-                          </div>
-                        </ErrorBoundary>
-                      </Module>
-                    );
-                  })}
-                </ul>
-              </Column>
+            return (
+              <ErrorBoundary>
+                <div className="module__header">
+                  <h3 className="module__title">
+                    {capitalizeFirstLetter(module.type)}
+                  </h3>
+                  <div className="header__buttons">
+                    {ModuleSettings && (
+                      <Fragment>
+                        <button
+                          type="button"
+                          className="header__button header__button--settings"
+                          onClick={() => setShowSettings(module.id)}
+                        >
+                          <span className="sr-only">View settings</span>
+                          <Cog8ToothIcon
+                            className="header__icon"
+                            aria-hidden="true"
+                          />
+                        </button>
+                        <Modal
+                          settings={settings}
+                          open={settingsShown === module.id}
+                          setOpen={() => setShowSettings(null)}
+                        >
+                          <ModuleSettings
+                            configuration={module}
+                            setConfiguration={(key, value) => {
+                              module[key] = value;
+                              setModules([...modules]);
+                            }}
+                          />
+                        </Modal>
+                      </Fragment>
+                    )}
+                    <button
+                      type="button"
+                      className="header__button header__button--danger"
+                      onClick={() => {
+                        setModules(
+                          (modules ?? []).map((column) => {
+                            return (column ?? []).filter((toFilter) => {
+                              return toFilter.id !== module.id;
+                            });
+                          })
+                        );
+                      }}
+                    >
+                      <span className="sr-only">Remove module</span>
+                      <TrashIcon className="header__icon" aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
+                <div className="visibility-switcher">
+                  <ShowHideButton
+                    hidden={(module.hiddenOnDevices || []).includes("mobile")}
+                    onClick={(hide) => {
+                      setDeviceVisibility(column, index, "mobile", hide);
+                    }}
+                  >
+                    <DevicePhoneMobileIcon
+                      className="visibility-switcher__icon"
+                      aria-hidden="true"
+                    />
+                  </ShowHideButton>
+                  <ShowHideButton
+                    hidden={(module.hiddenOnDevices || []).includes("tablet")}
+                    onClick={(hide) => {
+                      setDeviceVisibility(column, index, "tablet", hide);
+                    }}
+                  >
+                    <DeviceTabletIcon
+                      className="visibility-switcher__icon"
+                      aria-hidden="true"
+                    />
+                  </ShowHideButton>
+                  <ShowHideButton
+                    hidden={(module.hiddenOnDevices || []).includes("desktop")}
+                    onClick={(hide) => {
+                      setDeviceVisibility(column, index, "desktop", hide);
+                    }}
+                  >
+                    <ComputerDesktopIcon
+                      className="visibility-switcher__icon"
+                      aria-hidden="true"
+                    />
+                  </ShowHideButton>
+                </div>
+              </ErrorBoundary>
             );
-          })}
-        </ul>
+          }}
+        />
       </div>
     </Fragment>
   );
