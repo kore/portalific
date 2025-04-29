@@ -17,6 +17,7 @@ const availableModules = {
   countdown: dynamic(() => import("../../modules/Countdown/Configuration")),
   feed: dynamic(() => import("../../modules/Feed/Configuration")),
   calendar: dynamic(() => import("../../modules/Calendar/Configuration")),
+  webStats: dynamic(() => import("../../modules/WebStats/Configuration")),
 };
 
 function capitalizeFirstLetter(string) {
@@ -101,6 +102,7 @@ export default function ModulesManager({
               <option value="countdown">Countdown</option>
               <option value="feed">Feed Reader</option>
               <option value="todo">Todo list</option>
+              <option value="webStats">Access Statistics</option>
             </select>
           </div>
 
