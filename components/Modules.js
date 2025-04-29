@@ -11,6 +11,7 @@ const availableModules = {
   feed: dynamic(() => import("../modules/Feed")),
   calendar: dynamic(() => import("../modules/Calendar")),
   todo: dynamic(() => import("../modules/TodoList")),
+  webStats: dynamic(() => import("../modules/WebStats")),
   notfound: NotFound,
   welcome: Welcome,
 };
