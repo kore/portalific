@@ -44,12 +44,12 @@ export default function SimpleVisitorChart({ domain, data }) {
     datasets: [
       {
         label: "Bots",
-        data: Object.entries(data).reverse().map(([label, dayData]) => dayData?.userType?.Bot || 0 ),
+        data: Object.entries(data).map(([label, dayData]) => dayData?.userType?.Bot || 0 ),
         backgroundColor: themeStyles.getPropertyValue('--color-red-100'),
       },
       {
         label: "Humans",
-        data: Object.entries(data).reverse().map(([label, dayData]) => dayData?.userType?.Human || 0),
+        data: Object.entries(data).map(([label, dayData]) => dayData?.userType?.Human || 0),
         backgroundColor: themeStyles.getPropertyValue('--color-gray-300'),
       },
     ],

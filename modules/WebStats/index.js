@@ -4,6 +4,8 @@ import SimpleVisitorChart from './SimpleVisitorChart';
 export default function WebStats({ configuration }) {
   const [domains, setDomains] = useState({});
   const [error, setError] = useState(null);
+  const [interval, setInterval] = useState("days");
+  const [domain, setDomain] = useState(null);
 
   useEffect(() => {
     if (!configuration?.url || !configuration?.domains?.length) return;
@@ -21,7 +23,7 @@ export default function WebStats({ configuration }) {
         // Remove credentials from URL
         urlObj.username = "";
         urlObj.password = "";
-        urlObj.pathname = "/" + domain;
+        urlObj.pathname = "/" + domain + "/" + interval;
 
         // Set up request with Authorization header
         const headers = new Headers();
@@ -64,8 +66,8 @@ export default function WebStats({ configuration }) {
   return (
     <div className="web-stats">
       {error && <p>{error}</p>}
-      {Object.entries(domains).map(([domainName, data]) => (
-        <SimpleVisitorChart domain={domainName} data={data} />
+      {Object.keys(domains).sort().map((domainName) => (
+        <SimpleVisitorChart domain={domainName} data={domains[domainName]} />
       ))}
     </div>
   );
