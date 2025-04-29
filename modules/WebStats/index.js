@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
-import SimpleVisitorChart from './SimpleVisitorChart';
+import SimpleVisitorChart from "./SimpleVisitorChart";
 
 export default function WebStats({ configuration }) {
   const [domains, setDomains] = useState({});
   const [error, setError] = useState(null);
-  const [interval, setInterval] = useState("days");
-  const [domain, setDomain] = useState(null);
+  const [interval /*, setInterval*/] = useState("days"); // @TODO: Switcher not yet implements
+  // const [domain, setDomain] = useState(null); // @TODO: Will be used for domain details
 
   useEffect(() => {
     if (!configuration?.url || !configuration?.domains?.length) return;
     setDomains({});
 
     const loadingPromises = [];
-    const newDomainData = {};
 
     const loadDomainData = async (domain) => {
       try {
@@ -45,9 +44,9 @@ export default function WebStats({ configuration }) {
         }
 
         // Use functional state update to avoid stale closure issues
-        setDomains(prevDomains => ({
+        setDomains((prevDomains) => ({
           ...prevDomains,
-          [domain]: result.data
+          [domain]: result.data,
         }));
       } catch (err) {
         setError(`Error loading ${domain}: ${err.message}`);
@@ -55,20 +54,24 @@ export default function WebStats({ configuration }) {
     };
 
     // Start all loading processes in parallel
-    configuration.domains.forEach(domain => {
+    configuration.domains.forEach((domain) => {
       const loadPromise = loadDomainData(domain);
       loadingPromises.push(loadPromise);
     });
-  }, [configuration.url, configuration.domains]);
-
-  console.log(domains);
+  }, [configuration.url, configuration.domains, interval]);
 
   return (
     <div className="web-stats">
       {error && <p>{error}</p>}
-      {Object.keys(domains).sort().map((domainName) => (
-        <SimpleVisitorChart domain={domainName} data={domains[domainName]} />
-      ))}
+      {Object.keys(domains)
+        .sort()
+        .map((domainName) => (
+          <SimpleVisitorChart
+            domain={domainName}
+            data={domains[domainName]}
+            key={domainName}
+          />
+        ))}
     </div>
   );
 }
