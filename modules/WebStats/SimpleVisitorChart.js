@@ -21,13 +21,32 @@ ChartJS.register(
   Tooltip
 );
 
-export default function SimpleVisitorChart({ interval, domain, data }) {
+export default function SimpleVisitorChart({
+  interval,
+  domain,
+  data,
+  onClick,
+}) {
   const themeStyles = getComputedStyle(
     window.document.getElementsByClassName("layout__container")[0]
   );
 
   let options = {
     responsive: true,
+    interaction: {
+      intersect: false,
+      mode: "index",
+    },
+    scales: {
+      x: {
+        stacked: true,
+        display: false,
+      },
+      y: {
+        stacked: true,
+        display: false,
+      },
+    },
     plugins: {
       title: {
         display: true,
@@ -45,20 +64,6 @@ export default function SimpleVisitorChart({ interval, domain, data }) {
             return "Combined: " + sum;
           },
         },
-      },
-    },
-    interaction: {
-      intersect: false,
-      mode: "index",
-    },
-    scales: {
-      x: {
-        stacked: true,
-        display: false,
-      },
-      y: {
-        stacked: true,
-        display: false,
       },
     },
   };
@@ -106,5 +111,7 @@ export default function SimpleVisitorChart({ interval, domain, data }) {
     ],
   };
 
-  return <Line options={options} data={visitors} height={60} />;
+  return (
+    <Line onClick={onClick} options={options} data={visitors} height={60} />
+  );
 }

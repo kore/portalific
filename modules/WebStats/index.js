@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import { XCircleIcon } from "@heroicons/react/24/outline";
+import DonutChart from "./DonutChart";
 import SimpleVisitorChart from "./SimpleVisitorChart";
 
 export default function WebStats({ configuration }) {
   const [domains, setDomains] = useState({});
   const [error, setError] = useState(null);
   const [interval, setInterval] = useState("days");
-  // const [domain, setDomain] = useState(null); // @TODO: Will be used for domain details
+  const [domain, setDomain] = useState(null);
 
   useEffect(() => {
     if (!configuration?.url || !configuration?.domains?.length) return;
@@ -46,7 +48,10 @@ export default function WebStats({ configuration }) {
         // Use functional state update to avoid stale closure issues
         setDomains((prevDomains) => ({
           ...prevDomains,
-          [domain]: result.data,
+          [domain]: {
+            history: result.data,
+            aggregate: result.aggregate,
+          },
         }));
       } catch (err) {
         setError(`Error loading ${domain}: ${err.message}`);
@@ -83,17 +88,57 @@ export default function WebStats({ configuration }) {
         </button>
       </nav>
       {error && <p>{error}</p>}
-      {Object.keys(domains)
-        .sort()
-        .map((domainName) => (
-          <SimpleVisitorChart
-            onClick={() => console.log("Click")}
-            interval={interval}
-            domain={domainName}
-            data={domains[domainName]}
-            key={domainName}
-          />
-        ))}
+      {!domain &&
+        Object.keys(domains)
+          .sort()
+          .map((domainName) => (
+            <SimpleVisitorChart
+              onClick={() => setDomain(domainName)}
+              interval={interval}
+              domain={domainName}
+              data={domains[domainName].history}
+              key={domainName}
+            />
+          ))}
+      {domain && (
+        <>
+          <h4>
+            <button onClick={() => setDomain(null)}>
+              <XCircleIcon
+                className="theme-switcher__icon"
+                aria-hidden="true"
+              />
+            </button>{" "}
+            {domain}
+          </h4>
+          <ul className="web-stats__charts">
+            <li>
+              <DonutChart
+                title="Browsers"
+                data={domains[domain]?.aggregate?.browser || {}}
+              />
+            </li>
+            <li>
+              <DonutChart
+                title="Platforms"
+                data={domains[domain]?.aggregate?.platform || {}}
+              />
+            </li>
+            <li>
+              <DonutChart
+                title="Referer"
+                data={domains[domain]?.aggregate?.referer || {}}
+              />
+            </li>
+            <li>
+              <DonutChart
+                title="Source"
+                data={domains[domain]?.aggregate?.trackingModule || {}}
+              />
+            </li>
+          </ul>
+        </>
+      )}
     </div>
   );
 }
