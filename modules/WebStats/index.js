@@ -4,7 +4,7 @@ import SimpleVisitorChart from "./SimpleVisitorChart";
 export default function WebStats({ configuration }) {
   const [domains, setDomains] = useState({});
   const [error, setError] = useState(null);
-  const [interval, setInterval] = useState("months");
+  const [interval, setInterval] = useState("days");
   // const [domain, setDomain] = useState(null); // @TODO: Will be used for domain details
 
   useEffect(() => {
