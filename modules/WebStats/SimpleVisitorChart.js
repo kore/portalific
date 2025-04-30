@@ -3,15 +3,17 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
+  LineElement,
+  PointElement,
   Title,
+  Filler,
   Tooltip,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
+ChartJS.register(CategoryScale, Filler, LinearScale, LineElement, PointElement, Title, Tooltip);
 
-export default function SimpleVisitorChart({ domain, data }) {
+export default function SimpleVisitorChart({ interval, domain, data }) {
   const themeStyles = getComputedStyle(
     window.document.getElementsByClassName("layout__container")[0]
   );
@@ -22,7 +24,24 @@ export default function SimpleVisitorChart({ domain, data }) {
       title: {
         display: true,
         text: domain,
+        align: 'start',
       },
+      tooltip: {
+        callbacks: {
+          footer: (tooltipItems) => {
+            let sum = 0;
+
+            tooltipItems.forEach(function(tooltipItem) {
+              sum += tooltipItem.parsed.y;
+            });
+            return 'Combined: ' + sum;
+          },
+        }
+      }
+    },
+    interaction: {
+      intersect: false,
+      mode: 'index',
     },
     scales: {
       x: {
@@ -31,27 +50,51 @@ export default function SimpleVisitorChart({ domain, data }) {
       },
       y: {
         stacked: true,
+        display: false,
       },
     },
   };
 
   const visitors = {
-    labels: Object.keys(data).sort(),
+    labels: Object.keys(data).sort().map((dateString) => {
+      let date;
+      switch (interval) {
+        case 'days':
+          date = new Date(dateString);
+          return date.toLocaleDateString('en-US', { weekday: 'long' });
+          
+        case 'weeks':
+          return dateString.slice(-5);
+          
+        case 'months':
+          date = new Date(dateString + '-01');
+          return date.toLocaleDateString('en-US', { month: 'long' });
+          
+        default:
+          return dateString;
+      }
+    }),
     datasets: [
       {
         label: "Bots",
         data: Object.values(data).map((dayData) => dayData?.userType?.Bot || 0),
+        borderColor: themeStyles.getPropertyValue("--color-gray-500"),
         backgroundColor: themeStyles.getPropertyValue("--color-red-100"),
+        tension: 0.4,
+        fill: true,
       },
       {
         label: "Humans",
         data: Object.values(data).map(
           (dayData) => dayData?.userType?.Human || 0
         ),
+        borderColor: themeStyles.getPropertyValue("--color-gray-500"),
         backgroundColor: themeStyles.getPropertyValue("--color-gray-300"),
+        fill: true,
+        tension: 0.4,
       },
     ],
   };
 
-  return <Bar options={options} data={visitors} height={60} />;
+  return <Line options={options} data={visitors} height={60} />;
 }

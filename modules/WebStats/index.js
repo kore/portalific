@@ -4,7 +4,7 @@ import SimpleVisitorChart from "./SimpleVisitorChart";
 export default function WebStats({ configuration }) {
   const [domains, setDomains] = useState({});
   const [error, setError] = useState(null);
-  const [interval /*, setInterval*/] = useState("days"); // @TODO: Switcher not yet implements
+  const [interval /*, setInterval*/] = useState("months"); // @TODO: Switcher not yet implements
   // const [domain, setDomain] = useState(null); // @TODO: Will be used for domain details
 
   useEffect(() => {
@@ -67,6 +67,7 @@ export default function WebStats({ configuration }) {
         .sort()
         .map((domainName) => (
           <SimpleVisitorChart
+            interval={interval}
             domain={domainName}
             data={domains[domainName]}
             key={domainName}
