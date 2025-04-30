@@ -4,7 +4,7 @@ import SimpleVisitorChart from "./SimpleVisitorChart";
 export default function WebStats({ configuration }) {
   const [domains, setDomains] = useState({});
   const [error, setError] = useState(null);
-  const [interval /*, setInterval*/] = useState("months"); // @TODO: Switcher not yet implements
+  const [interval, setInterval] = useState("months");
   // const [domain, setDomain] = useState(null); // @TODO: Will be used for domain details
 
   useEffect(() => {
@@ -62,11 +62,32 @@ export default function WebStats({ configuration }) {
 
   return (
     <div className="web-stats">
+      <nav className="settings__views">
+        <button
+          className={interval === "days" ? "settings__view--active" : null}
+          onClick={() => setInterval("days")}
+        >
+          Days
+        </button>
+        <button
+          className={interval === "weeks" ? "settings__view--active" : null}
+          onClick={() => setInterval("weeks")}
+        >
+          Weeks
+        </button>
+        <button
+          className={interval === "months" ? "settings__view--active" : null}
+          onClick={() => setInterval("months")}
+        >
+          Months
+        </button>
+      </nav>
       {error && <p>{error}</p>}
       {Object.keys(domains)
         .sort()
         .map((domainName) => (
           <SimpleVisitorChart
+            onClick={() => console.log("Click")}
             interval={interval}
             domain={domainName}
             data={domains[domainName]}

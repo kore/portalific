@@ -11,7 +11,15 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-ChartJS.register(CategoryScale, Filler, LinearScale, LineElement, PointElement, Title, Tooltip);
+ChartJS.register(
+  CategoryScale,
+  Filler,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip
+);
 
 export default function SimpleVisitorChart({ interval, domain, data }) {
   const themeStyles = getComputedStyle(
@@ -24,24 +32,24 @@ export default function SimpleVisitorChart({ interval, domain, data }) {
       title: {
         display: true,
         text: domain,
-        align: 'start',
+        align: "start",
       },
       tooltip: {
         callbacks: {
           footer: (tooltipItems) => {
             let sum = 0;
 
-            tooltipItems.forEach(function(tooltipItem) {
+            tooltipItems.forEach(function (tooltipItem) {
               sum += tooltipItem.parsed.y;
             });
-            return 'Combined: ' + sum;
+            return "Combined: " + sum;
           },
-        }
-      }
+        },
+      },
     },
     interaction: {
       intersect: false,
-      mode: 'index',
+      mode: "index",
     },
     scales: {
       x: {
@@ -56,24 +64,26 @@ export default function SimpleVisitorChart({ interval, domain, data }) {
   };
 
   const visitors = {
-    labels: Object.keys(data).sort().map((dateString) => {
-      let date;
-      switch (interval) {
-        case 'days':
-          date = new Date(dateString);
-          return date.toLocaleDateString('en-US', { weekday: 'long' });
-          
-        case 'weeks':
-          return dateString.slice(-5);
-          
-        case 'months':
-          date = new Date(dateString + '-01');
-          return date.toLocaleDateString('en-US', { month: 'long' });
-          
-        default:
-          return dateString;
-      }
-    }),
+    labels: Object.keys(data)
+      .sort()
+      .map((dateString) => {
+        let date;
+        switch (interval) {
+          case "days":
+            date = new Date(dateString);
+            return date.toLocaleDateString("en-US", { weekday: "long" });
+
+          case "weeks":
+            return dateString.slice(-5);
+
+          case "months":
+            date = new Date(dateString + "-01");
+            return date.toLocaleDateString("en-US", { month: "long" });
+
+          default:
+            return dateString;
+        }
+      }),
     datasets: [
       {
         label: "Bots",
