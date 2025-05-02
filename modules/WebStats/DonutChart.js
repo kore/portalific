@@ -31,7 +31,6 @@ export default function DonutChart({ title, data }) {
   const themeStyles = getComputedStyle(
     window.document.getElementsByClassName("layout__container")[0]
   );
-  console.log(themeStyles.getPropertyValue("--color-primary-300"));
 
   let options = {
     responsive: true,
