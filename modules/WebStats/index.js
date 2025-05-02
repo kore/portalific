@@ -103,11 +103,8 @@ export default function WebStats({ configuration }) {
       {domain && (
         <>
           <h4>
-            <button onClick={() => setDomain(null)}>
-              <XCircleIcon
-                className="theme-switcher__icon"
-                aria-hidden="true"
-              />
+            <button className="button__back" onClick={() => setDomain(null)}>
+              <XCircleIcon className="icon__button-back" aria-hidden="true" />
             </button>{" "}
             {domain}
           </h4>

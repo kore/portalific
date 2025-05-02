@@ -1889,6 +1889,38 @@ a {
   }
 }
 
+// WebStats module
+.web-stats {
+  h4 {
+    margin: var(--spacing-sm) 0;
+    vertical-align: middle;
+  }
+
+  .button__back {
+    padding: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: var(--color-gray-300);
+    border-radius: var(--radius-sm);
+  }
+
+  .icon__button-back {
+    margin: 0;
+    color: var(--color-gray-700);
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  &__charts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: var(--spacing-sm);
+  }
+}
+
 // Utilities
 .sr-only {
   position: absolute;
