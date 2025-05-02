@@ -1,41 +1,41 @@
-import { useRef } from "react";
-import { useDrop } from "react-dnd";
+import { useRef } from 'react'
+import { useDrop } from 'react-dnd'
 
-export default function Column({ column, length, moveModule, children }) {
-  const ref = useRef(null);
+export default function Column ({ column, length, moveModule, children }) {
+  const ref = useRef(null)
 
   const [{ handlerId }, drop] = useDrop({
-    accept: "MODULE",
-    collect(monitor) {
+    accept: 'MODULE',
+    collect (monitor) {
       return {
-        handlerId: monitor.getHandlerId(),
-      };
+        handlerId: monitor.getHandlerId()
+      }
     },
-    hover(item) {
+    hover (item) {
       if (!ref.current) {
-        return;
+        return
       }
 
       // Do not allow item to drop on current column
       if (item.column === column) {
-        return;
+        return
       }
 
       // Time to actually perform the action
-      moveModule(item.column, item.index, column, length);
+      moveModule(item.column, item.index, column, length)
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
       // to avoid expensive index searches.
-      item.column = column;
-      item.index = length;
-    },
-  });
+      item.column = column
+      item.index = length
+    }
+  })
 
-  drop(ref);
+  drop(ref)
 
   return (
-    <li className="column" ref={ref} data-handler-id={handlerId}>
+    <li className='column' ref={ref} data-handler-id={handlerId}>
       {children}
     </li>
-  );
+  )
 }

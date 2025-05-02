@@ -1,67 +1,67 @@
-import { useState } from "react";
+import { useState } from 'react'
 import {
   Cog8ToothIcon,
   ArrowPathIcon,
-  ViewColumnsIcon,
-} from "@heroicons/react/24/outline";
-import SettingsDisplay from "./Settings/Display";
-import SettingsModules from "./Settings/Modules";
-import SettingsSynchronization from "./Settings/Synchronization";
+  ViewColumnsIcon
+} from '@heroicons/react/24/outline'
+import SettingsDisplay from './Settings/Display'
+import SettingsModules from './Settings/Modules'
+import SettingsSynchronization from './Settings/Synchronization'
 
 const groups = [
-  { name: "Display", href: "#", icon: Cog8ToothIcon },
-  { name: "Synchronization", href: "#", icon: ArrowPathIcon },
-  { name: "Modules", href: "#", icon: ViewColumnsIcon },
-];
+  { name: 'Display', href: '#', icon: Cog8ToothIcon },
+  { name: 'Synchronization', href: '#', icon: ArrowPathIcon },
+  { name: 'Modules', href: '#', icon: ViewColumnsIcon }
+]
 
-export default function Settings({
+export default function Settings ({
   modules,
   setModules,
   moveModule,
   settings,
-  setSettings,
+  setSettings
 }) {
-  const [group, setGroup] = useState("Display");
+  const [group, setGroup] = useState('Display')
 
   return (
-    <div className="settings-panel">
-      <aside className="settings-panel__sidebar">
-        <nav className="settings-panel__nav">
+    <div className='settings-panel'>
+      <aside className='settings-panel__sidebar'>
+        <nav className='settings-panel__nav'>
           {groups.map((item) => {
-            const current = group === item.name;
+            const current = group === item.name
             return (
               <button
                 key={item.name}
                 onClick={() => setGroup(item.name)}
                 className={`settings-panel__nav-button ${
-                  current ? "settings-panel__nav-button--active" : ""
+                  current ? 'settings-panel__nav-button--active' : ''
                 }`}
-                aria-current={current ? "page" : undefined}
+                aria-current={current ? 'page' : undefined}
               >
                 <item.icon
                   className={`settings-panel__nav-icon ${
-                    current ? "settings-panel__nav-icon--active" : ""
+                    current ? 'settings-panel__nav-icon--active' : ''
                   }`}
-                  aria-hidden="true"
+                  aria-hidden='true'
                 />
-                <span className="settings-panel__nav-text">{item.name}</span>
+                <span className='settings-panel__nav-text'>{item.name}</span>
               </button>
-            );
+            )
           })}
         </nav>
       </aside>
 
-      <div className="settings-panel__content">
-        {group === "Display" && (
+      <div className='settings-panel__content'>
+        {group === 'Display' && (
           <SettingsDisplay settings={settings} setSettings={setSettings} />
         )}
-        {group === "Synchronization" && (
+        {group === 'Synchronization' && (
           <SettingsSynchronization
             settings={settings}
             setSettings={setSettings}
           />
         )}
-        {group === "Modules" && (
+        {group === 'Modules' && (
           <SettingsModules
             settings={settings}
             setSettings={setSettings}
@@ -72,5 +72,5 @@ export default function Settings({
         )}
       </div>
     </div>
-  );
+  )
 }

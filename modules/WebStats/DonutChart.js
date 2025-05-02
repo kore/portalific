@@ -1,20 +1,20 @@
-import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import React from 'react'
+import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js'
+import { Doughnut } from 'react-chartjs-2'
 
-ChartJS.register(ArcElement, Tooltip);
+ChartJS.register(ArcElement, Tooltip)
 
 const generateColorPermutations = (hexColor) => {
   // Remove # if present and ensure it's a valid hex color
-  const hex = hexColor.replace("#", "");
+  const hex = hexColor.replace('#', '')
   if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
-    throw new Error("Invalid hex color format");
+    throw new Error('Invalid hex color format')
   }
 
   // Extract R, G, B components
-  const r = hex.substring(0, 2);
-  const g = hex.substring(2, 4);
-  const b = hex.substring(4, 6);
+  const r = hex.substring(0, 2)
+  const g = hex.substring(2, 4)
+  const b = hex.substring(4, 6)
 
   // Generate all permutations
   return [
@@ -23,26 +23,26 @@ const generateColorPermutations = (hexColor) => {
     `#${g}${r}${b}`, // GRB
     `#${g}${b}${r}`, // GBR
     `#${b}${r}${g}`, // BRG
-    `#${b}${g}${r}`, // BGR
-  ];
-};
+    `#${b}${g}${r}` // BGR
+  ]
+}
 
-export default function DonutChart({ title, data }) {
-  const themeStyles = getComputedStyle(
-    window.document.getElementsByClassName("layout__container")[0]
-  );
+export default function DonutChart ({ title, data }) {
+  const themeStyles = window.getComputedStyle(
+    window.document.getElementsByClassName('layout__container')[0]
+  )
 
-  let options = {
+  const options = {
     responsive: true,
     plugins: {
       title: {
         display: true,
         text: title,
-        align: "start",
-      },
+        align: 'start'
+      }
     },
-    centertext: title,
-  };
+    centertext: title
+  }
 
   const visitors = {
     labels: Object.keys(data),
@@ -51,15 +51,15 @@ export default function DonutChart({ title, data }) {
         label: title,
         data: Object.values(data),
         backgroundColor: generateColorPermutations(
-          themeStyles.getPropertyValue("--color-primary-300")
+          themeStyles.getPropertyValue('--color-primary-300')
         ),
         borderColor: generateColorPermutations(
-          themeStyles.getPropertyValue("--color-primary-500")
+          themeStyles.getPropertyValue('--color-primary-500')
         ),
-        borderWidth: 1,
-      },
-    ],
-  };
+        borderWidth: 1
+      }
+    ]
+  }
 
-  return <Doughnut options={options} data={visitors} height={60} />;
+  return <Doughnut options={options} data={visitors} height={60} />
 }

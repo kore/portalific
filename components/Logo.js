@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-export default function Logo({ className }) {
+export default function Logo ({ className }) {
   return (
     <div className={className}>
-      <div className="header__logo-svg" />
+      <div className='header__logo-svg' />
     </div>
-  );
+  )
 }

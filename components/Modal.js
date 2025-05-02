@@ -1,20 +1,20 @@
-import { Dialog } from "@headlessui/react";
+import { Dialog } from '@headlessui/react'
 
-export default function Modal({ open, setOpen, children, settings }) {
+export default function Modal ({ open, setOpen, children, settings }) {
   return (
     <Dialog
-      as="div"
+      as='div'
       className={`modal theme--${settings.theme}`}
       open={open}
       onClose={setOpen}
     >
-      <Dialog.Panel className="modal__content">
-        <div className="modal__body">{children}</div>
+      <Dialog.Panel className='modal__content'>
+        <div className='modal__body'>{children}</div>
 
-        <div className="modal__footer">
+        <div className='modal__footer'>
           <button
-            type="button"
-            className="button button--primary"
+            type='button'
+            className='button button--primary'
             onClick={() => setOpen(false)}
           >
             Close
@@ -22,5 +22,5 @@ export default function Modal({ open, setOpen, children, settings }) {
         </div>
       </Dialog.Panel>
     </Dialog>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-export default function mapFeedItems(feed) {
+export default function mapFeedItems (feed) {
   return feed.parsed.items.map((item) => {
     return {
       id: item.id || item.link,
@@ -7,7 +7,7 @@ export default function mapFeedItems(feed) {
       title: item.title,
       link: item.link,
       date: new Date(item.isoDate || item.pubDate).toISOString(),
-      summary: item.summary,
-    };
-  });
+      summary: item.summary
+    }
+  })
 }

@@ -1,120 +1,121 @@
-import { useState, useEffect } from "react";
-import { SunIcon, MoonIcon, ClockIcon } from "@heroicons/react/24/outline";
+import { useState, useEffect } from 'react'
+import { SunIcon, MoonIcon, ClockIcon } from '@heroicons/react/24/outline'
 
 const ThemeSwitcher = () => {
-  const [auto, setAuto] = useState(true);
-  const hasLocalStorage = typeof localStorage !== "undefined";
+  const [auto, setAuto] = useState(true)
+  const hasWindow = typeof window !== 'undefined'
+  const hasLocalStorage = hasWindow && (typeof window.localStorage !== 'undefined')
 
   const setAutoTheme = (auto) => {
-    if (typeof document === "undefined") {
-      return;
+    if (typeof document === 'undefined') {
+      return
     }
 
     if (!auto) {
-      return;
+      return
     }
 
-    const hours = new Date().getHours();
+    const hours = new Date().getHours()
     if (hours > 6 && hours < 20) {
-      document.documentElement.classList.remove("variant--dark");
+      document.documentElement.classList.remove('variant--dark')
     } else {
-      document.documentElement.classList.add("variant--dark");
+      document.documentElement.classList.add('variant--dark')
     }
-  };
+  }
 
-  setAutoTheme(auto);
+  setAutoTheme(auto)
   useEffect(() => {
     setAuto(
-      !hasLocalStorage || !localStorage.getItem("theme")
+      !hasLocalStorage || !window.localStorage.getItem('theme')
         ? true
-        : localStorage.getItem("theme") === "auto"
-    );
+        : window.localStorage.getItem('theme') === 'auto'
+    )
 
-    setAutoTheme(auto);
+    setAutoTheme(auto)
 
-    const interval = setInterval(() => {}, 1000);
+    const interval = setInterval(() => {}, 1000)
 
     return () => {
-      clearInterval(interval);
-    };
-  }, [hasLocalStorage, auto]);
+      clearInterval(interval)
+    }
+  }, [hasLocalStorage, auto])
 
   return (
-    <div className="theme-switcher">
+    <div className='theme-switcher'>
       <button
-        type="button"
-        aria-label="Use Dark Mode"
+        type='button'
+        aria-label='Use Dark Mode'
         onClick={() => {
-          document.documentElement.classList.add("variant--dark");
-          localStorage.setItem("theme", "dark");
-          setAuto(false);
+          document.documentElement.classList.add('variant--dark')
+          window.localStorage.setItem('theme', 'dark')
+          setAuto(false)
         }}
         className={`theme-switcher__button theme-switcher__button--dark ${
-          hasLocalStorage && localStorage.getItem("theme") === "dark"
-            ? "theme-switcher__button--active"
-            : ""
+          hasLocalStorage && window.localStorage.getItem('theme') === 'dark'
+            ? 'theme-switcher__button--active'
+            : ''
         }`}
       >
-        <MoonIcon className="theme-switcher__icon" aria-hidden="true" />
+        <MoonIcon className='theme-switcher__icon' aria-hidden='true' />
       </button>
 
       <button
-        type="button"
-        aria-label="Use Light Mode"
+        type='button'
+        aria-label='Use Light Mode'
         onClick={() => {
-          document.documentElement.classList.remove("variant--dark");
-          localStorage.setItem("theme", "light");
-          setAuto(false);
+          document.documentElement.classList.remove('variant--dark')
+          window.localStorage.setItem('theme', 'light')
+          setAuto(false)
         }}
         className={`theme-switcher__button theme-switcher__button--light ${
-          hasLocalStorage && localStorage.getItem("theme") === "light"
-            ? "theme-switcher__button--active"
-            : ""
+          hasLocalStorage && window.localStorage.getItem('theme') === 'light'
+            ? 'theme-switcher__button--active'
+            : ''
         }`}
       >
-        <SunIcon className="theme-switcher__icon" aria-hidden="true" />
+        <SunIcon className='theme-switcher__icon' aria-hidden='true' />
       </button>
 
       <button
-        type="button"
-        aria-label="Use Auto Mode"
+        type='button'
+        aria-label='Use Auto Mode'
         onClick={() => {
-          localStorage.setItem("theme", "auto");
-          setAuto(true);
+          window.localStorage.setItem('theme', 'auto')
+          setAuto(true)
         }}
         className={`theme-switcher__button theme-switcher__button--auto ${
-          auto ? "theme-switcher__button--active" : ""
+          auto ? 'theme-switcher__button--active' : ''
         }`}
       >
-        <ClockIcon className="theme-switcher__icon" aria-hidden="true" />
+        <ClockIcon className='theme-switcher__icon' aria-hidden='true' />
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default function Footer() {
+export default function Footer () {
   return (
-    <footer className="footer">
-      <p className="footer__copyright">
+    <footer className='footer'>
+      <p className='footer__copyright'>
         <a
-          className="footer__link"
-          target="_blank"
-          href="https://github.com/kore/portalific/blob/main/LICENSE"
-          rel="noreferrer"
+          className='footer__link'
+          target='_blank'
+          href='https://github.com/kore/portalific/blob/main/LICENSE'
+          rel='noreferrer'
         >
           GPLv3
-        </a>{" "}
-        by{" "}
+        </a>{' '}
+        by{' '}
         <a
-          className="footer__link"
-          target="_blank"
-          href="https://kore-nordmann.de/"
-          rel="noreferrer"
+          className='footer__link'
+          target='_blank'
+          href='https://kore-nordmann.de/'
+          rel='noreferrer'
         >
           Kore Nordmann
         </a>
       </p>
       <ThemeSwitcher />
     </footer>
-  );
+  )
 }
