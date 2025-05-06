@@ -1,13 +1,8 @@
-export default function Welcome ({
-  pushError,
-  settings,
-  setSettings,
-  modules,
-  setModules
-}) {
+export default function Welcome ({ state }) {
+
   const setSetting = (setting, value) => {
-    setSettings({
-      ...settings,
+    state.setSettings({
+      ...state.settings,
       [setting]: value
     })
   }
@@ -39,7 +34,7 @@ export default function Welcome ({
           type='text'
           name='name'
           id='name'
-          value={settings.name ?? ''}
+          value={state.settings.name ?? ''}
           onChange={(event) => setSetting('name', event.target.value)}
           placeholder='Your name'
           className='welcome__input welcome__input--name'
@@ -50,7 +45,7 @@ export default function Welcome ({
           type='text'
           name='columns'
           id='columns'
-          value={settings.columns ?? ''}
+          value={state.settings.columns ?? ''}
           onChange={(event) => setSetting('columns', event.target.value)}
           className='welcome__input welcome__input--columns'
         >
@@ -65,13 +60,14 @@ export default function Welcome ({
         <button
           id='add-module'
           onClick={() => {
+            let modules = [...state.modules]
             modules[0].unshift({
               type: 'clock',
               id: 'firstModule-' + modules[0].length,
               showAnalogue: true,
               showSeconds: true
             })
-            setModules([...modules])
+            state.setModules(modules)
           }}
           className='welcome__button'
         >
@@ -121,7 +117,7 @@ export default function Welcome ({
         <button
           id='add-error'
           onClick={() => {
-            pushError(
+            state.pushError(
               'An error example',
               'Created from the welcome screen to test errors.'
             )

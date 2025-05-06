@@ -4,6 +4,7 @@ import ErrorBoundary from '../components/ErrorBoundary'
 import Module from '../components/Module'
 import NotFound from '../modules/NotFound'
 import Welcome from '../modules/Welcome'
+import useStore from '../utils/store'
 
 const availableModules = {
   clock: dynamic(() => import('../modules/Clock')),
@@ -12,19 +13,14 @@ const availableModules = {
   calendar: dynamic(() => import('../modules/Calendar')),
   todo: dynamic(() => import('../modules/TodoList')),
   webStats: dynamic(() => import('../modules/WebStats')),
+  welcome: Welcome,
   notfound: NotFound,
-  welcome: Welcome
 }
 
-export default function Modules ({
-  pushError,
-  setSettings,
-  settings,
-  modules,
-  setModules,
-  moduleRenderer = null
-}) {
+export default function Modules ({ state, moduleRenderer = null }) {
+
   const moveModule = (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
+    let modules = [...state.modules]
     const removedModule = modules[sourceColumn][sourceIndex]
 
     // Remove item from source column
@@ -36,23 +32,25 @@ export default function Modules ({
     }
     modules[targetColumn].splice(targetIndex, 0, removedModule)
 
-    setModules([...modules])
+    state.setModules(modules)
   }
 
-  const gridClassName = 'grid__cols-' + (settings.columns ?? 3)
+  const gridClassName = 'grid__cols-' + (state.settings.columns ?? 3)
+
+  console.log(state.modules)
 
   return (
     <ul className={`grid ${gridClassName}`}>
-      {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
+      {[...Array(+(state.settings.columns ?? 3)).keys()].map((column) => {
         return (
           <Column
             key={column}
             column={column}
-            length={(modules[column] ?? []).length}
+            length={(state.modules[column] ?? []).length}
             moveModule={moveModule}
           >
             <ul className='modules'>
-              {(modules[column] ?? []).map((module, index) => {
+              {(state.modules[column] ?? []).map((module, index) => {
                 const ModuleComponent =
                   availableModules[module.type] ?? availableModules.notfound
 
@@ -66,23 +64,19 @@ export default function Modules ({
                     moveModule={moveModule}
                     hiddenOnDevices={module.hiddenOnDevices || []}
                   >
-                    <ErrorBoundary pushError={pushError}>
+                    <ErrorBoundary pushError={state.pushError}>
                       {moduleRenderer
                         ? (
                             moduleRenderer(module, index)
                           )
                         : (
                           <ModuleComponent
+                            state={state}
                             configuration={module}
                             updateModuleConfiguration={(configuration) => {
-                              modules[column][index] = configuration
-                              setModules([...modules])
+                              state.modules[column][index] = configuration
+                              setModules([...state.modules])
                             }}
-                            pushError={pushError}
-                            settings={settings}
-                            setSettings={setSettings}
-                            modules={modules}
-                            setModules={setModules}
                           />
                           )}
                     </ErrorBoundary>
