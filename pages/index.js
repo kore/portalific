@@ -81,7 +81,7 @@ export default function Index () {
   return (
     <Layout>
       <Seo title={globalData.name} description={globalData.description} />
-      <Header name={globalData.name} />
+      <Header store={store} name={globalData.name} />
       <main>
         <Modules store={store} />
       </main>

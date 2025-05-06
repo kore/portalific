@@ -8,16 +8,7 @@ import Logo from './Logo'
 import Modal from './Modal'
 import Settings from './Settings'
 
-export default function Header ({
-  name,
-  modules = [],
-  setModules = null,
-  moveModule = null,
-  settings = {},
-  setSettings = null,
-  errors = [],
-  clearErrors = null
-}) {
+export default function Header ({ name, store }) {
   const [showSettings, setShowSettings] = useState(false)
   const [showErrors, setShowErrors] = useState(false)
 
@@ -25,10 +16,10 @@ export default function Header ({
     <header className='header'>
       <Logo className='header__logo' />
       <Link href='/' className='header__title'>
-        {settings.name && settings.name + "'s "}
+        {store.settings.name && store.settings.name + "'s "}
         {name}
       </Link>
-      {errors && !!errors.length && (
+      {store.errors && !!store.errors.length && (
         <button
           type='button'
           className='header__button header__button--error'
@@ -41,11 +32,11 @@ export default function Header ({
           />
         </button>
       )}
-      <Modal settings={settings} open={showErrors} setOpen={setShowErrors}>
+      <Modal settings={store.settings} open={showErrors} setOpen={setShowErrors}>
         <ul className='error-list'>
-          {errors.map((error, index) => (
+          {store.errors.map((error, index) => (
             <li key={index} className='error-list__item'>
-              {index !== errors.length - 1
+              {index !== store.errors.length - 1
                 ? (
                   <span className='error-list__separator' aria-hidden='true' />
                   )
@@ -73,31 +64,23 @@ export default function Header ({
           type='button'
           className='button button--secondary'
           onClick={() => {
-            clearErrors()
+            store.clearErrors()
             setShowErrors(false)
           }}
         >
           Clear all errors
         </button>
       </Modal>
-      {setSettings && (
-        <button
-          type='button'
-          className='header__button header__button--settings'
-          onClick={() => setShowSettings(true)}
-        >
-          <span className='sr-only'>View settings</span>
-          <Cog8ToothIcon className='header__icon' aria-hidden='true' />
-        </button>
-      )}
-      <Modal settings={settings} open={showSettings} setOpen={setShowSettings}>
-        <Settings
-          modules={modules}
-          setModules={setModules}
-          moveModule={moveModule}
-          settings={settings}
-          setSettings={setSettings}
-        />
+      <button
+        type='button'
+        className='header__button header__button--settings'
+        onClick={() => setShowSettings(true)}
+      >
+        <span className='sr-only'>View settings</span>
+        <Cog8ToothIcon className='header__icon' aria-hidden='true' />
+      </button>
+      <Modal settings={store.settings} open={showSettings} setOpen={setShowSettings}>
+        <Settings store={store} />
       </Modal>
     </header>
   )
