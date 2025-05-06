@@ -13,7 +13,7 @@ export default function Index () {
     description: 'Offline-first, privacy-focussed, open-source personal portal'
   }
 
-  const state = useStore((state) => state)
+  const store = useStore((store) => store)
 
   // const hasWindow = typeof window !== 'undefined'
   // const hasLocalStorage = hasWindow && (typeof window.localStorage !== 'undefined')
@@ -21,12 +21,12 @@ export default function Index () {
   /*
   useEffect(() => {
     console.log('Load')
-    // state.load()
+    // store.load()
 
     // We only want to run his effect once, actualy, when the localStorage is
     // available. We only read loaded, settings, and modules but don't care if
     // they (also) changed:
-  }, [state.settings.synchronize])
+  }, [store.settings.synchronize])
   // */
 
   /*
@@ -83,7 +83,7 @@ export default function Index () {
       <Seo title={globalData.name} description={globalData.description} />
       <Header name={globalData.name} />
       <main>
-        <Modules state={state} />
+        <Modules store={store} />
       </main>
       <Footer copyrightText={globalData.footerText} />
     </Layout>

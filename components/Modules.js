@@ -17,10 +17,10 @@ const availableModules = {
   notfound: NotFound,
 }
 
-export default function Modules ({ state, moduleRenderer = null }) {
+export default function Modules ({ store, moduleRenderer = null }) {
 
   const moveModule = (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
-    let modules = [...state.modules]
+    let modules = [...store.modules]
     const removedModule = modules[sourceColumn][sourceIndex]
 
     // Remove item from source column
@@ -32,25 +32,23 @@ export default function Modules ({ state, moduleRenderer = null }) {
     }
     modules[targetColumn].splice(targetIndex, 0, removedModule)
 
-    state.setModules(modules)
+    store.setModules(modules)
   }
 
-  const gridClassName = 'grid__cols-' + (state.settings.columns ?? 3)
-
-  console.log(state.modules)
+  const gridClassName = 'grid__cols-' + (store.settings.columns ?? 3)
 
   return (
     <ul className={`grid ${gridClassName}`}>
-      {[...Array(+(state.settings.columns ?? 3)).keys()].map((column) => {
+      {[...Array(+(store.settings.columns ?? 3)).keys()].map((column) => {
         return (
           <Column
             key={column}
             column={column}
-            length={(state.modules[column] ?? []).length}
+            length={(store.modules[column] ?? []).length}
             moveModule={moveModule}
           >
             <ul className='modules'>
-              {(state.modules[column] ?? []).map((module, index) => {
+              {(store.modules[column] ?? []).map((module, index) => {
                 const ModuleComponent =
                   availableModules[module.type] ?? availableModules.notfound
 
@@ -64,18 +62,18 @@ export default function Modules ({ state, moduleRenderer = null }) {
                     moveModule={moveModule}
                     hiddenOnDevices={module.hiddenOnDevices || []}
                   >
-                    <ErrorBoundary pushError={state.pushError}>
+                    <ErrorBoundary pushError={store.pushError}>
                       {moduleRenderer
                         ? (
                             moduleRenderer(module, index)
                           )
                         : (
                           <ModuleComponent
-                            state={state}
+                            store={store}
                             configuration={module}
                             updateModuleConfiguration={(configuration) => {
-                              state.modules[column][index] = configuration
-                              setModules([...state.modules])
+                              store.modules[column][index] = configuration
+                              setModules([...store.modules])
                             }}
                           />
                           )}
