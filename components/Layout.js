@@ -1,6 +1,9 @@
 import { Fragment, useEffect } from 'react'
+import useStore from '../utils/store'
 
-export default function Layout ({ children, settings = {} }) {
+export default function Layout ({ children }) {
+  const settings = useStore((store) => store.settings)
+
   const setAppTheme = () => {
     const darkMode = window.localStorage.getItem('theme') === 'dark'
     const lightMode = window.localStorage.getItem('theme') === 'light'
@@ -35,24 +38,22 @@ export default function Layout ({ children, settings = {} }) {
   }, [])
 
   return (
-    <>
-      <div
-        className={`layout theme-transition theme--${settings.theme}`}
-        style={{
-          backgroundColor: settings.backgroundColor || null,
-          backgroundImage: settings.backgroundImage
-            ? `url(${settings.backgroundImage})`
-            : null
-        }}
-      >
-        <div className='layout__container'>{children}</div>
-        {!settings.backgroundColor && !settings.backgroundImage && (
-          <>
-            <div className='layout__gradient layout__gradient--large' />
-            <div className='layout__gradient layout__gradient--small' />
-          </>
-        )}
-      </div>
-    </>
+    <div
+      className={`layout theme-transition theme--${settings.theme}`}
+      style={{
+        backgroundColor: settings.backgroundColor || null,
+        backgroundImage: settings.backgroundImage
+          ? `url(${settings.backgroundImage})`
+          : null
+      }}
+    >
+      <div className='layout__container'>{children}</div>
+      {!settings.backgroundColor && !settings.backgroundImage && (
+        <>
+          <div className='layout__gradient layout__gradient--large' />
+          <div className='layout__gradient layout__gradient--small' />
+        </>
+      )}
+    </div>
   )
 }

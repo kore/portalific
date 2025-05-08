@@ -1,9 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import {
-  Cog8ToothIcon,
-  ExclamationTriangleIcon
-} from '@heroicons/react/24/outline'
+import { Cog8ToothIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import Logo from './Logo'
 import Modal from './Modal'
 import Settings from './Settings'
@@ -32,7 +29,7 @@ export default function Header ({ name, store }) {
           />
         </button>
       )}
-      <Modal settings={store.settings} open={showErrors} setOpen={setShowErrors}>
+      <Modal theme={store.settings.theme} open={showErrors} setOpen={setShowErrors}>
         <ul className='error-list'>
           {store.errors.map((error, index) => (
             <li key={index} className='error-list__item'>
@@ -79,8 +76,8 @@ export default function Header ({ name, store }) {
         <span className='sr-only'>View settings</span>
         <Cog8ToothIcon className='header__icon' aria-hidden='true' />
       </button>
-      <Modal settings={store.settings} open={showSettings} setOpen={setShowSettings}>
-        <Settings store={store} />
+      <Modal theme={store.settings.theme} open={showSettings} setOpen={setShowSettings}>
+        <Settings />
       </Modal>
     </header>
   )
