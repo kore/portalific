@@ -39,6 +39,22 @@ const useStore = create((set, get) => ({
     set({ settings, modules })
   },
 
+  moveModule: (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
+    const modules = [...get().modules]
+    const removedModule = modules[sourceColumn][sourceIndex]
+
+    // Remove item from source column
+    modules[sourceColumn].splice(sourceIndex, 1)
+
+    // Put item into target column
+    if (!Array.isArray(modules[targetColumn])) {
+      modules[targetColumn] = []
+    }
+    modules[targetColumn].splice(targetIndex, 0, removedModule)
+
+    set({ modules })
+  },
+
   load: async () => {
     const settings = get().settings
 
@@ -61,7 +77,7 @@ const useStore = create((set, get) => ({
           revision: response.data.revision
         })
       })
-  }
+  },
 }))
 
 export default useStore

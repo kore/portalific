@@ -17,22 +17,6 @@ const availableModules = {
 }
 
 export default function Modules ({ store, moduleRenderer = null }) {
-  const moveModule = (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
-    const modules = [...store.modules]
-    const removedModule = modules[sourceColumn][sourceIndex]
-
-    // Remove item from source column
-    modules[sourceColumn].splice(sourceIndex, 1)
-
-    // Put item into target column
-    if (!Array.isArray(modules[targetColumn])) {
-      modules[targetColumn] = []
-    }
-    modules[targetColumn].splice(targetIndex, 0, removedModule)
-
-    store.setModules(modules)
-  }
-
   const gridClassName = 'grid__cols-' + (store.settings.columns ?? 3)
 
   return (
@@ -43,7 +27,7 @@ export default function Modules ({ store, moduleRenderer = null }) {
             key={column}
             column={column}
             length={(store.modules[column] ?? []).length}
-            moveModule={moveModule}
+            moveModule={store.moveModule}
           >
             <ul className='modules'>
               {(store.modules[column] ?? []).map((module, index) => {
@@ -57,7 +41,7 @@ export default function Modules ({ store, moduleRenderer = null }) {
                     id={module.id}
                     column={column}
                     index={index}
-                    moveModule={moveModule}
+                    moveModule={store.moveModule}
                     hiddenOnDevices={module.hiddenOnDevices || []}
                   >
                     <ErrorBoundary pushError={store.pushError}>
