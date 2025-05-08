@@ -1,5 +1,4 @@
 export default function Welcome ({ store }) {
-
   const setSetting = (setting, value) => {
     store.setSettings({
       ...store.settings,
@@ -60,7 +59,7 @@ export default function Welcome ({ store }) {
         <button
           id='add-module'
           onClick={() => {
-            let modules = [...store.modules]
+            const modules = [...store.modules]
             modules[0].unshift({
               type: 'clock',
               id: 'firstModule-' + modules[0].length,

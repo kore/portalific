@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { SunIcon, MoonIcon, ClockIcon } from '@heroicons/react/24/outline'
 
-const ThemeSwitcher = () => {
+const ThemeSwitcher = ({ store }) => {
   const [auto, setAuto] = useState(true)
   const hasWindow = typeof window !== 'undefined'
   const hasLocalStorage = hasWindow && (typeof window.localStorage !== 'undefined')

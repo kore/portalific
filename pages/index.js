@@ -18,7 +18,6 @@ export default function Index () {
   // const hasWindow = typeof window !== 'undefined'
   // const hasLocalStorage = hasWindow && (typeof window.localStorage !== 'undefined')
 
-  /*
   useEffect(() => {
     console.log('Load')
     // store.load()
@@ -27,7 +26,6 @@ export default function Index () {
     // available. We only read loaded, settings, and modules but don't care if
     // they (also) changed:
   }, [store.settings.synchronize])
-  // */
 
   /*
   import { useDebouncedCallback } from 'use-debounce'
@@ -85,7 +83,7 @@ export default function Index () {
       <main>
         <Modules store={store} />
       </main>
-      <Footer copyrightText={globalData.footerText} />
+      <Footer store={store} copyrightText={globalData.footerText} />
     </Layout>
   )
 }

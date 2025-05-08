@@ -4,7 +4,6 @@ import ErrorBoundary from '../components/ErrorBoundary'
 import Module from '../components/Module'
 import NotFound from '../modules/NotFound'
 import Welcome from '../modules/Welcome'
-import useStore from '../utils/store'
 
 const availableModules = {
   clock: dynamic(() => import('../modules/Clock')),
@@ -14,13 +13,12 @@ const availableModules = {
   todo: dynamic(() => import('../modules/TodoList')),
   webStats: dynamic(() => import('../modules/WebStats')),
   welcome: Welcome,
-  notfound: NotFound,
+  notfound: NotFound
 }
 
 export default function Modules ({ store, moduleRenderer = null }) {
-
   const moveModule = (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
-    let modules = [...store.modules]
+    const modules = [...store.modules]
     const removedModule = modules[sourceColumn][sourceIndex]
 
     // Remove item from source column
@@ -73,7 +71,7 @@ export default function Modules ({ store, moduleRenderer = null }) {
                             configuration={module}
                             updateModuleConfiguration={(configuration) => {
                               store.modules[column][index] = configuration
-                              setModules([...store.modules])
+                              store.setModules([...store.modules])
                             }}
                           />
                           )}

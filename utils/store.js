@@ -6,6 +6,7 @@ const API_KEY = 'Bearer dslafki92esakflu8qfasdf'
 
 const useStore = create((set, get) => ({
   settings: { columns: 1 },
+  theme: 'auto',
   modules: [[{ type: 'welcome', id: 'welcome' }]],
   errors: [],
   revision: null,
