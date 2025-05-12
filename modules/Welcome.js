@@ -1,7 +1,12 @@
-export default function Welcome ({ store }) {
+import useStore from '../utils/store'
+import { useShallow } from 'zustand/react/shallow'
+
+export default function Welcome () {
+  const [settings, setSettings, modules, setModules, pushError] = useStore(useShallow((store) => [store.settings, store.setSettings, store.modules, store.setModules, store.pushError]))
+
   const setSetting = (setting, value) => {
-    store.setSettings({
-      ...store.settings,
+    setSettings({
+      ...settings,
       [setting]: value
     })
   }
@@ -33,7 +38,7 @@ export default function Welcome ({ store }) {
           type='text'
           name='name'
           id='name'
-          value={store.settings.name ?? ''}
+          value={settings.name ?? ''}
           onChange={(event) => setSetting('name', event.target.value)}
           placeholder='Your name'
           className='welcome__input welcome__input--name'
@@ -44,7 +49,7 @@ export default function Welcome ({ store }) {
           type='text'
           name='columns'
           id='columns'
-          value={store.settings.columns ?? ''}
+          value={settings.columns ?? ''}
           onChange={(event) => setSetting('columns', event.target.value)}
           className='welcome__input welcome__input--columns'
         >
@@ -59,14 +64,14 @@ export default function Welcome ({ store }) {
         <button
           id='add-module'
           onClick={() => {
-            const modules = [...store.modules]
-            modules[0].unshift({
+            let newModules = [...modules]
+            newModules[0].unshift({
               type: 'clock',
               id: 'firstModule-' + modules[0].length,
               showAnalogue: true,
               showSeconds: true
             })
-            store.setModules(modules)
+            setModules(newModules)
           }}
           className='welcome__button'
         >
@@ -116,7 +121,7 @@ export default function Welcome ({ store }) {
         <button
           id='add-error'
           onClick={() => {
-            store.pushError(
+            pushError(
               'An error example',
               'Created from the welcome screen to test errors.'
             )

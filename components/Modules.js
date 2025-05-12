@@ -4,6 +4,8 @@ import ErrorBoundary from '../components/ErrorBoundary'
 import Module from '../components/Module'
 import NotFound from '../modules/NotFound'
 import Welcome from '../modules/Welcome'
+import useStore from '../utils/store'
+import { useShallow } from 'zustand/react/shallow'
 
 const availableModules = {
   clock: dynamic(() => import('../modules/Clock')),
@@ -16,21 +18,22 @@ const availableModules = {
   notfound: NotFound
 }
 
-export default function Modules ({ store, moduleRenderer = null }) {
-  const gridClassName = 'grid__cols-' + (store.settings.columns ?? 3)
+export default function Modules ({ moduleRenderer = null }) {
+  const [settings, modules, setModules, moveModule, pushError] = useStore(useShallow((store) => [store.settings, store.modules, store.setModules, store.moveModule, store.pushError]))
+  const gridClassName = 'grid__cols-' + (settings.columns ?? 3)
 
   return (
     <ul className={`grid ${gridClassName}`}>
-      {[...Array(+(store.settings.columns ?? 3)).keys()].map((column) => {
+      {[...Array(+(settings.columns ?? 3)).keys()].map((column) => {
         return (
           <Column
             key={column}
             column={column}
-            length={(store.modules[column] ?? []).length}
-            moveModule={store.moveModule}
+            length={(modules[column] ?? []).length}
+            moveModule={moveModule}
           >
             <ul className='modules'>
-              {(store.modules[column] ?? []).map((module, index) => {
+              {(modules[column] ?? []).map((module, index) => {
                 const ModuleComponent =
                   availableModules[module.type] ?? availableModules.notfound
 
@@ -41,21 +44,20 @@ export default function Modules ({ store, moduleRenderer = null }) {
                     id={module.id}
                     column={column}
                     index={index}
-                    moveModule={store.moveModule}
+                    moveModule={moveModule}
                     hiddenOnDevices={module.hiddenOnDevices || []}
                   >
-                    <ErrorBoundary pushError={store.pushError}>
+                    <ErrorBoundary pushError={pushError}>
                       {moduleRenderer
                         ? (
                             moduleRenderer(module, index)
                           )
                         : (
                           <ModuleComponent
-                            store={store}
                             configuration={module}
                             updateModuleConfiguration={(configuration) => {
-                              store.modules[column][index] = configuration
-                              store.setModules([...store.modules])
+                              modules[column][index] = configuration
+                              setModules([...modules])
                             }}
                           />
                           )}

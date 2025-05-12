@@ -77,7 +77,7 @@ const useStore = create((set, get) => ({
           revision: response.data.revision
         })
       })
-  },
+  }
 }))
 
 export default useStore
