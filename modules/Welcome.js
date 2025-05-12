@@ -64,7 +64,7 @@ export default function Welcome () {
         <button
           id='add-module'
           onClick={() => {
-            let newModules = [...modules]
+            const newModules = [...modules]
             newModules[0].unshift({
               type: 'clock',
               id: 'firstModule-' + modules[0].length,

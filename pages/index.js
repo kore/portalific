@@ -79,11 +79,11 @@ export default function Index () {
   return (
     <Layout>
       <Seo title={globalData.name} description={globalData.description} />
-      <Header store={store} name={globalData.name} />
+      <Header name={globalData.name} />
       <main>
-        <Modules store={store} />
+        <Modules />
       </main>
-      <Footer store={store} copyrightText={globalData.footerText} />
+      <Footer />
     </Layout>
   )
 }

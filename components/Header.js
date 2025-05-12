@@ -4,8 +4,11 @@ import { Cog8ToothIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outl
 import Logo from './Logo'
 import Modal from './Modal'
 import Settings from './Settings'
+import useStore from '../utils/store'
+import { useShallow } from 'zustand/react/shallow'
 
-export default function Header ({ name, store }) {
+export default function Header ({ name }) {
+  const [settings, errors, clearErrors] = useStore(useShallow((store) => [store.settings, store.errors, store.clearErrors]))
   const [showSettings, setShowSettings] = useState(false)
   const [showErrors, setShowErrors] = useState(false)
 
@@ -13,10 +16,10 @@ export default function Header ({ name, store }) {
     <header className='header'>
       <Logo className='header__logo' />
       <Link href='/' className='header__title'>
-        {store.settings.name && store.settings.name + "'s "}
+        {settings.name && settings.name + "'s "}
         {name}
       </Link>
-      {store.errors && !!store.errors.length && (
+      {errors && !!errors.length && (
         <button
           type='button'
           className='header__button header__button--error'
@@ -29,11 +32,11 @@ export default function Header ({ name, store }) {
           />
         </button>
       )}
-      <Modal theme={store.settings.theme} open={showErrors} setOpen={setShowErrors}>
+      <Modal theme={settings.theme} open={showErrors} setOpen={setShowErrors}>
         <ul className='error-list'>
-          {store.errors.map((error, index) => (
+          {errors.map((error, index) => (
             <li key={index} className='error-list__item'>
-              {index !== store.errors.length - 1
+              {index !== errors.length - 1
                 ? (
                   <span className='error-list__separator' aria-hidden='true' />
                   )
@@ -61,7 +64,7 @@ export default function Header ({ name, store }) {
           type='button'
           className='button button--secondary'
           onClick={() => {
-            store.clearErrors()
+            clearErrors()
             setShowErrors(false)
           }}
         >
@@ -76,7 +79,7 @@ export default function Header ({ name, store }) {
         <span className='sr-only'>View settings</span>
         <Cog8ToothIcon className='header__icon' aria-hidden='true' />
       </button>
-      <Modal theme={store.settings.theme} open={showSettings} setOpen={setShowSettings}>
+      <Modal theme={settings.theme} open={showSettings} setOpen={setShowSettings}>
         <Settings />
       </Modal>
     </header>

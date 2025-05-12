@@ -33,7 +33,6 @@ export default function ModulesManager () {
 
   const [settings, setSettings, modules, setModules] = useStore(useShallow((store) => [store.settings, store.setSettings, store.modules, store.setModules]))
 
-
   const setDeviceVisibility = (column, index, device, hidden) => {
     const moduleToUpdate = modules[column][index]
     if (!Array.isArray(moduleToUpdate.hiddenOnDevices)) {
