@@ -11,6 +11,8 @@ import ShowHideButton from './ShowHideButton'
 import ErrorBoundary from '../ErrorBoundary'
 import Modal from '../Modal'
 import Modules from '../Modules'
+import useStore from '../../utils/store'
+import { useShallow } from 'zustand/react/shallow'
 
 const availableModules = {
   clock: dynamic(() => import('../../modules/Clock/Configuration')),
@@ -24,15 +26,13 @@ function capitalizeFirstLetter (string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-export default function ModulesManager ({
-  settings,
-  setSettings,
-  modules,
-  setModules
-}) {
+export default function ModulesManager () {
   const [module, setModule] = useState('none')
   const [column, setColumn] = useState('0')
   const [settingsShown, setShowSettings] = useState(null)
+
+  const [settings, setSettings, modules, setModules] = useStore(useShallow((store) => [store.settings, store.setSettings, store.modules, store.setModules]))
+
 
   const setDeviceVisibility = (column, index, device, hidden) => {
     const moduleToUpdate = modules[column][index]
@@ -158,10 +158,6 @@ export default function ModulesManager ({
       >
         <Modules
           pushError={() => {}}
-          setSettings={setSettings}
-          settings={settings}
-          modules={modules}
-          setModules={setModules}
           moduleRenderer={(module, index) => {
             const ModuleSettings = availableModules[module.type] ?? null
 

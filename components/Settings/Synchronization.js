@@ -10,8 +10,11 @@ import {
 } from '@heroicons/react/24/outline'
 import { QRCodeSVG } from 'qrcode.react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import useStore from '../../utils/store'
+import { useShallow } from 'zustand/react/shallow'
 
-export default function Settings ({ settings, setSettings }) {
+export default function Settings () {
+  const [settings, setSettings] = useStore(useShallow((store) => [store.settings, store.setSettings]))
   const [copied, setCopied] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [includePassword, setIncludePassword] = useState(false)

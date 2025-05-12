@@ -1,6 +1,11 @@
 import { Fragment } from 'react'
 
-export default function Settings ({ settings, setSettings }) {
+import useStore from '../../utils/store'
+import { useShallow } from 'zustand/react/shallow'
+
+export default function Settings () {
+  const [settings, setSettings] = useStore(useShallow((store) => [store.settings, store.setSettings]))
+
   return (
     <>
       {/* Main section */}
