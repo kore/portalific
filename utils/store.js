@@ -85,7 +85,7 @@ const useStore = create()(persist(
   }),
   {
     name: 'portalific',
-    storage: createJSONStorage(),
+    storage: createJSONStorage(() => localStorage),
   },
 ))
 
