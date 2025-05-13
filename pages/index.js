@@ -19,8 +19,7 @@ export default function Index () {
   // const hasLocalStorage = hasWindow && (typeof window.localStorage !== 'undefined')
 
   useEffect(() => {
-    console.log('Load')
-    // store.load()
+    store.load()
 
     // We only want to run his effect once, actualy, when the localStorage is
     // available. We only read loaded, settings, and modules but don't care if
@@ -28,6 +27,8 @@ export default function Index () {
   }, [store.settings.synchronize])
 
   /*
+   * @TODO: Migrate into store…
+   *
   import { useDebouncedCallback } from 'use-debounce'
   const debouncedLocalStorageToServer = useDebouncedCallback(
     (settings, revision) => {
