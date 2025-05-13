@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import {
-  ExclamationTriangleIcon,
   EyeIcon,
   EyeSlashIcon,
   CloudArrowDownIcon,
   LockOpenIcon,
   ArrowDownTrayIcon,
-  CheckCircleIcon,
   ArrowRightCircleIcon
 } from '@heroicons/react/24/outline'
-import axios from 'axios'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Layout from '../components/Layout'
@@ -29,7 +26,7 @@ export default function Setup () {
   const router = useRouter()
   const [password, setPassword] = useState(router.query.password || '')
   const [showPassword, setShowPassword] = useState(false)
-  const [steps, setSteps] = useState([
+  const steps = [
     {
       icon: CloudArrowDownIcon,
       completed: false,
@@ -54,7 +51,7 @@ export default function Setup () {
       message: 'Go to portal…',
       info: null
     }
-  ])
+  ]
 
   const startImport = () => {
     store.setSettings({

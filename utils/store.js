@@ -86,8 +86,8 @@ const useStore = create()(persist(
   store,
   {
     name: 'portalific',
-    storage: createJSONStorage(() => localStorage),
-  },
+    storage: createJSONStorage(() => window.localStorage)
+  }
 ))
 
 export default useStore
