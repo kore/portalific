@@ -16,7 +16,11 @@ import Header from '../components/Header'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 
+import useStore from '../utils/store'
+
 export default function Setup () {
+  const store = useStore((store) => store)
+
   const globalData = {
     name: 'Portalific',
     description: 'Offline-first, privacy-focussed, open-source personal portal'
@@ -53,43 +57,20 @@ export default function Setup () {
   ])
 
   const startImport = () => {
-    axios
-      .get(
-        `https://local-storage-storage.io/api/portalific/${router.query.identifier}`,
-        {
-          headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
-        }
-      )
-      .then((response) => {
-        steps[0].icon = CheckCircleIcon
-        steps[0].completed = true
-        steps[0].info = null
-        setSteps([...steps])
+    store.setSettings({
+      identifier: router.query.identifier,
+      synchronize: true,
+      password
+    })
 
-        const data = JSON.parse(response.data.data)
-        steps[1].icon = CheckCircleIcon
-        steps[1].completed = true
-        steps[1].info = null
-        setSteps([...steps])
-
-        window.localStorage.setItem('modules', JSON.stringify(data.modules))
-        window.localStorage.setItem('settings', JSON.stringify(data.settings))
-
-        steps[2].icon = CheckCircleIcon
-        steps[2].completed = true
-        steps[2].info = null
-
-        window.location = '/'
-
-        setSteps([...steps])
-      })
-      .catch((response) => {
-        console.log(response)
-        steps[0].icon = ExclamationTriangleIcon
-        steps[0].info = `Could not find data for identifier ${router.query.identifier}`
-        setSteps([...steps])
-      })
+    store.load()
   }
+
+  useEffect(() => {
+    if (store.revision) {
+      router.push('/')
+    }
+  }, [store.revision])
 
   useEffect(() => {
     setPassword(router.query.password || '')
