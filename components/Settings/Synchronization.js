@@ -61,7 +61,11 @@ export default function Settings () {
             </div>
             <Switch
               checked={settings.synchronize}
-              onChange={(value) => setSetting('synchronize', value)}
+              onChange={(value) => setSettings({
+                synchronize: !!value,
+                identifier: !value ? null : settings.identifier,
+                password: !value ? null : settings.password
+              })}
               className={`settings__switch ${
                 settings.synchronize ? 'settings__switch--active' : ''
               }`}

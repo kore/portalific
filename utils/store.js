@@ -44,6 +44,10 @@ const store = (set, get) => ({
     set({ settings, modules })
   },
 
+  setRevision: (revision) => {
+    set({ revision })
+  },
+
   moveModule: (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
     const modules = [...get().modules]
     const removedModule = modules[sourceColumn][sourceIndex]
@@ -96,69 +100,66 @@ const useStore = create(
   )
 )
 
-const debouncedLocalStorageToServer = debounce(
-  (store) => {
-    if (!store.settings.synchronize) {
-      return
-    }
+export const storeToServer = (store) => {
+  if (!store.settings.synchronize) {
+    return
+  }
 
-    console.log(store)
-
-    if (!store.revision) {
-      // Try to create storage, first time…
-      axios
-        .put(
-          `${API_URL}${store.settings.identifier}`,
-          // @TODO: Encrypt data with settings.password
-          JSON.stringify({
-            modules: store.modules,
-            settings: store.settings,
-            theme: store.theme
-          }),
-          {
-            headers: { Authorization: API_KEY }
+  if (!store.revision) {
+    // Try to create storage, first time…
+    axios
+      .put(
+        `${API_URL}${store.settings.identifier}`,
+        // @TODO: Encrypt data with settings.password
+        JSON.stringify({
+          modules: store.modules,
+          settings: store.settings,
+          theme: store.theme
+        }),
+        {
+          headers: { Authorization: API_KEY }
+        }
+      )
+      .then((response) => {
+        store.setRevision(response.data.revision)
+      })
+      .catch(
+        (error) => {
+          if (error.response.status === 409) {
+            // store.load()
           }
-        )
-        .then((response) => {
-          store.setSettings({
-            revision: response.data.revision
-          })
-        })
-    } else {
-      // Update existing storage
-      axios
-        .post(
-          `${API_URL}${store.settings.identifier}?revision=${store.revision}`,
-          // @TODO: Encrypt data with settings.password
-          JSON.stringify({
-            modules: store.modules,
-            settings: store.settings,
-            theme: store.theme
-          }),
-          {
-            headers: { Authorization: API_KEY }
+        }
+      )
+  } else {
+    // Update existing storage
+    axios
+      .post(
+        `${API_URL}${store.settings.identifier}?revision=${store.revision}`,
+        // @TODO: Encrypt data with settings.password
+        JSON.stringify({
+          modules: store.modules,
+          settings: store.settings,
+          theme: store.theme
+        }),
+        {
+          headers: { Authorization: API_KEY }
+        }
+      )
+      .then((response) => {
+        store.setRevision(response.data.revision)
+      })
+      .catch(
+        (error) => {
+          if (error.response.status === 409) {
+            // store.load()
           }
-        )
-        .then((response) => {
-          store.setSettings({
-            revision: response.data.revision
-          })
-        })
-        .catch(
-          (error) => {
-            console.log(error)
-            if (error.response.status === 409) {
-              // store.load()
-            }
-          }
-        )
-    }
-  },
-  1000
-)
+        }
+      )
+  }
+}
 
 // Listen for all store changes to store them on the remote server
-useStore.subscribe(debouncedLocalStorageToServer)
+useStore.subscribe(debounce(storeToServer, 1000))
 
 export default useStore
 
