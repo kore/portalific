@@ -1,14 +1,18 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import axios from 'axios'
+import debounce from 'debounce'
 
 const API_URL = 'https://local-storage-storage.io/api/portalific/'
 const API_KEY = 'Bearer dslafki92esakflu8qfasdf'
 
 const store = (set, get) => ({
+  // Synchronized state
   settings: { columns: 1 },
   theme: 'auto',
   modules: [[{ type: 'welcome', id: 'welcome' }]],
+
+  // Local app state
   errors: [],
   revision: null,
 
@@ -82,13 +86,79 @@ const store = (set, get) => ({
   }
 })
 
-const useStore = create()(persist(
-  store,
-  {
-    name: 'portalific',
-    storage: createJSONStorage(() => window.localStorage)
-  }
-))
+const useStore = create(
+  persist(
+    store,
+    {
+      name: 'portalific',
+      storage: createJSONStorage(() => window.localStorage)
+    }
+  )
+)
+
+const debouncedLocalStorageToServer = debounce(
+  (store) => {
+    if (!store.settings.synchronize) {
+      return
+    }
+
+    console.log(store)
+
+    if (!store.revision) {
+      // Try to create storage, first time…
+      axios
+        .put(
+          `${API_URL}${store.settings.identifier}`,
+          // @TODO: Encrypt data with settings.password
+          JSON.stringify({
+            modules: store.modules,
+            settings: store.settings,
+            theme: store.theme
+          }),
+          {
+            headers: { Authorization: API_KEY }
+          }
+        )
+        .then((response) => {
+          store.setSettings({
+            revision: response.data.revision
+          })
+        })
+    } else {
+      // Update existing storage
+      axios
+        .post(
+          `${API_URL}${store.settings.identifier}?revision=${store.revision}`,
+          // @TODO: Encrypt data with settings.password
+          JSON.stringify({
+            modules: store.modules,
+            settings: store.settings,
+            theme: store.theme
+          }),
+          {
+            headers: { Authorization: API_KEY }
+          }
+        )
+        .then((response) => {
+          store.setSettings({
+            revision: response.data.revision
+          })
+        })
+        .catch(
+          (error) => {
+            console.log(error)
+            if (error.response.status === 409) {
+              // store.load()
+            }
+          }
+        )
+    }
+  },
+  1000
+)
+
+// Listen for all store changes to store them on the remote server
+useStore.subscribe(debouncedLocalStorageToServer)
 
 export default useStore
 

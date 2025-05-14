@@ -15,9 +15,6 @@ export default function Index () {
 
   const store = useStore((store) => store)
 
-  // const hasWindow = typeof window !== 'undefined'
-  // const hasLocalStorage = hasWindow && (typeof window.localStorage !== 'undefined')
-
   useEffect(() => {
     store.load()
 
@@ -25,57 +22,6 @@ export default function Index () {
     // available. We only read loaded, settings, and modules but don't care if
     // they (also) changed:
   }, [store.settings.synchronize])
-
-  /*
-   * @TODO: Migrate into store…
-   *
-  import { useDebouncedCallback } from 'use-debounce'
-  const debouncedLocalStorageToServer = useDebouncedCallback(
-    (settings, revision) => {
-      if (!settings.synchronize) {
-        setRevision(null)
-        return
-      }
-
-      if (!revision) {
-        axios
-          .put(
-            `https://local-storage-storage.io/api/portalific/${settings.identifier}`,
-            // @TODO: Encrypt data with settings.password
-            JSON.stringify({
-              modules: JSON.parse(window.localStorage.getItem('modules')),
-              settings: JSON.parse(window.localStorage.getItem('settings')),
-              theme: window.localStorage.getItem('theme')
-            }),
-            {
-              headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
-            }
-          )
-          .then((response) => {
-            setRevision(response.data.revision)
-          })
-      } else {
-        axios
-          .post(
-            `https://local-storage-storage.io/api/portalific/${settings.identifier}?revision=${revision}`,
-            // @TODO: Encrypt data with settings.password
-            JSON.stringify({
-              modules: JSON.parse(window.localStorage.getItem('modules')),
-              settings: JSON.parse(window.localStorage.getItem('settings')),
-              theme: window.localStorage.getItem('theme')
-            }),
-            {
-              headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
-            }
-          )
-          .then((response) => {
-            setRevision(response.data.revision)
-          })
-        // @TODO: Handle 409 (Conflict)
-      }
-    },
-    1000
-  ) // */
 
   return (
     <Layout>
