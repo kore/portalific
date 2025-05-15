@@ -82,7 +82,7 @@ const store = (set, get) => ({
           settings: data.settings,
           modules: data.modules,
           revision: response.data.revision,
-          synchronizedStateHasChanges: false,
+          synchronizedStateHasChanges: false
         })
       })
   },
@@ -98,7 +98,7 @@ const store = (set, get) => ({
 
     const dataToSync = JSON.stringify({
       modules: get().modules,
-      settings: get().settings,
+      settings: get().settings
     })
 
     if (!get().revision) {

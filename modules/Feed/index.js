@@ -14,7 +14,7 @@ import { useShallow } from 'zustand/react/shallow'
 
 export default function Feed ({
   configuration,
-  updateModuleConfiguration,
+  updateModuleConfiguration
 }) {
   const pushError = useStore(useShallow((store) => store.pushError))
   const [feedItems, setFeedItems] = useState([])
