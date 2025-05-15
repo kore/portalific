@@ -4,7 +4,7 @@ import axios from 'axios'
 import debounce from 'debounce'
 
 const API_URL = 'https://local-storage-storage.io/api/portalific/'
-const API_AUTH_HEADER = { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
+export const API_AUTH_HEADER = { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
 
 const store = (set, get) => ({
   // Synchronized state
