@@ -68,10 +68,11 @@ const store = (set, get) => ({
     const settings = get().settings
 
     if (!settings.synchronize) {
-      return
+      return Promise.resolve()
     }
 
-    axios
+    // Return the axios promise chain so it can be awaited
+    return axios
       .get(
         `${API_URL}${settings.identifier}`,
         { headers: API_AUTH_HEADER }
@@ -84,16 +85,17 @@ const store = (set, get) => ({
           revision: response.data.revision,
           synchronizedStateHasChanges: false
         })
+        return response // Return the response for chaining
       })
   },
 
   persist: async () => {
     if (!get().settings.synchronize) {
-      return
+      return Promise.resolve()
     }
 
     if (!get().synchronizedStateHasChanges) {
-      return
+      return Promise.resolve()
     }
 
     const dataToSync = JSON.stringify({
@@ -103,7 +105,7 @@ const store = (set, get) => ({
 
     if (!get().revision) {
       // Try to create storage, first time…
-      axios
+      return axios
         .put(
           `${API_URL}${get().settings.identifier}`,
           // @TODO: Encrypt data with settings.password
@@ -112,17 +114,32 @@ const store = (set, get) => ({
         )
         .then((response) => {
           set({ revision: response.data.revision, synchronizedStateHasChanges: false })
+          return response // Return the response for chaining
         })
         .catch(
-          (error) => {
-            if (error.response.status === 409) {
-              store.load()
+          async (error) => {
+            if (error.response && error.response.status === 409) {
+              return get().load()
             }
+
+            // For 404 errors, disable synchronization
+            if (error.response && error.response.status === 404) {
+              set({
+                settings: {
+                  ...get().settings,
+                  synchronize: false,
+                  identifier: null,
+                  password: null
+                }
+              })
+            }
+
+            throw error // Re-throw the error for further handling
           }
         )
     } else {
       // Update existing storage
-      axios
+      return axios
         .post(
           `${API_URL}${get().settings.identifier}?revision=${get().revision}`,
           // @TODO: Encrypt data with settings.password
@@ -131,12 +148,27 @@ const store = (set, get) => ({
         )
         .then((response) => {
           set({ revision: response.data.revision, synchronizedStateHasChanges: false })
+          return response // Return the response for chaining
         })
         .catch(
-          (error) => {
-            if (error.response.status === 409) {
-              store.load()
+          async (error) => {
+            if (error.response && error.response.status === 409) {
+              return get().load()
             }
+
+            // For 404 errors, disable synchronization
+            if (error.response && error.response.status === 404) {
+              set({
+                settings: {
+                  ...get().settings,
+                  synchronize: false,
+                  identifier: null,
+                  password: null
+                }
+              })
+            }
+
+            throw error // Re-throw the error for further handling
           }
         )
     }

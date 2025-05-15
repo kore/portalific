@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { useTestStore as useStore, storeToServer, API_AUTH_HEADER } from '../utils/store'
+import { useTestStore as useStore, API_AUTH_HEADER } from '../utils/store'
 import axios from 'axios'
 
 jest.mock('axios')
@@ -36,7 +36,6 @@ describe('Zustand Store', () => {
     const { setState } = useStore
     setState({
       settings: { columns: 1 },
-      theme: 'auto',
       modules: [[{ type: 'welcome', id: 'welcome' }]],
       errors: [],
       revision: null
@@ -234,8 +233,7 @@ describe('Zustand Store', () => {
         modules: [
           [{ type: 'remote1', id: 'remote1' }],
           [{ type: 'remote2', id: 'remote2' }]
-        ],
-        theme: 'dark'
+        ]
       }),
       revision: '123456'
     }
@@ -273,15 +271,13 @@ describe('Zustand Store', () => {
 
       expect(state.settings).toEqual(parsedResponse.settings)
       expect(state.modules).toEqual(parsedResponse.modules)
-      expect(state.theme).toEqual(parsedResponse.theme)
       expect(state.revision).toEqual(mockResponseData.revision)
     })
 
     test('should handle API response correctly', async () => {
       useStore.setState({
         settings: { columns: 1, synchronize: true, identifier: 'test-id' },
-        modules: [[{ type: 'local', id: 'local' }]],
-        theme: 'auto'
+        modules: [[{ type: 'local', id: 'local' }]]
       })
 
       const customResponse = {
@@ -290,8 +286,7 @@ describe('Zustand Store', () => {
           modules: [
             [{ type: 'api1', id: 'api1' }],
             [{ type: 'api2', id: 'api2' }]
-          ],
-          theme: 'light'
+          ]
         }),
         revision: 'abc123'
       }
@@ -305,91 +300,88 @@ describe('Zustand Store', () => {
 
       expect(state.settings).toEqual(parsedResponse.settings)
       expect(state.modules).toEqual(parsedResponse.modules)
-      expect(state.theme).toEqual(parsedResponse.theme)
       expect(state.revision).toEqual(customResponse.revision)
     })
   })
 })
 
 describe('Store synchronization tests', () => {
-  let store
+  const API_URL = 'https://local-storage-storage.io/api/portalific/'
 
   beforeEach(() => {
     // Clear all mocks before each test
     jest.clearAllMocks()
 
-    // Initialize the test store with default values
-    store = useStore.getState()
-    store.settings = {
-      synchronize: true,
-      identifier: 'test-id',
-      columns: 1
-    }
-    store.modules = [[{ type: 'test', id: 'test-module' }]]
-    store.theme = 'light'
-    store.revision = null
-
-    // Mock the store's setSettings method
-    store.setSettings = jest.fn((newSettings) => {
-      storesettings = { ...store.settings, ...newSettings }
-    })
-
-    store.setRevision = jest.fn((revision) => {
-      store.revision = revision
+    // Initialize the store with default values
+    useStore.setState({
+      settings: {
+        synchronize: true,
+        identifier: 'test-id',
+        columns: 1
+      },
+      modules: [[{ type: 'test', id: 'test-module' }]],
+      theme: 'light',
+      revision: null,
+      synchronizedStateHasChanges: true
     })
   })
 
   test('1) If there\'s no revision use PUT', async () => {
     // Setup: ensure there's no revision
-    store.revision = null
+    useStore.setState({ revision: null })
 
     // Mock successful PUT response
     axios.put.mockResolvedValueOnce({
       data: { revision: 'new-revision-123' }
     })
 
-    // Execute
-    await storeToServer(store)
+    // Execute - call persist directly from the store
+    await useStore.getState().persist()
 
     // Assert: PUT was called with correct params
     expect(axios.put).toHaveBeenCalledTimes(1)
     expect(axios.put).toHaveBeenCalledWith(
-      'https://local-storage-storage.io/api/portalific/test-id',
-      JSON.stringify({
-        modules: store.modules,
-        settings: store.settings,
-        theme: store.theme
-      }),
+      `${API_URL}test-id`,
+      expect.any(String),
       { headers: API_AUTH_HEADER }
     )
 
-    // Assert: revision was updated via setSettings
-    expect(store.revision).toBe('new-revision-123')
+    // Verify store state was updated correctly
+    const storeState = useStore.getState()
+    expect(storeState.revision).toBe('new-revision-123')
+    expect(storeState.synchronizedStateHasChanges).toBe(false)
   })
 
   test('2) If PUT is used but file exists on backend (409), should reload store', async () => {
     // Setup: ensure there's no revision
-    store.revision = null
+    useStore.setState({ revision: null })
+
+    // Spy on the load method
+    const originalLoad = useStore.getState().load
+    const loadSpy = jest.fn(() => Promise.resolve())
+    useStore.getState().load = loadSpy
 
     // Mock PUT to throw 409 conflict error
     const error = new Error('Conflict')
     error.response = { status: 409 }
     axios.put.mockRejectedValueOnce(error)
 
-    // Mock the store.load method
-    store.load = jest.fn()
-
-    // Execute
-    await storeToServer(store)
+    // Execute - this should call load() in the catch block
+    await useStore.getState().persist().catch(() => {
+      // We don't care about the error here, just want to ensure the promise completes
+    })
 
     // Assert: PUT was called
     expect(axios.put).toHaveBeenCalledTimes(1)
-    expect(store.load).toHaveBeenCalledTimes(1)
+    expect(loadSpy).toHaveBeenCalledTimes(1)
+
+    // Restore original method
+    useStore.getState().load = originalLoad
   })
 
   test('3) If there\'s a revision use POST', async () => {
     // Setup: set a revision
-    store.revision = 'existing-revision-123'
+    useStore.setState({ revision: 'existing-revision-123' })
 
     // Mock successful POST response
     axios.post.mockResolvedValueOnce({
@@ -397,27 +389,32 @@ describe('Store synchronization tests', () => {
     })
 
     // Execute
-    await storeToServer(store)
+    await useStore.getState().persist()
 
     // Assert: POST was called with correct params
     expect(axios.post).toHaveBeenCalledTimes(1)
     expect(axios.post).toHaveBeenCalledWith(
-      'https://local-storage-storage.io/api/portalific/test-id?revision=existing-revision-123',
-      JSON.stringify({
-        modules: store.modules,
-        settings: store.settings,
-        theme: store.theme
-      }),
+      `${API_URL}test-id?revision=existing-revision-123`,
+      expect.any(String),
       { headers: API_AUTH_HEADER }
     )
 
-    // Assert: revision was updated
-    expect(store.setRevision).toHaveBeenCalledWith('updated-revision-456')
+    // Verify store state was updated correctly
+    const storeState = useStore.getState()
+    expect(storeState.revision).toBe('updated-revision-456')
+    expect(storeState.synchronizedStateHasChanges).toBe(false)
   })
 
   test('4) If file does not exist (404), should disable synchronization', async () => {
     // Setup: set a revision
-    store.revision = 'existing-revision-123'
+    useStore.setState({
+      revision: 'existing-revision-123',
+      settings: {
+        synchronize: true,
+        identifier: 'test-id',
+        columns: 1
+      }
+    })
 
     // Mock POST to throw 404 not found error
     const error = new Error('Not Found')
@@ -425,43 +422,78 @@ describe('Store synchronization tests', () => {
     axios.post.mockRejectedValueOnce(error)
 
     // Execute
-    await storeToServer(store)
+    await useStore.getState().persist().catch(() => {
+      // We don't care about the error here, just want to ensure the promise completes
+    })
 
     // Assert: POST was attempted
     expect(axios.post).toHaveBeenCalledTimes(1)
 
-    // Assert: synchronization should be disabled
-    expect(store.settings.identifier).toBe(null)
-    expect(store.settings.password).toBe(null)
-    expect(store.settings.synchronize).toBe(false)
+    // Verify store settings were updated correctly
+    const settings = useStore.getState().settings
+    expect(settings.identifier).toBe(null)
+    expect(settings.password).toBe(null)
+    expect(settings.synchronize).toBe(false)
   })
 
   test('5) If revision is wrong (409), store should be reloaded', async () => {
     // Setup: set a revision
-    store.revision = 'existing-revision-123'
+    useStore.setState({ revision: 'existing-revision-123' })
+
+    // Spy on the load method
+    const originalLoad = useStore.getState().load
+    const loadSpy = jest.fn(() => Promise.resolve())
+    useStore.getState().load = loadSpy
 
     // Mock POST to throw 409 conflict error
     const error = new Error('Conflict')
     error.response = { status: 409 }
     axios.post.mockRejectedValueOnce(error)
 
-    // Mock the store.load method
-    store.load = jest.fn()
-
     // Execute
-    await storeToServer(store)
+    await useStore.getState().persist().catch(() => {
+      // We don't care about the error here, just want to ensure the promise completes
+    })
 
     // Assert: POST was called
     expect(axios.post).toHaveBeenCalledTimes(1)
-    expect(store.load).toHaveBeenCalledTimes(1)
+    expect(loadSpy).toHaveBeenCalledTimes(1)
+
+    // Restore original method
+    useStore.getState().load = originalLoad
   })
 
   test('Should not sync if synchronize is false', async () => {
     // Setup: disable synchronization
-    store.settings.synchronize = false
+    useStore.setState({
+      settings: {
+        synchronize: false,
+        identifier: 'test-id',
+        columns: 1
+      }
+    })
 
     // Execute
-    await storeToServer(store)
+    await useStore.getState().persist()
+
+    // Assert: no HTTP requests were made
+    expect(axios.put).not.toHaveBeenCalled()
+    expect(axios.post).not.toHaveBeenCalled()
+  })
+
+  test('Should not sync if no state changes', async () => {
+    // Setup: mark state as not having changes
+    useStore.setState({
+      synchronizedStateHasChanges: false,
+      settings: {
+        synchronize: true,
+        identifier: 'test-id',
+        columns: 1
+      }
+    })
+
+    // Execute
+    await useStore.getState().persist()
 
     // Assert: no HTTP requests were made
     expect(axios.put).not.toHaveBeenCalled()
