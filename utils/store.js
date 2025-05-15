@@ -4,7 +4,7 @@ import axios from 'axios'
 import debounce from 'debounce'
 
 const API_URL = 'https://local-storage-storage.io/api/portalific/'
-const API_KEY = 'Bearer dslafki92esakflu8qfasdf'
+const API_AUTH_HEADER = { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
 
 const store = (set, get) => ({
   // Synchronized state
@@ -15,6 +15,7 @@ const store = (set, get) => ({
   // Local app state
   errors: [],
   revision: null,
+  lastSyncState: null,
 
   setModules: (modules) => set({ modules }),
   pushError: (error, errorInfo) => set({ errors: [...get().errors, { error, info: errorInfo }] }),
@@ -74,9 +75,7 @@ const store = (set, get) => ({
     axios
       .get(
         `${API_URL}${settings.identifier}`,
-        {
-          headers: { Authorization: API_KEY }
-        }
+        { headers: API_AUTH_HEADER }
       )
       .then((response) => {
         const data = JSON.parse(response.data.data)
@@ -84,9 +83,66 @@ const store = (set, get) => ({
           settings: data.settings,
           modules: data.modules,
           theme: data.theme,
-          revision: response.data.revision
+          revision: response.data.revision,
+          lastSyncState: JSON.stringify(data),
         })
       })
+  },
+
+  persist: async () => {
+    if (!get().settings.synchronize) {
+      return
+    }
+
+    const dataToSync = JSON.stringify({
+      modules: get().modules,
+      settings: get().settings,
+      theme: get().theme
+    })
+
+    if (get().lastSyncState === dataToSync) {
+      return
+    }
+
+    if (!get().revision) {
+      // Try to create storage, first time…
+      axios
+        .put(
+          `${API_URL}${get().settings.identifier}`,
+          // @TODO: Encrypt data with settings.password
+          dataToSync,
+          { headers: API_AUTH_HEADER }
+        )
+        .then((response) => {
+          set({ revision: response.data.revision, lastSyncState: dataToSync })
+        })
+        .catch(
+          (error) => {
+            if (error.response.status === 409) {
+              // store.load()
+            }
+          }
+        )
+    } else {
+      // Update existing storage
+      axios
+        .post(
+          `${API_URL}${get().settings.identifier}?revision=${get().revision}`,
+          // @TODO: Encrypt data with settings.password
+          dataToSync,
+          { headers: API_AUTH_HEADER }
+        )
+        .then((response) => {
+          set({ revision: response.data.revision, lastSyncState: dataToSync })
+        })
+        .catch(
+          (error) => {
+            if (error.response.status === 409) {
+              // store.load()
+            }
+          }
+        )
+    }
   }
 })
 
@@ -100,63 +156,7 @@ const useStore = create(
   )
 )
 
-export const storeToServer = (store) => {
-  if (!store.settings.synchronize) {
-    return
-  }
-
-  if (!store.revision) {
-    // Try to create storage, first time…
-    axios
-      .put(
-        `${API_URL}${store.settings.identifier}`,
-        // @TODO: Encrypt data with settings.password
-        JSON.stringify({
-          modules: store.modules,
-          settings: store.settings,
-          theme: store.theme
-        }),
-        {
-          headers: { Authorization: API_KEY }
-        }
-      )
-      .then((response) => {
-        store.setRevision(response.data.revision)
-      })
-      .catch(
-        (error) => {
-          if (error.response.status === 409) {
-            // store.load()
-          }
-        }
-      )
-  } else {
-    // Update existing storage
-    axios
-      .post(
-        `${API_URL}${store.settings.identifier}?revision=${store.revision}`,
-        // @TODO: Encrypt data with settings.password
-        JSON.stringify({
-          modules: store.modules,
-          settings: store.settings,
-          theme: store.theme
-        }),
-        {
-          headers: { Authorization: API_KEY }
-        }
-      )
-      .then((response) => {
-        store.setRevision(response.data.revision)
-      })
-      .catch(
-        (error) => {
-          if (error.response.status === 409) {
-            // store.load()
-          }
-        }
-      )
-  }
-}
+export const storeToServer = (store) => store.persist()
 
 // Listen for all store changes to store them on the remote server
 useStore.subscribe(debounce(storeToServer, 1000))
