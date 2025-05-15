@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { useTestStore as useStore, storeToServer } from '../utils/store'
+import { useTestStore as useStore, storeToServer, API_AUTH_HEADER } from '../utils/store'
 import axios from 'axios'
 
 jest.mock('axios')
@@ -228,7 +228,6 @@ describe('Zustand Store', () => {
 
   describe('load function', () => {
     const API_URL = 'https://local-storage-storage.io/api/portalific/'
-    const API_KEY = 'Bearer dslafki92esakflu8qfasdf'
     const mockResponseData = {
       data: JSON.stringify({
         settings: { columns: 3, synchronize: true, identifier: 'test-id' },
@@ -266,7 +265,7 @@ describe('Zustand Store', () => {
 
       expect(axios.get).toHaveBeenCalledWith(
         `${API_URL}test-id`,
-        { headers: { Authorization: API_KEY } }
+        { headers: API_AUTH_HEADER }
       )
 
       const state = useStore.getState()
@@ -332,7 +331,7 @@ describe('Store synchronization tests', () => {
 
     // Mock the store's setSettings method
     store.setSettings = jest.fn((newSettings) => {
-      store.settings = { ...store.settings, ...newSettings }
+      storesettings = { ...store.settings, ...newSettings }
     })
 
     store.setRevision = jest.fn((revision) => {
@@ -361,11 +360,11 @@ describe('Store synchronization tests', () => {
         settings: store.settings,
         theme: store.theme
       }),
-      { headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' } }
+      { headers: API_AUTH_HEADER }
     )
 
     // Assert: revision was updated via setSettings
-    expect(store.setRevision).toHaveBeenCalledWith('new-revision-123')
+    expect(store.revision).toBe('new-revision-123')
   })
 
   test('2) If PUT is used but file exists on backend (409), should reload store', async () => {
@@ -409,7 +408,7 @@ describe('Store synchronization tests', () => {
         settings: store.settings,
         theme: store.theme
       }),
-      { headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' } }
+      { headers: API_AUTH_HEADER }
     )
 
     // Assert: revision was updated
