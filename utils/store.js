@@ -9,15 +9,14 @@ const API_AUTH_HEADER = { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
 const store = (set, get) => ({
   // Synchronized state
   settings: { columns: 1 },
-  theme: 'auto',
   modules: [[{ type: 'welcome', id: 'welcome' }]],
 
   // Local app state
   errors: [],
   revision: null,
-  lastSyncState: null,
+  synchronizedStateHasChanges: false,
 
-  setModules: (modules) => set({ modules }),
+  setModules: (modules) => set({ modules, synchronizedStateHasChanges: true }),
   pushError: (error, errorInfo) => set({ errors: [...get().errors, { error, info: errorInfo }] }),
   clearErrors: () => set({ errors: [] }),
 
@@ -42,7 +41,7 @@ const store = (set, get) => ({
       }
     }
 
-    set({ settings, modules })
+    set({ settings, modules, synchronizedStateHasChanges: true })
   },
 
   setRevision: (revision) => {
@@ -62,7 +61,7 @@ const store = (set, get) => ({
     }
     modules[targetColumn].splice(targetIndex, 0, removedModule)
 
-    set({ modules })
+    set({ modules, synchronizedStateHasChanges: true })
   },
 
   load: async () => {
@@ -82,9 +81,8 @@ const store = (set, get) => ({
         set({
           settings: data.settings,
           modules: data.modules,
-          theme: data.theme,
           revision: response.data.revision,
-          lastSyncState: JSON.stringify(data),
+          synchronizedStateHasChanges: false,
         })
       })
   },
@@ -94,15 +92,14 @@ const store = (set, get) => ({
       return
     }
 
+    if (!get().synchronizedStateHasChanges) {
+      return
+    }
+
     const dataToSync = JSON.stringify({
       modules: get().modules,
       settings: get().settings,
-      theme: get().theme
     })
-
-    if (get().lastSyncState === dataToSync) {
-      return
-    }
 
     if (!get().revision) {
       // Try to create storage, first time…
@@ -114,12 +111,12 @@ const store = (set, get) => ({
           { headers: API_AUTH_HEADER }
         )
         .then((response) => {
-          set({ revision: response.data.revision, lastSyncState: dataToSync })
+          set({ revision: response.data.revision, synchronizedStateHasChanges: false })
         })
         .catch(
           (error) => {
             if (error.response.status === 409) {
-              // store.load()
+              store.load()
             }
           }
         )
@@ -133,12 +130,12 @@ const store = (set, get) => ({
           { headers: API_AUTH_HEADER }
         )
         .then((response) => {
-          set({ revision: response.data.revision, lastSyncState: dataToSync })
+          set({ revision: response.data.revision, synchronizedStateHasChanges: false })
         })
         .catch(
           (error) => {
             if (error.response.status === 409) {
-              // store.load()
+              store.load()
             }
           }
         )
