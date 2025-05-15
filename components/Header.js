@@ -19,7 +19,7 @@ export default function Header ({ name }) {
         {settings.name && settings.name + "'s "}
         {name}
       </Link>
-      {errors && !!errors.length && (
+      {Array.isArray(errors) && errors.length > 0 && (
         <button
           type='button'
           className='header__button header__button--error'
@@ -34,7 +34,7 @@ export default function Header ({ name }) {
       )}
       <Modal theme={settings.theme} open={showErrors} setOpen={setShowErrors}>
         <ul className='error-list'>
-          {errors.map((error, index) => (
+          {Array.isArray(errors) && errors.map((error, index) => (
             <li key={index} className='error-list__item'>
               {index !== errors.length - 1
                 ? (
