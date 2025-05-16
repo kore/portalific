@@ -8,6 +8,11 @@ describe('Encryption and decryption integration', () => {
   })
 
   it('should successfully encrypt and decrypt data', async () => {
+    if (typeof window?.crypto?.getRandomValues !== 'function') {
+      console.info("Skip test, since window.crypto.getRandomValues isn't available")
+      return
+    }
+
     const password = 'securePassword123'
     const originalData = {
       message: 'This is a test message',
@@ -27,6 +32,11 @@ describe('Encryption and decryption integration', () => {
   })
 
   it('should fail decryption with incorrect password', async () => {
+    if (typeof window?.crypto?.getRandomValues !== 'function') {
+      console.info("Skip test, since window.crypto.getRandomValues isn't available")
+      return
+    }
+
     const password = 'correctPassword'
     const wrongPassword = 'wrongPassword'
     const originalData = { message: 'Secret information' }
