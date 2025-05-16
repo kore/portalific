@@ -13,15 +13,15 @@ export default function Index () {
     description: 'Offline-first, privacy-focussed, open-source personal portal'
   }
 
-  const hasWindow = typeof window !== 'undefined'
-  const hasLocalStorage = hasWindow && (typeof window.localStorage !== 'undefined')
-
   const store = useStore((store) => store)
 
   // This code (The useEffect callback) can be removed by 2025-07-01
   //
   // It is used to migrate old localStorage items into the Zustand store, which
   // also stores these items in localStorage, but in a "portalific" property.
+  const hasWindow = typeof window !== 'undefined'
+  const hasLocalStorage = hasWindow && (typeof window.localStorage !== 'undefined')
+
   useEffect(() => {
     let legacySettings = window.localStorage.getItem('settings') || null
     let legacyModules = window.localStorage.getItem('modules') || null
@@ -41,6 +41,7 @@ export default function Index () {
       console.info('Migration complete')
     }
   }, [hasLocalStorage])
+  // End of temporary migration code
 
   useEffect(() => {
     store.load()
