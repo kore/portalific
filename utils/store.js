@@ -87,6 +87,16 @@ const store = (set, get) => ({
         })
         return response // Return the response for chaining
       })
+      .catch(
+        async (error) => {
+          if (error.response && error.response.status === 404) {
+            set({ revision: null })
+            return Promise.resolve()
+          }
+
+          throw error // Re-throw the error for further handling
+        }
+      )
   },
 
   persist: async () => {
@@ -122,18 +132,6 @@ const store = (set, get) => ({
               return get().load()
             }
 
-            // For 404 errors, disable synchronization
-            if (error.response && error.response.status === 404) {
-              set({
-                settings: {
-                  ...get().settings,
-                  synchronize: false,
-                  identifier: null,
-                  password: null
-                }
-              })
-            }
-
             throw error // Re-throw the error for further handling
           }
         )
@@ -166,6 +164,7 @@ const store = (set, get) => ({
                   password: null
                 }
               })
+              return Promise.resolve()
             }
 
             throw error // Re-throw the error for further handling

@@ -20,11 +20,6 @@ export default function Settings () {
   const [includePassword, setIncludePassword] = useState(false)
 
   const setSetting = (setting, value) => {
-    if (setting === 'synchronize' && value) {
-      settings.identifier =
-        settings.identifier || (Math.random() + 1).toString(36).substring(2)
-    }
-
     setCopied(false)
     setSettings({
       ...settings,
@@ -63,7 +58,7 @@ export default function Settings () {
               checked={settings.synchronize}
               onChange={(value) => setSettings({
                 synchronize: !!value,
-                identifier: !value ? null : settings.identifier,
+                identifier: !value ? null : (settings.identifier || (Math.random() + 1).toString(36).substring(2)),
                 password: !value ? null : settings.password
               })}
               className={`settings__switch ${
