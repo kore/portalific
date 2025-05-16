@@ -14,13 +14,7 @@ const groups = [
   { name: 'Modules', href: '#', icon: ViewColumnsIcon }
 ]
 
-export default function Settings ({
-  modules,
-  setModules,
-  moveModule,
-  settings,
-  setSettings
-}) {
+export default function Settings () {
   const [group, setGroup] = useState('Display')
 
   return (
@@ -53,22 +47,13 @@ export default function Settings ({
 
       <div className='settings-panel__content'>
         {group === 'Display' && (
-          <SettingsDisplay settings={settings} setSettings={setSettings} />
+          <SettingsDisplay />
         )}
         {group === 'Synchronization' && (
-          <SettingsSynchronization
-            settings={settings}
-            setSettings={setSettings}
-          />
+          <SettingsSynchronization />
         )}
         {group === 'Modules' && (
-          <SettingsModules
-            settings={settings}
-            setSettings={setSettings}
-            modules={modules}
-            setModules={setModules}
-            moveModule={moveModule}
-          />
+          <SettingsModules />
         )}
       </div>
     </div>

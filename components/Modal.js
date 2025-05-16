@@ -1,10 +1,10 @@
 import { Dialog } from '@headlessui/react'
 
-export default function Modal ({ open, setOpen, children, settings }) {
+export default function Modal ({ open, setOpen, children, theme }) {
   return (
     <Dialog
       as='div'
-      className={`modal theme--${settings.theme}`}
+      className={`modal theme--${theme}`}
       open={open}
       onClose={setOpen}
     >

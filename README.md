@@ -34,7 +34,8 @@ yarn run dev
 ```
 
 Open your browser and visit <http://localhost:3000>, your project should be
-running!
+running! You can, if you want to, also import a test configuration using
+http://localhost:3000/setup?identifier=test-data
 
 ### Dependencies
 

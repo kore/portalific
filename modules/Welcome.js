@@ -1,10 +1,9 @@
-export default function Welcome ({
-  pushError,
-  settings,
-  setSettings,
-  modules,
-  setModules
-}) {
+import useStore from '../utils/store'
+import { useShallow } from 'zustand/react/shallow'
+
+export default function Welcome () {
+  const [settings, setSettings, modules, setModules, pushError] = useStore(useShallow((store) => [store.settings, store.setSettings, store.modules, store.setModules, store.pushError]))
+
   const setSetting = (setting, value) => {
     setSettings({
       ...settings,
@@ -65,13 +64,14 @@ export default function Welcome ({
         <button
           id='add-module'
           onClick={() => {
-            modules[0].unshift({
+            const newModules = [...modules]
+            newModules[0].unshift({
               type: 'clock',
               id: 'firstModule-' + modules[0].length,
               showAnalogue: true,
               showSeconds: true
             })
-            setModules([...modules])
+            setModules(newModules)
           }}
           className='welcome__button'
         >

@@ -1,13 +1,14 @@
 import { Fragment, useEffect } from 'react'
+import useStore from '../utils/store'
+import { useShallow } from 'zustand/react/shallow'
 
-export default function Layout ({ children, settings = {} }) {
+export default function Layout ({ children }) {
+  const [settings, themeVariant, setThemeVariant] = useStore(useShallow((store) => [store.settings, store.themeVariant, store.setThemeVariant]))
+
   const setAppTheme = () => {
-    const darkMode = window.localStorage.getItem('theme') === 'dark'
-    const lightMode = window.localStorage.getItem('theme') === 'light'
-
-    if (darkMode) {
+    if (themeVariant === 'dark') {
       document.documentElement.classList.add('variant--dark')
-    } else if (lightMode) {
+    } else if (themeVariant === 'light') {
       document.documentElement.classList.remove('variant--dark')
     }
   }
@@ -18,41 +19,39 @@ export default function Layout ({ children, settings = {} }) {
     darkQuery.onchange = (e) => {
       if (e.matches) {
         document.documentElement.classList.add('variant--dark')
-        window.localStorage.setItem('theme', 'dark')
+        setThemeVariant('dark')
       } else {
         document.documentElement.classList.remove('variant--dark')
-        window.localStorage.setItem('theme', 'light')
+        setThemeVariant('light')
       }
     }
   }
 
   useEffect(() => {
     setAppTheme()
-  }, [])
+  }, [themeVariant])
 
   useEffect(() => {
     handleSystemThemeChange()
   }, [])
 
   return (
-    <>
-      <div
-        className={`layout theme-transition theme--${settings.theme}`}
-        style={{
-          backgroundColor: settings.backgroundColor || null,
-          backgroundImage: settings.backgroundImage
-            ? `url(${settings.backgroundImage})`
-            : null
-        }}
-      >
-        <div className='layout__container'>{children}</div>
-        {!settings.backgroundColor && !settings.backgroundImage && (
-          <>
-            <div className='layout__gradient layout__gradient--large' />
-            <div className='layout__gradient layout__gradient--small' />
-          </>
-        )}
-      </div>
-    </>
+    <div
+      className={`layout theme-transition theme--${settings.theme}`}
+      style={{
+        backgroundColor: settings.backgroundColor || null,
+        backgroundImage: settings.backgroundImage
+          ? `url(${settings.backgroundImage})`
+          : null
+      }}
+    >
+      <div className='layout__container'>{children}</div>
+      {!settings.backgroundColor && !settings.backgroundImage && (
+        <>
+          <div className='layout__gradient layout__gradient--large' />
+          <div className='layout__gradient layout__gradient--small' />
+        </>
+      )}
+    </div>
   )
 }

@@ -2,6 +2,8 @@ import { Fragment, useState, useEffect } from 'react'
 import axios from 'axios'
 import ICAL from 'ical.js'
 import resolveAllPromises from '../../utils/resolveAllPromises'
+import useStore, { API_AUTH_HEADER } from '../../utils/store'
+import { useShallow } from 'zustand/react/shallow'
 
 const groupBy = (list, keyGetter) => {
   const map = new Map()
@@ -17,7 +19,8 @@ const groupBy = (list, keyGetter) => {
   return map
 }
 
-export default function Calendar ({ configuration, pushError }) {
+export default function Calendar ({ configuration }) {
+  const pushError = useStore(useShallow((store) => store.pushError))
   const [calendarItems, setCalendarItems] = useState([])
 
   // Use https://stackoverflow.com/questions/72540660/react-how-to-combine-data-from-multiple-api-and-render-it to fetch data from all feeds
@@ -28,7 +31,7 @@ export default function Calendar ({ configuration, pushError }) {
         response: axios.get(
           'https://local-storage-storage.io/proxy/portalific?url=' +
             encodeURIComponent(calendar.calendar),
-          { headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' } }
+          { headers: API_AUTH_HEADER }
         )
       }
     })

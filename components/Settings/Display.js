@@ -1,6 +1,11 @@
 import { Fragment } from 'react'
 
-export default function Settings ({ settings, setSettings }) {
+import useStore from '../../utils/store'
+import { useShallow } from 'zustand/react/shallow'
+
+export default function Settings () {
+  const [settings, setSettings, reset] = useStore(useShallow((store) => [store.settings, store.setSettings, store.reset]))
+
   return (
     <>
       {/* Main section */}
@@ -163,9 +168,7 @@ export default function Settings ({ settings, setSettings }) {
               className='button button--danger'
               onClick={() => {
                 if (window.confirm('Really remove all data?')) {
-                  window.localStorage.removeItem('theme')
-                  window.localStorage.removeItem('settings')
-                  window.localStorage.removeItem('modules')
+                  reset()
                   window.location = '/'
                 }
               }}

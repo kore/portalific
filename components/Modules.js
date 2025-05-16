@@ -4,6 +4,8 @@ import ErrorBoundary from '../components/ErrorBoundary'
 import Module from '../components/Module'
 import NotFound from '../modules/NotFound'
 import Welcome from '../modules/Welcome'
+import useStore from '../utils/store'
+import { useShallow } from 'zustand/react/shallow'
 
 const availableModules = {
   clock: dynamic(() => import('../modules/Clock')),
@@ -12,33 +14,12 @@ const availableModules = {
   calendar: dynamic(() => import('../modules/Calendar')),
   todo: dynamic(() => import('../modules/TodoList')),
   webStats: dynamic(() => import('../modules/WebStats')),
-  notfound: NotFound,
-  welcome: Welcome
+  welcome: Welcome,
+  notfound: NotFound
 }
 
-export default function Modules ({
-  pushError,
-  setSettings,
-  settings,
-  modules,
-  setModules,
-  moduleRenderer = null
-}) {
-  const moveModule = (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
-    const removedModule = modules[sourceColumn][sourceIndex]
-
-    // Remove item from source column
-    modules[sourceColumn].splice(sourceIndex, 1)
-
-    // Put item into target column
-    if (!Array.isArray(modules[targetColumn])) {
-      modules[targetColumn] = []
-    }
-    modules[targetColumn].splice(targetIndex, 0, removedModule)
-
-    setModules([...modules])
-  }
-
+export default function Modules ({ moduleRenderer = null }) {
+  const [settings, modules, setModules, moveModule, pushError] = useStore(useShallow((store) => [store.settings, store.modules, store.setModules, store.moveModule, store.pushError]))
   const gridClassName = 'grid__cols-' + (settings.columns ?? 3)
 
   return (
@@ -78,11 +59,6 @@ export default function Modules ({
                               modules[column][index] = configuration
                               setModules([...modules])
                             }}
-                            pushError={pushError}
-                            settings={settings}
-                            setSettings={setSettings}
-                            modules={modules}
-                            setModules={setModules}
                           />
                           )}
                     </ErrorBoundary>

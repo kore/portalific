@@ -9,12 +9,14 @@ import axios from 'axios'
 import Parser from 'rss-parser'
 import mapFeedItems from './mapFeedItems'
 import resolveAllPromises from '../../utils/resolveAllPromises'
+import useStore, { API_AUTH_HEADER } from '../../utils/store'
+import { useShallow } from 'zustand/react/shallow'
 
 export default function Feed ({
   configuration,
-  updateModuleConfiguration,
-  pushError
+  updateModuleConfiguration
 }) {
+  const pushError = useStore(useShallow((store) => store.pushError))
   const [feedItems, setFeedItems] = useState([])
   const [updated, setUpdated] = useState(null)
 
@@ -26,7 +28,7 @@ export default function Feed ({
         response: axios.get(
           'https://local-storage-storage.io/proxy/portalific?url=' +
             encodeURIComponent(feed.feed),
-          { headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' } }
+          { headers: API_AUTH_HEADER }
         )
       }
     })

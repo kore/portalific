@@ -10,18 +10,16 @@ import {
 } from '@heroicons/react/24/outline'
 import { QRCodeSVG } from 'qrcode.react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import useStore from '../../utils/store'
+import { useShallow } from 'zustand/react/shallow'
 
-export default function Settings ({ settings, setSettings }) {
+export default function Settings () {
+  const [settings, setSettings] = useStore(useShallow((store) => [store.settings, store.setSettings]))
   const [copied, setCopied] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [includePassword, setIncludePassword] = useState(false)
 
   const setSetting = (setting, value) => {
-    if (setting === 'synchronize' && value) {
-      settings.identifier =
-        settings.identifier || (Math.random() + 1).toString(36).substring(2)
-    }
-
     setCopied(false)
     setSettings({
       ...settings,
@@ -58,7 +56,12 @@ export default function Settings ({ settings, setSettings }) {
             </div>
             <Switch
               checked={settings.synchronize}
-              onChange={(value) => setSetting('synchronize', value)}
+              onChange={(value) => setSettings({
+                ...settings,
+                synchronize: !!value,
+                identifier: !value ? null : (settings.identifier || (Math.random() + 1).toString(36).substring(2)),
+                password: !value ? null : settings.password
+              })}
               className={`settings__switch ${
                 settings.synchronize ? 'settings__switch--active' : ''
               }`}

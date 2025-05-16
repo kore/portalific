@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react'
 import { SunIcon, MoonIcon, ClockIcon } from '@heroicons/react/24/outline'
+import useStore from '../utils/store'
+import { useShallow } from 'zustand/react/shallow'
 
 const ThemeSwitcher = () => {
   const [auto, setAuto] = useState(true)
-  const hasWindow = typeof window !== 'undefined'
-  const hasLocalStorage = hasWindow && (typeof window.localStorage !== 'undefined')
+  const [themeVariant, setThemeVariant] = useStore(useShallow((store) => [store.themeVariant, store.setThemeVariant]))
 
   const setAutoTheme = (auto) => {
-    if (typeof document === 'undefined') {
-      return
-    }
-
-    if (!auto) {
+    if (typeof document === 'undefined' || !auto) {
       return
     }
 
@@ -23,14 +20,8 @@ const ThemeSwitcher = () => {
     }
   }
 
-  setAutoTheme(auto)
   useEffect(() => {
-    setAuto(
-      !hasLocalStorage || !window.localStorage.getItem('theme')
-        ? true
-        : window.localStorage.getItem('theme') === 'auto'
-    )
-
+    setAuto(themeVariant === 'auto')
     setAutoTheme(auto)
 
     const interval = setInterval(() => {}, 1000)
@@ -38,7 +29,7 @@ const ThemeSwitcher = () => {
     return () => {
       clearInterval(interval)
     }
-  }, [hasLocalStorage, auto])
+  }, [auto])
 
   return (
     <div className='theme-switcher'>
@@ -46,14 +37,11 @@ const ThemeSwitcher = () => {
         type='button'
         aria-label='Use Dark Mode'
         onClick={() => {
-          document.documentElement.classList.add('variant--dark')
-          window.localStorage.setItem('theme', 'dark')
+          setThemeVariant('dark')
           setAuto(false)
         }}
         className={`theme-switcher__button theme-switcher__button--dark ${
-          hasLocalStorage && window.localStorage.getItem('theme') === 'dark'
-            ? 'theme-switcher__button--active'
-            : ''
+          themeVariant === 'dark' ? 'theme-switcher__button--active' : ''
         }`}
       >
         <MoonIcon className='theme-switcher__icon' aria-hidden='true' />
@@ -63,14 +51,11 @@ const ThemeSwitcher = () => {
         type='button'
         aria-label='Use Light Mode'
         onClick={() => {
-          document.documentElement.classList.remove('variant--dark')
-          window.localStorage.setItem('theme', 'light')
+          setThemeVariant('light')
           setAuto(false)
         }}
         className={`theme-switcher__button theme-switcher__button--light ${
-          hasLocalStorage && window.localStorage.getItem('theme') === 'light'
-            ? 'theme-switcher__button--active'
-            : ''
+          themeVariant === 'light' ? 'theme-switcher__button--active' : ''
         }`}
       >
         <SunIcon className='theme-switcher__icon' aria-hidden='true' />
@@ -80,7 +65,7 @@ const ThemeSwitcher = () => {
         type='button'
         aria-label='Use Auto Mode'
         onClick={() => {
-          window.localStorage.setItem('theme', 'auto')
+          setThemeVariant('auto')
           setAuto(true)
         }}
         className={`theme-switcher__button theme-switcher__button--auto ${

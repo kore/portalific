@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useDebouncedCallback } from 'use-debounce'
+import { useEffect } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Layout from '../components/Layout'
 import Modules from '../components/Modules'
 import Seo from '../components/Seo'
+
+import useStore from '../utils/store'
 
 export default function Index () {
   const globalData = {
@@ -13,196 +13,51 @@ export default function Index () {
     description: 'Offline-first, privacy-focussed, open-source personal portal'
   }
 
-  const [revision, setRevision] = useState(null)
-  const [loaded, setLoaded] = useState(false)
-  const [errors, setErrors] = useState([])
-  const [settings, setSettingsState] = useState({ columns: 1 })
-  const [modules, setModulesState] = useState([
-    [{ type: 'welcome', id: 'welcome' }]
-  ])
   const hasWindow = typeof window !== 'undefined'
   const hasLocalStorage = hasWindow && (typeof window.localStorage !== 'undefined')
 
+  const store = useStore((store) => store)
+
+  // This code (The useEffect callback) can be removed by 2025-07-01
+  //
+  // It is used to migrate old localStorage items into the Zustand store, which
+  // also stores these items in localStorage, but in a "portalific" property.
   useEffect(() => {
-    if (!settings.synchronize) {
-      return
+    let legacySettings = window.localStorage.getItem('settings') || null
+    let legacyModules = window.localStorage.getItem('modules') || null
+
+    legacySettings = JSON.parse(legacySettings) || null
+    legacyModules = JSON.parse(legacyModules) || null
+
+    if (legacySettings && legacyModules) {
+      console.info('Found legacy configuration – will migrate it: ', legacySettings, legacyModules)
+
+      store.setSettings(legacySettings)
+      store.setModules(legacyModules)
+
+      window.localStorage.removeItem('settings')
+      window.localStorage.removeItem('modules')
+
+      console.info('Migration complete')
     }
-
-    axios
-      .get(
-        `https://local-storage-storage.io/api/portalific/${settings.identifier}`,
-        {
-          headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
-        }
-      )
-      .then((response) => {
-        const data = JSON.parse(response.data.data)
-        setRevision(response.data.revision)
-        setModulesState(data.modules)
-        setSettingsState(data.settings)
-      })
-
-    // We only want to run his effect once, actualy, when the localStorage is
-    // available. We only read loaded, settings, and modules but don't care if
-    // they (also) changed:
-  }, [settings.synchronize])
-
-  useEffect(() => {
-    // Update configuration from server, once the window gets focus
-    if (!hasWindow || !settings.synchronize) {
-      return
-    }
-
-    window.addEventListener('focus', () => {
-      axios
-        .get(
-          `https://local-storage-storage.io/api/portalific/${settings.identifier}`,
-          {
-            headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
-          }
-        )
-        .then((response) => {
-          const data = JSON.parse(response.data.data)
-          setRevision(response.data.revision)
-          setModulesState(data.modules)
-          setSettingsState(data.settings)
-        })
-
-      return () => {
-        window.removeEventListener('focus')
-      }
-    })
-    // We only want to run his effect once, actualy, when the window is
-    // available. We only read loaded, settings, and modules but don't care if
-    // they (also) changed:
-  }, [hasWindow])
-
-  const debouncedLocalStorageToServer = useDebouncedCallback(
-    (settings, revision) => {
-      if (!settings.synchronize) {
-        setRevision(null)
-        return
-      }
-
-      if (!revision) {
-        axios
-          .put(
-            `https://local-storage-storage.io/api/portalific/${settings.identifier}`,
-            // @TODO: Encrypt data with settings.password
-            JSON.stringify({
-              modules: JSON.parse(window.localStorage.getItem('modules')),
-              settings: JSON.parse(window.localStorage.getItem('settings')),
-              theme: window.localStorage.getItem('theme')
-            }),
-            {
-              headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
-            }
-          )
-          .then((response) => {
-            setRevision(response.data.revision)
-          })
-      } else {
-        axios
-          .post(
-            `https://local-storage-storage.io/api/portalific/${settings.identifier}?revision=${revision}`,
-            // @TODO: Encrypt data with settings.password
-            JSON.stringify({
-              modules: JSON.parse(window.localStorage.getItem('modules')),
-              settings: JSON.parse(window.localStorage.getItem('settings')),
-              theme: window.localStorage.getItem('theme')
-            }),
-            {
-              headers: { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
-            }
-          )
-          .then((response) => {
-            setRevision(response.data.revision)
-          })
-        // @TODO: Handle 409 (Conflict)
-      }
-    },
-    1000
-  )
-
-  const debouncedModulesToLocalStorage = useDebouncedCallback((modules) => {
-    window.localStorage.setItem('modules', JSON.stringify(modules))
-    debouncedLocalStorageToServer(settings, revision)
-  }, 1000)
-
-  const setModules = (modules) => {
-    setModulesState(modules)
-    debouncedModulesToLocalStorage(modules)
-  }
-
-  const debouncedSettingsLocalStorage = useDebouncedCallback((settings) => {
-    window.localStorage.setItem('settings', JSON.stringify(settings))
-    debouncedLocalStorageToServer(settings, revision)
-  }, 1000)
-
-  const setSettings = (newSettings) => {
-    // If the number of columns is reduced map all modules to the still
-    // available columns
-    if (newSettings.columns < settings.columns) {
-      for (
-        let column = newSettings.columns;
-        column < settings.columns;
-        column++
-      ) {
-        modules[newSettings.columns - 1] = (
-          modules[newSettings.columns - 1] || []
-        )
-          .concat(modules[column])
-          .filter((item) => !!item)
-        modules[column] = []
-      }
-
-      setModules(modules)
-    }
-
-    setSettingsState(newSettings)
-    debouncedSettingsLocalStorage(newSettings)
-  }
-
-  const pushError = (error, errorInfo = null) => {
-    setErrors([...errors, { error, info: errorInfo }])
-  }
-
-  useEffect(() => {
-    if (hasLocalStorage && !loaded) {
-      setSettingsState(
-        JSON.parse(window.localStorage.getItem('settings')) || settings
-      )
-      setModulesState(JSON.parse(window.localStorage.getItem('modules')) || modules)
-      setLoaded(true)
-    }
-
-    // We only want to run his effect once, actualy, when the localStorage is
-    // available. We only read loaded, settings, and modules but don't care if
-    // they (also) changed:
   }, [hasLocalStorage])
 
+  useEffect(() => {
+    store.load()
+
+    // We only want to run his effect once, actualy, when the localStorage is
+    // available. We only read loaded, settings, and modules but don't care if
+    // they (also) changed:
+  }, [store.settings.synchronize])
+
   return (
-    <Layout settings={settings}>
+    <Layout>
       <Seo title={globalData.name} description={globalData.description} />
-      <Header
-        name={globalData.name}
-        modules={modules}
-        setModules={setModules}
-        settings={settings}
-        setSettings={setSettings}
-        errors={errors}
-        clearErrors={() => setErrors([])}
-      />
+      <Header name={globalData.name} />
       <main>
-        <Modules
-          pushError={pushError}
-          setSettings={setSettings}
-          settings={settings}
-          modules={modules}
-          setModules={setModules}
-        />
+        <Modules />
       </main>
-      <Footer copyrightText={globalData.footerText} />
+      <Footer />
     </Layout>
   )
 }
