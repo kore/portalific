@@ -23,7 +23,7 @@ export const deriveKey = async (password, salt) => {
     {
       name: 'PBKDF2',
       salt,
-      iterations: 100000,
+      iterations: 1024, // Make this configurable by the user? CPU usage vs. security…
       hash: 'SHA-256'
     },
     passwordKey,
