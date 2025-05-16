@@ -562,6 +562,11 @@ describe('Zustand Store encrypted synchronization tests', () => {
     })
 
     test('2) should decrypt data when password is set and data is encrypted', async () => {
+      if (typeof window?.crypto?.getRandomValues !== 'function') {
+        console.info("Skip test, since window.crypto.getRandomValues isn't available")
+        return
+      }
+
       // Setup: set password in settings
       const testPassword = 'mySecurePassword'
       useStore.setState({
@@ -610,6 +615,11 @@ describe('Zustand Store encrypted synchronization tests', () => {
     })
 
     test('2) should reset everything if decryption fails', async () => {
+      if (typeof window?.crypto?.getRandomValues !== 'function') {
+        console.info("Skip test, since window.crypto.getRandomValues isn't available")
+        return
+      }
+
       // Setup: set password in settings
       const correctPassword = 'correctPassword'
       const wrongPassword = 'wrongPassword'
@@ -685,6 +695,11 @@ describe('Zustand Store encrypted synchronization tests', () => {
     })
 
     test('3) Should encrypt data on PUT if password is set', async () => {
+      if (typeof window?.crypto?.getRandomValues !== 'function') {
+        console.info("Skip test, since window.crypto.getRandomValues isn't available")
+        return
+      }
+
       // Setup: no revision but set a password
       const testPassword = 'secure123'
       useStore.setState({
@@ -723,6 +738,11 @@ describe('Zustand Store encrypted synchronization tests', () => {
     })
 
     test('3) Should encrypt data on POST if password is set', async () => {
+      if (typeof window?.crypto?.getRandomValues !== 'function') {
+        console.info("Skip test, since window.crypto.getRandomValues isn't available")
+        return
+      }
+
       // Setup: set a revision and password
       const testPassword = 'secure456'
       useStore.setState({
