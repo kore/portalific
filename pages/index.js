@@ -4,7 +4,6 @@ import Header from '../components/Header'
 import Layout from '../components/Layout'
 import Modules from '../components/Modules'
 import Seo from '../components/Seo'
-import { encryptData, decryptData } from '../utils/encryption'
 
 import useStore from '../utils/store'
 
