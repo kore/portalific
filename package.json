@@ -11,7 +11,7 @@
     "export": "next build && next export",
     "format": "standard --fix",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",
