@@ -4,7 +4,7 @@ import useStore from '../../utils/store'
 import { useShallow } from 'zustand/react/shallow'
 
 export default function Settings () {
-  const [settings, setSettings] = useStore(useShallow((store) => [store.settings, store.setSettings]))
+  const [settings, setSettings, reset] = useStore(useShallow((store) => [store.settings, store.setSettings, store.reset]))
 
   return (
     <>
@@ -168,9 +168,7 @@ export default function Settings () {
               className='button button--danger'
               onClick={() => {
                 if (window.confirm('Really remove all data?')) {
-                  window.localStorage.removeItem('theme')
-                  window.localStorage.removeItem('settings')
-                  window.localStorage.removeItem('modules')
+                  reset()
                   window.location = '/'
                 }
               }}

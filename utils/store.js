@@ -3,10 +3,10 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 import axios from 'axios'
 import debounce from 'debounce'
 
-const API_URL = 'https://local-storage-storage.io/api/portalific/'
+export const API_URL = 'https://local-storage-storage.io/api/portalific/'
 export const API_AUTH_HEADER = { Authorization: 'Bearer dslafki92esakflu8qfasdf' }
 
-const store = (set, get) => ({
+export const initialState = {
   // Synchronized state
   settings: { columns: 1 },
   modules: [[{ type: 'welcome', id: 'welcome' }]],
@@ -15,6 +15,12 @@ const store = (set, get) => ({
   errors: [],
   revision: null,
   synchronizedStateHasChanges: false,
+}
+
+const store = (set, get) => ({
+  ...initialState,
+
+  reset: () => set(initialState),
 
   setModules: (modules) => set({ modules, synchronizedStateHasChanges: true }),
   pushError: (error, errorInfo) => set({ errors: [...get().errors, { error, info: errorInfo }] }),
