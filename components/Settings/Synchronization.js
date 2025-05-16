@@ -57,6 +57,7 @@ export default function Settings () {
             <Switch
               checked={settings.synchronize}
               onChange={(value) => setSettings({
+                ...settings,
                 synchronize: !!value,
                 identifier: !value ? null : (settings.identifier || (Math.random() + 1).toString(36).substring(2)),
                 password: !value ? null : settings.password
