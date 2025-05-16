@@ -31,8 +31,6 @@ const ThemeSwitcher = () => {
     }
   }, [auto])
 
-  console.log(themeVariant, auto)
-
   return (
     <div className='theme-switcher'>
       <button
