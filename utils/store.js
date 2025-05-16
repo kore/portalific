@@ -15,6 +15,7 @@ export const initialState = {
   errors: [],
   revision: null,
   synchronizedStateHasChanges: false,
+  themeVariant: 'auto'
 }
 
 const store = (set, get) => ({
@@ -22,6 +23,7 @@ const store = (set, get) => ({
 
   reset: () => set(initialState),
 
+  setThemeVariant: (themeVariant) => set({ themeVariant }),
   setModules: (modules) => set({ modules, synchronizedStateHasChanges: true }),
   pushError: (error, errorInfo) => set({ errors: [...get().errors, { error, info: errorInfo }] }),
   clearErrors: () => set({ errors: [] }),
