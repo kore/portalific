@@ -7,7 +7,7 @@ export const API_URL = 'https://local-storage-storage.io/api/portalific/'
 export const API_AUTH_HEADER = {
   Accept: 'application/json',
   Authorization: 'Bearer dslafki92esakflu8qfasdf',
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json'
 }
 
 export const initialState = {
