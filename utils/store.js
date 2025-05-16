@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import axios from 'axios'
 import debounce from 'debounce'
+import { encryptData, decryptData } from '../utils/encryption'
 
 export const API_URL = 'https://local-storage-storage.io/api/portalific/'
 export const API_AUTH_HEADER = {
@@ -89,14 +90,51 @@ const store = (set, get) => ({
         `${API_URL}${settings.identifier}`,
         { headers: API_AUTH_HEADER }
       )
-      .then((response) => {
+      .then(async (response) => {
         const data = JSON.parse(response.data.data)
-        set({
-          settings: data.settings,
-          modules: data.modules,
-          revision: response.data.revision,
-          synchronizedStateHasChanges: false
-        })
+
+        // Check if data is encrypted
+        if (data.encryptedData) {
+          // If password is set, try to decrypt
+          if (settings.password) {
+            try {
+              const decrypted = await decryptData(
+                settings.password,
+                data.encryptedData
+              )
+
+              // If decryption fails, reset the store
+              if (!decrypted) {
+                get().reset()
+                get().pushError('Decryption failed, likely because of a wrong password')
+                return response
+              }
+
+              // Use decrypted data
+              set({
+                settings: decrypted.settings,
+                modules: decrypted.modules,
+                revision: response.data.revision,
+                errors: [],
+                synchronizedStateHasChanges: false
+              })
+            } catch (error) {
+              console.error('Cought', error)
+            }
+          } else {
+            // No password but encrypted data - treat as error
+            get().reset()
+            get().pushError('Encrypted data received but no password set')
+          }
+        } else {
+          // Data is not encrypted, parse it normally
+          set({
+            settings: data.settings,
+            modules: data.modules,
+            revision: response.data.revision,
+            synchronizedStateHasChanges: false
+          })
+        }
         return response // Return the response for chaining
       })
       .catch(
@@ -120,18 +158,26 @@ const store = (set, get) => ({
       return Promise.resolve()
     }
 
-    const dataToSync = JSON.stringify({
+    const dataToSync = {
       modules: get().modules,
       settings: get().settings
-    })
+    }
+
+    // Encrypt data if password is set
+    let finalData
+    if (get().settings.password) {
+      const encrypted = await encryptData(get().settings.password, dataToSync)
+      finalData = JSON.stringify(encrypted)
+    } else {
+      finalData = JSON.stringify(dataToSync)
+    }
 
     if (!get().revision) {
       // Try to create storage, first time…
       return axios
         .put(
           `${API_URL}${get().settings.identifier}`,
-          // @TODO: Encrypt data with settings.password
-          dataToSync,
+          finalData,
           { headers: API_AUTH_HEADER }
         )
         .then((response) => {
@@ -152,8 +198,7 @@ const store = (set, get) => ({
       return axios
         .post(
           `${API_URL}${get().settings.identifier}?revision=${get().revision}`,
-          // @TODO: Encrypt data with settings.password
-          dataToSync,
+          finalData,
           { headers: API_AUTH_HEADER }
         )
         .then((response) => {

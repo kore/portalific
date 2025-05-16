@@ -1,4 +1,10 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+const crypto = require('crypto')
+
 module.exports = {
-  testEnvironment: 'node'
+  testEnvironment: 'node',
+  globals: {
+    window: {
+      crypto
+    }
+  }
 }
