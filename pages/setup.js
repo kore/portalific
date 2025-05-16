@@ -37,7 +37,8 @@ export default function Setup () {
       icon: LockOpenIcon,
       completed: false,
       message: 'Decrpyting data',
-      info: null
+      info: null,
+      showErrors: true
     },
     {
       icon: ArrowDownTrayIcon,
@@ -53,25 +54,31 @@ export default function Setup () {
     }
   ]
 
-  const startImport = () => {
-    store.setSettings({
+  const startImport = async () => {
+    await store.setSettings({
       identifier: router.query.identifier,
       synchronize: true,
       password
     })
 
-    store.load()
+    try {
+      await store.load()
+    } catch (error) {
+      console.info('Loading failed:', error)
+    }
   }
 
   useEffect(() => {
-    if (store.revision) {
+    if (store.revision && store.settings && store.modules) {
       router.push('/')
     }
-  }, [store.revision])
+  }, [store.revision, store.settings, store.modules])
 
   useEffect(() => {
     setPassword(router.query.password || '')
   }, [router.query])
+
+  console.log(store.errors)
 
   return (
     <Layout>
@@ -161,6 +168,7 @@ export default function Setup () {
                     {step.info && (
                       <div className='error-list__message-info'>
                         {step.info}
+                        {step.showErrors && errors && <p>{errors[0].error}</p>}
                       </div>
                     )}
                   </div>

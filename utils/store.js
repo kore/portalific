@@ -91,37 +91,43 @@ const store = (set, get) => ({
         { headers: API_AUTH_HEADER }
       )
       .then(async (response) => {
+        const data = JSON.parse(response.data.data)
+
         // Check if data is encrypted
-        if (response.data.data.encryptedData) {
+        if (data.encryptedData) {
           // If password is set, try to decrypt
           if (settings.password) {
-            const decrypted = await decryptData(
-              settings.password,
-              response.data.data.encryptedData
-            )
+            try {
+              const decrypted = await decryptData(
+                settings.password,
+                data.encryptedData
+              )
 
-            // If decryption fails, reset the store
-            if (!decrypted) {
-              console.error('Decryption failed')
-              get().reset()
-              return response
+              // If decryption fails, reset the store
+              if (!decrypted) {
+                get().reset()
+                get().pushError('Decryption failed, likely because of a wrong password')
+                return response
+              }
+
+              // Use decrypted data
+              set({
+                settings: decrypted.settings,
+                modules: decrypted.modules,
+                revision: response.data.revision,
+                errors: [],
+                synchronizedStateHasChanges: false
+              })
+            } catch (error) {
+              console.error('Cought', error)
             }
-
-            // Use decrypted data
-            set({
-              settings: decrypted.settings,
-              modules: decrypted.modules,
-              revision: response.data.revision,
-              synchronizedStateHasChanges: false
-            })
           } else {
             // No password but encrypted data - treat as error
-            console.error('Encrypted data received but no password set')
             get().reset()
+            get().pushError('Encrypted data received but no password set')
           }
         } else {
           // Data is not encrypted, parse it normally
-          const data = JSON.parse(response.data.data)
           set({
             settings: data.settings,
             modules: data.modules,
