@@ -21,7 +21,7 @@ export const initialState = {
   revision: null,
   synchronized: false,
   synchronizedStateHasChanges: false,
-  themeVariant: 'auto',
+  themeVariant: 'auto'
 }
 
 const store = (set, get) => ({
