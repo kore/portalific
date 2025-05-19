@@ -54,20 +54,20 @@ export default function Setup () {
   ]
 
   const startImport = async () => {
+    await store.reset()
     await store.setSettings({
       identifier: router.query.identifier,
       synchronize: true,
       password
     })
-
     await store.load()
   }
 
   useEffect(() => {
-    if (store.revision && Array.isArray(store.modules) && store.modules.length > 0) {
+    if (store.synchronized) {
       router.push('/')
     }
-  }, [store.revision, store.settings, store.modules])
+  }, [store.synchronized])
 
   useEffect(() => {
     setPassword(router.query.password || '')

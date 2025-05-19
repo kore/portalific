@@ -19,8 +19,9 @@ export const initialState = {
   // Local app state
   errors: [],
   revision: null,
+  synchronized: false,
   synchronizedStateHasChanges: false,
-  themeVariant: 'auto'
+  themeVariant: 'auto',
 }
 
 const store = (set, get) => ({
@@ -104,7 +105,6 @@ const store = (set, get) => ({
 
             // If decryption fails, reset the store
             if (!decrypted) {
-              get().reset()
               get().pushError('Decryption failed, likely because of a wrong password', 'decrypting')
               return response
             }
@@ -115,11 +115,11 @@ const store = (set, get) => ({
               modules: decrypted.modules,
               revision: response.data.revision,
               errors: [],
-              synchronizedStateHasChanges: false
+              synchronizedStateHasChanges: false,
+              synchronized: true
             })
           } else {
             // No password but encrypted data - treat as error
-            get().reset()
             get().pushError('Encrypted data received but no password set', 'decrypting')
           }
         } else {
@@ -128,7 +128,8 @@ const store = (set, get) => ({
             settings: data.settings,
             modules: data.modules,
             revision: response.data.revision,
-            synchronizedStateHasChanges: false
+            synchronizedStateHasChanges: false,
+            synchronized: true
           })
         }
         return response // Return the response for chaining
@@ -136,7 +137,6 @@ const store = (set, get) => ({
       .catch(
         async (error) => {
           if (error.response && error.response.status === 404) {
-            get().reset()
             get().pushError('No storage found with provided ID', 'loading')
             return Promise.resolve()
           }
