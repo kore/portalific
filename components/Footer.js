@@ -85,10 +85,10 @@ export default function Footer () {
         <a
           className='footer__link'
           target='_blank'
-          href='https://github.com/kore/portalific/blob/main/LICENSE'
+          href='https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12'
           rel='noreferrer'
         >
-          GPLv3
+          EUPL
         </a>{' '}
         by{' '}
         <a

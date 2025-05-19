@@ -3,7 +3,7 @@
   "description": "Simple offline-first portal",
   "author": "Kore Nordmann",
   "homepage": "https://portalific.com/",
-  "license": "GPL-3.0-only",
+  "license": "EUPL",
   "scripts": {
     "dev": "next",
     "build": "next build",
