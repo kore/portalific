@@ -1,6 +1,7 @@
 /* eslint-env jest */
 
-import { useTestStore as useStore, API_AUTH_HEADER } from '../utils/store'
+import { useTestStore as useStore, API_URL, API_AUTH_HEADER } from '../utils/store'
+import { encryptData, decryptData } from '../utils/encryption'
 import axios from 'axios'
 
 jest.mock('axios')
@@ -498,5 +499,319 @@ describe('Store synchronization tests', () => {
     // Assert: no HTTP requests were made
     expect(axios.put).not.toHaveBeenCalled()
     expect(axios.post).not.toHaveBeenCalled()
+  })
+})
+
+describe('Zustand Store encrypted synchronization tests', () => {
+  beforeEach(() => {
+    localStorageMock.clear()
+
+    // Reset the store to initial state between tests
+    const { setState } = useStore
+    setState({
+      settings: { columns: 1 },
+      modules: [[{ type: 'welcome', id: 'welcome' }]],
+      errors: [],
+      revision: null
+    })
+
+    // Reset mocks
+    jest.clearAllMocks()
+    console.error = jest.fn()
+  })
+
+  describe('loading with encryption', () => {
+    beforeEach(() => {
+      axios.get.mockClear()
+    })
+
+    test('1) should use unencrypted data as-is when password is set but received data is not encrypted', async () => {
+      // Setup: set password in settings but return unencrypted data
+      useStore.setState({
+        settings: {
+          columns: 2,
+          synchronize: true,
+          identifier: 'test-id',
+          password: 'mypassword'
+        }
+      })
+
+      // Mock API response with unencrypted data (no encryptedData property)
+      const unencryptedData = {
+        data: JSON.stringify({
+          settings: { columns: 3, synchronize: true, identifier: 'test-id' },
+          modules: [
+            [{ type: 'remote1', id: 'remote1' }],
+            [{ type: 'remote2', id: 'remote2' }]
+          ]
+        }),
+        revision: '123456'
+      }
+
+      axios.get.mockResolvedValueOnce({ data: unencryptedData })
+
+      // Execute
+      await useStore.getState().load()
+
+      // Verify store was updated with unencrypted data
+      const state = useStore.getState()
+      const parsedData = JSON.parse(unencryptedData.data)
+      expect(state.settings).toEqual(parsedData.settings)
+      expect(state.modules).toEqual(parsedData.modules)
+      expect(state.revision).toEqual(unencryptedData.revision)
+    })
+
+    test('2) should decrypt data when password is set and data is encrypted', async () => {
+      if (typeof window?.crypto?.getRandomValues !== 'function') {
+        console.info("Skip test, since window.crypto.getRandomValues isn't available")
+        return
+      }
+
+      // Setup: set password in settings
+      const testPassword = 'mySecurePassword'
+      useStore.setState({
+        settings: {
+          columns: 2,
+          synchronize: true,
+          identifier: 'test-id',
+          password: testPassword
+        }
+      })
+
+      // Create real encrypted data
+      const originalData = {
+        settings: {
+          columns: 3,
+          synchronize: true,
+          identifier: 'test-id',
+          password: testPassword // Keep password in decrypted data
+        },
+        modules: [
+          [{ type: 'decrypted1', id: 'dec1' }],
+          [{ type: 'decrypted2', id: 'dec2' }]
+        ]
+      }
+
+      // Actually encrypt the data
+      const encrypted = await encryptData(testPassword, originalData)
+
+      // Mock API response with encrypted data
+      const apiResponse = {
+        data: encrypted,
+        revision: '123456'
+      }
+
+      // Setup mocks
+      axios.get.mockResolvedValueOnce({ data: apiResponse })
+
+      // Execute
+      await useStore.getState().load()
+
+      // Verify store was updated with decrypted data
+      const state = useStore.getState()
+      expect(state.settings).toEqual(originalData.settings)
+      expect(state.modules).toEqual(originalData.modules)
+      expect(state.revision).toEqual(apiResponse.revision)
+    })
+
+    test('2) should reset everything if decryption fails', async () => {
+      if (typeof window?.crypto?.getRandomValues !== 'function') {
+        console.info("Skip test, since window.crypto.getRandomValues isn't available")
+        return
+      }
+
+      // Setup: set password in settings
+      const correctPassword = 'correctPassword'
+      const wrongPassword = 'wrongPassword'
+
+      // Spy on the reset method
+      const resetSpy = jest.fn()
+      const originalReset = useStore.getState().reset
+      useStore.getState().reset = resetSpy
+
+      useStore.setState({
+        settings: {
+          columns: 2,
+          synchronize: true,
+          identifier: 'test-id',
+          password: wrongPassword // Setting wrong password
+        },
+        modules: [[{ type: 'existing', id: 'existing' }]]
+      })
+
+      // Create data encrypted with the CORRECT password
+      const originalData = {
+        settings: {
+          columns: 3,
+          synchronize: true,
+          identifier: 'test-id',
+          password: correctPassword
+        },
+        modules: [
+          [{ type: 'secure1', id: 'secure1' }]
+        ]
+      }
+
+      // Actually encrypt with CORRECT password
+      const encrypted = await encryptData(correctPassword, originalData)
+
+      // Mock API response with encrypted data (that cannot be decrypted with wrong password)
+      const apiResponse = {
+        data: encrypted,
+        revision: '123456'
+      }
+
+      // Setup mocks
+      axios.get.mockResolvedValueOnce({ data: apiResponse })
+
+      // Execute
+      await useStore.getState().load()
+
+      // Verify reset was called since decryption should fail
+      expect(resetSpy).toHaveBeenCalled()
+
+      // Restore original reset method
+      useStore.getState().reset = originalReset
+    })
+  })
+
+  describe('storing with encryption', () => {
+    beforeEach(() => {
+      // Clear all mocks before each test
+      jest.clearAllMocks()
+
+      // Initialize the store with default values
+      useStore.setState({
+        settings: {
+          synchronize: true,
+          identifier: 'test-id',
+          columns: 1
+        },
+        modules: [[{ type: 'test', id: 'test-module' }]],
+        theme: 'light',
+        revision: null,
+        synchronizedStateHasChanges: true
+      })
+    })
+
+    test('3) Should encrypt data on PUT if password is set', async () => {
+      if (typeof window?.crypto?.getRandomValues !== 'function') {
+        console.info("Skip test, since window.crypto.getRandomValues isn't available")
+        return
+      }
+
+      // Setup: no revision but set a password
+      const testPassword = 'secure123'
+      useStore.setState({
+        revision: null,
+        settings: {
+          synchronize: true,
+          identifier: 'test-id',
+          columns: 1,
+          password: testPassword
+        }
+      })
+
+      // Mock successful PUT response
+      axios.put.mockResolvedValueOnce({
+        data: { revision: 'encrypted-put-123' }
+      })
+
+      // Execute
+      await useStore.getState().persist()
+
+      // Parse the data sent to verify it contains encrypted content
+      const sentData = JSON.parse(axios.put.mock.calls[0][1])
+      expect(sentData).toHaveProperty('encryptedData')
+      expect(sentData.encryptedData).toHaveProperty('iv')
+      expect(sentData.encryptedData).toHaveProperty('salt')
+      expect(sentData.encryptedData).toHaveProperty('data')
+
+      // Verify the encrypted data can be decrypted back
+      const decrypted = await decryptData(testPassword, sentData.encryptedData)
+      expect(decrypted).toBeTruthy()
+      expect(decrypted).toHaveProperty('settings')
+      expect(decrypted).toHaveProperty('modules')
+
+      // Settings should match our store state (including the password)
+      expect(decrypted.settings.password).toBe(testPassword)
+    })
+
+    test('3) Should encrypt data on POST if password is set', async () => {
+      if (typeof window?.crypto?.getRandomValues !== 'function') {
+        console.info("Skip test, since window.crypto.getRandomValues isn't available")
+        return
+      }
+
+      // Setup: set a revision and password
+      const testPassword = 'secure456'
+      useStore.setState({
+        revision: 'existing-revision-123',
+        settings: {
+          synchronize: true,
+          identifier: 'test-id',
+          columns: 1,
+          password: testPassword
+        }
+      })
+
+      // Mock successful POST response
+      axios.post.mockResolvedValueOnce({
+        data: { revision: 'encrypted-post-456' }
+      })
+
+      // Execute
+      await useStore.getState().persist()
+
+      // Assert: POST was called with URL including revision
+      expect(axios.post).toHaveBeenCalledWith(
+        `${API_URL}test-id?revision=existing-revision-123`,
+        expect.any(String),
+        { headers: API_AUTH_HEADER }
+      )
+
+      // Parse the data sent to verify it contains encrypted content
+      const sentData = JSON.parse(axios.post.mock.calls[0][1])
+      expect(sentData).toHaveProperty('encryptedData')
+      expect(sentData.encryptedData).toHaveProperty('iv')
+      expect(sentData.encryptedData).toHaveProperty('salt')
+      expect(sentData.encryptedData).toHaveProperty('data')
+
+      // Verify the encrypted data can be decrypted back
+      const decrypted = await decryptData(testPassword, sentData.encryptedData)
+      expect(decrypted).toBeTruthy()
+      expect(decrypted).toHaveProperty('settings')
+      expect(decrypted).toHaveProperty('modules')
+
+      // Settings should match our store state (including the password)
+      expect(decrypted.settings.password).toBe(testPassword)
+    })
+
+    test('3) Make sure to not encrypt data if no password is set', async () => {
+      // Setup: no revision and no password
+      useStore.setState({
+        revision: null,
+        settings: {
+          synchronize: true,
+          identifier: 'test-id',
+          columns: 1,
+          password: null // explicitly set to null
+        }
+      })
+
+      // Mock successful PUT response
+      axios.put.mockResolvedValueOnce({
+        data: { revision: 'unencrypted-123' }
+      })
+
+      // Execute
+      await useStore.getState().persist()
+
+      // Assert: PUT data should not contain encryptedData
+      const sentData = JSON.parse(axios.put.mock.calls[0][1])
+      expect(sentData).not.toHaveProperty('encryptedData')
+      expect(sentData).toHaveProperty('settings')
+      expect(sentData).toHaveProperty('modules')
+    })
   })
 })

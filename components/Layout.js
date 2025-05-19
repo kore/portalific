@@ -37,16 +37,16 @@ export default function Layout ({ children }) {
 
   return (
     <div
-      className={`layout theme-transition theme--${settings.theme}`}
+      className={`layout theme-transition theme--${settings?.theme}`}
       style={{
-        backgroundColor: settings.backgroundColor || null,
-        backgroundImage: settings.backgroundImage
+        backgroundColor: settings?.backgroundColor || null,
+        backgroundImage: settings?.backgroundImage
           ? `url(${settings.backgroundImage})`
           : null
       }}
     >
       <div className='layout__container'>{children}</div>
-      {!settings.backgroundColor && !settings.backgroundImage && (
+      {!settings?.backgroundColor && !settings?.backgroundImage && (
         <>
           <div className='layout__gradient layout__gradient--large' />
           <div className='layout__gradient layout__gradient--small' />

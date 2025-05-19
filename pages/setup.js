@@ -31,43 +31,43 @@ export default function Setup () {
       icon: CloudArrowDownIcon,
       completed: false,
       message: 'Loading data',
-      info: null
+      type: 'loading'
     },
     {
       icon: LockOpenIcon,
       completed: false,
       message: 'Decrpyting data',
-      info: null
+      type: 'decrypting'
     },
     {
       icon: ArrowDownTrayIcon,
       completed: false,
       message: 'Storing settings locally',
-      info: null
+      type: 'importing'
     },
     {
       icon: ArrowRightCircleIcon,
       completed: false,
       message: 'Go to portal…',
-      info: null
+      type: 'leaving'
     }
   ]
 
-  const startImport = () => {
-    store.setSettings({
+  const startImport = async () => {
+    await store.reset()
+    await store.setSettings({
       identifier: router.query.identifier,
       synchronize: true,
       password
     })
-
-    store.load()
+    await store.load()
   }
 
   useEffect(() => {
-    if (store.revision) {
+    if (store.synchronized) {
       router.push('/')
     }
-  }, [store.revision])
+  }, [store.synchronized])
 
   useEffect(() => {
     setPassword(router.query.password || '')
@@ -158,11 +158,13 @@ export default function Setup () {
                   </div>
                   <div className='error-list__message'>
                     <p>{step.message}</p>
-                    {step.info && (
-                      <div className='error-list__message-info'>
-                        {step.info}
+                    {Array.isArray(store.errors) && store.errors.length > 0 && store.errors.filter(
+                      (error) => (error.info === step.type)
+                    ).map((error) => (
+                      <div className='error-list__message-error' key={error.error}>
+                        {error.error}
                       </div>
-                    )}
+                    ))}
                   </div>
                 </div>
               </li>
