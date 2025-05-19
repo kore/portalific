@@ -97,34 +97,30 @@ const store = (set, get) => ({
         if (data.encryptedData) {
           // If password is set, try to decrypt
           if (settings.password) {
-            try {
-              const decrypted = await decryptData(
-                settings.password,
-                data.encryptedData
-              )
+            const decrypted = await decryptData(
+              settings.password,
+              data.encryptedData
+            )
 
-              // If decryption fails, reset the store
-              if (!decrypted) {
-                get().reset()
-                get().pushError('Decryption failed, likely because of a wrong password')
-                return response
-              }
-
-              // Use decrypted data
-              set({
-                settings: decrypted.settings,
-                modules: decrypted.modules,
-                revision: response.data.revision,
-                errors: [],
-                synchronizedStateHasChanges: false
-              })
-            } catch (error) {
-              console.error('Cought', error)
+            // If decryption fails, reset the store
+            if (!decrypted) {
+              get().reset()
+              get().pushError('Decryption failed, likely because of a wrong password', 'decrypting')
+              return response
             }
+
+            // Use decrypted data
+            set({
+              settings: decrypted.settings,
+              modules: decrypted.modules,
+              revision: response.data.revision,
+              errors: [],
+              synchronizedStateHasChanges: false
+            })
           } else {
             // No password but encrypted data - treat as error
             get().reset()
-            get().pushError('Encrypted data received but no password set')
+            get().pushError('Encrypted data received but no password set', 'decrypting')
           }
         } else {
           // Data is not encrypted, parse it normally
@@ -140,7 +136,8 @@ const store = (set, get) => ({
       .catch(
         async (error) => {
           if (error.response && error.response.status === 404) {
-            set({ revision: null })
+            get().reset()
+            get().pushError('No storage found with provided ID', 'loading')
             return Promise.resolve()
           }
 

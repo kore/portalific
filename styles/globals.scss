@@ -521,6 +521,12 @@ a {
       font-size: 0.875rem;
       color: var(--color-gray-500);
     }
+
+    &-error {
+      white-space: nowrap;
+      font-size: 0.875rem;
+      color: var(--color-error);
+    }
   }
 }
 

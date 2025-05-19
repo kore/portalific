@@ -31,26 +31,25 @@ export default function Setup () {
       icon: CloudArrowDownIcon,
       completed: false,
       message: 'Loading data',
-      info: null
+      type: 'loading'
     },
     {
       icon: LockOpenIcon,
       completed: false,
       message: 'Decrpyting data',
-      info: null,
-      showErrors: true
+      type: 'decrypting'
     },
     {
       icon: ArrowDownTrayIcon,
       completed: false,
       message: 'Storing settings locally',
-      info: null
+      type: 'importing'
     },
     {
       icon: ArrowRightCircleIcon,
       completed: false,
       message: 'Go to portal…',
-      info: null
+      type: 'leaving'
     }
   ]
 
@@ -61,15 +60,11 @@ export default function Setup () {
       password
     })
 
-    try {
-      await store.load()
-    } catch (error) {
-      console.info('Loading failed:', error)
-    }
+    await store.load()
   }
 
   useEffect(() => {
-    if (store.revision && store.settings && store.modules) {
+    if (store.revision && Array.isArray(store.modules) && store.modules.length > 0) {
       router.push('/')
     }
   }, [store.revision, store.settings, store.modules])
@@ -77,8 +72,6 @@ export default function Setup () {
   useEffect(() => {
     setPassword(router.query.password || '')
   }, [router.query])
-
-  console.log(store.errors)
 
   return (
     <Layout>
@@ -165,12 +158,13 @@ export default function Setup () {
                   </div>
                   <div className='error-list__message'>
                     <p>{step.message}</p>
-                    {step.info && (
-                      <div className='error-list__message-info'>
-                        {step.info}
-                        {step.showErrors && errors && <p>{errors[0].error}</p>}
+                    {Array.isArray(store.errors) && store.errors.length > 0 && store.errors.filter(
+                      (error) => (error.info === step.type)
+                    ).map((error) => (
+                      <div className='error-list__message-error' key={error.error}>
+                        {error.error}
                       </div>
-                    )}
+                    ))}
                   </div>
                 </div>
               </li>
