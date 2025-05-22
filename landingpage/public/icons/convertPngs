@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+# Directory containing PNG files (default: current directory)
+INPUT_DIR="${1:-.}"
+
+TEMP_DIR=$(mktemp -d)
+
+# Loop through all PNG files in the input directory
+for png_file in "$INPUT_DIR"/*.png; do
+    # Check if file exists and is a regular file
+    if [ -f "$png_file" ]; then
+        # Get the base filename without extension
+        original_base_name=$(basename "$png_file" .png)
+
+        # Determine the number of scans based on filename
+        if [[ "$original_base_name" == *"-2"* ]]; then
+            # If filename contains "-2", use 2 scans
+            num_scans=2
+            stack_scans=true
+            echo "Detected '-2' in filename - using 2 stacked scans"
+        else
+            # Otherwise use 3 scans
+            num_scans=3
+            stack_scans=false
+            echo "No '-2' in filename - using 3 regular scans"
+        fi
+
+        # Process the filename:
+        # 1. Remove "--Streamline-Sharp"
+        # 2. Replace "-2" with "-lined"
+        # 3. Convert to lowercase
+        processed_base_name=$(echo "$original_base_name" | sed 's/--Streamline-Sharp//g' | sed 's/-2/-lined/g' | tr '[:upper:]' '[:lower:]')
+
+        # Create output SVG filename with the processed base name
+        svg_file="$INPUT_DIR/$processed_base_name.svg"
+        traced_svg="$TEMP_DIR/$original_base_name-traced.svg"
+        cleaned_svg="$TEMP_DIR/$original_base_name-cleaned.svg"
+
+        echo "Tracing $png_file to $svg_file"
+
+        # First import the PNG into a temporary SVG
+        temp_svg="$TEMP_DIR/$original_base_name-temp.svg"
+        inkscape "$png_file" --export-filename="$temp_svg"
+
+        # Then trace it using the object-trace action with parameters for two colors
+        # - 2 scans (for 2 colors)
+        # - false for smooth (to keep sharp edges)
+        # - false for stack (don't stack scans)
+        # - false for remove_background (keep both colors)
+        # - 1 for speckles (minimal speckle removal)
+        # - 0 for smooth_corners (keep sharp corners)
+        # - 0 for optimize (minimal path optimization)
+        inkscape "$temp_svg" \
+                 --batch-process \
+                 --actions="select-all;object-trace:$num_scans,false,$stack_param,true,4,0,1;export-filename:$traced_svg;export-do"
+
+        # Open the traced SVG, select the image, and delete it, keeping only the trace
+        inkscape "$traced_svg" \
+                 --batch-process \
+                 --actions="select-by-element:image;delete;export-filename:$cleaned_svg;export-do"
+
+        # Now optimize the SVG
+        inkscape "$cleaned_svg" \
+                 --batch-process \
+                 --export-plain-svg \
+                 --actions="select-all;object-simplify;export-filename:$svg_file;export-do"
+
+        # Replace colors in the SVG file
+        # #2758c4 -> #4b4999
+        # #8ebef9 -> #cbcaff
+        # We need to handle both uppercase and lowercase hex codes
+        # Also handle both 'fill' and 'stroke' attributes
+        sed -i -e 's/#2[78][5][89][bcC][4]/#4b4999/g' -e 's/#2[bB][5][bB][cC][4]/#4b4999/g' -e 's/#8[dDeE][bB][cCdDeE][fF][7-9]/#cbcaff/g' "$svg_file"
+
+        echo "  ✓ Saved as $processed_base_name.svg"
+    fi
+done
+
+# Clean up temporary directory
+rm -rf "$TEMP_DIR"
+
+echo "Tracing complete!"
