@@ -92,12 +92,69 @@
     <div class="container">
       <h2 class="section-title">See Portalific in Action</h2>
       <p>A clean, distraction-free interface that puts you in control of your information.</p>
-      <div class="screenshot-container">
+      <div class="screenshot-container" id="screenshot">
         <img src="/images/screenshot-default-light.png" alt="Portalific Screenshot" />
         <p>Default light theme</p>
       </div>
+      <ul class="screenshot-list">
+        <li>
+          <button class="screenshot-container">
+            <img src="/images/screenshot-default-light.png" alt="Portalific Screenshot" />
+            <p>Default theme – light</p>
+          </button>
+        </li>
+        <li>
+          <button class="screenshot-container">
+            <img src="/images/screenshot-default-dark.png" alt="Portalific Screenshot" />
+            <p>Default theme – dark</p>
+          </button>
+        </li>
+        <li>
+          <button class="screenshot-container">
+            <img src="/images/screenshot-black-satin.png" alt="Portalific Screenshot" />
+            <p>Black satin theme</p>
+          </button>
+        </li>
+        <li>
+          <button class="screenshot-container">
+            <img src="/images/screenshot-nature.png" alt="Portalific Screenshot" />
+            <p>Nature theme</p>
+          </button>
+        </li>
+        <li>
+          <button class="screenshot-container">
+            <img src="/images/screenshot-nature-bg.png" alt="Portalific Screenshot" />
+            <p>Nature theme with background</p>
+          </button>
+        </li>
+      </ul>
     </div>
   </section>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the main screenshot container
+      const mainScreenshot = document.getElementById('screenshot');
+      const mainImage = mainScreenshot.querySelector('img');
+      const mainText = mainScreenshot.querySelector('p');
+
+      // Get all screenshot buttons
+      const screenshotButtons = document.querySelectorAll('.screenshot-list button.screenshot-container');
+
+      // Add click event listener to each button
+      screenshotButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          // Get the image and text from the clicked button
+          const buttonImage = button.querySelector('img');
+          const buttonText = button.querySelector('p');
+
+          // Update the main screenshot with the button's content
+          mainImage.src = buttonImage.src;
+          mainImage.alt = buttonImage.alt;
+          mainText.textContent = buttonText.textContent;
+        });
+      });
+    });
+  </script>
   
   <!-- Modules Section -->
   <section class="modules">

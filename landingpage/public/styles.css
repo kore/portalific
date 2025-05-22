@@ -347,9 +347,21 @@ a {
   box-shadow: var(--shadow);
 }
 
+button.screenshot-container {
+  cursor: pointer;
+}
+
 .screenshot-container img {
   width: 100%;
   margin: 0;
+}
+
+.screenshot-list {
+  padding: 0;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
 }
 
 /* How It Works */
