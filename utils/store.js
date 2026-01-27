@@ -162,11 +162,22 @@ const store = (set, get) => ({
 
     // Encrypt data if password is set
     let finalData
-    if (get().settings.password) {
-      const encrypted = await encryptData(get().settings.password, dataToSync)
-      finalData = JSON.stringify(encrypted)
-    } else {
-      finalData = JSON.stringify(dataToSync)
+    try {
+      if (get().settings.password) {
+        const encrypted = await encryptData(get().settings.password, dataToSync)
+        finalData = JSON.stringify(encrypted)
+      } else {
+        finalData = JSON.stringify(dataToSync)
+      }
+    } catch (error) {
+      get().pushError('Failed to prepare data for sync: ' + error.message, 'persisting')
+      return Promise.resolve()
+    }
+
+    // Validate that we have actual data to sync - prevents writing empty files
+    if (!finalData || finalData === '{}' || finalData === '""' || finalData.length < 10) {
+      get().pushError('Sync aborted: data appears to be empty or corrupted', 'persisting')
+      return Promise.resolve()
     }
 
     if (!get().revision) {
