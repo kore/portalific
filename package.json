@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "deploy": "vite build && rsync -avz --delete dist/ web@k023.de:/var/www/torii-portal.org/public/",
     "preview": "vite preview",
     "format": "standard --fix",
     "test": "jest --verbose"
