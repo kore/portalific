@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import {
   EyeIcon,
   EyeSlashIcon,
@@ -11,21 +10,22 @@ import {
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Layout from '../components/Layout'
-import Seo from '../components/Seo'
 
 import useStore from '../utils/store'
+
+function getHashParams () {
+  const hashQuery = window.location.hash.split('?')[1] || ''
+  return new URLSearchParams(hashQuery)
+}
 
 export default function Setup () {
   const store = useStore((store) => store)
 
-  const globalData = {
-    name: 'Portalific',
-    description: 'Offline-first, privacy-focussed, open-source personal portal'
-  }
-
-  const router = useRouter()
-  const [password, setPassword] = useState(router.query.password || '')
+  const params = getHashParams()
+  const [password, setPassword] = useState(params.get('password') || '')
   const [showPassword, setShowPassword] = useState(false)
+  const identifier = params.get('identifier') || ''
+
   const steps = [
     {
       icon: CloudArrowDownIcon,
@@ -56,7 +56,7 @@ export default function Setup () {
   const startImport = async () => {
     await store.reset()
     await store.setSettings({
-      identifier: router.query.identifier,
+      identifier,
       synchronize: true,
       password
     })
@@ -65,18 +65,13 @@ export default function Setup () {
 
   useEffect(() => {
     if (store.synchronized) {
-      router.push('/')
+      window.location.hash = '#/'
     }
   }, [store.synchronized])
 
-  useEffect(() => {
-    setPassword(router.query.password || '')
-  }, [router.query])
-
   return (
     <Layout>
-      <Seo title={globalData.name} description={globalData.description} />
-      <Header name={globalData.name} />
+      <Header name='Portalific' />
       <main className='modules modules--setup'>
         <div className='module'>
           <h1 className='typography__heading typography__heading--1'>
@@ -95,7 +90,7 @@ export default function Setup () {
                   type='text'
                   disabled
                   className='settings__input'
-                  value={router.query.identifier || 'Missing identifier'}
+                  value={identifier || 'Missing identifier'}
                 />
               </div>
               <div>
@@ -172,11 +167,7 @@ export default function Setup () {
           </ul>
         </div>
       </main>
-      <Footer copyrightText={globalData.footerText} />
+      <Footer />
     </Layout>
   )
-}
-
-export function getStaticProps () {
-  return { props: {} }
 }

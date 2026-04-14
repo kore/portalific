@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic'
+import { lazy, Suspense } from 'react'
 import Column from '../components/Column'
 import ErrorBoundary from '../components/ErrorBoundary'
 import Module from '../components/Module'
@@ -8,12 +8,12 @@ import useStore from '../utils/store'
 import { useShallow } from 'zustand/react/shallow'
 
 const availableModules = {
-  clock: dynamic(() => import('../modules/Clock')),
-  countdown: dynamic(() => import('../modules/Countdown')),
-  feed: dynamic(() => import('../modules/Feed')),
-  calendar: dynamic(() => import('../modules/Calendar')),
-  todo: dynamic(() => import('../modules/TodoList')),
-  webStats: dynamic(() => import('../modules/WebStats')),
+  clock: lazy(() => import('../modules/Clock')),
+  countdown: lazy(() => import('../modules/Countdown')),
+  feed: lazy(() => import('../modules/Feed')),
+  calendar: lazy(() => import('../modules/Calendar')),
+  todo: lazy(() => import('../modules/TodoList')),
+  webStats: lazy(() => import('../modules/WebStats')),
   welcome: Welcome,
   notfound: NotFound
 }
@@ -48,19 +48,21 @@ export default function Modules ({ moduleRenderer = null }) {
                     hiddenOnDevices={module.hiddenOnDevices || []}
                   >
                     <ErrorBoundary pushError={pushError}>
-                      {moduleRenderer
-                        ? (
-                            moduleRenderer(module, index)
-                          )
-                        : (
-                          <ModuleComponent
-                            configuration={module}
-                            updateModuleConfiguration={(configuration) => {
-                              modules[column][index] = configuration
-                              setModules([...modules])
-                            }}
-                          />
-                          )}
+                      <Suspense fallback={null}>
+                        {moduleRenderer
+                          ? (
+                              moduleRenderer(module, index)
+                            )
+                          : (
+                            <ModuleComponent
+                              configuration={module}
+                              updateModuleConfiguration={(configuration) => {
+                                modules[column][index] = configuration
+                                setModules([...modules])
+                              }}
+                            />
+                            )}
+                      </Suspense>
                     </ErrorBoundary>
                   </Module>
                 )

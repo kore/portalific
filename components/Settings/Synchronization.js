@@ -28,7 +28,7 @@ export default function Settings () {
   }
 
   const setupLink =
-    `${window.location.host}/setup?identifier=${settings.identifier}` +
+    `${window.location.origin}/#/setup?identifier=${settings.identifier}` +
     (includePassword ? `&password=${settings.password}` : '')
 
   return (
