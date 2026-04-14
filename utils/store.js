@@ -24,6 +24,14 @@ export const initialState = {
   themeVariant: 'auto'
 }
 
+// Filter out corrupted/undefined entries from module columns
+const sanitizeModules = (modules) => {
+  if (!Array.isArray(modules)) return initialState.modules
+  return modules.map((column) =>
+    Array.isArray(column) ? column.filter((module) => module && module.type) : []
+  )
+}
+
 const store = (set, get) => ({
   ...initialState,
 
@@ -64,6 +72,11 @@ const store = (set, get) => ({
 
   moveModule: (sourceColumn, sourceIndex, targetColumn, targetIndex) => {
     const modules = [...get().modules]
+
+    if (!Array.isArray(modules[sourceColumn]) || !modules[sourceColumn][sourceIndex]) {
+      return
+    }
+
     const removedModule = modules[sourceColumn][sourceIndex]
 
     // Remove item from source column
@@ -112,7 +125,7 @@ const store = (set, get) => ({
             // Use decrypted data
             set({
               settings: decrypted.settings,
-              modules: decrypted.modules,
+              modules: sanitizeModules(decrypted.modules),
               revision: response.data.revision,
               errors: [],
               synchronizedStateHasChanges: false,
@@ -126,7 +139,7 @@ const store = (set, get) => ({
           // Data is not encrypted, parse it normally
           set({
             settings: data.settings,
-            modules: data.modules,
+            modules: sanitizeModules(data.modules),
             revision: response.data.revision,
             synchronizedStateHasChanges: false,
             synchronized: true

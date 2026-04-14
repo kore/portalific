@@ -33,7 +33,7 @@ export default function Modules ({ moduleRenderer = null }) {
             moveModule={moveModule}
           >
             <ul className='modules'>
-              {(modules[column] ?? []).map((module, index) => {
+              {(modules[column] ?? []).filter((module) => module && module.type).map((module, index) => {
                 const ModuleComponent =
                   availableModules[module.type] ?? availableModules.notfound
 
