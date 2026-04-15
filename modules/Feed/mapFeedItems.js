@@ -1,7 +1,7 @@
 export default function mapFeedItems (feed) {
   return feed.parsed.items.map((item) => {
     return {
-      id: item.id || item.link,
+      id: item.id || item.guid || item.link,
       color: feed.color,
       source: feed.name,
       title: item.title,
