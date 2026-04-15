@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>Code That Ships — Acquisitions</title>
+  <link>https://codethatships.com</link>
+  <description>Latest book acquisitions</description>
+  <item>
+    <title>Kore Nordmann, architect, €1.00</title>
+    <pubDate>Tue, 14 Apr 2026 05:08:02 +0000</pubDate>
+    <guid isPermaLink="false">test-port-7E2D-UsqP-VFJY</guid>
+  </item>
+  <item>
+    <title>Kore Nordmann, architect, €1.00</title>
+    <pubDate>Tue, 14 Apr 2026 04:48:44 +0000</pubDate>
+    <guid isPermaLink="false">test-port-gX64-soXE-LuAZ</guid>
+  </item>
+</channel>
+</rss>

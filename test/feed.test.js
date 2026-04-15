@@ -47,10 +47,29 @@ describe.each(feeds)('A feed', (feed) => {
       expect(item.title.length).toBeGreaterThan(0)
 
       expect(item).toHaveProperty('link')
-      expect(typeof item.link).toBe('string')
-      expect(item.link.length).toBeGreaterThan(0)
+      if (item.link !== undefined) {
+        expect(typeof item.link).toBe('string')
+        expect(item.link.length).toBeGreaterThan(0)
+      }
 
       expect(item).toHaveProperty('summary')
     })
+  })
+})
+
+describe('guid-only feed', () => {
+  it('uses guid as item id', async () => {
+    const parser = new Parser()
+    const data = fs.readFileSync('./test/feeds/guid-only.xml').toString()
+    const parsedFeed = {
+      name: 'guid-only',
+      color: '#000',
+      parsed: await parser.parseString(data)
+    }
+
+    const items = mapFeedItems(parsedFeed)
+
+    expect(items[0].id).toBe('test-port-7E2D-UsqP-VFJY')
+    expect(items[1].id).toBe('test-port-gX64-soXE-LuAZ')
   })
 })
