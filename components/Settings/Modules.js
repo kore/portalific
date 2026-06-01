@@ -101,6 +101,7 @@ export default function ModulesManager () {
               <option value='countdown'>Countdown</option>
               <option value='feed'>Feed Reader</option>
               <option value='todo'>Todo list</option>
+              <option value='morningRoutine'>Morning Routine</option>
               <option value='webStats'>Access Statistics</option>
             </select>
           </div>

@@ -13,6 +13,7 @@ const availableModules = {
   feed: dynamic(() => import('../modules/Feed')),
   calendar: dynamic(() => import('../modules/Calendar')),
   todo: dynamic(() => import('../modules/TodoList')),
+  morningRoutine: dynamic(() => import('../modules/MorningRoutine')),
   webStats: dynamic(() => import('../modules/WebStats')),
   welcome: Welcome,
   notfound: NotFound
