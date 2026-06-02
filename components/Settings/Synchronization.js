@@ -9,7 +9,6 @@ import {
   LockOpenIcon
 } from '@heroicons/react/24/outline'
 import { QRCodeSVG } from 'qrcode.react'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 import useStore from '../../utils/store'
 import { useShallow } from 'zustand/react/shallow'
 
@@ -165,29 +164,27 @@ export default function Settings () {
                       />
                       )}
                 </button>
-                <CopyToClipboard
-                  text={setupLink}
-                  onCopy={() => setCopied(true)}
+                <button
+                  type='button'
+                  onClick={() => {
+                    navigator.clipboard.writeText(setupLink).then(() => setCopied(true))
+                  }}
+                  className='settings__button-group-item settings__button-group-item--right'
                 >
-                  <button
-                    type='button'
-                    className='settings__button-group-item settings__button-group-item--right'
-                  >
-                    {copied
-                      ? (
-                        <ClipboardDocumentCheckIcon
-                          className='settings__button-icon'
-                          aria-hidden='true'
-                        />
-                        )
-                      : (
-                        <ClipboardDocumentIcon
-                          className='settings__button-icon'
-                          aria-hidden='true'
-                        />
-                        )}
-                  </button>
-                </CopyToClipboard>
+                  {copied
+                    ? (
+                      <ClipboardDocumentCheckIcon
+                        className='settings__button-icon'
+                        aria-hidden='true'
+                      />
+                      )
+                    : (
+                      <ClipboardDocumentIcon
+                        className='settings__button-icon'
+                        aria-hidden='true'
+                      />
+                      )}
+                </button>
               </div>
             </div>
           )}
