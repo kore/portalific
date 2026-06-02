@@ -169,7 +169,7 @@ export default function Settings () {
               onClick={() => {
                 if (window.confirm('Really remove all data?')) {
                   reset()
-                  window.location = '/'
+                  window.location.hash = '#/'
                 }
               }}
             >

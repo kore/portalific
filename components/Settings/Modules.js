@@ -1,5 +1,4 @@
-import { Fragment, useState } from 'react'
-import dynamic from 'next/dynamic'
+import { Fragment, lazy, Suspense, useState } from 'react'
 import {
   Cog8ToothIcon,
   TrashIcon,
@@ -15,11 +14,11 @@ import useStore from '../../utils/store'
 import { useShallow } from 'zustand/react/shallow'
 
 const availableModules = {
-  clock: dynamic(() => import('../../modules/Clock/Configuration')),
-  countdown: dynamic(() => import('../../modules/Countdown/Configuration')),
-  feed: dynamic(() => import('../../modules/Feed/Configuration')),
-  calendar: dynamic(() => import('../../modules/Calendar/Configuration')),
-  webStats: dynamic(() => import('../../modules/WebStats/Configuration'))
+  clock: lazy(() => import('../../modules/Clock/Configuration')),
+  countdown: lazy(() => import('../../modules/Countdown/Configuration')),
+  feed: lazy(() => import('../../modules/Feed/Configuration')),
+  calendar: lazy(() => import('../../modules/Calendar/Configuration')),
+  webStats: lazy(() => import('../../modules/WebStats/Configuration'))
 }
 
 function capitalizeFirstLetter (string) {
@@ -186,13 +185,15 @@ export default function ModulesManager () {
                           open={settingsShown === module.id}
                           setOpen={() => setShowSettings(null)}
                         >
-                          <ModuleSettings
-                            configuration={module}
-                            setConfiguration={(key, value) => {
-                              module[key] = value
-                              setModules([...modules])
-                            }}
-                          />
+                          <Suspense fallback={null}>
+                            <ModuleSettings
+                              configuration={module}
+                              setConfiguration={(key, value) => {
+                                module[key] = value
+                                setModules([...modules])
+                              }}
+                            />
+                          </Suspense>
                         </Modal>
                       </>
                     )}

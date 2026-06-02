@@ -7,10 +7,10 @@
 
 # testing
 /coverage
+/test/screenshots
 
-# next.js
-/.next/
-/out/
+# build output
+/dist
 
 # production
 /build

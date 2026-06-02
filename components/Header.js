@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Link from 'next/link'
 import { Cog8ToothIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import Logo from './Logo'
 import Modal from './Modal'
@@ -15,10 +14,10 @@ export default function Header ({ name }) {
   return (
     <header className='header'>
       <Logo className='header__logo' />
-      <Link href='/' className='header__title'>
+      <a href='#/' className='header__title'>
         {settings.name && settings.name + "'s "}
         {name}
-      </Link>
+      </a>
       {Array.isArray(errors) && errors.length > 0 && (
         <button
           type='button'

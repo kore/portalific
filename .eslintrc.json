@@ -1,7 +1,6 @@
 {
   "extends": [
     "eslint:recommended",
-    "next/core-web-vitals",
     "plugin:prettier/recommended",
     "plugin:import/recommended"
   ],
@@ -30,16 +29,6 @@
             "group": "external",
             "position": "before"
           },
-          {
-            "pattern": "next",
-            "group": "external",
-            "position": "before"
-          },
-          {
-            "pattern": "next/**",
-            "group": "external",
-            "position": "before"
-          }
         ],
         "pathGroupsExcludedImportTypes": ["react"],
         "newlines-between": "never",
