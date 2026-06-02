@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "deploy": "vite build && rsync -avz --delete dist/ web@k023.de:/var/www/torii-portal.org/public/",
+    "deploy": "vite build && rsync -avz --delete dist/ web@k023.de:/var/www/portalific.com/public/",
     "preview": "vite preview",
     "format": "standard --fix",
     "test": "jest --verbose"
@@ -19,6 +19,7 @@
     "chart.js": "^4.4.9",
     "classnames": "^2.3.2",
     "debounce": "^2.2.0",
+    "events": "^3.3.0",
     "ical.js": "^2.1.0",
     "normalize.css": "^8.0.1",
     "qrcode.react": "^4.2.0",
