@@ -1,24 +1,25 @@
 /* eslint-env jest */
 
+import { vi } from 'vitest'
 import { useTestStore as useStore, API_URL, API_AUTH_HEADER } from '../utils/store'
 import { encryptData, decryptData } from '../utils/encryption'
 import axios from 'axios'
 
-jest.mock('axios')
+vi.mock('axios')
 
 const localStorageMock = (function () {
   let store = {}
   return {
-    getItem: jest.fn(key => {
+    getItem: vi.fn(key => {
       return store[key] || null
     }),
-    setItem: jest.fn((key, value) => {
+    setItem: vi.fn((key, value) => {
       store[key] = value.toString()
     }),
-    clear: jest.fn(() => {
+    clear: vi.fn(() => {
       store = {}
     }),
-    removeItem: jest.fn(key => {
+    removeItem: vi.fn(key => {
       delete store[key]
     })
   }
@@ -311,7 +312,7 @@ describe('Store synchronization tests', () => {
 
   beforeEach(() => {
     // Clear all mocks before each test
-    jest.clearAllMocks()
+    vi.clearAllMocks()
 
     // Initialize the store with default values
     useStore.setState({
@@ -359,7 +360,7 @@ describe('Store synchronization tests', () => {
 
     // Spy on the load method
     const originalLoad = useStore.getState().load
-    const loadSpy = jest.fn(() => Promise.resolve())
+    const loadSpy = vi.fn(() => Promise.resolve())
     useStore.getState().load = loadSpy
 
     // Mock PUT to throw 409 conflict error
@@ -443,7 +444,7 @@ describe('Store synchronization tests', () => {
 
     // Spy on the load method
     const originalLoad = useStore.getState().load
-    const loadSpy = jest.fn(() => Promise.resolve())
+    const loadSpy = vi.fn(() => Promise.resolve())
     useStore.getState().load = loadSpy
 
     // Mock POST to throw 409 conflict error
@@ -516,8 +517,8 @@ describe('Zustand Store encrypted synchronization tests', () => {
     })
 
     // Reset mocks
-    jest.clearAllMocks()
-    console.error = jest.fn()
+    vi.clearAllMocks()
+    console.error = vi.fn()
   })
 
   describe('loading with encryption', () => {
@@ -625,7 +626,7 @@ describe('Zustand Store encrypted synchronization tests', () => {
       const wrongPassword = 'wrongPassword'
 
       // Spy on the reset method
-      const resetSpy = jest.fn()
+      const resetSpy = vi.fn()
       const originalReset = useStore.getState().reset
       useStore.getState().reset = resetSpy
 
@@ -678,7 +679,7 @@ describe('Zustand Store encrypted synchronization tests', () => {
   describe('storing with encryption', () => {
     beforeEach(() => {
       // Clear all mocks before each test
-      jest.clearAllMocks()
+      vi.clearAllMocks()
 
       // Initialize the store with default values
       useStore.setState({

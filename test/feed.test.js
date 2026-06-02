@@ -1,8 +1,8 @@
 /* eslint-env jest */
 
-const fs = require('fs')
-const Parser = require('rss-parser')
-const mapFeedItems = require('../modules/Feed/mapFeedItems').default
+import fs from 'fs'
+import Parser from 'rss-parser'
+import mapFeedItems from '../modules/Feed/mapFeedItems'
 
 const feeds = fs.readdirSync('./test/feeds').map((fileName) => {
   return {

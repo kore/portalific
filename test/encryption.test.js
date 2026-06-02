@@ -1,10 +1,11 @@
 /* eslint-env jest */
+import { vi } from 'vitest'
 import { encryptData, decryptData } from '../utils/encryption'
 
 // Integration tests
 describe('Encryption and decryption integration', () => {
   beforeEach(() => {
-    console.error = jest.fn()
+    console.error = vi.fn()
   })
 
   it('should successfully encrypt and decrypt data', async () => {

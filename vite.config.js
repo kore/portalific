@@ -16,9 +16,10 @@ export default defineConfig({
   build: {
     outDir: 'dist'
   },
-  esbuild: {
-    include: /\.[jt]sx?$/,
-    exclude: [],
-    loader: 'jsx'
+  test: {
+    environment: 'node',
+    globals: true,
+    setupFiles: './test/setup.js',
+    include: ['test/**/*.test.js']
   }
 })
