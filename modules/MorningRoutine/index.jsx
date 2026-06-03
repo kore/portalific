@@ -80,34 +80,11 @@ const ROUTINES = {
 
 const WEEKDAY_TO_ROUTINE = { 1: 'A', 2: 'B', 3: 'A', 4: 'B', 5: 'A' }
 
-const STORAGE_KEY_PREFIX = 'morning-routine-'
-
-const hasLocalStorage = () =>
-  typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
-
-const loadCompletions = (id) => {
-  if (!hasLocalStorage()) return {}
-  try {
-    return JSON.parse(window.localStorage.getItem(STORAGE_KEY_PREFIX + id)) ?? {}
-  } catch {
-    return {}
-  }
-}
-
-const saveCompletions = (id, data) => {
-  if (!hasLocalStorage()) return
-  window.localStorage.setItem(STORAGE_KEY_PREFIX + id, JSON.stringify(data))
-}
-
 const todayKey = (date) => date.toISOString().slice(0, 10)
 
-export default function MorningRoutine ({ configuration }) {
+export default function MorningRoutine ({ configuration, updateModuleConfiguration }) {
   const [now, setNow] = useState(() => new Date())
-  const [completions, setCompletions] = useState({})
-
-  useEffect(() => {
-    setCompletions(loadCompletions(configuration.id))
-  }, [configuration.id])
+  const completions = configuration.completions ?? {}
 
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date()), 60 * 1000)
@@ -134,12 +111,21 @@ export default function MorningRoutine ({ configuration }) {
   const overdue = !done && now.getHours() >= 11
 
   const toggleDone = () => {
-    const next = {
+    const merged = {
       ...completions,
       [dateKey]: { routine: routineKey, done: !done }
     }
-    setCompletions(next)
-    saveCompletions(configuration.id, next)
+
+    // Keep only the most recent 256 days so the synced configuration does not
+    // grow without bound.
+    const next = Object.fromEntries(
+      Object.keys(merged)
+        .sort()
+        .slice(-256)
+        .map((key) => [key, merged[key]])
+    )
+
+    updateModuleConfiguration({ ...configuration, completions: next })
   }
 
   const ToggleIcon = done ? XCircleIcon : CheckCircleIcon
