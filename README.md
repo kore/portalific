@@ -60,6 +60,25 @@ background. Currently all module data (see feed, calendar) is only stored in
 the local state of the module components, which makes them volatile and prune
 to outages.
 
+### Externally hosted modules
+
+Modules are lazily loaded React components with a small prop contract
+(`configuration` + `updateModuleConfiguration`), so it should be possible to
+host private or experimental modules outside this repo and load them at
+runtime. The real enabler is not web components but a runtime, data-driven
+registry (module type → URL) using a dynamic `import()` of a remote ESM
+bundle. Three things need to be in place: the registry has to resolve URLs at
+runtime instead of build time; app services a module currently imports
+directly (`pushError`, the proxy URL/auth) must be injected as props rather
+than imported, so external bundles don't pull in their own store instance; and
+the module must share the host's React instance (via an import map). Web
+components are an alternative packaging option that gives a framework-agnostic
+boundary, but they clash with the global BEM theming (shadow DOM isolates it)
+and turn the prop contract into attributes/events, so they're only worth it for
+hard isolation. Note that loading remote code executes arbitrary JS with access
+to the decrypted, synced configuration — acceptable for self-hosting, but it
+should be pinned to trusted hosts.
+
 ### Different environment modes
 
 It could make sense to show different modules in different envuironment modes,
