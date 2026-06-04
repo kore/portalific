@@ -57,8 +57,8 @@ const ROUTINES = {
     description: 'Focus: mobilize the thoracic spine + lateral core stability.',
     steps: [
       {
-        name: 'Thoracic Foam Roll',
-        detail: 'Roller across the thoracic spine, hands behind the head. Roll segment by segment from mid-thoracic to the shoulder blades. No lumbar rolling.',
+        name: 'Puppy Pose',
+        detail: 'Kneeling, walk the hands far forward, hips above the knees. Let the chest sink toward the floor, arms stretched. Breathe into the upper back, no lumbar arching.',
         reps: 1,
         repTime: 90,
         pause: 0
