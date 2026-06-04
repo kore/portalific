@@ -499,7 +499,7 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
                     className='button button--primary morning-routine__start'
                     onClick={() => startRoutine(key)}
                   >
-                    Start · {routine.steps.length} exercises · ~{Math.round(routineDuration(routine) / 60)} min
+                    Start · ~{Math.round(routineDuration(routine) / 60)} min
                   </button>
                   )}
             </li>
