@@ -3,7 +3,7 @@ import { CheckCircleIcon } from '@heroicons/react/24/outline'
 
 const ROUTINES = {
   A: {
-    label: 'Routine A',
+    label: 'Daily Back A',
     schedule: 'Mon · Wed · Fri',
     description: 'Focus: release hip flexors + activate glutes.',
     steps: [
@@ -52,7 +52,7 @@ const ROUTINES = {
     ]
   },
   B: {
-    label: 'Routine B',
+    label: 'Daily Back B',
     schedule: 'Tue · Thu',
     description: 'Focus: mobilize the thoracic spine + lateral core stability.',
     steps: [
@@ -99,10 +99,51 @@ const ROUTINES = {
         pause: 0
       }
     ]
+  },
+  S: {
+    label: 'Strength',
+    schedule: 'Mon · Thu',
+    description: 'Full-body strength: 4 exercises, 3 rounds of 4 minutes each, no breaks.',
+    steps: [
+      {
+        name: 'Pistol Squats + One-Arm Push-Ups',
+        detail: '6 single-leg squats per side, then 6 single-arm push-ups per side. Rest within the remaining time of the round.',
+        reps: 3,
+        repTime: 240,
+        pause: 0
+      },
+      {
+        name: 'Pull-Ups',
+        detail: '8 pull-ups, optionally with added weight. Rest within the remaining time of the round.',
+        reps: 3,
+        repTime: 240,
+        pause: 0
+      },
+      {
+        name: 'Military Press + V-Ups',
+        detail: '8 military presses with raised legs (or handstand push-ups), then 12 V-ups. Rest within the remaining time of the round.',
+        reps: 3,
+        repTime: 240,
+        pause: 0
+      },
+      {
+        name: 'Door Rows + Bicycles',
+        detail: '12 door rows (bodyweight rows pulling on a door), then 24 bicycle crunches. Rest within the remaining time of the round.',
+        reps: 3,
+        repTime: 240,
+        pause: 0
+      }
+    ]
   }
 }
 
-const WEEKDAY_TO_ROUTINE = { 1: 'A', 2: 'B', 3: 'A', 4: 'B', 5: 'A' }
+const WEEKDAY_TO_ROUTINES = {
+  1: ['A', 'S'],
+  2: ['B'],
+  3: ['A'],
+  4: ['B', 'S'],
+  5: ['A']
+}
 
 const todayKey = (date) => date.toISOString().slice(0, 10)
 
@@ -112,9 +153,12 @@ const stepDuration = (step) =>
 const routineDuration = (routine) =>
   routine.steps.reduce((sum, step) => sum + stepDuration(step), 0)
 
+const formatRepTime = (seconds) =>
+  seconds >= 60 && seconds % 60 === 0 ? seconds / 60 + ' min' : seconds + ' sec'
+
 const formatTiming = (step) =>
   (step.reps > 1 ? step.reps + ' × ' : '') +
-  step.repTime + ' sec' +
+  formatRepTime(step.repTime) +
   (step.reps > 1 && step.pause > 0 ? ' · ' + step.pause + ' sec pause' : '')
 
 const formatCountdown = (seconds) => {
@@ -167,7 +211,8 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
     return () => clearInterval(interval)
   }, [])
 
-  const routineKey = WEEKDAY_TO_ROUTINE[now.getDay()]
+  const todayRoutines = WEEKDAY_TO_ROUTINES[now.getDay()] ?? []
+  const plannedToday = (key) => todayRoutines.includes(key)
   const dateKey = todayKey(now)
 
   // Routines completed today; reads the legacy { routine, done } shape too.
@@ -175,7 +220,8 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
     entry?.routines ?? (entry?.done && entry?.routine ? [entry.routine] : [])
 
   const completedToday = (key) => completedRoutines(completions[dateKey]).includes(key)
-  const overdue = routineKey && !completedToday(routineKey) && now.getHours() >= 11
+  const overdueToday = (key) =>
+    plannedToday(key) && !completedToday(key) && now.getHours() >= 11
 
   const setCompleted = (key, value) => {
     const routines = new Set(completedRoutines(completions[dateKey]))
@@ -369,13 +415,13 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
           .sort(([a], [b]) => a.localeCompare(b))
           .map(([key, routine]) => (
             <li
-              className={'morning-routine__routine' + (key !== routineKey ? ' morning-routine__routine--muted' : '')}
+              className={'morning-routine__routine' + (!plannedToday(key) ? ' morning-routine__routine--muted' : '')}
               key={'routine-' + key}
               title={routine.description}
             >
               <span className='morning-routine__title'>{routine.label}</span>
               <span className='morning-routine__schedule'>{routine.schedule}</span>
-              {key === routineKey && overdue
+              {overdueToday(key)
                 ? (
                   <span
                     className='morning-routine__diode'
