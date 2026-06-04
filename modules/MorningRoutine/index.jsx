@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/24/outline'
 
 const ROUTINES = {
@@ -122,6 +122,39 @@ const formatCountdown = (seconds) => {
   return minutes + ':' + String(seconds % 60).padStart(2, '0')
 }
 
+// Short synthesized beeps via the Web Audio API – no audio assets needed. The
+// context is created lazily on the first (user-gesture-triggered) sound, which
+// keeps the browser autoplay policy happy.
+let audioContext = null
+
+const beep = (frequency, duration, delay = 0) => {
+  try {
+    audioContext = audioContext ?? new (window.AudioContext || window.webkitAudioContext)()
+    if (audioContext.state === 'suspended') {
+      audioContext.resume()
+    }
+
+    const start = audioContext.currentTime + delay
+    const oscillator = audioContext.createOscillator()
+    const gain = audioContext.createGain()
+
+    oscillator.type = 'sine'
+    oscillator.frequency.value = frequency
+    // Hold the volume and only fade out over the last 150 ms.
+    gain.gain.setValueAtTime(0.2, start)
+    gain.gain.setValueAtTime(0.2, start + Math.max(0, duration - 0.15))
+    gain.gain.exponentialRampToValueAtTime(0.001, start + duration)
+    oscillator.connect(gain).connect(audioContext.destination)
+    oscillator.start(start)
+    oscillator.stop(start + duration)
+  } catch {
+    // Sound is non-essential – ignore environments without Web Audio.
+  }
+}
+
+const repStartSound = () => beep(880, 0.9, 0.25)
+const repEndSound = () => beep(440, 0.3)
+
 export default function MorningRoutine ({ configuration, updateModuleConfiguration }) {
   const [now, setNow] = useState(() => new Date())
   // null = overview; otherwise
@@ -198,6 +231,34 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
       skipToNextExercise()
     }
   }
+
+  // Play a low beep when a rep ends and a high beep when one starts, for any
+  // transition – timer tick, skip button, or routine start/finish alike.
+  const previousRun = useRef(null)
+  useEffect(() => {
+    const before = previousRun.current
+    previousRun.current = run
+
+    const repChanged =
+      !before !== !run ||
+      (before && run && (
+        before.routine !== run.routine ||
+        before.step !== run.step ||
+        before.rep !== run.rep ||
+        before.phase !== run.phase
+      ))
+
+    if (!repChanged) {
+      return
+    }
+
+    if (before?.phase === 'exercise') {
+      repEndSound()
+    }
+    if (run?.phase === 'exercise') {
+      repStartSound()
+    }
+  }, [run])
 
   useEffect(() => {
     if (!run) {
