@@ -1902,6 +1902,10 @@ a {
     align-items: baseline;
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-xs);
+
+    .morning-routine__schedule {
+      margin-left: auto;
+    }
   }
 
   &__title {
@@ -1910,31 +1914,28 @@ a {
     font-weight: 500;
   }
 
-  &__toggle {
-    flex-shrink: 0;
-    width: 1.25rem;
-    height: 1.25rem;
+  &__list {
+    list-style: none;
+    margin: 0;
     padding: 0;
-    background: transparent;
-    color: var(--color-gray-500);
-    cursor: pointer;
-
-    &:hover {
-      color: var(--color-primary-500);
-    }
-
-    &--done {
-      color: var(--color-primary-500);
-    }
   }
 
-  &__toggle-icon {
-    width: 100%;
-    height: 100%;
+  & &__routine {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs);
+
+    &--muted {
+      opacity: 0.4;
+    }
+
+    & + & {
+      border-top: 1px solid var(--color-gray-300);
+    }
   }
 
   &__schedule {
-    margin-left: auto;
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -1955,6 +1956,108 @@ a {
     margin: 0 0 var(--spacing-sm);
     font-size: 0.875rem;
     color: var(--color-gray-500);
+  }
+
+  &__start {
+    flex-shrink: 0;
+    margin-left: auto;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  &__check {
+    flex-shrink: 0;
+    margin-left: auto;
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0;
+    background: transparent;
+    color: var(--color-primary-500);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-gray-500);
+    }
+  }
+
+  &__check-icon {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__runner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    text-align: center;
+  }
+
+  &__runner-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__progress {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-gray-500);
+  }
+
+  &__phase {
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-700);
+
+    &--pause {
+      background-color: var(--color-gray-300);
+      color: var(--color-gray-700);
+    }
+  }
+
+  &__exercise-name {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  &__timing {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+  }
+
+  &__countdown {
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-primary-500);
+
+    &--pause {
+      color: var(--color-gray-500);
+    }
+  }
+
+  &__controls {
+    display: flex;
+    gap: var(--spacing-sm);
+    width: 100%;
+    margin-top: var(--spacing-xs);
+
+    .button {
+      flex: 1;
+      cursor: pointer;
+    }
   }
 }
 

@@ -1,78 +1,102 @@
 import { useEffect, useState } from 'react'
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
+import { CheckCircleIcon } from '@heroicons/react/24/outline'
 
 const ROUTINES = {
   A: {
     label: 'Routine A',
-    schedule: 'Mo · Mi · Fr',
-    description: 'Fokus: Hüftbeuger lösen + Gesäß aktivieren.',
+    schedule: 'Mon · Wed · Fri',
+    description: 'Focus: release hip flexors + activate glutes.',
     steps: [
       {
-        name: 'Katze–Kuh',
-        detail: 'Auf allen Vieren, Wirbel für Wirbel rollen. Langsam, mit Atemrhythmus – Einatmen = Hohlkreuz, Ausatmen = Rundrücken.',
-        time: '90 Sek'
+        name: 'Cat–Cow',
+        detail: 'On all fours, roll vertebra by vertebra. Slow, following your breath – inhale = arch, exhale = round the back.',
+        reps: 1,
+        repTime: 90,
+        pause: 0
       },
       {
         name: '90/90 Hip Stretch',
-        detail: 'Im Sitzen beide Knie im 90°-Winkel, vorderes Bein außen, hinteres innen. Aufrecht sitzen, leicht nach vorne lehnen. Seite wechseln nach 45 Sek.',
-        time: '90 Sek'
+        detail: 'Seated, both knees at 90°, front leg outside, back leg inside. Sit upright, lean slightly forward. One rep per side.',
+        reps: 2,
+        repTime: 45,
+        pause: 10
       },
       {
         name: 'Couch Stretch (Psoas)',
-        detail: 'Hinteres Knie am Boden, vorderer Fuß vor dir. Becken leicht kippen, Gesäß anspannen. Je Seite 45 Sek, dabei aufrecht bleiben.',
-        time: '90 Sek'
+        detail: 'Back knee on the floor, front foot in front of you. Tilt the pelvis slightly, squeeze the glutes. One rep per side, stay upright.',
+        reps: 2,
+        repTime: 45,
+        pause: 10
       },
       {
         name: 'Glute Bridge',
-        detail: 'Rücken am Boden, Füße hüftbreit. Gesäß fest anspannen, Hüfte hoch, 3 Sek halten, kontrolliert runter. Knie leicht nach außen drücken.',
-        time: '2 Min (3×10)'
+        detail: 'On your back, feet hip-width apart. Squeeze the glutes, lift the hips, hold 3 sec, lower with control. Push the knees slightly outward. 10× per set.',
+        reps: 3,
+        repTime: 30,
+        pause: 15
       },
       {
         name: 'Bird Dog',
-        detail: 'Auf allen Vieren: gegenüberliegendes Arm-Bein-Paar strecken, 2 Sek halten. Kern stabil halten, kein Hohlkreuz.',
-        time: '2 Min (je 8×)'
+        detail: 'On all fours: extend the opposite arm-leg pair, hold 2 sec. Keep the core stable, no arching. 8× per set.',
+        reps: 3,
+        repTime: 30,
+        pause: 15
       },
       {
-        name: 'Weltgrößte Dehnung',
-        detail: 'Ausfallschritt, vordere Hand neben Fuß, dann Arm zur Decke drehen. 3–4 Wiederholungen pro Seite, fließende Bewegung.',
-        time: '2 Min'
+        name: "World's Greatest Stretch",
+        detail: 'Lunge, front hand next to the foot, then rotate the arm toward the ceiling. 3–4 reps per side, flowing movement.',
+        reps: 2,
+        repTime: 60,
+        pause: 0
       }
     ]
   },
   B: {
     label: 'Routine B',
-    schedule: 'Di · Do',
-    description: 'Fokus: Brustwirbelsäule mobilisieren + seitliche Rumpfstabilität.',
+    schedule: 'Tue · Thu',
+    description: 'Focus: mobilize the thoracic spine + lateral core stability.',
     steps: [
       {
         name: 'Thoracic Foam Roll',
-        detail: 'Rolle quer unter die Brustwirbelsäule, Hände hinter Kopf. Segmentweise von BWS-Mitte bis Schulterblätter rollen. Kein LWS-Rollen.',
-        time: '90 Sek'
+        detail: 'Roller across the thoracic spine, hands behind the head. Roll segment by segment from mid-thoracic to the shoulder blades. No lumbar rolling.',
+        reps: 1,
+        repTime: 90,
+        pause: 0
       },
       {
-        name: 'Thoracic Rotation (Boden)',
-        detail: 'Seitenlage, Knie 90° angewinkelt. Oberen Arm zur Decke und dahinter Richtung Boden führen, Augen folgen. Je Seite 8×, langsam.',
-        time: '2 Min'
+        name: 'Thoracic Rotation (floor)',
+        detail: 'Side-lying, knees bent at 90°. Bring the top arm to the ceiling and behind you toward the floor, eyes following. 8× per side, slow.',
+        reps: 2,
+        repTime: 60,
+        pause: 10
       },
       {
         name: 'Thread the Needle',
-        detail: 'Auf allen Vieren, einen Arm unter dem Körper einfädeln, Schulter zum Boden. Kurz halten, zurück, drehen. Je Seite 6–8×.',
-        time: '90 Sek'
+        detail: 'On all fours, thread one arm under the body, shoulder toward the floor. Hold briefly, return, rotate. 6–8× per side.',
+        reps: 2,
+        repTime: 45,
+        pause: 10
       },
       {
-        name: 'Side Plank (statisch)',
-        detail: 'Auf Unterarm oder Hand, Körper gerade Linie. Hüfte nicht hängen lassen. Je Seite 3×20 Sek mit kurzer Pause.',
-        time: '2 Min'
+        name: 'Side Plank (static)',
+        detail: 'On the forearm or hand, body in a straight line. Do not let the hips sag. Alternate sides.',
+        reps: 6,
+        repTime: 20,
+        pause: 10
       },
       {
-        name: 'Hip CARs (Hüftkreisen)',
-        detail: 'Stehend oder auf allen Vieren, ein Bein in maximaler Amplitude langsam kreisen lassen – vollständig aktiv kontrolliert. Je Seite 5 langsame Kreise.',
-        time: '2 Min'
+        name: 'Hip CARs (hip circles)',
+        detail: 'Standing or on all fours, slowly circle one leg through its full range – fully active and controlled. 5 slow circles per side.',
+        reps: 2,
+        repTime: 60,
+        pause: 10
       },
       {
-        name: 'Stehende Seitneigung + Rotation',
-        detail: 'Aufrecht stehen, Arme locker. Erst Seite zu Seite neigen, dann langsam rotieren. 8–10× je Richtung.',
-        time: '90 Sek'
+        name: 'Standing Side Bend + Rotation',
+        detail: 'Stand upright, arms relaxed. First bend side to side, then rotate slowly. 8–10× per direction.',
+        reps: 1,
+        repTime: 90,
+        pause: 0
       }
     ]
   }
@@ -82,8 +106,27 @@ const WEEKDAY_TO_ROUTINE = { 1: 'A', 2: 'B', 3: 'A', 4: 'B', 5: 'A' }
 
 const todayKey = (date) => date.toISOString().slice(0, 10)
 
+const stepDuration = (step) =>
+  step.reps * step.repTime + (step.reps - 1) * step.pause
+
+const routineDuration = (routine) =>
+  routine.steps.reduce((sum, step) => sum + stepDuration(step), 0)
+
+const formatTiming = (step) =>
+  (step.reps > 1 ? step.reps + ' × ' : '') +
+  step.repTime + ' sec' +
+  (step.reps > 1 && step.pause > 0 ? ' · ' + step.pause + ' sec pause' : '')
+
+const formatCountdown = (seconds) => {
+  const minutes = Math.floor(seconds / 60)
+  return minutes + ':' + String(seconds % 60).padStart(2, '0')
+}
+
 export default function MorningRoutine ({ configuration, updateModuleConfiguration }) {
   const [now, setNow] = useState(() => new Date())
+  // null = overview; otherwise
+  // { routine, step, rep, phase: 'exercise' | 'pause', remaining }
+  const [run, setRun] = useState(null)
   const completions = configuration.completions ?? {}
 
   useEffect(() => {
@@ -92,28 +135,22 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
   }, [])
 
   const routineKey = WEEKDAY_TO_ROUTINE[now.getDay()]
-
-  if (!routineKey) {
-    return (
-      <div className='morning-routine'>
-        <div className='morning-routine__header'>
-          <h3 className='morning-routine__title'>Ruhetag</h3>
-          <span className='morning-routine__schedule'>Sa · So</span>
-        </div>
-        <p className='morning-routine__description'>Heute keine Morgenroutine geplant.</p>
-      </div>
-    )
-  }
-
-  const routine = ROUTINES[routineKey]
   const dateKey = todayKey(now)
-  const done = !!completions[dateKey]?.done
-  const overdue = !done && now.getHours() >= 11
 
-  const toggleDone = () => {
+  // Routines completed today; reads the legacy { routine, done } shape too.
+  const completedRoutines = (entry) =>
+    entry?.routines ?? (entry?.done && entry?.routine ? [entry.routine] : [])
+
+  const completedToday = (key) => completedRoutines(completions[dateKey]).includes(key)
+  const overdue = routineKey && !completedToday(routineKey) && now.getHours() >= 11
+
+  const setCompleted = (key, value) => {
+    const routines = new Set(completedRoutines(completions[dateKey]))
+    routines[value ? 'add' : 'delete'](key)
+
     const merged = {
       ...completions,
-      [dateKey]: { routine: routineKey, done: !done }
+      [dateKey]: { routines: [...routines] }
     }
 
     // Keep only the most recent 256 days so the synced configuration does not
@@ -128,54 +165,188 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
     updateModuleConfiguration({ ...configuration, completions: next })
   }
 
-  const ToggleIcon = done ? XCircleIcon : CheckCircleIcon
-  const toggleLabel = done ? 'Als nicht erledigt markieren' : 'Als erledigt markieren'
+  const finishRun = () => {
+    // Completing a full routine marks it as done for today.
+    setCompleted(run.routine, true)
+    setRun(null)
+  }
+
+  const skipToNextExercise = () => {
+    const steps = ROUTINES[run.routine].steps
+    const nextStep = run.step + 1
+
+    if (nextStep >= steps.length) {
+      finishRun()
+      return
+    }
+
+    setRun({
+      ...run,
+      step: nextStep,
+      rep: 1,
+      phase: 'exercise',
+      remaining: steps[nextStep].repTime
+    })
+  }
+
+  const skipToNextRep = () => {
+    const step = ROUTINES[run.routine].steps[run.step]
+
+    if (run.rep < step.reps) {
+      setRun({ ...run, rep: run.rep + 1, phase: 'exercise', remaining: step.repTime })
+    } else {
+      skipToNextExercise()
+    }
+  }
+
+  useEffect(() => {
+    if (!run) {
+      return
+    }
+
+    const timeout = setTimeout(() => {
+      if (run.remaining > 1) {
+        setRun({ ...run, remaining: run.remaining - 1 })
+        return
+      }
+
+      const step = ROUTINES[run.routine].steps[run.step]
+
+      if (run.phase === 'pause') {
+        setRun({ ...run, rep: run.rep + 1, phase: 'exercise', remaining: step.repTime })
+        return
+      }
+
+      if (run.rep < step.reps) {
+        if (step.pause > 0) {
+          setRun({ ...run, phase: 'pause', remaining: step.pause })
+        } else {
+          setRun({ ...run, rep: run.rep + 1, phase: 'exercise', remaining: step.repTime })
+        }
+        return
+      }
+
+      skipToNextExercise()
+    }, 1000)
+
+    return () => clearTimeout(timeout)
+  }, [run])
+
+  const startRoutine = (key) => {
+    setRun({
+      routine: key,
+      step: 0,
+      rep: 1,
+      phase: 'exercise',
+      remaining: ROUTINES[key].steps[0].repTime
+    })
+  }
+
+  if (run) {
+    const runRoutine = ROUTINES[run.routine]
+    const step = runRoutine.steps[run.step]
+
+    return (
+      <div className='morning-routine'>
+        <div className='morning-routine__header'>
+          <h3 className='morning-routine__title'>{runRoutine.label}</h3>
+          <span className='morning-routine__schedule'>{runRoutine.schedule}</span>
+        </div>
+        <div className='morning-routine__runner'>
+          <div className='morning-routine__runner-header'>
+            <span className='morning-routine__progress'>
+              {(run.step + 1) + '/' + runRoutine.steps.length}
+            </span>
+            <span
+              className={'morning-routine__phase' + (run.phase === 'pause' ? ' morning-routine__phase--pause' : '')}
+            >
+              {run.phase === 'pause' ? 'Pause' : 'Exercise'}
+            </span>
+          </div>
+          <h4 className='morning-routine__exercise-name'>{step.name}</h4>
+          <p className='morning-routine__description'>{step.detail}</p>
+          <p className='morning-routine__timing'>
+            {formatTiming(step)}
+            {step.reps > 1 ? ' · Rep ' + run.rep + '/' + step.reps : ''}
+          </p>
+          <div
+            className={'morning-routine__countdown' + (run.phase === 'pause' ? ' morning-routine__countdown--pause' : '')}
+          >
+            {formatCountdown(run.remaining)}
+          </div>
+          <div className='morning-routine__controls'>
+            {run.rep < step.reps
+              ? (
+                <button
+                  type='button'
+                  className='button button--secondary morning-routine__next-rep'
+                  onClick={skipToNextRep}
+                >
+                  Next rep
+                </button>
+                )
+              : null}
+            <button
+              type='button'
+              className='button button--secondary morning-routine__done'
+              onClick={skipToNextExercise}
+            >
+              {run.step + 1 >= runRoutine.steps.length
+                ? 'Done'
+                : 'Done – next exercise'}
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className='morning-routine'>
-      <div className='morning-routine__header'>
-        <button
-          type='button'
-          className={'morning-routine__toggle' + (done ? ' morning-routine__toggle--done' : '')}
-          onClick={toggleDone}
-          title={toggleLabel}
-          aria-label={toggleLabel}
-        >
-          <ToggleIcon className='morning-routine__toggle-icon' aria-hidden='true' />
-        </button>
-        <h3 className='morning-routine__title'>{routine.label}</h3>
-        <span className='morning-routine__schedule'>{routine.schedule}</span>
-        {overdue
-          ? (
-            <span
-              className='morning-routine__diode'
-              title='Noch nicht erledigt – schon nach 11:00'
-              aria-label='Routine überfällig'
-            />
-            )
-          : null}
-      </div>
-      {done
-        ? null
-        : (
-          <p className='morning-routine__description'>{routine.description}</p>
-          )}
-      {done
-        ? null
-        : (
-          <ul className='todo-list'>
-            {routine.steps.map((step, idx) => (
-              <li className='todo-list__item' key={'step-' + idx} title={step.detail}>
-                <div className='todo-list__content'>
-                  <p className='todo-list__text'>{step.name}</p>
-                </div>
-                <div className='todo-list__due-date'>
-                  <span className='todo-list__due-date-text'>{step.time}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-          )}
+      <ul className='morning-routine__list'>
+        {Object.entries(ROUTINES)
+          .sort(([a], [b]) => a.localeCompare(b))
+          .map(([key, routine]) => (
+            <li
+              className={'morning-routine__routine' + (key !== routineKey ? ' morning-routine__routine--muted' : '')}
+              key={'routine-' + key}
+              title={routine.description}
+            >
+              <span className='morning-routine__title'>{routine.label}</span>
+              <span className='morning-routine__schedule'>{routine.schedule}</span>
+              {key === routineKey && overdue
+                ? (
+                  <span
+                    className='morning-routine__diode'
+                    title='Not done yet – already past 11:00'
+                    aria-label='Routine overdue'
+                  />
+                  )
+                : null}
+              {completedToday(key)
+                ? (
+                  <button
+                    type='button'
+                    className='morning-routine__check'
+                    onClick={() => setCompleted(key, false)}
+                    title='Done today – mark as not done'
+                    aria-label='Done today – mark as not done'
+                  >
+                    <CheckCircleIcon className='morning-routine__check-icon' aria-hidden='true' />
+                  </button>
+                  )
+                : (
+                  <button
+                    type='button'
+                    className='button button--primary morning-routine__start'
+                    onClick={() => startRoutine(key)}
+                  >
+                    Start · {routine.steps.length} exercises · ~{Math.round(routineDuration(routine) / 60)} min
+                  </button>
+                  )}
+            </li>
+          ))}
+      </ul>
     </div>
   )
 }
