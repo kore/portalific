@@ -4,7 +4,7 @@ import { CheckCircleIcon } from '@heroicons/react/24/outline'
 const ROUTINES = {
   A: {
     label: 'Daily Back A',
-    schedule: 'Mon · Wed · Fri',
+    schedule: 'Mo, We, Fr',
     description: 'Focus: release hip flexors + activate glutes.',
     steps: [
       {
@@ -53,7 +53,7 @@ const ROUTINES = {
   },
   B: {
     label: 'Daily Back B',
-    schedule: 'Tue · Thu',
+    schedule: 'Tue, Thu',
     description: 'Focus: mobilize the thoracic spine + lateral core stability.',
     steps: [
       {
@@ -102,7 +102,7 @@ const ROUTINES = {
   },
   S: {
     label: 'Strength',
-    schedule: 'Mon · Thu',
+    schedule: 'Mo, Thu',
     description: 'Full-body strength (You Are Your Own Gym): 4 random combos – 4× upper body, 2× legs, 2× core – 3 rounds of 4 minutes each, no breaks.',
     steps: [] // Generated per day from the STRENGTH pools below.
   }
