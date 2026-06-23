@@ -128,13 +128,13 @@ const STRENGTH = {
     { name: 'Bulgarian Split Squats', task: '10 split squats per side, rear foot on a low rung of the stall bars' },
     { name: 'Iron Mikes', task: '12 alternating jumping lunges' },
     { name: 'Single-Leg Romanian Deadlifts', task: '10 single-leg deadlifts per side, slow and controlled' },
-    { name: 'Squat Jumps', task: '15 deep squat jumps, soft landings' },
+    { name: 'Squat Jumps', task: '15 deep squat jumps, soft landings' }
   ],
   core: [
     { name: 'V-Ups', task: '12 V-ups' },
     { name: 'Bicycles', task: '24 bicycle crunches' },
     { name: 'Hanging Leg Raises', task: '10 hanging leg raises on the pull-up bar, toes toward the bar' },
-    { name: 'Windshield Wipers', task: '10 windshield wipers, hanging from the bar or on the floor' },
+    { name: 'Windshield Wipers', task: '10 windshield wipers, hanging from the bar or on the floor' }
   ]
 }
 
@@ -185,6 +185,10 @@ const strengthSteps = (dateKey) => {
   ]
 }
 
+// Seconds of "get ready" before each exercise block, giving time to read the
+// description and get into position before the rep starts.
+const PREPARE_TIME = 10
+
 const WEEKDAY_TO_ROUTINES = {
   1: ['A', 'S'],
   2: ['B'],
@@ -199,7 +203,7 @@ const stepDuration = (step) =>
   step.reps * step.repTime + (step.reps - 1) * step.pause
 
 const routineDuration = (routine) =>
-  routine.steps.reduce((sum, step) => sum + stepDuration(step), 0)
+  routine.steps.reduce((sum, step) => sum + PREPARE_TIME + stepDuration(step), 0)
 
 const formatRepTime = (seconds) =>
   seconds >= 60 && seconds % 60 === 0 ? seconds / 60 + ' min' : seconds + ' sec'
@@ -314,8 +318,8 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
       ...run,
       step: nextStep,
       rep: 1,
-      phase: 'exercise',
-      remaining: steps[nextStep].repTime
+      phase: 'prepare',
+      remaining: PREPARE_TIME
     })
   }
 
@@ -370,6 +374,11 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
 
       const step = routines[run.routine].steps[run.step]
 
+      if (run.phase === 'prepare') {
+        setRun({ ...run, phase: 'exercise', remaining: step.repTime })
+        return
+      }
+
       if (run.phase === 'pause') {
         setRun({ ...run, rep: run.rep + 1, phase: 'exercise', remaining: step.repTime })
         return
@@ -395,8 +404,8 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
       routine: key,
       step: 0,
       rep: 1,
-      phase: 'exercise',
-      remaining: routines[key].steps[0].repTime
+      phase: 'prepare',
+      remaining: PREPARE_TIME
     })
   }
 
@@ -416,9 +425,9 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
               {(run.step + 1) + '/' + runRoutine.steps.length}
             </span>
             <span
-              className={'morning-routine__phase' + (run.phase === 'pause' ? ' morning-routine__phase--pause' : '')}
+              className={'morning-routine__phase' + (run.phase === 'pause' ? ' morning-routine__phase--pause' : run.phase === 'prepare' ? ' morning-routine__phase--prepare' : '')}
             >
-              {run.phase === 'pause' ? 'Pause' : 'Exercise'}
+              {run.phase === 'pause' ? 'Pause' : run.phase === 'prepare' ? 'Get ready' : 'Exercise'}
             </span>
           </div>
           <h4 className='morning-routine__exercise-name'>{step.name}</h4>
@@ -428,12 +437,12 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
             {step.reps > 1 ? ' · Rep ' + run.rep + '/' + step.reps : ''}
           </p>
           <div
-            className={'morning-routine__countdown' + (run.phase === 'pause' ? ' morning-routine__countdown--pause' : '')}
+            className={'morning-routine__countdown' + (run.phase === 'pause' ? ' morning-routine__countdown--pause' : run.phase === 'prepare' ? ' morning-routine__countdown--prepare' : '')}
           >
             {formatCountdown(run.remaining)}
           </div>
           <div className='morning-routine__controls'>
-            {run.rep < step.reps
+            {run.phase === 'exercise' && run.rep < step.reps
               ? (
                 <button
                   type='button'
