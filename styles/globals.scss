@@ -2023,6 +2023,11 @@ a {
       background-color: var(--color-gray-300);
       color: var(--color-gray-700);
     }
+
+    &--prepare {
+      background-color: var(--color-primary-300);
+      color: var(--color-primary-900);
+    }
   }
 
   &__exercise-name {
@@ -2046,6 +2051,10 @@ a {
 
     &--pause {
       color: var(--color-gray-500);
+    }
+
+    &--prepare {
+      color: var(--color-primary-300);
     }
   }
 
