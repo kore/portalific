@@ -19,33 +19,25 @@ export default function Settings () {
 
   return (
     <div className='settings-panel'>
-      <aside className='settings-panel__sidebar'>
-        <nav className='settings-panel__nav'>
+      <aside className='settings-sidebar'>
+        <nav className='settings-nav'>
           {groups.map((item) => {
             const current = group === item.name
             return (
               <button
                 key={item.name}
                 onClick={() => setGroup(item.name)}
-                className={`settings-panel__nav-button ${
-                  current ? 'settings-panel__nav-button--active' : ''
-                }`}
                 aria-current={current ? 'page' : undefined}
               >
-                <item.icon
-                  className={`settings-panel__nav-icon ${
-                    current ? 'settings-panel__nav-icon--active' : ''
-                  }`}
-                  aria-hidden='true'
-                />
-                <span className='settings-panel__nav-text'>{item.name}</span>
+                <item.icon aria-hidden='true' />
+                <span>{item.name}</span>
               </button>
             )
           })}
         </nav>
       </aside>
 
-      <div className='settings-panel__content'>
+      <div className='settings-content'>
         {group === 'Display' && (
           <SettingsDisplay />
         )}

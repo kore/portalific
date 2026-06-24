@@ -1,5 +1,3 @@
-import { Fragment } from 'react'
-
 import useStore from '../../utils/store'
 import { useShallow } from 'zustand/react/shallow'
 
@@ -8,21 +6,18 @@ export default function Settings () {
 
   return (
     <>
-      {/* Main section */}
-      <div className='settings__section'>
-        <div className='settings__header'>
-          <h2 className='settings__heading'>Profile</h2>
-          <p className='settings__description'>
+      <section className='settings-section'>
+        <header className='settings-header'>
+          <h2>Profile</h2>
+          <p className='settings-description'>
             General settings affecting the overall behavior.
           </p>
-        </div>
+        </header>
 
-        <div className='settings__form'>
-          <div className='settings__form-row'>
-            <div className='settings__form-group'>
-              <label htmlFor='name' className='settings__label'>
-                Name
-              </label>
+        <div className='settings-form'>
+          <div className='form-row'>
+            <div className='form-group'>
+              <label htmlFor='name'>Name</label>
               <input
                 type='text'
                 name='name'
@@ -33,21 +28,17 @@ export default function Settings () {
                     ...settings,
                     name: event.target.value
                   })}
-                className='settings__input'
               />
             </div>
 
-            <div className='settings__form-group'>
-              <label htmlFor='columns' className='settings__label'>
-                Number of columns
-              </label>
+            <div className='form-group'>
+              <label htmlFor='columns'>Number of columns</label>
               <select
                 name='columns'
                 id='columns'
                 value={settings.columns ?? ''}
                 onChange={(event) =>
                   setSettings({ ...settings, columns: event.target.value })}
-                className='settings__input'
               >
                 <option value='1'>1</option>
                 <option value='2'>2</option>
@@ -57,127 +48,105 @@ export default function Settings () {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className='settings__section settings__section--border'>
-        <div className='settings__content'>
-          <h2 className='settings__subheading'>Theme</h2>
+      <section className='settings-section' data-border>
+        <h3>Theme</h3>
 
-          <div className='settings__form-row'>
-            <div
-              className='settings__form-group'
-              style={{ gridColumn: '1/13' }}
+        <div className='form-row'>
+          <div className='form-group' data-span='full'>
+            <label htmlFor='theme'>Theme</label>
+            <select
+              name='theme'
+              id='theme'
+              value={settings.theme ?? 'default'}
+              onChange={(event) =>
+                setSettings({ ...settings, theme: event.target.value })}
             >
-              <label htmlFor='theme' className='settings__label'>
-                Theme
-              </label>
-              <select
-                name='theme'
-                id='theme'
-                value={settings.theme ?? 'default'}
-                onChange={(event) =>
-                  setSettings({ ...settings, theme: event.target.value })}
-                className='settings__input'
-              >
-                <option value='default'>Default</option>
-                <option value='black'>Black Satin</option>
-                <option value='green'>Polished Nature</option>
-              </select>
-            </div>
-          </div>
-
-          <h3 className='settings__subheading'>Background</h3>
-
-          <div className='settings__form-row'>
-            <div className='settings__form-group' style={{ gridColumn: '1/3' }}>
-              <label htmlFor='background-color' className='settings__label'>
-                Color
-              </label>
-              <input
-                type='color'
-                name='background-color'
-                id='background-color'
-                value={settings.backgroundColor ?? '#7D7AFF'}
-                onChange={(event) =>
-                  setSettings({
-                    ...settings,
-                    backgroundColor: event.target.value
-                  })}
-                className='settings__input'
-                style={{ height: '38px' }}
-              />
-            </div>
-
-            <div
-              className='settings__form-group'
-              style={{ gridColumn: '3/11' }}
-            >
-              <label htmlFor='background-image' className='settings__label'>
-                Image (URL)
-              </label>
-              <input
-                type='text'
-                name='background-image'
-                id='background-image'
-                placeholder='Background image URL'
-                value={settings.backgroundImage ?? ''}
-                onChange={(event) =>
-                  setSettings({
-                    ...settings,
-                    backgroundImage: event.target.value
-                  })}
-                className='settings__input'
-              />
-            </div>
-
-            <div
-              className='settings__form-group'
-              style={{ gridColumn: '11/13' }}
-            >
-              <button
-                type='button'
-                className='button button--danger'
-                onClick={() => {
-                  setSettings({
-                    ...settings,
-                    backgroundImage: undefined,
-                    backgroundColor: undefined,
-                    theme: 'default'
-                  })
-                }}
-              >
-                Clear
-              </button>
-            </div>
+              <option value='default'>Default</option>
+              <option value='black'>Black Satin</option>
+              <option value='green'>Polished Nature</option>
+            </select>
           </div>
         </div>
-      </div>
 
-      {/* Danger zone */}
-      <div className='settings__section settings__section--border'>
-        <div className='settings__content'>
-          <div className='settings__header'>
-            <h2 className='settings__heading'>Danger Zone</h2>
-            <p className='settings__description'>
-              Danger zone, resetting all current state
-            </p>
+        <h3>Background</h3>
+
+        <div className='form-row'>
+          <div className='form-group' data-span='narrow'>
+            <label htmlFor='background-color'>Color</label>
+            <input
+              type='color'
+              name='background-color'
+              id='background-color'
+              value={settings.backgroundColor ?? '#7D7AFF'}
+              onChange={(event) =>
+                setSettings({
+                  ...settings,
+                  backgroundColor: event.target.value
+                })}
+            />
           </div>
-          <div className='settings__actions'>
+
+          <div className='form-group' data-span='wide'>
+            <label htmlFor='background-image'>Image (URL)</label>
+            <input
+              type='text'
+              name='background-image'
+              id='background-image'
+              placeholder='Background image URL'
+              value={settings.backgroundImage ?? ''}
+              onChange={(event) =>
+                setSettings({
+                  ...settings,
+                  backgroundImage: event.target.value
+                })}
+            />
+          </div>
+
+          <div className='form-group' data-span='narrow'>
             <button
               type='button'
-              className='button button--danger'
+              className='button'
+              data-variant='danger'
               onClick={() => {
-                if (window.confirm('Really remove all data?')) {
-                  reset()
-                  window.location.hash = '#/'
-                }
+                setSettings({
+                  ...settings,
+                  backgroundImage: undefined,
+                  backgroundColor: undefined,
+                  theme: 'default'
+                })
               }}
             >
-              Delete
+              Clear
             </button>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className='settings-section' data-border>
+        <header className='settings-header'>
+          <h2>Danger Zone</h2>
+          <p className='settings-description'>
+            Danger zone, resetting all current state
+          </p>
+        </header>
+        <div className='settings-actions'>
+          <button
+            type='button'
+            className='button'
+            data-variant='danger'
+            onClick={() => {
+              if (window.confirm('Really remove all data?')) {
+                reset()
+                window.location.hash = '#/'
+              }
+            }}
+          >
+            Delete
+          </button>
+        </div>
+      </section>
     </>
   )
 }

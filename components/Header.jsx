@@ -13,46 +13,34 @@ export default function Header ({ name }) {
 
   return (
     <header className='header'>
-      <Logo className='header__logo' />
-      <a href='#/' className='header__title'>
+      <Logo />
+      <a href='#/' className='header-title'>
         {settings.name && settings.name + "'s "}
         {name}
       </a>
       {Array.isArray(errors) && errors.length > 0 && (
         <button
           type='button'
-          className='header__button header__button--error'
+          className='icon-button'
+          data-variant='error'
           onClick={() => setShowErrors(true)}
         >
           <span className='sr-only'>View notifications</span>
-          <ExclamationTriangleIcon
-            className='header__icon'
-            aria-hidden='true'
-          />
+          <ExclamationTriangleIcon aria-hidden='true' />
         </button>
       )}
-      <Modal theme={settings.theme} open={showErrors} setOpen={setShowErrors}>
+      <Modal open={showErrors} setOpen={setShowErrors}>
         <ul className='error-list'>
           {Array.isArray(errors) && errors.map((error, index) => (
-            <li key={index} className='error-list__item'>
-              {index !== errors.length - 1
-                ? (
-                  <span className='error-list__separator' aria-hidden='true' />
-                  )
-                : null}
-              <div className='error-list__content'>
-                <div>
-                  <span className='error-list__icon-container'>
-                    <ExclamationTriangleIcon
-                      className='error-list__icon'
-                      aria-hidden='true'
-                    />
-                  </span>
-                </div>
-                <div className='error-list__message'>
+            <li key={index}>
+              <div className='error-entry'>
+                <span className='error-icon'>
+                  <ExclamationTriangleIcon aria-hidden='true' />
+                </span>
+                <div className='error-message'>
                   <p>{error.error}</p>
                   {error.info && (
-                    <div className='error-list__message-info'>{error.info}</div>
+                    <p className='error-meta'>{error.info}</p>
                   )}
                 </div>
               </div>
@@ -61,7 +49,8 @@ export default function Header ({ name }) {
         </ul>
         <button
           type='button'
-          className='button button--secondary'
+          className='button'
+          data-variant='secondary'
           onClick={() => {
             clearErrors()
             setShowErrors(false)
@@ -72,13 +61,14 @@ export default function Header ({ name }) {
       </Modal>
       <button
         type='button'
-        className='header__button header__button--settings'
+        className='icon-button'
+        data-variant='settings'
         onClick={() => setShowSettings(true)}
       >
         <span className='sr-only'>View settings</span>
-        <Cog8ToothIcon className='header__icon' aria-hidden='true' />
+        <Cog8ToothIcon aria-hidden='true' />
       </button>
-      <Modal theme={settings.theme} open={showSettings} setOpen={setShowSettings}>
+      <Modal open={showSettings} setOpen={setShowSettings}>
         <Settings />
       </Modal>
     </header>

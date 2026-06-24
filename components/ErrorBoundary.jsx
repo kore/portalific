@@ -20,21 +20,16 @@ class ErrorBoundary extends React.Component {
   render () {
     if (this.state.hasError) {
       return (
-        <div className='error-list__message'>
-          <div className='error-list__content'>
-            <div className='error-list__icon-container'>
-              <ExclamationTriangleIcon
-                className='error-list__icon'
-                aria-hidden='true'
-              />
-            </div>
-            <div className='error-list__message'>
-              <p>
-                <strong>
-                  An error occured while rendering this component.
-                </strong>
-              </p>
-            </div>
+        <div className='error-entry'>
+          <span className='error-icon'>
+            <ExclamationTriangleIcon aria-hidden='true' />
+          </span>
+          <div className='error-message'>
+            <p>
+              <strong>
+                An error occured while rendering this component.
+              </strong>
+            </p>
           </div>
         </div>
       )

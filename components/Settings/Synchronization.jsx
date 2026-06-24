@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Switch } from '@headlessui/react'
 import {
   EyeIcon,
   EyeSlashIcon,
@@ -9,6 +8,7 @@ import {
   LockOpenIcon
 } from '@heroicons/react/24/outline'
 import { QRCodeSVG } from 'qrcode.react'
+import Switch from '../Switch'
 import useStore from '../../utils/store'
 import { useShallow } from 'zustand/react/shallow'
 
@@ -31,165 +31,102 @@ export default function Settings () {
     (includePassword ? `&password=${settings.password}` : '')
 
   return (
-    <div className='settings__section settings__section--border'>
-      <div className='settings__content'>
-        <div className='settings__header'>
-          <h2 className='settings__heading'>Synchronization</h2>
-          <p className='settings__description'>
-            Enable synchronization with a backend to enable cross-device
-            synchronization.
-          </p>
+    <section className='settings-section' data-border>
+      <header className='settings-header'>
+        <h2>Synchronization</h2>
+        <p className='settings-description'>
+          Enable synchronization with a backend to enable cross-device
+          synchronization.
+        </p>
+      </header>
+
+      <ul className='toggle-list'>
+        <Switch
+          label='Enable synchronization'
+          description='Once enabled we will transfer your encrypted configuration to a storage backend. You can then connect additional devices which will use the same configuration.'
+          checked={settings.synchronize}
+          onChange={(value) => setSettings({
+            ...settings,
+            synchronize: !!value,
+            identifier: !value ? null : (settings.identifier || (Math.random() + 1).toString(36).substring(2)),
+            password: !value ? null : settings.password
+          })}
+        />
+      </ul>
+
+      <div className='sync-panel' data-disabled={!settings.synchronize || undefined}>
+        <div className='sync-form'>
+          <label htmlFor='identifier'>Identifier</label>
+          <input
+            type='text'
+            name='identifier'
+            id='identifier'
+            value={settings.identifier ?? ''}
+            disabled
+          />
+          <label htmlFor='password' data-spaced>
+            Password{' '}
+            {includePassword ? ' (included in link)' : ' (not in link)'}
+          </label>
+          <div className='input-group'>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name='password'
+              id='password'
+              disabled={!settings.synchronize}
+              value={settings.password ?? ''}
+              onChange={(event) => setSetting('password', event.target.value)}
+            />
+
+            <button
+              type='button'
+              className='input-button'
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword
+                ? <EyeIcon aria-hidden='true' />
+                : <EyeSlashIcon aria-hidden='true' />}
+            </button>
+          </div>
         </div>
 
-        <ul className='settings__toggle-list'>
-          <Switch.Group as='li' className='settings__toggle-item'>
-            <div className='settings__toggle-content'>
-              <Switch.Label as='p' className='settings__toggle-label' passive>
-                Enable synchronization
-              </Switch.Label>
-              <Switch.Description className='settings__toggle-description'>
-                Once enabled we will transfer your encrypted configuration to a
-                storage backend. You can then connect additional devices which
-                will use the same configuration.
-              </Switch.Description>
-            </div>
-            <Switch
-              checked={settings.synchronize}
-              onChange={(value) => setSettings({
-                ...settings,
-                synchronize: !!value,
-                identifier: !value ? null : (settings.identifier || (Math.random() + 1).toString(36).substring(2)),
-                password: !value ? null : settings.password
-              })}
-              className={`settings__switch ${
-                settings.synchronize ? 'settings__switch--active' : ''
-              }`}
-            >
-              <span
-                aria-hidden='true'
-                className={`settings__switch-handle ${
-                  settings.synchronize ? 'settings__switch-handle--active' : ''
-                }`}
-              />
-            </Switch>
-          </Switch.Group>
-        </ul>
-
-        <div
-          className={`settings__sync-panel ${
-            !settings.synchronize ? 'settings__sync-panel--disabled' : ''
-          }`}
-        >
-          <div className='settings__sync-form'>
-            <label htmlFor='identifier' className='settings__label'>
-              Identifier
-            </label>
-            <input
-              type='text'
-              name='identifier'
-              id='identifier'
-              value={settings.identifier ?? ''}
-              disabled
-              className='settings__input'
+        {settings.synchronize && (
+          <div className='sync-qr'>
+            <QRCodeSVG
+              width='128'
+              height='128'
+              className='qr-code'
+              value={setupLink}
             />
-            <label
-              htmlFor='password'
-              className='settings__label settings__label--spaced'
-            >
-              Password{' '}
-              {includePassword ? ' (included in link)' : ' (not in link)'}
-            </label>
-            <div className='settings__input-group'>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                name='password'
-                id='password'
-                disabled={!settings.synchronize}
-                value={settings.password ?? ''}
-                onChange={(event) => setSetting('password', event.target.value)}
-                className='settings__input'
-              />
-
+            <div className='button-group'>
               <button
-                onClick={() => setShowPassword(!showPassword)}
-                className='settings__input-button'
+                type='button'
+                aria-label='Include password in link'
+                onClick={() => {
+                  setIncludePassword(!includePassword)
+                  setCopied(false)
+                }}
               >
-                {showPassword
-                  ? (
-                    <EyeIcon
-                      className='settings__input-icon'
-                      aria-hidden='true'
-                    />
-                    )
-                  : (
-                    <EyeSlashIcon
-                      className='settings__input-icon'
-                      aria-hidden='true'
-                    />
-                    )}
+                {includePassword
+                  ? <LockOpenIcon aria-hidden='true' />
+                  : <LockClosedIcon aria-hidden='true' />}
+              </button>
+              <button
+                type='button'
+                aria-label='Copy setup link'
+                onClick={() => {
+                  navigator.clipboard.writeText(setupLink).then(() => setCopied(true))
+                }}
+              >
+                {copied
+                  ? <ClipboardDocumentCheckIcon aria-hidden='true' />
+                  : <ClipboardDocumentIcon aria-hidden='true' />}
               </button>
             </div>
           </div>
-
-          {settings.synchronize && (
-            <div className='settings__sync-qr'>
-              <QRCodeSVG
-                width='128'
-                height='128'
-                className='settings__qr-code'
-                value={setupLink}
-              />
-              <div className='settings__button-group'>
-                <button
-                  type='button'
-                  onClick={() => {
-                    setIncludePassword(!includePassword)
-                    setCopied(false)
-                  }}
-                  className='settings__button-group-item settings__button-group-item--left'
-                >
-                  {includePassword
-                    ? (
-                      <LockOpenIcon
-                        className='settings__button-icon'
-                        aria-hidden='true'
-                        title='Include password in link'
-                      />
-                      )
-                    : (
-                      <LockClosedIcon
-                        className='settings__button-icon'
-                        aria-hidden='true'
-                        title='Include password in link'
-                      />
-                      )}
-                </button>
-                <button
-                  type='button'
-                  onClick={() => {
-                    navigator.clipboard.writeText(setupLink).then(() => setCopied(true))
-                  }}
-                  className='settings__button-group-item settings__button-group-item--right'
-                >
-                  {copied
-                    ? (
-                      <ClipboardDocumentCheckIcon
-                        className='settings__button-icon'
-                        aria-hidden='true'
-                      />
-                      )
-                    : (
-                      <ClipboardDocumentIcon
-                        className='settings__button-icon'
-                        aria-hidden='true'
-                      />
-                      )}
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
+        )}
       </div>
-    </div>
+    </section>
   )
 }

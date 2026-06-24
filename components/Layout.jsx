@@ -1,43 +1,48 @@
-import { Fragment, useEffect } from 'react'
+import { useEffect } from 'react'
 import useStore from '../utils/store'
 import { useShallow } from 'zustand/react/shallow'
 
 export default function Layout ({ children }) {
   const [settings, themeVariant, setThemeVariant] = useStore(useShallow((store) => [store.settings, store.themeVariant, store.setThemeVariant]))
 
-  const setAppTheme = () => {
+  // Dark mode is a document-level variant so it also reaches portalled content
+  // like the settings dialog and the charts reading theme variables off :root.
+  useEffect(() => {
+    const root = document.documentElement
     if (themeVariant === 'dark') {
-      document.documentElement.classList.add('variant--dark')
+      root.setAttribute('data-variant', 'dark')
     } else if (themeVariant === 'light') {
-      document.documentElement.classList.remove('variant--dark')
+      root.removeAttribute('data-variant')
     }
-  }
+  }, [themeVariant])
 
-  const handleSystemThemeChange = () => {
+  // The named theme (default/black/green) is applied as a document attribute.
+  useEffect(() => {
+    const root = document.documentElement
+    if (settings?.theme && settings.theme !== 'default') {
+      root.setAttribute('data-theme', settings.theme)
+    } else {
+      root.removeAttribute('data-theme')
+    }
+  }, [settings?.theme])
+
+  useEffect(() => {
     const darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
     darkQuery.onchange = (e) => {
       if (e.matches) {
-        document.documentElement.classList.add('variant--dark')
+        document.documentElement.setAttribute('data-variant', 'dark')
         setThemeVariant('dark')
       } else {
-        document.documentElement.classList.remove('variant--dark')
+        document.documentElement.removeAttribute('data-variant')
         setThemeVariant('light')
       }
     }
-  }
-
-  useEffect(() => {
-    setAppTheme()
-  }, [themeVariant])
-
-  useEffect(() => {
-    handleSystemThemeChange()
   }, [])
 
   return (
     <div
-      className={`layout theme-transition theme--${settings?.theme}`}
+      className='layout theme-transition'
       style={{
         backgroundColor: settings?.backgroundColor || null,
         backgroundImage: settings?.backgroundImage
@@ -45,11 +50,11 @@ export default function Layout ({ children }) {
           : null
       }}
     >
-      <div className='layout__container'>{children}</div>
+      <div className='layout-content'>{children}</div>
       {!settings?.backgroundColor && !settings?.backgroundImage && (
         <>
-          <div className='layout__gradient layout__gradient--large' />
-          <div className='layout__gradient layout__gradient--small' />
+          <div className='layout-gradient' data-size='large' />
+          <div className='layout-gradient' data-size='small' />
         </>
       )}
     </div>

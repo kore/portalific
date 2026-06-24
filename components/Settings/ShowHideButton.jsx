@@ -4,19 +4,11 @@ export default function ShowHideButton ({ hidden, onClick, children }) {
   return (
     <button
       type='button'
+      data-hidden={hidden || undefined}
+      aria-pressed={hidden}
       onClick={() => onClick(!hidden)}
-      className={`theme-switcher__button ${
-        hidden
-          ? 'theme-switcher__button--hidden'
-          : 'theme-switcher__button--visible'
-      }`}
     >
-      {hidden && (
-        <XCircleIcon
-          className='theme-switcher__icon theme-switcher__icon--hidden'
-          aria-hidden='true'
-        />
-      )}
+      {hidden && <XCircleIcon className='overlay-icon' aria-hidden='true' />}
       {children}
     </button>
   )

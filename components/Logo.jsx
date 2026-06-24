@@ -1,9 +1,7 @@
-import React from 'react'
-
-export default function Logo ({ className }) {
+export default function Logo () {
   return (
-    <div className={className}>
-      <div className='header__logo-svg' />
-    </div>
+    <span className='logo'>
+      <span className='logo-mark' />
+    </span>
   )
 }

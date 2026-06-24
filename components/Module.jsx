@@ -78,27 +78,17 @@ export default function Module ({
 
   drag(drop(ref))
 
-  // Create BEM visibility modifiers
-  const visibilityClasses = []
-  if (hiddenOnDevices.includes('mobile')) {
-    visibilityClasses.push('module--hidden-mobile')
-  }
-  if (hiddenOnDevices.includes('tablet')) {
-    visibilityClasses.push('module--hidden-tablet')
-  } else {
-    visibilityClasses.push('module--visible-tablet')
-  }
-  if (hiddenOnDevices.includes('desktop')) {
-    visibilityClasses.push('module--hidden-desktop')
-  } else {
-    visibilityClasses.push('module--visible-desktop')
-  }
+  // Per-device visibility is expressed as a space-separated token list,
+  // matched in CSS via [data-hidden~="mobile"] etc.
+  const hidden = ['mobile', 'tablet', 'desktop'].filter((device) =>
+    hiddenOnDevices.includes(device)
+  )
 
   return (
     <li
-      className={`module module--${type} ${visibilityClasses.join(
-        ' '
-      )} theme-transition`}
+      className='module theme-transition'
+      data-module={type}
+      data-hidden={hidden.join(' ') || undefined}
       style={{ opacity: isDragging ? 0.2 : 1 }}
       ref={ref}
       data-handler-id={handlerId}

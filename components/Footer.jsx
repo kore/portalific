@@ -14,9 +14,9 @@ const ThemeSwitcher = () => {
 
     const hours = new Date().getHours()
     if (hours > 6 && hours < 20) {
-      document.documentElement.classList.remove('variant--dark')
+      document.documentElement.removeAttribute('data-variant')
     } else {
-      document.documentElement.classList.add('variant--dark')
+      document.documentElement.setAttribute('data-variant', 'dark')
     }
   }
 
@@ -32,58 +32,54 @@ const ThemeSwitcher = () => {
   }, [auto])
 
   return (
-    <div className='theme-switcher'>
+    <nav className='theme-switcher' aria-label='Theme'>
       <button
         type='button'
+        data-mode='dark'
         aria-label='Use Dark Mode'
+        aria-pressed={themeVariant === 'dark'}
         onClick={() => {
           setThemeVariant('dark')
           setAuto(false)
         }}
-        className={`theme-switcher__button theme-switcher__button--dark ${
-          themeVariant === 'dark' ? 'theme-switcher__button--active' : ''
-        }`}
       >
-        <MoonIcon className='theme-switcher__icon' aria-hidden='true' />
+        <MoonIcon aria-hidden='true' />
       </button>
 
       <button
         type='button'
+        data-mode='light'
         aria-label='Use Light Mode'
+        aria-pressed={themeVariant === 'light'}
         onClick={() => {
           setThemeVariant('light')
           setAuto(false)
         }}
-        className={`theme-switcher__button theme-switcher__button--light ${
-          themeVariant === 'light' ? 'theme-switcher__button--active' : ''
-        }`}
       >
-        <SunIcon className='theme-switcher__icon' aria-hidden='true' />
+        <SunIcon aria-hidden='true' />
       </button>
 
       <button
         type='button'
+        data-mode='auto'
         aria-label='Use Auto Mode'
+        aria-pressed={auto}
         onClick={() => {
           setThemeVariant('auto')
           setAuto(true)
         }}
-        className={`theme-switcher__button theme-switcher__button--auto ${
-          auto ? 'theme-switcher__button--active' : ''
-        }`}
       >
-        <ClockIcon className='theme-switcher__icon' aria-hidden='true' />
+        <ClockIcon aria-hidden='true' />
       </button>
-    </div>
+    </nav>
   )
 }
 
 export default function Footer () {
   return (
     <footer className='footer'>
-      <p className='footer__copyright'>
+      <p className='footer-copyright'>
         <a
-          className='footer__link'
           target='_blank'
           href='https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12'
           rel='noreferrer'
@@ -92,7 +88,6 @@ export default function Footer () {
         </a>{' '}
         by{' '}
         <a
-          className='footer__link'
           target='_blank'
           href='https://kore-nordmann.de/'
           rel='noreferrer'

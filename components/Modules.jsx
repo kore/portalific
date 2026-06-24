@@ -21,7 +21,7 @@ const availableModules = {
 
 export default function Modules ({ moduleRenderer = null }) {
   const [settings, modules, setModules, moveModule, pushError] = useStore(useShallow((store) => [store.settings, store.modules, store.setModules, store.moveModule, store.pushError]))
-  const gridClassName = 'grid__cols-' + (settings.columns ?? 3)
+  const gridClassName = 'grid-' + (settings.columns ?? 3)
 
   return (
     <ul className={`grid ${gridClassName}`}>

@@ -1,4 +1,4 @@
-import { Fragment, lazy, Suspense, useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import {
   Cog8ToothIcon,
   TrashIcon,
@@ -51,21 +51,18 @@ export default function ModulesManager () {
 
   return (
     <>
-      <div className='settings__section'>
-        <div className='settings__header'>
-          <h2 className='settings__heading'>Configure Modules</h2>
-          <p className='settings__description'>
+      <section className='settings-section'>
+        <header className='settings-header'>
+          <h2>Configure Modules</h2>
+          <p className='settings-description'>
             Add modules from the list of available modules and configure them.
           </p>
-        </div>
+        </header>
 
-        <div className='settings__form-row'>
-          <div className='settings__form-group settings__form-group--large'>
-            <label htmlFor='columns' className='settings__label'>
-              Number of columns
-            </label>
+        <div className='form-row'>
+          <div className='form-group' data-width='large'>
+            <label htmlFor='columns'>Number of columns</label>
             <select
-              type='text'
               name='columns'
               id='columns'
               value={settings.columns ?? ''}
@@ -73,7 +70,6 @@ export default function ModulesManager () {
                 setSettings({ ...settings, columns: event.target.value })
                 setColumn(Math.min(+column, event.target.value - 1))
               }}
-              className='settings__input'
             >
               <option value='1'>1</option>
               <option value='2'>2</option>
@@ -82,17 +78,13 @@ export default function ModulesManager () {
             </select>
           </div>
 
-          <div className='settings__form-group settings__form-group--large'>
-            <label htmlFor='moduleType' className='settings__label'>
-              Module
-            </label>
+          <div className='form-group' data-width='large'>
+            <label htmlFor='moduleType'>Module</label>
             <select
-              type='text'
               name='moduleType'
               id='moduleType'
               value={module}
               onChange={(event) => setModule(event.target.value)}
-              className='settings__input'
             >
               <option value='none'>Select Module Type</option>
               <option value='calendar'>Calendar</option>
@@ -105,17 +97,13 @@ export default function ModulesManager () {
             </select>
           </div>
 
-          <div className='settings__form-group settings__form-group--small'>
-            <label htmlFor='moduleColumn' className='settings__label'>
-              Column
-            </label>
+          <div className='form-group' data-width='small'>
+            <label htmlFor='moduleColumn'>Column</label>
             <select
-              type='text'
               name='moduleColumn'
               id='moduleColumn'
               value={column}
               onChange={(event) => setColumn(+event.target.value)}
-              className='settings__input'
             >
               {Array.from(Array(+settings.columns).keys()).map((column) => (
                 <option key={column} value={column}>
@@ -125,10 +113,11 @@ export default function ModulesManager () {
             </select>
           </div>
 
-          <div className='settings__form-group settings__form-group--small'>
+          <div className='form-group' data-width='small'>
             <button
               type='button'
-              className='button button--primary'
+              className='button'
+              data-variant='primary'
               onClick={() => {
                 if (module === 'none') {
                   return
@@ -149,12 +138,9 @@ export default function ModulesManager () {
             </button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div
-        className='settings__section settings__section--border'
-        style={{ paddingTop: '1.5rem' }}
-      >
+      <section className='settings-section' data-border>
         <Modules
           pushError={() => {}}
           moduleRenderer={(module, index) => {
@@ -162,26 +148,23 @@ export default function ModulesManager () {
 
             return (
               <ErrorBoundary>
-                <div className='module__header'>
-                  <h3 className='module__title'>
+                <div className='module-header'>
+                  <h3 className='module-title'>
                     {capitalizeFirstLetter(module.type)}
                   </h3>
-                  <div className='header__buttons'>
+                  <div className='header-buttons'>
                     {ModuleSettings && (
                       <>
                         <button
                           type='button'
-                          className='header__button header__button--settings'
+                          className='icon-button'
+                          data-variant='settings'
                           onClick={() => setShowSettings(module.id)}
                         >
                           <span className='sr-only'>View settings</span>
-                          <Cog8ToothIcon
-                            className='header__icon'
-                            aria-hidden='true'
-                          />
+                          <Cog8ToothIcon aria-hidden='true' />
                         </button>
                         <Modal
-                          settings={settings}
                           open={settingsShown === module.id}
                           setOpen={() => setShowSettings(null)}
                         >
@@ -199,7 +182,8 @@ export default function ModulesManager () {
                     )}
                     <button
                       type='button'
-                      className='header__button header__button--danger'
+                      className='icon-button'
+                      data-variant='danger'
                       onClick={() => {
                         setModules(
                           (modules ?? []).map((column) => {
@@ -211,7 +195,7 @@ export default function ModulesManager () {
                       }}
                     >
                       <span className='sr-only'>Remove module</span>
-                      <TrashIcon className='header__icon' aria-hidden='true' />
+                      <TrashIcon aria-hidden='true' />
                     </button>
                   </div>
                 </div>
@@ -222,10 +206,7 @@ export default function ModulesManager () {
                       setDeviceVisibility(column, index, 'mobile', hide)
                     }}
                   >
-                    <DevicePhoneMobileIcon
-                      className='visibility-switcher__icon'
-                      aria-hidden='true'
-                    />
+                    <DevicePhoneMobileIcon aria-hidden='true' />
                   </ShowHideButton>
                   <ShowHideButton
                     hidden={(module.hiddenOnDevices || []).includes('tablet')}
@@ -233,10 +214,7 @@ export default function ModulesManager () {
                       setDeviceVisibility(column, index, 'tablet', hide)
                     }}
                   >
-                    <DeviceTabletIcon
-                      className='visibility-switcher__icon'
-                      aria-hidden='true'
-                    />
+                    <DeviceTabletIcon aria-hidden='true' />
                   </ShowHideButton>
                   <ShowHideButton
                     hidden={(module.hiddenOnDevices || []).includes('desktop')}
@@ -244,17 +222,14 @@ export default function ModulesManager () {
                       setDeviceVisibility(column, index, 'desktop', hide)
                     }}
                   >
-                    <ComputerDesktopIcon
-                      className='visibility-switcher__icon'
-                      aria-hidden='true'
-                    />
+                    <ComputerDesktopIcon aria-hidden='true' />
                   </ShowHideButton>
                 </div>
               </ErrorBoundary>
             )
           }}
         />
-      </div>
+      </section>
     </>
   )
 }
