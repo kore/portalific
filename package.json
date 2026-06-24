@@ -14,11 +14,9 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.10",
     "@heroicons/react": "^2.0.13",
     "axios": "^1.16.1",
     "chart.js": "^4.5.1",
-    "classnames": "^2.3.2",
     "debounce": "^3.0.0",
     "events": "^3.3.0",
     "ical.js": "^2.2.1",
@@ -36,7 +34,6 @@
     "@vitejs/plugin-react": "^6.0.2",
     "autoprefixer": "^10.5.0",
     "postcss": "^8.5.15",
-    "sass": "^1.100.0",
     "standard": "^17.1.2",
     "vite": "^8.0.16",
     "vitest": "^4.1.8"

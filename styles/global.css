@@ -1,0 +1,263 @@
+/*
+ * Global layer: design tokens, themes, reset and base element styles.
+ * Inheritable properties (font, color, line-height) cascade into everything.
+ */
+
+@import "normalize.css/normalize.css";
+
+:root {
+  /* Base colors */
+  --color-text: #26254d;
+  --color-bg: #f2f2ff;
+  --color-error: #ff6b6b;
+
+  /* Primary colors */
+  --color-primary-100: #e5e4ff;
+  --color-primary-300: #cbcaff;
+  --color-primary-500: #7d7aff;
+  --color-primary-700: #4b4999;
+  --color-primary-900: #26254d;
+
+  /* Gray colors */
+  --color-gray-100: #f3f4f6;
+  --color-gray-300: #d1d5db;
+  --color-gray-500: #6b7280;
+  --color-gray-700: #374151;
+  --color-gray-900: #111827;
+
+  /* Red colors for error states */
+  --color-red-100: #fee2e2;
+  --color-red-500: #ef4444;
+  --color-red-900: #7f1d1d;
+
+  --color-transparent: transparent;
+
+  /* Alpha colors */
+  --color-black-75: rgba(0, 0, 0, 0.75);
+  --color-black-50: rgba(0, 0, 0, 0.5);
+  --color-black-25: rgba(0, 0, 0, 0.25);
+  --color-black-10: rgba(0, 0, 0, 0.1);
+
+  --color-white-80: rgba(255, 255, 255, 0.8);
+  --color-white-50: rgba(255, 255, 255, 0.5);
+  --color-white-20: rgba(255, 255, 255, 0.2);
+
+  --color-gray-900-50: rgba(17, 24, 39, 0.5); /* overlays */
+  --color-gray-900-10: rgba(17, 24, 39, 0.1); /* borders */
+
+  --color-primary-500-30: rgba(125, 122, 255, 0.3); /* button highlights */
+
+  /* Decorative background gradient (default theme) */
+  --color-gradient-1: #7d7aff;
+  --color-gradient-2: #2121e2;
+  --color-gradient-3: #00fff0;
+  --color-gradient-4: #8785ff;
+
+  /* Fonts */
+  --font-primary: ui-sans-serif, system-ui, sans-serif;
+  --font-secondary: ui-sans-serif, system-ui, sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+
+  /* Border radius */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1.5rem;
+
+  /* Breakpoints (documentation only — used as literals in @media) */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+/* Dark mode — toggled as [data-variant="dark"] on the document element. Only
+   applies to the default theme; the black/green themes carry fixed palettes. */
+:root[data-variant="dark"]:not([data-theme="black"]):not([data-theme="green"]) {
+  --color-text: #f2f2ff;
+  --color-bg: #26254d;
+  --color-error: #ff6b6b;
+
+  --color-primary-900: #e5e4ff;
+  --color-primary-700: #cbcaff;
+  --color-primary-500: #7d7aff;
+  --color-primary-300: #4b4999;
+  --color-primary-100: #26254d;
+
+  --color-gray-900: #f3f4f6;
+  --color-gray-700: #d1d5db;
+  --color-gray-500: #6b7280;
+  --color-gray-300: #374151;
+  --color-gray-100: #111827;
+
+  --color-red-900: #fee2e2;
+  --color-red-500: #ef4444;
+  --color-red-100: #7f1d1d;
+
+  --color-black-75: rgba(255, 255, 255, 0.75);
+  --color-black-50: rgba(255, 255, 255, 0.5);
+  --color-black-25: rgba(255, 255, 255, 0.25);
+  --color-black-10: rgba(255, 255, 255, 0.1);
+
+  --color-white-80: rgba(0, 0, 0, 0.8);
+  --color-white-50: rgba(0, 0, 0, 0.5);
+  --color-white-20: rgba(0, 0, 0, 0.2);
+
+  --color-gray-900-50: rgba(243, 244, 246, 0.5);
+  --color-gray-900-10: rgba(243, 244, 246, 0.1);
+
+  --color-primary-500-30: rgba(125, 122, 255, 0.3);
+}
+
+/* "Black Satin" theme */
+:root[data-theme="black"] {
+  --color-text: #f2f2ff;
+  --color-bg: #1c1c1c;
+  --color-error: #ff6b6b;
+
+  --color-primary-100: #f5cdad;
+  --color-primary-300: #efb17e;
+  --color-primary-500: #ed9f5a;
+  --color-primary-700: #9e5315;
+  --color-primary-900: #68370e;
+
+  --color-gray-100: #202020;
+  --color-gray-300: #373737;
+  --color-gray-500: #6b6b6b;
+  --color-gray-700: #d1d1d1;
+  --color-gray-900: #f3f3f3;
+
+  --color-black-75: rgba(255, 255, 255, 0.75);
+  --color-black-50: rgba(255, 255, 255, 0.5);
+  --color-black-25: rgba(255, 255, 255, 0.25);
+  --color-black-10: rgba(255, 255, 255, 0.1);
+
+  --color-white-80: rgba(0, 0, 0, 0.8);
+  --color-white-50: rgba(0, 0, 0, 0.5);
+  --color-white-20: rgba(0, 0, 0, 0.2);
+
+  --color-gray-900-10: rgba(17, 24, 39, 0.2);
+
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0.2rem;
+  --radius-lg: 0.5rem;
+}
+
+/* "Polished Nature" theme */
+:root[data-theme="green"] {
+  --color-text: #080404;
+  --color-bg: #f8f4f4;
+  --color-error: #ff6b6b;
+
+  --color-primary-100: #f4f9f8;
+  --color-primary-300: #387561;
+  --color-primary-500: #1d5745;
+  --color-primary-700: #0a3728;
+  --color-primary-900: #06271b;
+  --color-secondary-500: #e0bb52;
+
+  --color-gray-100: #f3f3f3;
+  --color-gray-300: #d1d1d1;
+  --color-gray-500: #6b6b6b;
+  --color-gray-700: #373737;
+  --color-gray-900: #202020;
+
+  --color-white-80: rgba(248, 244, 244, 0.8);
+  --color-white-50: rgba(248, 244, 244, 0.5);
+  --color-white-20: rgba(248, 244, 244, 0.2);
+
+  --color-gray-900-10: rgba(17, 24, 39, 0.2);
+
+  --color-primary-500-40: rgba(19, 77, 58, 0.2); /* module highlights */
+  --color-primary-500-30: rgba(19, 77, 58, 0.3); /* button highlights */
+
+  --radius-xs: 0.2rem;
+  --radius-sm: 0.3rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+}
+
+/* Reset & base elements */
+html,
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  color: var(--color-text);
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  background-color: var(--color-bg);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  width: 100%;
+}
+
+a {
+  color: var(--color-text);
+}
+
+input,
+button,
+select,
+textarea {
+  font: inherit;
+  border: none;
+  outline: none;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Base heading scale; blocks override where a specific size is needed. */
+h1 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

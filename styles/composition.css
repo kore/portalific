@@ -1,0 +1,103 @@
+/*
+ * Composition layer: layout primitives that control flow and spacing.
+ * Reusable shells that any content flows into.
+ */
+
+/* Page shell */
+.layout {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.layout-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 2 * var(--spacing-xs));
+  height: 100%;
+  padding: 0 var(--spacing-xs);
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .layout-content {
+    padding: 0 var(--spacing-lg);
+    width: calc(100% - 2 * var(--spacing-lg));
+  }
+}
+
+/* Decorative background gradient blobs (default theme) */
+.layout-gradient {
+  position: fixed;
+  z-index: -1;
+  filter: blur(44px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.layout-gradient[data-size="large"] {
+  max-height: 800px;
+  height: 80vh;
+  max-width: 1400px;
+  top: 5rem;
+  opacity: 0.4;
+  background: radial-gradient(at 71% 77%, var(--color-gradient-1) 0, transparent 21%),
+    radial-gradient(at 36% 47%, var(--color-gradient-3) 0, transparent 50%),
+    radial-gradient(at 54% 29%, var(--color-gradient-3) 0, transparent 28%),
+    radial-gradient(at 45% 51%, var(--color-gradient-1) 0, transparent 53%),
+    radial-gradient(at 73% 44%, var(--color-gradient-2) 0, transparent 54%),
+    radial-gradient(at 24% 7%, var(--color-gradient-2) 0, transparent 40%),
+    radial-gradient(at 76% 46%, var(--color-gradient-1) 0, transparent 50%);
+}
+
+.layout-gradient[data-size="small"] {
+  height: 600px;
+  max-width: 900px;
+  bottom: 0;
+  transform: translateX(-50%) rotate(190deg);
+  opacity: 0.2;
+  background: radial-gradient(at 83% 25%, var(--color-gradient-1) 0, transparent 21%),
+    radial-gradient(at 36% 47%, var(--color-gradient-3) 0, transparent 50%),
+    radial-gradient(at 79% 45%, var(--color-gradient-3) 0, transparent 28%),
+    radial-gradient(at 66% 38%, var(--color-gradient-1) 0, transparent 53%),
+    radial-gradient(at 89% 13%, var(--color-gradient-2) 0, transparent 54%),
+    radial-gradient(at 24% 7%, var(--color-gradient-2) 0, transparent 40%),
+    radial-gradient(at 76% 46%, var(--color-gradient-1) 0, transparent 50%);
+}
+
+/* Fluid column grid for the dashboard */
+.grid {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.grid li {
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

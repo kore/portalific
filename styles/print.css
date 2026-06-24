@@ -1,0 +1,43 @@
+/*
+ * Print layer: a clean, ink-friendly rendering of the dashboard.
+ */
+
+@media print {
+  :root {
+    --color-bg: #fff;
+    --color-text: #000;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  /* Hide decorative and interactive-only chrome. */
+  .layout-gradient,
+  .theme-switcher,
+  .footer,
+  .icon-button,
+  .feed-header,
+  .morning-routine-diode,
+  dialog.modal {
+    display: none !important;
+  }
+
+  /* Flatten effects that do not print well. */
+  .module,
+  .modules,
+  .clock-analog,
+  .countdown-digit {
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    background: #fff !important;
+    animation: none !important;
+  }
+
+  /* Keep cards intact across page breaks. */
+  .module {
+    break-inside: avoid;
+    border: 1px solid var(--color-gray-300);
+  }
+}

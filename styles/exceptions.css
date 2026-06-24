@@ -1,0 +1,304 @@
+/*
+ * Exception layer: variants and states expressed as data attributes, plus
+ * theme-specific overrides scoped by [data-theme] on the document element.
+ */
+
+/* ---- Button colour variants -------------------------------------------- */
+
+.button[data-variant="primary"] {
+  background-color: var(--color-primary-500);
+  color: var(--color-bg);
+}
+
+.button[data-variant="primary"]:hover {
+  background-color: var(--color-primary-700);
+}
+
+.button[data-variant="secondary"] {
+  background-color: var(--color-bg);
+  color: var(--color-primary-700);
+  border: 1px solid var(--color-primary-300);
+}
+
+.button[data-variant="secondary"]:hover {
+  background-color: var(--color-primary-100);
+}
+
+.button[data-variant="danger"] {
+  background-color: var(--color-red-500);
+  color: var(--color-bg);
+}
+
+.button[data-variant="danger"]:hover {
+  background-color: var(--color-red-900);
+  color: var(--color-bg);
+}
+
+/* ---- Icon button states ------------------------------------------------- */
+
+.icon-button[data-variant="settings"] {
+  color: var(--color-primary-300);
+}
+
+.icon-button[data-variant="settings"]:hover {
+  background-color: var(--color-primary-700);
+  color: var(--color-bg);
+}
+
+.icon-button[data-variant="settings"]:focus {
+  background-color: var(--color-primary-900);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary-900);
+}
+
+.icon-button[data-variant="error"] {
+  color: var(--color-red-100);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.icon-button[data-variant="error"]:hover {
+  background-color: var(--color-red-900);
+  color: var(--color-bg);
+}
+
+.icon-button[data-variant="error"]:focus {
+  background-color: var(--color-red-900);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-red-900);
+}
+
+/* ---- Settings navigation active state ---------------------------------- */
+
+.settings-nav button[aria-current="page"] {
+  background-color: var(--color-primary-100);
+  border-left-color: var(--color-primary-500);
+  color: var(--color-primary-700);
+}
+
+.settings-nav button[aria-current="page"]:hover {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-700);
+}
+
+.settings-nav button[aria-current="page"] svg {
+  color: var(--color-primary-500);
+}
+
+/* ---- Theme switcher button modes & active state ------------------------ */
+
+.theme-switcher button[data-mode="dark"] {
+  color: var(--color-gray-300);
+}
+
+.theme-switcher button[data-mode="light"] {
+  background-color: var(--color-primary-500);
+  color: var(--color-gray-100);
+}
+
+.theme-switcher button[data-mode="auto"] {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-700);
+}
+
+.theme-switcher button[data-mode="auto"][aria-pressed="true"] {
+  background-color: var(--color-primary-700);
+  color: var(--color-bg);
+}
+
+.theme-switcher button[aria-pressed="true"] {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px var(--color-primary-500-30);
+}
+
+/* ---- Visibility switcher hidden / visible states ----------------------- */
+
+.visibility-switcher button[data-hidden] {
+  background-color: var(--color-red-500);
+  color: var(--color-gray-300);
+}
+
+.visibility-switcher button[data-hidden]:hover {
+  background-color: var(--color-bg);
+  color: var(--color-gray-800);
+}
+
+.visibility-switcher button:not([data-hidden]) {
+  background-color: var(--color-bg);
+  color: var(--color-gray-800);
+}
+
+.visibility-switcher button:not([data-hidden]):hover {
+  background-color: var(--color-red-500);
+  color: var(--color-bg);
+}
+
+/* ---- WebStats interval view switcher ----------------------------------- */
+
+.view-switcher button[aria-current="page"] {
+  background-color: var(--color-gray-300);
+}
+
+/* ---- Module per-device visibility -------------------------------------- */
+
+.module[data-hidden~="mobile"] {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .module[data-hidden~="tablet"] {
+    display: none;
+  }
+
+  .module:not([data-hidden~="tablet"]) {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .module[data-hidden~="desktop"] {
+    display: none;
+  }
+
+  .module:not([data-hidden~="desktop"]) {
+    display: block;
+  }
+}
+
+/* ---- "Black Satin" theme overrides ------------------------------------- */
+
+:root[data-theme="black"] .theme-switcher {
+  display: none;
+}
+
+:root[data-theme="black"] .grid {
+  gap: var(--spacing-lg);
+}
+
+:root[data-theme="black"] .layout-gradient {
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  filter: none;
+  transform: none;
+  opacity: 1;
+}
+
+:root[data-theme="black"] .layout-gradient[data-size="large"] {
+  inset: 0;
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(
+    at 90% 10%,
+    var(--color-gray-300) 0,
+    var(--color-bg) 70%
+  );
+}
+
+:root[data-theme="black"] .layout-gradient[data-size="small"] {
+  display: none;
+}
+
+:root[data-theme="black"] .modules {
+  box-shadow: 1px 0 1px 0 var(--color-gray-500),
+    -3px 3px 4px 1px var(--color-white-50);
+}
+
+:root[data-theme="black"] .module {
+  background-color: var(--color-white-80);
+  backdrop-filter: blur(10px);
+}
+
+:root[data-theme="black"] .clock-time,
+:root[data-theme="black"] .countdown-name,
+:root[data-theme="black"] .todo-checkbox svg,
+:root[data-theme="black"] .feed-source {
+  color: var(--color-primary-500);
+}
+
+/* ---- "Polished Nature" theme overrides --------------------------------- */
+
+:root[data-theme="green"] .layout-content {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+:root[data-theme="green"] .theme-switcher {
+  display: none;
+}
+
+:root[data-theme="green"] .header-title {
+  color: var(--color-primary-500);
+}
+
+:root[data-theme="green"] .grid {
+  gap: var(--spacing-lg);
+}
+
+:root[data-theme="green"] .layout-gradient {
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  filter: none;
+  transform: none;
+  opacity: 1;
+}
+
+:root[data-theme="green"] .layout-gradient[data-size="large"] {
+  inset: 0;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--color-bg);
+}
+
+:root[data-theme="green"] .layout-gradient[data-size="small"] {
+  display: none;
+}
+
+:root[data-theme="green"] .modules {
+  box-shadow: 1px 1px 4px 1px var(--color-black-10),
+    5px 5px 50px 0 var(--color-primary-500-40),
+    5px 5px 100px 0 var(--color-primary-500-40);
+}
+
+:root[data-theme="green"] .module {
+  background-color: var(--color-white-50);
+  backdrop-filter: blur(10px);
+  border: none;
+}
+
+:root[data-theme="green"] .module[data-module="clock"] {
+  background: radial-gradient(
+      at 10% 10%,
+      var(--color-primary-700) 0,
+      var(--color-primary-300) 70%
+    ),
+    radial-gradient(
+      at 30% 90%,
+      var(--color-primary-700) 0,
+      var(--color-primary-300) 50%
+    );
+  color: var(--color-bg);
+}
+
+:root[data-theme="green"] .feed-header {
+  background-color: var(--color-white-20);
+  box-shadow: 0 1px 3px 0 var(--color-black-10);
+  padding: var(--spacing-xs) var(--spacing-md);
+}
+
+:root[data-theme="green"] .clock-time {
+  color: var(--color-secondary-500);
+}
+
+:root[data-theme="green"] .countdown-digit,
+:root[data-theme="green"] .countdown-digit-top,
+:root[data-theme="green"] .countdown-digit-bottom {
+  border-radius: var(--radius-xs);
+}
