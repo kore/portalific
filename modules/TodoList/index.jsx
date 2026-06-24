@@ -21,35 +21,34 @@ export default function TodoList ({ configuration, updateModuleConfiguration }) 
         .filter((todo) => !todo.resolved)
         .map((todo, index) => {
           const dueDate = todo.dueDate ? new Date(todo.dueDate) : null
+          const status =
+            today.toLocaleDateString() === dueDate?.toLocaleDateString()
+              ? 'today'
+              : dueDate < today
+                ? 'overdue'
+                : 'future'
 
           return (
-            <li className='todo-list__item' key={todo.create}>
-              <div className='todo-list__checkbox-container'>
-                <div className='todo-list__checkbox-wrapper'>
+            <li className='todo-item' key={todo.create}>
+              <div className='todo-checkbox'>
+                <div className='todo-checkbox-wrapper'>
                   <input
                     id={'todo-' + index}
                     aria-describedby='comments-description'
                     type='checkbox'
-                    className='todo-list__checkbox'
                     onChange={() => {
                       todo.resolved = new Date().toISOString()
                       updateModuleConfiguration({ ...configuration })
                     }}
                   />
-                  <label
-                    htmlFor={'todo-' + index}
-                    className='todo-list__checkbox-label'
-                  >
-                    <CheckIcon
-                      className='todo-list__checkbox-icon'
-                      aria-hidden='true'
-                    />
+                  <label htmlFor={'todo-' + index}>
+                    <CheckIcon aria-hidden='true' />
                   </label>
                 </div>
               </div>
-              <div className='todo-list__content'>
-                <p className='todo-list__text'>{todo.text}</p>
-                <p className='todo-list__created-date'>
+              <div className='todo-content'>
+                <p className='todo-text'>{todo.text}</p>
+                <p className='todo-created'>
                   Created{' '}
                   {new Date(todo.create).toLocaleDateString(undefined, {
                     weekday: 'short',
@@ -58,18 +57,9 @@ export default function TodoList ({ configuration, updateModuleConfiguration }) 
                   })}
                 </p>
               </div>
-              <div className='todo-list__due-date'>
+              <div className='todo-due'>
                 {dueDate && (
-                  <p
-                    className={`todo-list__due-date-text ${
-                      today.toLocaleDateString() ===
-                      dueDate.toLocaleDateString()
-                        ? 'todo-list__due-date-text--today'
-                        : dueDate < today
-                          ? 'todo-list__due-date-text--overdue'
-                          : 'todo-list__due-date-text--future'
-                    }`}
-                  >
+                  <p className='todo-due-text' data-status={status}>
                     {dueDate.toLocaleDateString(undefined, {
                       month: 'short',
                       day: 'numeric'
@@ -84,45 +74,32 @@ export default function TodoList ({ configuration, updateModuleConfiguration }) 
         .filter((todo) => todo.resolved && new Date(todo.resolved) > today)
         .map((todo, index) => {
           return (
-            <li
-              className='todo-list__item todo-list__item--resolved'
-              key={todo.create}
-            >
-              <div className='todo-list__checkbox-container'>
-                <div className='todo-list__checkbox-wrapper todo-list__checkbox-wrapper--resolved'>
+            <li className='todo-item' data-resolved key={todo.create}>
+              <div className='todo-checkbox'>
+                <div className='todo-checkbox-wrapper'>
                   <input
                     id={'resolved-' + index}
                     aria-describedby='comments-description'
                     type='checkbox'
-                    className='todo-list__checkbox'
                     onChange={() => {
                       todo.resolved = null
                       updateModuleConfiguration({ ...configuration })
                     }}
                   />
-                  <label
-                    htmlFor={'resolved-' + index}
-                    className='todo-list__checkbox-label todo-list__checkbox-label--resolved'
-                  >
-                    <XCircleIcon
-                      className='todo-list__checkbox-icon todo-list__checkbox-icon--resolved'
-                      aria-hidden='true'
-                    />
+                  <label htmlFor={'resolved-' + index}>
+                    <XCircleIcon aria-hidden='true' />
                   </label>
                 </div>
               </div>
-              <div className='todo-list__content todo-list__content--resolved'>
-                <p className='todo-list__text todo-list__text--resolved'>
-                  {todo.text}
-                </p>
+              <div className='todo-content'>
+                <p className='todo-text'>{todo.text}</p>
               </div>
-              <div className='todo-list__due-date' />
+              <div className='todo-due' />
             </li>
           )
         })}
-      <li className='todo-list__form-container'>
+      <li className='todo-form'>
         <form
-          className='todo-list__form'
           onSubmit={(event) => {
             const todos = (configuration.todos || []).concat([
               {
@@ -148,7 +125,6 @@ export default function TodoList ({ configuration, updateModuleConfiguration }) 
             id='duedate'
             value={dueDate}
             onChange={(event) => setDueDate(event.target.value)}
-            className='todo-list__date-input'
           />
           <input
             type='text'
@@ -157,7 +133,6 @@ export default function TodoList ({ configuration, updateModuleConfiguration }) 
             value={newTodo}
             onChange={(event) => setNewTodo(event.target.value)}
             placeholder='Add a TODO item (with optional due date)'
-            className='todo-list__text-input'
           />
         </form>
       </li>

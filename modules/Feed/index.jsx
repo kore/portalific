@@ -1,5 +1,4 @@
-import { Fragment, useState, useEffect } from 'react'
-import { Menu } from '@headlessui/react'
+import { useState, useEffect } from 'react'
 import {
   ArrowPathIcon,
   ChevronDownIcon,
@@ -95,86 +94,73 @@ export default function Feed ({
 
   return (
     <>
-      <div className='feed__header'>
-        <div className='feed__title'>
+      <header className='feed-header'>
+        <div className='feed-title'>
           {configuration.title
             ? configuration.title
             : (configuration.feeds ?? []).map((feed) => feed.name).join(', ')}
         </div>
-        <div className='feed__update-time'>
+        <div className='feed-update-time'>
           {updated
             ? (
-              <span className='feed__time'>
+              <span className='feed-time'>
                 {updated.toLocaleTimeString('de-DE', { timeStyle: 'short' })}
               </span>
               )
             : (
-              <ArrowPathIcon className='feed__loading-icon' aria-hidden='true' />
+              <ArrowPathIcon className='feed-loading' aria-hidden='true' />
               )}
         </div>
         {(configuration.feeds || []).length < 2
           ? (
             <button
               type='button'
-              className='feed__mark-read-button'
+              className='feed-mark-read'
               onClick={() => markRead()}
             >
               <span className='sr-only'>Mark all entries read</span>
-              <CheckIcon
-                className='feed__button-icon'
-                aria-hidden='true'
-                title='Mark all entries read'
-              />
+              <CheckIcon aria-hidden='true' title='Mark all entries read' />
             </button>
             )
           : (
-            <Menu as='div' className='feed__mark-read-menu'>
-              <div className='feed__menu-buttons'>
+            <div className='feed-menu'>
+              <div className='feed-menu-buttons'>
                 <button
                   type='button'
-                  className='feed__mark-all-button'
+                  className='feed-mark-all'
                   onClick={() => markRead()}
                 >
                   <span className='sr-only'>Mark all entries read</span>
-                  <CheckIcon
-                    className='feed__button-icon'
-                    aria-hidden='true'
-                    title='Mark all entries read'
-                  />
+                  <CheckIcon aria-hidden='true' title='Mark all entries read' />
                 </button>
-                <Menu.Button className='feed__dropdown-button'>
-                  <ChevronDownIcon
-                    className='feed__button-icon'
-                    aria-hidden='true'
-                  />
-                </Menu.Button>
-              </div>
-
-              <Menu.Items className='feed__dropdown-menu'>
-                <div className='feed__dropdown-content'>
-                  {configuration.feeds.map((feed) => {
-                    return (
-                      <Menu.Item key={feed.name}>
+                <details>
+                  <summary className='feed-dropdown-toggle'>
+                    <span className='sr-only'>Mark a single feed read</span>
+                    <ChevronDownIcon aria-hidden='true' />
+                  </summary>
+                  <div className='feed-dropdown'>
+                    {configuration.feeds.map((feed) => {
+                      return (
                         <button
-                          className='feed__dropdown-item'
+                          type='button'
+                          key={feed.name}
                           onClick={() => markRead(feed.name)}
                         >
                           {feed.name}{' '}
                           <CheckIcon
-                            className='feed__dropdown-icon'
                             aria-hidden='true'
                             title='Mark all entries read'
                           />
                         </button>
-                      </Menu.Item>
-                    )
-                  })}
-                </div>
-              </Menu.Items>
-            </Menu>
+                      )
+                    })}
+                  </div>
+                </details>
+              </div>
+            </div>
             )}
-      </div>
-      <ul className='feed__list'>
+      </header>
+      <ul className='feed-list'>
         {feedItems.map((feedItem) => {
           if (
             Array.isArray(configuration.read) &&
@@ -184,10 +170,10 @@ export default function Feed ({
           }
 
           return (
-            <li key={feedItem.id} className='feed__item'>
+            <li key={feedItem.id}>
               <a
-                className='feed__link'
-                style={{ borderColor: feedItem.color }}
+                className='feed-link'
+                style={{ '--accent': feedItem.color }}
                 href={feedItem.link}
                 onMouseUp={() => {
                   // We delay marking the item as read, otherwise the link will
@@ -211,10 +197,10 @@ export default function Feed ({
                 target='_blank'
                 rel='noreferrer'
               >
-                <span className='feed__source'>[{feedItem.source}]</span>{' '}
+                <span className='feed-source'>[{feedItem.source}]</span>{' '}
                 {feedItem.title}
                 {configuration.showSummary && feedItem.summary && (
-                  <span className='feed__summary'>
+                  <span className='feed-summary'>
                     {feedItem.summary.replace(/<[^>]*>/g, '')}
                   </span>
                 )}

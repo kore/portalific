@@ -67,12 +67,13 @@ export default function WebStats ({ configuration }) {
 
   return (
     <div className='web-stats'>
-      <nav className='settings__views'>
+      <nav className='view-switcher'>
         {['days', 'weeks', 'months'].map((buttonInterval) =>
           <button
             key={buttonInterval}
+            type='button'
             onClick={() => { setInterval(buttonInterval) }}
-            className={interval === buttonInterval ? 'settings__view--active' : null}
+            aria-current={interval === buttonInterval ? 'page' : undefined}
           >
             {buttonInterval[0].toUpperCase() + buttonInterval.slice(1)}
           </button>
@@ -94,12 +95,17 @@ export default function WebStats ({ configuration }) {
       {domain && (
         <>
           <h4>
-            <button className='button__back' onClick={() => setDomain(null)}>
-              <XCircleIcon className='icon__button-back' aria-hidden='true' />
+            <button
+              type='button'
+              className='web-stats-back'
+              aria-label='Back to all domains'
+              onClick={() => setDomain(null)}
+            >
+              <XCircleIcon aria-hidden='true' />
             </button>{' '}
             {domain}
           </h4>
-          <ul className='web-stats__charts'>
+          <ul className='web-stats-charts'>
             <li>
               <DonutChart
                 title='Browsers'

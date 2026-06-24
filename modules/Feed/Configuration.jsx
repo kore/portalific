@@ -1,6 +1,6 @@
-import { Fragment, useState } from 'react'
-import { Switch } from '@headlessui/react'
+import { useState } from 'react'
 import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline'
+import Switch from '../../components/Switch'
 
 export default function FeedConfiguration ({ configuration, setConfiguration }) {
   const [color, setColor] = useState('')
@@ -9,12 +9,10 @@ export default function FeedConfiguration ({ configuration, setConfiguration }) 
 
   return (
     <>
-      <div className='settings__section'>
-        <div className='settings__form-row'>
-          <div className='settings__form-group settings__form-group--large'>
-            <label htmlFor='title' className='settings__label'>
-              Title
-            </label>
+      <section className='settings-section'>
+        <div className='form-row'>
+          <div className='form-group' data-width='large'>
+            <label htmlFor='title'>Title</label>
             <input
               type='text'
               name='title'
@@ -22,63 +20,46 @@ export default function FeedConfiguration ({ configuration, setConfiguration }) 
               value={configuration.title ?? ''}
               onChange={(event) =>
                 setConfiguration('title', event.target.value)}
-              className='settings__input'
             />
           </div>
         </div>
 
-        <ul className='settings__toggle-list'>
-          <Switch.Group as='li' className='settings__toggle-item'>
-            <div className='settings__toggle-content'>
-              <Switch.Label as='p' className='settings__toggle-label' passive>
-                Show summary of feed entries
-              </Switch.Label>
-            </div>
-            <Switch
-              checked={configuration.showSummary}
-              onChange={(value) => setConfiguration('showSummary', value)}
-              className={`settings__switch ${
-                configuration.showSummary ? 'settings__switch--active' : ''
-              }`}
-            >
-              <span
-                aria-hidden='true'
-                className={`settings__switch-handle ${
-                  configuration.showSummary
-                    ? 'settings__switch-handle--active'
-                    : ''
-                }`}
-              />
-            </Switch>
-          </Switch.Group>
+        <ul className='toggle-list'>
+          <Switch
+            label='Show summary of feed entries'
+            checked={configuration.showSummary}
+            onChange={(value) => setConfiguration('showSummary', value)}
+          />
         </ul>
-      </div>
+      </section>
 
-      <div className='settings__section settings__section--border'>
-        <div className='settings__header'>
-          <h2 className='settings__heading'>Feed</h2>
-          <p className='settings__description'>
+      <section className='settings-section' data-border>
+        <header className='settings-header'>
+          <h2>Feed</h2>
+          <p className='settings-description'>
             Configure a set of Atom and RSS feed sources to collect news items
             from
           </p>
-        </div>
-        <ul className='settings__toggle-list'>
+        </header>
+        <ul className='toggle-list'>
           {(configuration.feeds ?? []).map((feed) => {
             return (
-              <li className='settings__form-row' key={feed.name}>
+              <li className='form-row' key={feed.name}>
                 <div
-                  className='settings__form-group feed__name'
-                  style={{ borderColor: feed.color }}
+                  className='form-group source-name'
+                  data-span='medium'
+                  style={{ '--accent': feed.color }}
                 >
                   {feed.name}
                 </div>
-                <div className='settings__form-group feed__url'>
+                <div className='form-group source-url'>
                   {feed.feed}
                 </div>
-                <div className='settings__form-group settings__form-group--small'>
+                <div className='form-group' data-width='small'>
                   <button
                     type='button'
-                    className='header__button header__button--danger'
+                    className='icon-button'
+                    data-variant='danger'
                     onClick={() => {
                       setConfiguration(
                         'feeds',
@@ -89,57 +70,48 @@ export default function FeedConfiguration ({ configuration, setConfiguration }) 
                     }}
                   >
                     <span className='sr-only'>Delete feed</span>
-                    <TrashIcon className='header__icon' aria-hidden='true' />
+                    <TrashIcon aria-hidden='true' />
                   </button>
                 </div>
               </li>
             )
           })}
-          <li className='settings__form-row'>
-            <div className='settings__form-group settings__form-group--small'>
-              <label htmlFor='color' className='settings__label'>
-                Color
-              </label>
+          <li className='form-row'>
+            <div className='form-group' data-width='small'>
+              <label htmlFor='color'>Color</label>
               <input
                 type='color'
                 name='color'
                 id='color'
                 value={color ?? ''}
                 onChange={(event) => setColor(event.target.value)}
-                className='settings__input'
-                style={{ height: '38px' }}
               />
             </div>
-            <div className='settings__form-group settings__form-group--small'>
-              <label htmlFor='name' className='settings__label'>
-                Name
-              </label>
+            <div className='form-group' data-width='small'>
+              <label htmlFor='name'>Name</label>
               <input
                 type='text'
                 name='name'
                 id='name'
                 value={name ?? ''}
                 onChange={(event) => setName(event.target.value)}
-                className='settings__input'
               />
             </div>
-            <div className='settings__form-group'>
-              <label htmlFor='url' className='settings__label'>
-                Feed URL
-              </label>
+            <div className='form-group'>
+              <label htmlFor='url'>Feed URL</label>
               <input
                 type='text'
                 name='url'
                 id='url'
                 value={feed ?? ''}
                 onChange={(event) => setFeed(event.target.value)}
-                className='settings__input'
               />
             </div>
-            <div className='settings__form-group settings__form-group--small'>
+            <div className='form-group' data-width='small'>
               <button
                 type='button'
-                className='button button--primary'
+                className='button'
+                data-variant='primary'
                 onClick={() => {
                   const feeds = (configuration.feeds ?? []).concat([
                     { name, feed, color }
@@ -152,12 +124,12 @@ export default function FeedConfiguration ({ configuration, setConfiguration }) 
                 }}
               >
                 <span className='sr-only'>Add feed</span>
-                <PlusIcon className='header__icon' aria-hidden='true' />
+                <PlusIcon aria-hidden='true' />
               </button>
             </div>
           </li>
         </ul>
-      </div>
+      </section>
     </>
   )
 }

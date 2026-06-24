@@ -72,93 +72,75 @@ export default function Setup () {
   return (
     <Layout>
       <Header name='Portalific' />
-      <main className='modules modules--setup'>
+      <main className='modules' data-variant='setup'>
         <div className='module'>
-          <h1 className='typography__heading typography__heading--1'>
-            Import Settings
-          </h1>
+          <h1>Import Settings</h1>
 
-          <div className='settings__form'>
-            <div className='settings__input-group'>
-              <div>
-                <label htmlFor='identifier' className='sr-only'>
-                  Identifier
-                </label>
-                <input
-                  id='identifier'
-                  name='identifier'
-                  type='text'
-                  disabled
-                  className='settings__input'
-                  value={identifier || 'Missing identifier'}
-                />
-              </div>
-              <div>
-                <label htmlFor='password' className='sr-only'>
-                  Password
-                </label>
-                <div className='settings__input-group'>
-                  <input
-                    id='password'
-                    name='password'
-                    type={showPassword ? 'text' : 'password'}
-                    className='settings__input'
-                    value={password}
-                    onChange={(event) => {
-                      setPassword(event.target.value)
-                    }}
-                  />
-                  <button
-                    onClick={() => setShowPassword(!showPassword)}
-                    className='settings__input-button'
-                  >
-                    {showPassword
-                      ? (
-                        <EyeIcon
-                          className='settings__input-icon'
-                          aria-hidden='true'
-                        />
-                        )
-                      : (
-                        <EyeSlashIcon
-                          className='settings__input-icon'
-                          aria-hidden='true'
-                        />
-                        )}
-                  </button>
-                </div>
-              </div>
-            </div>
-
+          <section className='settings-section'>
             <div>
-              <button
-                type='submit'
-                className='button button--primary'
-                onClick={startImport}
-              >
-                Start Import
-              </button>
+              <label htmlFor='identifier' className='sr-only'>
+                Identifier
+              </label>
+              <input
+                id='identifier'
+                name='identifier'
+                type='text'
+                disabled
+                value={identifier || 'Missing identifier'}
+              />
             </div>
-          </div>
+            <div>
+              <label htmlFor='password' className='sr-only'>
+                Password
+              </label>
+              <div className='input-group'>
+                <input
+                  id='password'
+                  name='password'
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value)
+                  }}
+                />
+                <button
+                  type='button'
+                  className='input-button'
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword
+                    ? <EyeIcon aria-hidden='true' />
+                    : <EyeSlashIcon aria-hidden='true' />}
+                </button>
+              </div>
+            </div>
 
-          <ul role='list' className='error-list error-list--import'>
+            <button
+              type='submit'
+              className='button'
+              data-variant='primary'
+              onClick={startImport}
+            >
+              Start Import
+            </button>
+          </section>
+
+          <ul className='error-list' data-variant='import'>
             {steps.map((step, i) => (
-              <li className='error-list__item' key={step.message + i}>
-                <div className='error-list__content'>
-                  <div className='error-list__icon-container'>
-                    <step.icon
-                      className='error-list__icon'
-                      aria-hidden='true'
-                    />
-                  </div>
-                  <div className='error-list__message'>
+              <li key={step.message + i}>
+                <div className='error-entry'>
+                  <span className='error-icon'>
+                    <step.icon aria-hidden='true' />
+                  </span>
+                  <div className='error-message'>
                     <p>{step.message}</p>
                     {Array.isArray(store.errors) && store.errors.length > 0 && store.errors.filter(
                       (error) => (error.info === step.type)
                     ).map((error) => (
-                      <div className='error-list__message-error' key={error.error}>
+                      <p className='error-meta' data-tone='error' key={error.error}>
                         {error.error}
-                      </div>
+                      </p>
                     ))}
                   </div>
                 </div>

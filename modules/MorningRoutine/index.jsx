@@ -415,38 +415,35 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
 
     return (
       <div className='morning-routine'>
-        <div className='morning-routine__header'>
-          <h3 className='morning-routine__title'>{runRoutine.label}</h3>
-          <span className='morning-routine__schedule'>{runRoutine.schedule}</span>
+        <div className='morning-routine-header'>
+          <h3 className='morning-routine-title'>{runRoutine.label}</h3>
+          <span className='morning-routine-schedule'>{runRoutine.schedule}</span>
         </div>
-        <div className='morning-routine__runner'>
-          <div className='morning-routine__runner-header'>
-            <span className='morning-routine__progress'>
+        <div className='morning-routine-runner'>
+          <div className='morning-routine-runner-header'>
+            <span className='morning-routine-progress'>
               {(run.step + 1) + '/' + runRoutine.steps.length}
             </span>
-            <span
-              className={'morning-routine__phase' + (run.phase === 'pause' ? ' morning-routine__phase--pause' : run.phase === 'prepare' ? ' morning-routine__phase--prepare' : '')}
-            >
+            <span className='morning-routine-phase' data-phase={run.phase}>
               {run.phase === 'pause' ? 'Pause' : run.phase === 'prepare' ? 'Get ready' : 'Exercise'}
             </span>
           </div>
-          <h4 className='morning-routine__exercise-name'>{step.name}</h4>
-          <p className='morning-routine__description'>{step.detail}</p>
-          <p className='morning-routine__timing'>
+          <h4 className='morning-routine-exercise'>{step.name}</h4>
+          <p className='morning-routine-description'>{step.detail}</p>
+          <p className='morning-routine-timing'>
             {formatTiming(step)}
             {step.reps > 1 ? ' · Rep ' + run.rep + '/' + step.reps : ''}
           </p>
-          <div
-            className={'morning-routine__countdown' + (run.phase === 'pause' ? ' morning-routine__countdown--pause' : run.phase === 'prepare' ? ' morning-routine__countdown--prepare' : '')}
-          >
+          <div className='morning-routine-countdown' data-phase={run.phase}>
             {formatCountdown(run.remaining)}
           </div>
-          <div className='morning-routine__controls'>
+          <div className='morning-routine-controls'>
             {run.phase === 'exercise' && run.rep < step.reps
               ? (
                 <button
                   type='button'
-                  className='button button--secondary morning-routine__next-rep'
+                  className='button'
+                  data-variant='secondary'
                   onClick={skipToNextRep}
                 >
                   Next rep
@@ -455,7 +452,8 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
               : null}
             <button
               type='button'
-              className='button button--secondary morning-routine__done'
+              className='button'
+              data-variant='secondary'
               onClick={skipToNextExercise}
             >
               {run.step + 1 >= runRoutine.steps.length
@@ -470,21 +468,22 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
 
   return (
     <div className='morning-routine'>
-      <ul className='morning-routine__list'>
+      <ul className='morning-routine-list'>
         {Object.entries(routines)
           .sort(([a], [b]) => a.localeCompare(b))
           .map(([key, routine]) => (
             <li
-              className={'morning-routine__routine' + (!plannedToday(key) ? ' morning-routine__routine--muted' : '')}
+              className='morning-routine-routine'
+              data-muted={!plannedToday(key) || undefined}
               key={'routine-' + key}
               title={routine.description}
             >
-              <span className='morning-routine__title'>{routine.label}</span>
-              <span className='morning-routine__schedule'>{routine.schedule}</span>
+              <span className='morning-routine-title'>{routine.label}</span>
+              <span className='morning-routine-schedule'>{routine.schedule}</span>
               {overdueToday(key)
                 ? (
                   <span
-                    className='morning-routine__diode'
+                    className='morning-routine-diode'
                     title='Not done yet – already past 11:00'
                     aria-label='Routine overdue'
                   />
@@ -494,18 +493,19 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
                 ? (
                   <button
                     type='button'
-                    className='morning-routine__check'
+                    className='morning-routine-check'
                     onClick={() => setCompleted(key, false)}
                     title='Done today – mark as not done'
                     aria-label='Done today – mark as not done'
                   >
-                    <CheckCircleIcon className='morning-routine__check-icon' aria-hidden='true' />
+                    <CheckCircleIcon aria-hidden='true' />
                   </button>
                   )
                 : (
                   <button
                     type='button'
-                    className='button button--primary morning-routine__start'
+                    className='button morning-routine-start'
+                    data-variant='primary'
                     onClick={() => startRoutine(key)}
                   >
                     Start · ~{Math.round(routineDuration(routine) / 60)} min

@@ -51,39 +51,23 @@ export default function Countdown ({ configuration }) {
         }
 
         return (
-          <div className='countdown__item' key={countdown.name}>
-            <h3 className='countdown__name'>{countdown.name}</h3>
-            <div className='countdown__digits'>
+          <div className='countdown-item' key={countdown.name}>
+            <h3 className='countdown-name'>{countdown.name}</h3>
+            <div className='countdown-digits'>
               {[...String(daysRemaining)].map((number, index) => {
                 return (
                   <div
                     key={index}
-                    className='countdown__digit'
-                    style={{ width: '40px', height: '55px' }}
+                    className='countdown-digit'
                     title={caption}
                   >
-                    <span
-                      className='countdown__digit-top'
-                      style={{
-                        font: 'bold 3em/55px sans-serif',
-                        height: '50%',
-                        overflow: 'hidden',
-                        backfaceVisibility: 'hidden'
-                      }}
-                    >
-                      {number}
-                    </span>
-                    <span
-                      className='countdown__digit-bottom'
-                      style={{ font: 'bold 3em/55px sans-serif' }}
-                    >
-                      {number}
-                    </span>
+                    <span className='countdown-digit-top'>{number}</span>
+                    <span className='countdown-digit-bottom'>{number}</span>
                   </div>
                 )
               })}
             </div>
-            <p className='countdown__type'>{type}</p>
+            <p className='countdown-type'>{type}</p>
           </div>
         )
       })}

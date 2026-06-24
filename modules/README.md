@@ -230,14 +230,26 @@ you mean to.)
 
 ## Styling
 
-Styles are global and follow BEM, namespaced by a block named after the module:
-`clock__time`, `feed__item`, `todo-list__item`, `morning-routine__title`. Add
-your module's block to `styles/globals.scss` (and, where relevant, the theme
-files `theme-*.scss`). Reuse existing blocks when it fits — `MorningRoutine`
-renders its steps with the shared `todo-list` block. Settings forms reuse the
-`settings__*` classes (`settings__section`, `settings__input`,
-`settings__switch`, …); copy an existing `Configuration.jsx` rather than
-inventing new ones.
+Styles follow the "style the document" approach (see
+`docs/html-css-code-style.md`): write **semantic HTML** and style elements
+directly; reach for a flat, descriptive class only when an element plus a data
+attribute is not enough. **No BEM** (`block__element--modifier`) and no inline
+styles for static values — variants and states are **data attributes**
+(`data-variant`, `data-status`, `data-phase`, …) and all colours/spacing come
+from the CSS variables in `styles/global.css`.
+
+The CSS lives in plain `.css` files organised in CubeCSS layers under `styles/`
+(`global` → `composition` → `utilities` → `blocks` → `exceptions` → `print`).
+Give your module a block class named after it (`clock`, `feed`, `calendar`) and
+style its child elements within that block in `styles/blocks.css`;
+theme-specific tweaks go in `styles/exceptions.css` under
+`:root[data-theme="…"]`. Reuse existing blocks when it fits — `MorningRoutine`
+renders its steps with the shared `todo-list` styling. Settings forms reuse the
+shared `settings-section`, `form-row`/`form-group`, `toggle-list` patterns and
+the `<Switch>` component (`components/Switch.jsx`); copy an existing
+`Configuration.jsx` rather than inventing new ones. Per-source accent colours
+are passed as a custom property (`style={{ '--accent': color }}`), never as
+`borderColor`.
 
 ## Device visibility
 
@@ -256,5 +268,6 @@ need to do anything for it.
    `configuration` via `updateModuleConfiguration` — **never** `localStorage`.
 6. Cap any state that can grow without bound.
 7. Route remote requests through the proxy and report failures via `pushError`.
-8. Add BEM styles under your module's block in `styles/globals.scss`.
+8. Add element-first styles under your module's block class in
+   `styles/blocks.css` (data attributes for variants/states; no BEM).
 ```

@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import ICAL from 'ical.js'
 import resolveAllPromises from '../../utils/resolveAllPromises'
@@ -153,10 +153,10 @@ export default function Calendar ({ configuration }) {
           })
           .map((day) => {
             return (
-              <li className='calendar__day' key={day.toISOString()}>
+              <li className='calendar-day' key={day.toISOString()}>
                 <time
                   dateTime={day.toISOString()}
-                  className='calendar__day-date'
+                  className='calendar-day-date'
                 >
                   {day.toLocaleDateString(undefined, {
                     weekday: 'short',
@@ -166,33 +166,32 @@ export default function Calendar ({ configuration }) {
                 </time>
                 {!byDay.has(day.toLocaleDateString())
                   ? (
-                    <p className='calendar__empty-message'>
+                    <p className='calendar-empty'>
                       Nothing on today’s schedule
                     </p>
                     )
                   : (
-                    <ul className='calendar__events'>
+                    <ul className='calendar-events'>
                       {byDay.get(day.toLocaleDateString()).map((appointment) => {
                         return (
                           <li
                             key={appointment.id}
-                            className='calendar__event'
-                            style={{ borderColor: appointment.color }}
+                            className='calendar-event'
+                            style={{ '--accent': appointment.color }}
                           >
-                            <p className='calendar__event-summary'>
+                            <p className='calendar-event-summary'>
                               {appointment.summary}
                             </p>
-                            <p className='calendar__event-time'>
+                            <p className='calendar-event-time'>
                               {appointment.fullDay
                                 ? (
-                                  <em className='calendar__event-fullday'>
+                                  <em className='calendar-event-fullday'>
                                     full day
                                   </em>
                                   )
                                 : (
                                   <time
                                     dateTime={appointment.start.toISOString()}
-                                    className='calendar__event-starttime'
                                   >
                                     {appointment.start.toLocaleTimeString('de-DE', {
                                       timeStyle: 'short'

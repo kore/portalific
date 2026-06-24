@@ -27,9 +27,7 @@ export default function SimpleVisitorChart ({
   data,
   onClick
 }) {
-  const themeStyles = window.getComputedStyle(
-    window.document.getElementsByClassName('layout__container')[0]
-  )
+  const themeStyles = window.getComputedStyle(document.documentElement)
 
   const options = {
     responsive: true,

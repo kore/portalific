@@ -1,5 +1,5 @@
-import { Fragment, useEffect, useState } from 'react'
-import { Switch } from '@headlessui/react'
+import { useEffect, useState } from 'react'
+import Switch from '../../components/Switch'
 
 export default function WebStatsConfiguration ({
   configuration,
@@ -79,83 +79,40 @@ export default function WebStatsConfiguration ({
   }
 
   return (
-    <>
-      <div className='settings__section'>
-        <div className='settings__form-row'>
-          <div className='settings__form-group settings__form-group--large'>
-            <label htmlFor='title' className='settings__label'>
-              Base URL
-            </label>
-            <input
-              type='text'
-              name='title'
-              id='title'
-              placeholder='https://user:password@domain/'
-              value={configuration.url ?? ''}
-              onChange={(event) => setConfiguration('url', event.target.value)}
-              className='settings__input'
-            />
-          </div>
-        </div>
-        <p className='settings__label'>
-          Web statistics in the format as exposed by{' '}
-          <a href='https://github.com/kore/SimpleWebStatsApi' target='_blank' rel='noreferrer'>
-            https://github.com/kore/SimpleWebStatsApi
-          </a>
-        </p>
-        <div className='settings__form-row'>
-          {error && <p>{error}</p>}
-          <ul
-            className='settings__toggle-list'
-            style={{ gridColumn: 'span 12' }}
-          >
-            {domains.map((domain) => {
-              return (
-                <Switch.Group
-                  as='li'
-                  className='settings__toggle-item'
-                  style={{ padding: 0 }}
-                  key={domain.name}
-                >
-                  <div className='settings__toggle-content'>
-                    <Switch.Label
-                      as='p'
-                      className='settings__toggle-label'
-                      style={{
-                        margin: '.25rem 0',
-                        fontWeight: isDomainActive(domain.name)
-                          ? 'bold'
-                          : 'normal'
-                      }}
-                      passive
-                    >
-                      {domain.name}
-                    </Switch.Label>
-                  </div>
-                  <Switch
-                    checked={isDomainActive(domain.name)}
-                    onChange={(value) => toggleDomain(domain.name, value)}
-                    className={`settings__switch ${
-                      isDomainActive(domain.name)
-                        ? 'settings__switch--active'
-                        : ''
-                    }`}
-                  >
-                    <span
-                      aria-hidden='true'
-                      className={`settings__switch-handle ${
-                        isDomainActive(domain.name)
-                          ? 'settings__switch-handle--active'
-                          : ''
-                      }`}
-                    />
-                  </Switch>
-                </Switch.Group>
-              )
-            })}
-          </ul>
+    <section className='settings-section'>
+      <div className='form-row'>
+        <div className='form-group' data-width='large'>
+          <label htmlFor='title'>Base URL</label>
+          <input
+            type='text'
+            name='title'
+            id='title'
+            placeholder='https://user:password@domain/'
+            value={configuration.url ?? ''}
+            onChange={(event) => setConfiguration('url', event.target.value)}
+          />
         </div>
       </div>
-    </>
+      <p className='settings-label'>
+        Web statistics in the format as exposed by{' '}
+        <a href='https://github.com/kore/SimpleWebStatsApi' target='_blank' rel='noreferrer'>
+          https://github.com/kore/SimpleWebStatsApi
+        </a>
+      </p>
+      {error && <p>{error}</p>}
+      <ul className='toggle-list'>
+        {domains.map((domain) => {
+          return (
+            <Switch
+              key={domain.name}
+              label={domain.name}
+              checked={isDomainActive(domain.name)}
+              onChange={(value) => toggleDomain(domain.name, value)}
+              data-active={isDomainActive(domain.name) || undefined}
+            />
+          )
+        })}
+      </ul>
+    </section>
   )
 }
