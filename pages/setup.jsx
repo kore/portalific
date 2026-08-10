@@ -153,10 +153,10 @@ export default function Setup () {
                   </div>
                   <div className='error-list__message'>
                     <p>{step.message}</p>
-                    {Array.isArray(store.errors) && store.errors.length > 0 && store.errors.filter(
-                      (error) => (error.info === step.type)
-                    ).map((error) => (
-                      <div className='error-list__message-error' key={error.error}>
+                    {Object.entries(store.errors ?? {}).filter(
+                      ([, error]) => (error.info === step.type)
+                    ).map(([key, error]) => (
+                      <div className='error-list__message-error' key={key}>
                         {error.error}
                       </div>
                     ))}

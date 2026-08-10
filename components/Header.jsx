@@ -6,10 +6,20 @@ import Settings from './Settings'
 import useStore from '../utils/store'
 import { useShallow } from 'zustand/react/shallow'
 
+const formatTime = (timestamp) =>
+  new Date(timestamp).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+
 export default function Header ({ name }) {
   const [settings, errors, clearErrors] = useStore(useShallow((store) => [store.settings, store.errors, store.clearErrors]))
   const [showSettings, setShowSettings] = useState(false)
   const [showErrors, setShowErrors] = useState(false)
+
+  const errorList = Object.entries(errors ?? {})
+    .map(([key, error]) => ({ key, ...error }))
+    .sort((a, b) => b.lastSeen - a.lastSeen)
 
   return (
     <header className='header'>
@@ -18,7 +28,7 @@ export default function Header ({ name }) {
         {settings.name && settings.name + "'s "}
         {name}
       </a>
-      {Array.isArray(errors) && errors.length > 0 && (
+      {errorList.length > 0 && (
         <button
           type='button'
           className='header__button header__button--error'
@@ -33,9 +43,9 @@ export default function Header ({ name }) {
       )}
       <Modal theme={settings.theme} open={showErrors} setOpen={setShowErrors}>
         <ul className='error-list'>
-          {Array.isArray(errors) && errors.map((error, index) => (
-            <li key={index} className='error-list__item'>
-              {index !== errors.length - 1
+          {errorList.map((error, index) => (
+            <li key={error.key} className='error-list__item'>
+              {index !== errorList.length - 1
                 ? (
                   <span className='error-list__separator' aria-hidden='true' />
                   )
@@ -54,6 +64,11 @@ export default function Header ({ name }) {
                   {error.info && (
                     <div className='error-list__message-info'>{error.info}</div>
                   )}
+                  <div className='error-list__message-meta'>
+                    {error.count > 1
+                      ? `Failed ${error.count} times, last at ${formatTime(error.lastSeen)}`
+                      : `Failed at ${formatTime(error.lastSeen)}`}
+                  </div>
                 </div>
               </div>
             </li>

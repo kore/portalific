@@ -20,7 +20,7 @@ const availableModules = {
 }
 
 export default function Modules ({ moduleRenderer = null }) {
-  const [settings, modules, setModules, moveModule, pushError] = useStore(useShallow((store) => [store.settings, store.modules, store.setModules, store.moveModule, store.pushError]))
+  const [settings, modules, setModules, moveModule, setError] = useStore(useShallow((store) => [store.settings, store.modules, store.setModules, store.moveModule, store.setError]))
   const gridClassName = 'grid__cols-' + (settings.columns ?? 3)
 
   return (
@@ -48,7 +48,10 @@ export default function Modules ({ moduleRenderer = null }) {
                     moveModule={moveModule}
                     hiddenOnDevices={module.hiddenOnDevices || []}
                   >
-                    <ErrorBoundary pushError={pushError}>
+                    <ErrorBoundary
+                      setError={setError}
+                      errorKey={`module:${module.id}`}
+                    >
                       <Suspense fallback={null}>
                         {moduleRenderer
                           ? (

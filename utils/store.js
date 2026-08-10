@@ -17,7 +17,10 @@ export const initialState = {
   modules: [[{ type: 'welcome', id: 'welcome' }]],
 
   // Local app state
-  errors: [],
+  // Errors are kept in slots keyed by their source (feed URL, calendar URL,
+  // sync operation, module id), so that a repeatedly failing source occupies
+  // exactly one slot and a recovering source can free its slot again.
+  errors: {},
   revision: null,
   synchronized: false,
   synchronizedStateHasChanges: false,
@@ -32,15 +35,91 @@ const sanitizeModules = (modules) => {
   )
 }
 
+// Error slot prefixes which can be derived from the current module
+// configuration. Slots with any other prefix (sync:… for example) have no
+// counterpart in the module list and are never pruned.
+const MANAGED_ERROR_PREFIXES = ['module:', 'feed:', 'calendar:']
+
+// All error slot keys the current module configuration could produce
+const activeErrorKeys = (modules) => {
+  const keys = new Set()
+
+  ;(Array.isArray(modules) ? modules : [])
+    .flat()
+    .filter((module) => module && module.type)
+    .forEach((module) => {
+      keys.add(`module:${module.id}`)
+      ;(module.feeds ?? []).forEach((feed) => keys.add(`feed:${feed.feed}`))
+      ;(module.calendars ?? []).forEach((calendar) =>
+        keys.add(`calendar:${calendar.calendar}`)
+      )
+    })
+
+  return keys
+}
+
+// Drop error slots whose source (module, feed, calendar) no longer exists –
+// nothing would ever clear those again, since they are not fetched any more
+const pruneErrors = (modules, errors) => {
+  const active = activeErrorKeys(modules)
+  const remaining = Object.fromEntries(
+    Object.entries(errors).filter(
+      ([key]) =>
+        active.has(key) ||
+        !MANAGED_ERROR_PREFIXES.some((prefix) => key.startsWith(prefix))
+    )
+  )
+
+  // Keep the previous object identity if nothing was pruned, to avoid
+  // re-rendering all error consumers on every configuration change
+  return Object.keys(remaining).length === Object.keys(errors).length
+    ? errors
+    : remaining
+}
+
 const store = (set, get) => ({
   ...initialState,
 
   reset: () => set(initialState),
 
   setThemeVariant: (themeVariant) => set({ themeVariant }),
-  setModules: (modules) => set({ modules, synchronizedStateHasChanges: true }),
-  pushError: (error, errorInfo) => set({ errors: [...get().errors, { error, info: errorInfo }] }),
-  clearErrors: () => set({ errors: [] }),
+  setModules: (modules) => set({
+    modules,
+    errors: pruneErrors(modules, get().errors),
+    synchronizedStateHasChanges: true
+  }),
+
+  setError: (key, error, errorInfo) => {
+    const previous = get().errors[key]
+    const now = new Date().getTime()
+
+    set({
+      errors: {
+        ...get().errors,
+        [key]: {
+          error,
+          info: errorInfo,
+          count: (previous?.count ?? 0) + 1,
+          firstSeen: previous?.firstSeen ?? now,
+          lastSeen: now
+        }
+      }
+    })
+  },
+
+  clearError: (key) => {
+    // Do not touch the state if there is nothing to clear – this runs on every
+    // successful refresh and would otherwise re-render all error consumers
+    if (!(key in get().errors)) {
+      return
+    }
+
+    const errors = { ...get().errors }
+    delete errors[key]
+    set({ errors })
+  },
+
+  clearErrors: () => set({ errors: {} }),
 
   setSettings: (settings) => {
     const oldSettings = get().settings
@@ -118,39 +197,46 @@ const store = (set, get) => ({
 
             // If decryption fails, reset the store
             if (!decrypted) {
-              get().pushError('Decryption failed, likely because of a wrong password', 'decrypting')
+              get().setError('sync:decrypting', 'Decryption failed, likely because of a wrong password', 'decrypting')
               return response
             }
 
             // Use decrypted data
+            const modules = sanitizeModules(decrypted.modules)
             set({
               settings: decrypted.settings,
-              modules: sanitizeModules(decrypted.modules),
+              modules,
+              errors: pruneErrors(modules, get().errors),
               revision: response.data.revision,
-              errors: [],
               synchronizedStateHasChanges: false,
               synchronized: true
             })
+            get().clearError('sync:decrypting')
           } else {
             // No password but encrypted data - treat as error
-            get().pushError('Encrypted data received but no password set', 'decrypting')
+            get().setError('sync:decrypting', 'Encrypted data received but no password set', 'decrypting')
           }
         } else {
           // Data is not encrypted, parse it normally
+          const modules = sanitizeModules(data.modules)
           set({
             settings: data.settings,
-            modules: sanitizeModules(data.modules),
+            modules,
+            errors: pruneErrors(modules, get().errors),
             revision: response.data.revision,
             synchronizedStateHasChanges: false,
             synchronized: true
           })
+          get().clearError('sync:decrypting')
         }
+
+        get().clearError('sync:loading')
         return response // Return the response for chaining
       })
       .catch(
         async (error) => {
           if (error.response && error.response.status === 404) {
-            get().pushError('No storage found with provided ID', 'loading')
+            get().setError('sync:loading', 'No storage found with provided ID', 'loading')
             return Promise.resolve()
           }
 
@@ -183,13 +269,13 @@ const store = (set, get) => ({
         finalData = JSON.stringify(dataToSync)
       }
     } catch (error) {
-      get().pushError('Failed to prepare data for sync: ' + error.message, 'persisting')
+      get().setError('sync:persisting', 'Failed to prepare data for sync: ' + error.message, 'persisting')
       return Promise.resolve()
     }
 
     // Validate that we have actual data to sync - prevents writing empty files
     if (!finalData || finalData === '{}' || finalData === '""' || finalData.length < 10) {
-      get().pushError('Sync aborted: data appears to be empty or corrupted', 'persisting')
+      get().setError('sync:persisting', 'Sync aborted: data appears to be empty or corrupted', 'persisting')
       return Promise.resolve()
     }
 
@@ -203,6 +289,7 @@ const store = (set, get) => ({
         )
         .then((response) => {
           set({ revision: response.data.revision, synchronizedStateHasChanges: false })
+          get().clearError('sync:persisting')
           return response // Return the response for chaining
         })
         .catch(
@@ -224,6 +311,7 @@ const store = (set, get) => ({
         )
         .then((response) => {
           set({ revision: response.data.revision, synchronizedStateHasChanges: false })
+          get().clearError('sync:persisting')
           return response // Return the response for chaining
         })
         .catch(
@@ -257,7 +345,15 @@ const useStore = create(
     store,
     {
       name: 'portalific',
-      storage: createJSONStorage(() => window.localStorage)
+      storage: createJSONStorage(() => window.localStorage),
+      // Error slots are derived from live state – they must not be restored
+      partialize: ({ errors, ...state }) => state,
+      merge: (persistedState, currentState) => ({
+        ...currentState,
+        ...persistedState,
+        // Drop error lists persisted by earlier versions
+        errors: {}
+      })
     }
   )
 )

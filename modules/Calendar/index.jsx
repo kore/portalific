@@ -20,7 +20,7 @@ const groupBy = (list, keyGetter) => {
 }
 
 export default function Calendar ({ configuration }) {
-  const pushError = useStore(useShallow((store) => store.pushError))
+  const [setError, clearError] = useStore(useShallow((store) => [store.setError, store.clearError]))
   const [calendarItems, setCalendarItems] = useState([])
 
   // Use https://stackoverflow.com/questions/72540660/react-how-to-combine-data-from-multiple-api-and-render-it to fetch data from all feeds
@@ -39,9 +39,14 @@ export default function Calendar ({ configuration }) {
 
     calendars = calendars
       .map((calendar) => {
+        // One error slot per calendar URL, so that a permanently broken
+        // calendar does not pile up an error on every single refresh
+        const errorKey = `calendar:${calendar.calendar}`
+
         if (calendar.response instanceof Promise) {
           calendar.response.catch((response) => {
-            pushError(
+            setError(
+              errorKey,
               response.message,
               `calendar: ${calendar.name}, URL: ${calendar.calendar}`
             )
@@ -50,12 +55,24 @@ export default function Calendar ({ configuration }) {
           return null
         }
 
-        const jcalData = ICAL.parse(calendar.response.data)
-        const vCalendar = new ICAL.Component(jcalData)
-        return {
-          ...calendar,
-          vCalendar,
-          response: null
+        try {
+          const jcalData = ICAL.parse(calendar.response.data)
+          const vCalendar = new ICAL.Component(jcalData)
+
+          clearError(errorKey)
+          return {
+            ...calendar,
+            vCalendar,
+            response: null
+          }
+        } catch (error) {
+          setError(
+            errorKey,
+            'Calendar could not be parsed: ' + error.message,
+            `calendar: ${calendar.name}, URL: ${calendar.calendar}`
+          )
+
+          return null
         }
       })
       .filter((item) => !!item)

@@ -527,6 +527,11 @@ a {
       font-size: 0.875rem;
       color: var(--color-error);
     }
+
+    &-meta {
+      font-size: 0.75rem;
+      color: var(--color-gray-500);
+    }
   }
 }
 

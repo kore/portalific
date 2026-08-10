@@ -156,7 +156,6 @@ export default function ModulesManager () {
         style={{ paddingTop: '1.5rem' }}
       >
         <Modules
-          pushError={() => {}}
           moduleRenderer={(module, index) => {
             const ModuleSettings = availableModules[module.type] ?? null
 

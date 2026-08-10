@@ -16,7 +16,7 @@ export default function Feed ({
   configuration,
   updateModuleConfiguration
 }) {
-  const pushError = useStore(useShallow((store) => store.pushError))
+  const [setError, clearError] = useStore(useShallow((store) => [store.setError, store.clearError]))
   const [feedItems, setFeedItems] = useState([])
   const [updated, setUpdated] = useState(null)
 
@@ -36,9 +36,14 @@ export default function Feed ({
 
     feeds = feeds
       .map((feed) => {
+        // One error slot per feed URL, so that a permanently broken feed does
+        // not pile up an error on every single refresh
+        const errorKey = `feed:${feed.feed}`
+
         if (feed.response instanceof Promise) {
           feed.response.catch((response) => {
-            pushError(
+            setError(
+              errorKey,
               response.message,
               `Feed: ${feed.name}, URL: ${feed.feed}`
             )
@@ -50,12 +55,28 @@ export default function Feed ({
         const parser = new Parser()
         return {
           ...feed,
+          errorKey,
           parsed: parser.parseString(feed.response.data),
           response: null
         }
       })
       .filter((item) => !!item)
     feeds = await resolveAllPromises(feeds)
+
+    feeds = feeds.filter((feed) => {
+      // Rejected parse promises are left untouched by resolveAllPromises
+      if (feed.parsed instanceof Promise) {
+        setError(
+          feed.errorKey,
+          'Feed could not be parsed',
+          `Feed: ${feed.name}, URL: ${feed.feed}`
+        )
+        return false
+      }
+
+      clearError(feed.errorKey)
+      return true
+    })
 
     const allItems = feeds.map(mapFeedItems)
 

@@ -2,7 +2,7 @@ import useStore from '../utils/store'
 import { useShallow } from 'zustand/react/shallow'
 
 export default function Welcome () {
-  const [settings, setSettings, modules, setModules, pushError] = useStore(useShallow((store) => [store.settings, store.setSettings, store.modules, store.setModules, store.pushError]))
+  const [settings, setSettings, modules, setModules, setError] = useStore(useShallow((store) => [store.settings, store.setSettings, store.modules, store.setModules, store.setError]))
 
   const setSetting = (setting, value) => {
     setSettings({
@@ -121,7 +121,8 @@ export default function Welcome () {
         <button
           id='add-error'
           onClick={() => {
-            pushError(
+            setError(
+              'welcome:example',
               'An error example',
               'Created from the welcome screen to test errors.'
             )

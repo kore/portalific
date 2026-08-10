@@ -39,8 +39,128 @@ describe('Zustand Store', () => {
     setState({
       settings: { columns: 1 },
       modules: [[{ type: 'welcome', id: 'welcome' }]],
-      errors: [],
+      errors: {},
       revision: null
+    })
+  })
+
+  describe('error slots', () => {
+    test('should keep one slot per key and count repeated failures', () => {
+      useStore.getState().setError('feed:a', 'Network Error', 'Feed: A')
+      useStore.getState().setError('feed:a', 'Network Error', 'Feed: A')
+      useStore.getState().setError('feed:b', 'Not Found', 'Feed: B')
+
+      const errors = useStore.getState().errors
+      expect(Object.keys(errors)).toEqual(['feed:a', 'feed:b'])
+      expect(errors['feed:a'].count).toBe(2)
+      expect(errors['feed:b'].count).toBe(1)
+    })
+
+    test('should keep firstSeen but update lastSeen on repeated failures', () => {
+      useStore.getState().setError('feed:a', 'Network Error')
+      const { firstSeen, lastSeen } = useStore.getState().errors['feed:a']
+
+      useStore.getState().setError('feed:a', 'Network Error')
+      const updated = useStore.getState().errors['feed:a']
+
+      expect(updated.firstSeen).toBe(firstSeen)
+      expect(updated.lastSeen).toBeGreaterThanOrEqual(lastSeen)
+    })
+
+    test('should free only the cleared slot', () => {
+      useStore.getState().setError('feed:a', 'Network Error')
+      useStore.getState().setError('feed:b', 'Not Found')
+
+      useStore.getState().clearError('feed:a')
+
+      expect(Object.keys(useStore.getState().errors)).toEqual(['feed:b'])
+    })
+
+    test('should not change state when clearing an unknown key', () => {
+      useStore.getState().setError('feed:a', 'Network Error')
+      const errors = useStore.getState().errors
+
+      useStore.getState().clearError('feed:unknown')
+
+      expect(useStore.getState().errors).toBe(errors)
+    })
+
+    test('should prune slots whose module is gone', () => {
+      useStore.setState({
+        modules: [[{ type: 'feed', id: 'feed1' }, { type: 'clock', id: 'clock1' }]]
+      })
+      useStore.getState().setError('module:clock1', 'Render error')
+      useStore.getState().setError('module:feed1', 'Render error')
+
+      useStore.getState().setModules([[{ type: 'feed', id: 'feed1' }]])
+
+      expect(Object.keys(useStore.getState().errors)).toEqual(['module:feed1'])
+    })
+
+    test('should prune slots of removed feeds and calendars', () => {
+      const modules = [[
+        {
+          type: 'feed',
+          id: 'feed1',
+          feeds: [
+            { name: 'A', feed: 'https://example.com/a.xml' },
+            { name: 'B', feed: 'https://example.com/b.xml' }
+          ]
+        },
+        {
+          type: 'calendar',
+          id: 'calendar1',
+          calendars: [{ name: 'C', calendar: 'https://example.com/c.ics' }]
+        }
+      ]]
+      useStore.setState({ modules })
+      useStore.getState().setError('feed:https://example.com/a.xml', 'Network Error')
+      useStore.getState().setError('feed:https://example.com/b.xml', 'Network Error')
+      useStore.getState().setError('calendar:https://example.com/c.ics', 'Network Error')
+
+      // Drop feed B from the configuration
+      const updated = [[
+        { ...modules[0][0], feeds: [modules[0][0].feeds[0]] },
+        modules[0][1]
+      ]]
+      useStore.getState().setModules(updated)
+
+      expect(Object.keys(useStore.getState().errors)).toEqual([
+        'feed:https://example.com/a.xml',
+        'calendar:https://example.com/c.ics'
+      ])
+    })
+
+    test('should not prune slots without a module counterpart', () => {
+      useStore.setState({ modules: [[]] })
+      useStore.getState().setError('sync:loading', 'No storage found', 'loading')
+      useStore.getState().setError('welcome:example', 'An error example')
+
+      useStore.getState().setModules([[{ type: 'clock', id: 'clock1' }]])
+
+      expect(Object.keys(useStore.getState().errors)).toEqual([
+        'sync:loading',
+        'welcome:example'
+      ])
+    })
+
+    test('should keep the errors object identity when nothing is pruned', () => {
+      useStore.setState({ modules: [[{ type: 'clock', id: 'clock1' }]] })
+      useStore.getState().setError('module:clock1', 'Render error')
+      const errors = useStore.getState().errors
+
+      useStore.getState().setModules([[{ type: 'clock', id: 'clock1' }]])
+
+      expect(useStore.getState().errors).toBe(errors)
+    })
+
+    test('should drop all slots on clearErrors', () => {
+      useStore.getState().setError('feed:a', 'Network Error')
+      useStore.getState().setError('sync:loading', 'No storage found')
+
+      useStore.getState().clearErrors()
+
+      expect(useStore.getState().errors).toEqual({})
     })
   })
 
@@ -512,7 +632,7 @@ describe('Zustand Store encrypted synchronization tests', () => {
     setState({
       settings: { columns: 1 },
       modules: [[{ type: 'welcome', id: 'welcome' }]],
-      errors: [],
+      errors: {},
       revision: null
     })
 
