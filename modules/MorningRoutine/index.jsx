@@ -103,79 +103,85 @@ const ROUTINES = {
   S: {
     label: 'Strength',
     schedule: 'Mo, Thu',
-    description: 'Full-body strength (You Are Your Own Gym): 4 random combos – 4× upper body, 2× legs, 2× core – 3 rounds of 4 minutes each, no breaks.',
-    steps: [] // Generated per day from the STRENGTH pools below.
+    description: 'Full-body strength (You Are Your Own Gym): 4 combos – 4× upper body, 2× legs, 2× core – 3 rounds of 4 minutes each. Rotating exercises, 1–3 reps left in reserve.',
+    steps: [] // Rotated per session from the STRENGTH pools below.
   }
 }
 
 // Exercise pools in the style of "You Are Your Own Gym" – everything works
 // with stall bars, dip bars and a pull-up bar, no weights. Each Strength day
-// draws 4 upper body, 2 legs and 2 core exercises, paired into 4 combos.
+// takes 4 upper body, 2 legs and 2 core exercises, paired into 4 combos.
+//
+// The rep targets are sized so that the *third* round still leaves one to
+// three clean reps in reserve – not so that the first round is maximal.
+// Training every set to momentary failure buys no extra hypertrophy and is
+// paid for with worse technique and a longer recovery need.
 const STRENGTH = {
   upper: [
-    { name: 'One-Arm Push-Ups', task: '6 one-arm push-ups per side, feet wide, body tight' },
-    { name: 'Pull-Ups', task: '8 pull-ups, overhand grip' },
-    { name: 'Chin-Ups', task: '8 chin-ups, underhand grip, chest to the bar' },
-    { name: 'Dips', task: '12 dips on the dip bars, slight forward lean, full range' },
-    { name: 'Military Press', task: '8 military presses with feet raised on the stall bars, or handstand push-ups' },
-    { name: 'Door Rows', task: '12 door rows (bodyweight rows pulling on a door)' },
-    { name: 'Let Me Ups', task: '12 horizontal rows hanging under a low rung of the stall bars, body straight' },
-    { name: 'Dive Bombers', task: '10 dive bomber push-ups, flowing through the whole movement' },
-    { name: 'Close-Grip Push-Ups', task: '12 push-ups with hands close together, elbows tucked' }
+    { name: 'One-Arm Push-Ups', task: '4 one-arm push-ups per side, feet wide, body tight' },
+    { name: 'Pull-Ups', task: '5 pull-ups, overhand grip' },
+    { name: 'Chin-Ups', task: '6 chin-ups, underhand grip, chest to the bar' },
+    { name: 'Dips', task: '8 dips on the dip bars, slight forward lean, full range' },
+    { name: 'Military Press', task: '6 military presses with feet raised on the stall bars, or handstand push-ups' },
+    { name: 'Door Rows', task: '10 door rows (bodyweight rows pulling on a door)' },
+    { name: 'Let Me Ups', task: '8 horizontal rows hanging under a low rung of the stall bars, body straight' },
+    { name: 'Dive Bombers', task: '6 dive bomber push-ups, flowing through the whole movement' },
+    { name: 'Close-Grip Push-Ups', task: '8 push-ups with hands close together, elbows tucked' }
   ],
   legs: [
-    { name: 'Pistol Squats', task: '6 single-leg squats per side, hold a rung of the stall bars for balance if needed' },
-    { name: 'Bulgarian Split Squats', task: '10 split squats per side, rear foot on a low rung of the stall bars' },
-    { name: 'Iron Mikes', task: '12 alternating jumping lunges' },
-    { name: 'Single-Leg Romanian Deadlifts', task: '10 single-leg deadlifts per side, slow and controlled' },
-    { name: 'Squat Jumps', task: '15 deep squat jumps, soft landings' }
+    { name: 'Pistol Squats', task: '4 single-leg squats per side, hold a rung of the stall bars for balance if needed' },
+    { name: 'Bulgarian Split Squats', task: '8 split squats per side, rear foot on a low rung of the stall bars' },
+    { name: 'Iron Mikes', task: '10 alternating jumping lunges' },
+    { name: 'Single-Leg Romanian Deadlifts', task: '8 single-leg deadlifts per side, slow and controlled' },
+    { name: 'Squat Jumps', task: '10 deep squat jumps, soft landings' }
   ],
   core: [
-    { name: 'V-Ups', task: '12 V-ups' },
-    { name: 'Bicycles', task: '24 bicycle crunches' },
-    { name: 'Hanging Leg Raises', task: '10 hanging leg raises on the pull-up bar, toes toward the bar' },
-    { name: 'Windshield Wipers', task: '10 windshield wipers, hanging from the bar or on the floor' }
+    { name: 'V-Ups', task: '10 V-ups' },
+    { name: 'Bicycles', task: '20 bicycle crunches' },
+    { name: 'Hanging Leg Raises', task: '8 hanging leg raises on the pull-up bar, toes toward the bar' },
+    { name: 'Windshield Wipers', task: '8 windshield wipers, hanging from the bar or on the floor' }
   ]
 }
 
-// Deterministic per-day randomness: the same date always yields the same
-// workout, so the selection does not change between renders or reloads.
-const hashString = (str) => {
-  let hash = 0
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash * 31) + str.charCodeAt(i)) | 0
-  }
-  return hash >>> 0
+// Strength days rotate through the pools instead of drawing from them at
+// random. The pools are small enough that random draws repeat the movement
+// patterns anyway, but they repeat *unevenly* – an exercise can land twice in
+// one week and then not show up for twelve days. A fixed cadence keeps the
+// stimulus per pattern even and makes progress readable: if dips come up every
+// nine sessions, "more reps than last time" is a meaningful comparison.
+//
+// Sessions are counted from a fixed Monday so the rotation depends only on the
+// date, never on how many routines were actually completed.
+const EPOCH_MONDAY_DAY = 4 // 1970-01-01 was a Thursday, so day 4 is a Monday.
+const MS_PER_DAY = 24 * 60 * 60 * 1000
+
+const sessionIndex = (date) => {
+  const day = Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / MS_PER_DAY) - EPOCH_MONDAY_DAY
+  const week = Math.floor(day / 7)
+  // Within the week Monday is 0 and Thursday is 3 – the two Strength days.
+  return week * 2 + (((day % 7) + 7) % 7 >= 3 ? 1 : 0)
 }
 
-const mulberry32 = (seed) => () => {
-  seed = (seed + 0x6D2B79F5) | 0
-  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed)
-  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296
-}
-
-const pickRandom = (pool, count, random) => {
-  const remaining = [...pool]
-  return Array.from(
-    { length: count },
-    () => remaining.splice(Math.floor(random() * remaining.length), 1)[0]
-  )
-}
+// Takes `count` consecutive entries starting at `index * count`, wrapping
+// around. With 9 upper and 5 leg exercises the take counts are coprime to the
+// pool sizes, so every exercise comes up equally often; the 4 core exercises
+// alternate as two fixed pairs, which still means all four every week.
+const rotate = (pool, count, index) =>
+  Array.from({ length: count }, (_, offset) => pool[(index * count + offset) % pool.length])
 
 const strengthCombo = (first, second) => ({
   name: first.name + ' + ' + second.name,
-  detail: first.task + ', then ' + second.task + '. Rest within the remaining time of the round.',
+  detail: first.task + ', then ' + second.task + '. Leave 1–3 clean reps in reserve – stop short of failure. Rest within the remaining time of the round.',
   reps: 3,
   repTime: 240,
   pause: 0
 })
 
-const strengthSteps = (dateKey) => {
-  const random = mulberry32(hashString(dateKey))
-  const upper = pickRandom(STRENGTH.upper, 4, random)
-  const legs = pickRandom(STRENGTH.legs, 2, random)
-  const core = pickRandom(STRENGTH.core, 2, random)
+const strengthSteps = (date) => {
+  const index = sessionIndex(date)
+  const upper = rotate(STRENGTH.upper, 4, index)
+  const legs = rotate(STRENGTH.legs, 2, index)
+  const core = rotate(STRENGTH.core, 2, index)
 
   return [
     strengthCombo(upper[0], legs[0]),
@@ -267,8 +273,8 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
   const plannedToday = (key) => todayRoutines.includes(key)
   const dateKey = todayKey(now)
 
-  // Today's routines, with the Strength steps drawn for this date.
-  const routines = { ...ROUTINES, S: { ...ROUTINES.S, steps: strengthSteps(dateKey) } }
+  // Today's routines, with the Strength steps rotated in for this session.
+  const routines = { ...ROUTINES, S: { ...ROUTINES.S, steps: strengthSteps(now) } }
 
   // Routines completed today; reads the legacy { routine, done } shape too.
   const completedRoutines = (entry) =>
