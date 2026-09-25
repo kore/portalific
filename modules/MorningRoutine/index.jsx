@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { CheckCircleIcon } from '@heroicons/react/24/outline'
+import { CheckCircleIcon, PauseIcon, PlayIcon } from '@heroicons/react/24/outline'
 
 const ROUTINES = {
   A: {
@@ -211,6 +211,29 @@ const stepDuration = (step) =>
 const routineDuration = (routine) =>
   routine.steps.reduce((sum, step) => sum + PREPARE_TIME + stepDuration(step), 0)
 
+// Seconds already spent inside the current step. A step runs as prepare, then
+// rep 1, pause, rep 2, pause, … – a pause always belongs to the rep it follows,
+// which is why `rep` is not advanced until the pause is over.
+const elapsedInStep = (step, { rep, phase, remaining }) => {
+  if (phase === 'prepare') {
+    return PREPARE_TIME - remaining
+  }
+
+  const base = PREPARE_TIME + (rep - 1) * (step.repTime + step.pause)
+
+  return phase === 'pause'
+    ? base + step.repTime + (step.pause - remaining)
+    : base + (step.repTime - remaining)
+}
+
+// Seconds spent in the routine so far. Skipping ahead jumps this forward, which
+// is what we want: the bar shows the position in the routine, not time on task.
+const routineElapsed = (routine, run) =>
+  routine.steps
+    .slice(0, run.step)
+    .reduce((sum, step) => sum + PREPARE_TIME + stepDuration(step), 0) +
+  elapsedInStep(routine.steps[run.step], run)
+
 const formatRepTime = (seconds) =>
   seconds >= 60 && seconds % 60 === 0 ? seconds / 60 + ' min' : seconds + ' sec'
 
@@ -260,7 +283,8 @@ const repEndSound = () => beep(440, 0.3)
 export default function MorningRoutine ({ configuration, updateModuleConfiguration }) {
   const [now, setNow] = useState(() => new Date())
   // null = overview; otherwise
-  // { routine, step, rep, phase: 'exercise' | 'pause', remaining }
+  // { routine, step, rep, phase: 'prepare' | 'exercise' | 'pause', remaining,
+  //   paused }
   const [run, setRun] = useState(null)
   const completions = configuration.completions ?? {}
 
@@ -368,7 +392,7 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
   }, [run])
 
   useEffect(() => {
-    if (!run) {
+    if (!run || run.paused) {
       return
     }
 
@@ -411,13 +435,23 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
       step: 0,
       rep: 1,
       phase: 'prepare',
-      remaining: PREPARE_TIME
+      remaining: PREPARE_TIME,
+      paused: false
     })
   }
+
+  // Pausing only stops the clock – skipping ahead while paused keeps it paused,
+  // so a break is never ended by accident.
+  const togglePause = () => setRun({ ...run, paused: !run.paused })
 
   if (run) {
     const runRoutine = routines[run.routine]
     const step = runRoutine.steps[run.step]
+    const nextStep = runRoutine.steps[run.step + 1]
+    const progress = Math.min(100, Math.max(
+      0,
+      (routineElapsed(runRoutine, run) / routineDuration(runRoutine)) * 100
+    ))
 
     return (
       <div className='morning-routine'>
@@ -443,7 +477,7 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
             {step.reps > 1 ? ' · Rep ' + run.rep + '/' + step.reps : ''}
           </p>
           <div
-            className={'morning-routine__countdown' + (run.phase === 'pause' ? ' morning-routine__countdown--pause' : run.phase === 'prepare' ? ' morning-routine__countdown--prepare' : '')}
+            className={'morning-routine__countdown' + (run.phase === 'pause' ? ' morning-routine__countdown--pause' : run.phase === 'prepare' ? ' morning-routine__countdown--prepare' : '') + (run.paused ? ' morning-routine__countdown--paused' : '')}
           >
             {formatCountdown(run.remaining)}
           </div>
@@ -468,6 +502,33 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
                 ? 'Done'
                 : 'Done – next exercise'}
             </button>
+            <button
+              type='button'
+              className='morning-routine__toggle'
+              onClick={togglePause}
+              title={run.paused ? 'Resume' : 'Pause'}
+              aria-label={run.paused ? 'Resume' : 'Pause'}
+            >
+              {run.paused
+                ? <PlayIcon className='morning-routine__toggle-icon' aria-hidden='true' />
+                : <PauseIcon className='morning-routine__toggle-icon' aria-hidden='true' />}
+            </button>
+          </div>
+          <p className='morning-routine__next'>
+            {nextStep ? 'Next: ' + nextStep.name : 'Last exercise'}
+          </p>
+          <div
+            className='morning-routine__bar'
+            role='progressbar'
+            aria-label='Routine progress'
+            aria-valuenow={Math.round(progress)}
+            aria-valuemin={0}
+            aria-valuemax={100}
+          >
+            <div
+              className='morning-routine__bar-fill'
+              style={{ width: progress + '%' }}
+            />
           </div>
         </div>
       </div>
