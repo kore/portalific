@@ -255,15 +255,21 @@ const parseDateKey = (key) => {
   return new Date(year, month - 1, day)
 }
 
-// The exercises of a finished Strength session, snapshotted at completion so
-// later changes to the pools do not rewrite the history. `rounds` counts the
-// rounds that were actually started, so skipped combos show up as 0.
-const strengthLog = (steps, rounds) =>
+// The steps of a finished routine, snapshotted at completion so later changes
+// to the routines or the Strength pools do not rewrite the history. `rounds`
+// counts the reps that were actually started, so skipped steps show up as 0.
+const routineLog = (steps, rounds) =>
   steps.map((step, index) => ({
-    exercises: step.exercises.map(({ name, task }) => ({ name, task })),
+    name: step.name,
+    tasks: step.exercises?.map(({ task }) => task) ?? [formatTiming(step)],
     rounds: rounds[index] ?? 0,
     of: step.reps
   }))
+
+// The steps a routine had on a given day, for days completed before routines
+// were logged.
+const reconstructedLog = (key, date) =>
+  routineLog(key === 'S' ? strengthSteps(date) : ROUTINES[key]?.steps ?? [], [])
 
 // Routines completed on a day; reads the legacy { routine, done } shape too.
 const completedRoutines = (entry) =>
@@ -271,41 +277,45 @@ const completedRoutines = (entry) =>
 
 const REPORT_MONTHS = 2
 
-// Markdown report of the Strength sessions within the last two months. Older
-// entries without a snapshot are reconstructed from the date-based rotation,
-// which matches only as long as the pools have not changed since.
-const strengthReport = (completions, now) => {
+const formatRounds = ({ rounds, of }) =>
+  rounds === 0 ? 'skipped' : of > 1 ? rounds + '/' + of + ' rounds' : 'done'
+
+// Markdown report of all routines completed within the last two months. Days
+// without a log are reconstructed from the current routines and the
+// date-based Strength rotation, which matches only as long as those have not
+// changed since.
+const routineReport = (completions, now) => {
   const since = new Date(now)
   since.setMonth(since.getMonth() - REPORT_MONTHS)
   const sinceKey = todayKey(since)
-  const sessions = Object.keys(completions)
-    .filter((key) => key >= sinceKey && completedRoutines(completions[key]).includes('S'))
+  const days = Object.keys(completions)
+    .filter((key) => key >= sinceKey && completedRoutines(completions[key]).length > 0)
     .sort()
     .reverse()
 
   const lines = [
-    '# Strength Training Report',
+    '# Morning Routine Report',
     '',
-    sinceKey + ' – ' + todayKey(now) + ' · ' + sessions.length + ' session' + (sessions.length === 1 ? '' : 's')
+    sinceKey + ' – ' + todayKey(now) + ' · ' + days.length + ' day' + (days.length === 1 ? '' : 's')
   ]
 
-  for (const key of sessions) {
-    const date = parseDateKey(key)
-    const log = completions[key].strength
-    const combos = log ?? strengthLog(strengthSteps(date), [])
+  for (const day of days) {
+    const date = parseDateKey(day)
+    lines.push('', '## ' + date.toLocaleDateString('en-GB', { weekday: 'short' }) + ', ' + day)
 
-    lines.push('', '## ' + date.toLocaleDateString('en-GB', { weekday: 'short' }) + ', ' + key, '')
-    for (const combo of combos) {
-      const status = !log
-        ? ''
-        : combo.rounds === 0 ? ' – skipped' : ' – ' + combo.rounds + '/' + combo.of + ' rounds'
-      lines.push('- **' + combo.exercises.map(({ name }) => name).join(' + ') + '**' + status)
-      for (const exercise of combo.exercises) {
-        lines.push('  - ' + exercise.task)
+    for (const key of [...completedRoutines(completions[day])].sort()) {
+      const log = completions[day].log?.[key]
+
+      lines.push('', '### ' + (ROUTINES[key]?.label ?? key), '')
+      for (const step of log ?? reconstructedLog(key, date)) {
+        lines.push('- **' + step.name + '**' + (log ? ' – ' + formatRounds(step) : ''))
+        for (const task of step.tasks) {
+          lines.push('  - ' + task)
+        }
       }
-    }
-    if (!log) {
-      lines.push('', '_Reconstructed from the rotation schedule, rounds not recorded._')
+      if (!log) {
+        lines.push('', '_Reconstructed from the schedule, rounds not recorded._')
+      }
     }
   }
 
@@ -380,19 +390,23 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
     plannedToday(key) && !completedToday(key) && now.getHours() >= 11
 
   const setCompleted = (key, value, log = null) => {
-    const { strength, ...entry } = completions[dateKey] ?? {}
+    const entry = completions[dateKey] ?? {}
     const routines = new Set(completedRoutines(entry))
     routines[value ? 'add' : 'delete'](key)
 
-    // Unmarking Strength drops its log; marking it by hand keeps a log from an
-    // earlier run today, if any.
-    const strengthEntry = key === 'S' ? (value ? log ?? strength : null) : strength
+    // Unmarking a routine drops its log; marking it by hand keeps a log from
+    // an earlier run today, if any.
+    const { [key]: previous, ...logs } = entry.log ?? {}
+    const routineEntry = value ? log ?? previous : null
+    if (routineEntry) {
+      logs[key] = routineEntry
+    }
 
     const merged = {
       ...completions,
       [dateKey]: {
         routines: [...routines],
-        ...(strengthEntry ? { strength: strengthEntry } : {})
+        ...(Object.keys(logs).length > 0 ? { log: logs } : {})
       }
     }
 
@@ -413,7 +427,7 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
     setCompleted(
       run.routine,
       true,
-      run.routine === 'S' ? strengthLog(routines.S.steps, rounds) : null
+      routineLog(routines[run.routine].steps, rounds)
     )
     setRun(null)
   }
@@ -675,8 +689,8 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
           type='button'
           className='morning-routine__report'
           onClick={() => downloadFile(
-            'strength-report-' + dateKey + '.md',
-            strengthReport(completions, now),
+            'morning-routine-report-' + dateKey + '.md',
+            routineReport(completions, now),
             'text/markdown'
           )}
         >
