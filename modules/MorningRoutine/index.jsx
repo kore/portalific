@@ -174,7 +174,8 @@ const strengthCombo = (first, second) => ({
   detail: first.task + ', then ' + second.task + '. Leave 1–3 clean reps in reserve – stop short of failure. Rest within the remaining time of the round.',
   reps: 3,
   repTime: 240,
-  pause: 0
+  pause: 0,
+  exercises: [first, second]
 })
 
 const strengthSteps = (date) => {
@@ -247,6 +248,80 @@ const formatCountdown = (seconds) => {
   return minutes + ':' + String(seconds % 60).padStart(2, '0')
 }
 
+// Date keys are plain YYYY-MM-DD strings; parse them as a local date so the
+// weekday and Strength rotation match the day they were recorded on.
+const parseDateKey = (key) => {
+  const [year, month, day] = key.split('-').map(Number)
+  return new Date(year, month - 1, day)
+}
+
+// The exercises of a finished Strength session, snapshotted at completion so
+// later changes to the pools do not rewrite the history. `rounds` counts the
+// rounds that were actually started, so skipped combos show up as 0.
+const strengthLog = (steps, rounds) =>
+  steps.map((step, index) => ({
+    exercises: step.exercises.map(({ name, task }) => ({ name, task })),
+    rounds: rounds[index] ?? 0,
+    of: step.reps
+  }))
+
+// Routines completed on a day; reads the legacy { routine, done } shape too.
+const completedRoutines = (entry) =>
+  entry?.routines ?? (entry?.done && entry?.routine ? [entry.routine] : [])
+
+const REPORT_MONTHS = 2
+
+// Markdown report of the Strength sessions within the last two months. Older
+// entries without a snapshot are reconstructed from the date-based rotation,
+// which matches only as long as the pools have not changed since.
+const strengthReport = (completions, now) => {
+  const since = new Date(now)
+  since.setMonth(since.getMonth() - REPORT_MONTHS)
+  const sinceKey = todayKey(since)
+  const sessions = Object.keys(completions)
+    .filter((key) => key >= sinceKey && completedRoutines(completions[key]).includes('S'))
+    .sort()
+    .reverse()
+
+  const lines = [
+    '# Strength Training Report',
+    '',
+    sinceKey + ' – ' + todayKey(now) + ' · ' + sessions.length + ' session' + (sessions.length === 1 ? '' : 's')
+  ]
+
+  for (const key of sessions) {
+    const date = parseDateKey(key)
+    const log = completions[key].strength
+    const combos = log ?? strengthLog(strengthSteps(date), [])
+
+    lines.push('', '## ' + date.toLocaleDateString('en-GB', { weekday: 'short' }) + ', ' + key, '')
+    for (const combo of combos) {
+      const status = !log
+        ? ''
+        : combo.rounds === 0 ? ' – skipped' : ' – ' + combo.rounds + '/' + combo.of + ' rounds'
+      lines.push('- **' + combo.exercises.map(({ name }) => name).join(' + ') + '**' + status)
+      for (const exercise of combo.exercises) {
+        lines.push('  - ' + exercise.task)
+      }
+    }
+    if (!log) {
+      lines.push('', '_Reconstructed from the rotation schedule, rounds not recorded._')
+    }
+  }
+
+  return lines.join('\n') + '\n'
+}
+
+const downloadFile = (name, content, type) => {
+  const url = URL.createObjectURL(new Blob([content], { type }))
+  const link = document.createElement('a')
+  link.href = url
+  link.download = name
+  link.click()
+  // Revoking right away can cancel the download in some browsers.
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
 // Short synthesized beeps via the Web Audio API – no audio assets needed. The
 // context is created lazily on the first (user-gesture-triggered) sound, which
 // keeps the browser autoplay policy happy.
@@ -284,7 +359,7 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
   const [now, setNow] = useState(() => new Date())
   // null = overview; otherwise
   // { routine, step, rep, phase: 'prepare' | 'exercise' | 'pause', remaining,
-  //   paused }
+  //   paused, rounds: rounds started per finished step }
   const [run, setRun] = useState(null)
   const completions = configuration.completions ?? {}
 
@@ -300,21 +375,25 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
   // Today's routines, with the Strength steps rotated in for this session.
   const routines = { ...ROUTINES, S: { ...ROUTINES.S, steps: strengthSteps(now) } }
 
-  // Routines completed today; reads the legacy { routine, done } shape too.
-  const completedRoutines = (entry) =>
-    entry?.routines ?? (entry?.done && entry?.routine ? [entry.routine] : [])
-
   const completedToday = (key) => completedRoutines(completions[dateKey]).includes(key)
   const overdueToday = (key) =>
     plannedToday(key) && !completedToday(key) && now.getHours() >= 11
 
-  const setCompleted = (key, value) => {
-    const routines = new Set(completedRoutines(completions[dateKey]))
+  const setCompleted = (key, value, log = null) => {
+    const { strength, ...entry } = completions[dateKey] ?? {}
+    const routines = new Set(completedRoutines(entry))
     routines[value ? 'add' : 'delete'](key)
+
+    // Unmarking Strength drops its log; marking it by hand keeps a log from an
+    // earlier run today, if any.
+    const strengthEntry = key === 'S' ? (value ? log ?? strength : null) : strength
 
     const merged = {
       ...completions,
-      [dateKey]: { routines: [...routines] }
+      [dateKey]: {
+        routines: [...routines],
+        ...(strengthEntry ? { strength: strengthEntry } : {})
+      }
     }
 
     // Keep only the most recent 256 days so the synced configuration does not
@@ -329,23 +408,32 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
     updateModuleConfiguration({ ...configuration, completions: next })
   }
 
-  const finishRun = () => {
+  const finishRun = (rounds) => {
     // Completing a full routine marks it as done for today.
-    setCompleted(run.routine, true)
+    setCompleted(
+      run.routine,
+      true,
+      run.routine === 'S' ? strengthLog(routines.S.steps, rounds) : null
+    )
     setRun(null)
   }
 
   const skipToNextExercise = () => {
     const steps = routines[run.routine].steps
     const nextStep = run.step + 1
+    // Rounds started in the step being left – none if it was skipped while
+    // still getting ready.
+    const rounds = [...run.rounds]
+    rounds[run.step] = run.phase === 'prepare' ? run.rep - 1 : run.rep
 
     if (nextStep >= steps.length) {
-      finishRun()
+      finishRun(rounds)
       return
     }
 
     setRun({
       ...run,
+      rounds,
       step: nextStep,
       rep: 1,
       phase: 'prepare',
@@ -436,7 +524,8 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
       rep: 1,
       phase: 'prepare',
       remaining: PREPARE_TIME,
-      paused: false
+      paused: false,
+      rounds: []
     })
   }
 
@@ -581,6 +670,19 @@ export default function MorningRoutine ({ configuration, updateModuleConfigurati
             </li>
           ))}
       </ul>
+      <div className='morning-routine__footer'>
+        <button
+          type='button'
+          className='morning-routine__report'
+          onClick={() => downloadFile(
+            'strength-report-' + dateKey + '.md',
+            strengthReport(completions, now),
+            'text/markdown'
+          )}
+        >
+          Download report
+        </button>
+      </div>
     </div>
   )
 }

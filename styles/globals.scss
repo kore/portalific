@@ -1964,6 +1964,25 @@ a {
     color: var(--color-gray-500);
   }
 
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--spacing-xs);
+  }
+
+  &__report {
+    padding: 0;
+    background: transparent;
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+
   &__start {
     flex-shrink: 0;
     margin-left: auto;
